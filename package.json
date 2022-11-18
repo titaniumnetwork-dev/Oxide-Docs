@@ -8,7 +8,7 @@
     "email": "emerald@titaniumnetwork.org"
   },
   "license": "GNU Affero",
-  "repository": "https://github.com/QuiteAFancyEmerald/Oxide-Vue/Oxide-Vue",
+  "repository": "https://github.com/titaniumnetwork-dev/Oxide-Docs",
   "scripts": {
     "dev": "gatsby develop",
     "build": "gatsby build",

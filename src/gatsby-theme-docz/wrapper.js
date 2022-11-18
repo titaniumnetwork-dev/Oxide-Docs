@@ -4,7 +4,7 @@ import { Helmet } from 'react-helmet-async'
 const Wrapper = ({ children, doc }) => <React.Fragment>
     <Helmet>
         <meta charSet="utf-8" />
-        <meta name="og:title" property="og:title" content="Titanium Network | SDK Documentation">
+        <meta name="og:title" property="og:title" content="Titanium Network | SDK Documentation"/>
         <title>Titanium Network | SDK Documentation</title>
         <link rel="icon" type="image/png" href="https://titaniumnetwork.org/logo.png"/>
         <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no"/>
