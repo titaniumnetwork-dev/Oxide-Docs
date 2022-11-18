@@ -1,5 +1,5 @@
 {
-  "name": "oxide-docs",
+  "name": "titaniumnetwork-docs",
   "version": "1.0.5",
   "description": "The official documentations site for Titanium Network, an organization dedicated innovating web proxy technologies. Made with Docz.",
   "main": "index.js",
@@ -10,14 +10,24 @@
   "license": "GNU Affero",
   "repository": "https://github.com/QuiteAFancyEmerald/Oxide-Vue/Oxide-Vue",
   "scripts": {
-    "dev": "docz dev",
-    "build": "docz build",
-    "serve": "docz serve"
+    "dev": "gatsby develop",
+    "build": "gatsby build",
+    "serve": "gatsby serve"
   },
   "dependencies": {
-    "docz": "latest",
+    "@emotion/core": "^10.3.1",
+    "docz": "^2.0.0-rc.76",
+    "gatsby": "^2.13.73",
+    "gatsby-plugin-offline": "^2.2.7",
+    "gatsby-plugin-sharp": "^2.2.18",
+    "gatsby-theme-docz": "latest",
+    "gatsby-transformer-sharp": "^2.2.7",
     "prop-types": "^15.7.2",
-    "react": "^16.11.0",
-    "react-dom": "^16.11.0"
+    "react": "^16.9.0",
+    "react-dom": "^16.9.0",
+    "react-helmet-async": "^1.0.4"
+  },
+  "devDependencies": {
+    "typescript": "^4.9.3"
   }
 }
