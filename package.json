@@ -1,5 +1,5 @@
 {
-  "name": "titaniumnetwork-docs",
+  "name": "titanium-network-docs",
   "version": "1.0.5",
   "description": "The official documentations site for Titanium Network, an organization dedicated innovating web proxy technologies. Made with Docz.",
   "main": "index.js",
