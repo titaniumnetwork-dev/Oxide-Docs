@@ -1,0 +1,335 @@
+---
+name: Ultraviolet
+route: /ultraviolet
+---
+
+### Ultraviolet
+Highly sophisticated proxy used for evading internet censorship or accessing websites in a controlled sandbox using the power of service-workers and more!
+
+[**GitHub**](https://github.com/titaniumnetwork-dev/Ultraviolet)
+
+## Setup
+Ultraviolet works by intercepting HTTP requests with a service worker script that follows the TompHTTP specifications. More information regarding TompHTTP can be found <a href="/tomphttp">here</a>.
+
+The components of Ultraviolet are as follows:
+- BareServer V1 TompHTTP
+- Ultraviolet-Static
+- Ultraviolet-Node (Production AIO)
+
+See the changelog if you're using v1.0.1 or above!
+
+## Building
+1. Clone the repository
+
+```sh
+$ git clone https://github.com/titaniumnetwork-dev/Ultraviolet.git
+> Cloning into Ultraviolet...
+$ cd Ultraviolet
+```
+
+2. Install dependencies
+
+```sh
+$ npm install
+```
+
+3. Produce the `dist/` directory and compile scripts
+
+```sh
+$ npm run build
+```
+### I don't care about building, where are the scripts for my website?!
+
+You can extract the scripts from the NPM package in the [releases section](https://github.com/titaniumnetwork-dev/Ultraviolet/releases). All the scripts you would typically look for (`uv.bundle.js`, `uv.handler.js`, `uv.sw.js`, and `uv.config.js`) are found within the `dist` directory.
+
+If you cannot open the tar.gz (Chrome OS?), use a [converter](https://cloudconvert.com/tar.gz-to-zip). We can only do so much to make the scripts accessible.
+
+## Installation
+> This will provide built files and the JS API to access the path of dist files.
+
+Currently, we don't have an NPM package. As a current solution, you can install from a [GitHub release](https://github.com/titaniumnetwork-dev/Ultraviolet/releases). Copy the link to the `.tgz` and install using NPM.
+
+```sh
+$ npm install https://github.com/titaniumnetwork-dev/Ultraviolet/releases/download/v1.0.1/ultraviolet-1.0.1.tgz
+
+## Packaging
+
+This is intended for releasing on hosting the package as a file, not on NPM.
+
+```sh
+$ npm pack
+```
+
+Package will be named `ultraviolet-X.X.X.tgz`
+
+## Changelogs
+### v1.0.2
+
+This package now targets CommonJS.
+
+### v1.0.1
+
+In your `sw.js` script, you MUST import `uv.bundle.js` then `uv.config.js` in order. This is because we can no longer hard-code the paths. Ideally, we would import `uv.config.js` then use the config.bundle path in the serviceworker, however the config is dependant on `uv.bundle.js`, which we don't know the location to.
+
+Old:
+
+```js
+importScripts('./uv/uv.sw.js');
+
+const sw = new UVServiceWorker();
+
+self.addEventListener('fetch', (event) => event.respondWith(sw.fetch(event)));
+```
+
+New:
+
+```diff
++ importScripts('./uv/uv.bundle.js');
++ importScripts('./uv/uv.config.js');
+importScripts('./uv/uv.sw.js');
+
+const sw = new UVServiceWorker();
+
+self.addEventListener('fetch', event =>
+    event.respondWith(
+        sw.fetch(event)
+    )
+);
+```
+
+You are still required to specify all paths in `uv.config.js`.
+
+## Deployment
+<img src="https://raw.githubusercontent.com/titaniumnetwork-dev/Ultraviolet-Static/main/public/uv.png" height="200"></img>
+
+<h1 align="center">Ultraviolet-Node</h1>
+
+Ultraviolet-Node is the deployable all-in-one bundle for Ultraviolet, a highly sophisticated proxy used for evading internet censorship or accessing websites in a controlled sandbox using the power of service-workers and more!
+
+[![Deploy to Heroku](https://binbashbanana.github.io/deploy-buttons/buttons/remade/heroku.svg)](https://github.com/titaniumnetwork-dev/Ultraviolet-Node/wiki/Deploy-to-Heroku)
+[![Run on Replit](https://binbashbanana.github.io/deploy-buttons/buttons/remade/replit.svg)](https://github.com/titaniumnetwork-dev/Ultraviolet-Node/wiki/Run-on-Replit)
+[![Deploy on Railway](https://binbashbanana.github.io/deploy-buttons/buttons/remade/railway.svg)](https://github.com/titaniumnetwork-dev/Ultraviolet-Node/wiki/Deploy-on-Railway)
+[![Remix on Glitch](https://binbashbanana.github.io/deploy-buttons/buttons/remade/glitch.svg)](https://github.com/titaniumnetwork-dev/Ultraviolet-Node/wiki/Remix-on-Glitch)
+[![Deploy to Koyeb](https://binbashbanana.github.io/deploy-buttons/buttons/remade/koyeb.svg)](https://github.com/titaniumnetwork-dev/Ultraviolet-Node/wiki/Deploy-to-Koyeb)
+
+### Manual Installation
+Deploying Ultraviolet through a terminal is made easy.
+
+> Don't copy the `$` in any of these commands when pasting in a terminal.
+
+### Clone
+
+```sh
+$ git clone https://github.com/titaniumnetwork-dev/Ultraviolet-Node.git
+> Cloning into Ultraviolet-Node...
+$ cd Ultraviolet-Node
+```
+
+### Install
+
+```sh
+$ npm install
+```
+
+> If this takes long, you may attempt to omit dev dependencies:
+
+```sh
+$ npm install --omit=dev
+```
+
+### Start
+
+
+```sh
+$ npm start
+```
+
+Alternatively, run on a port:
+
+```sh
+$ PORT=8000 npm start
+```
+
+### Features
+
+- CAPTCHA support along with hCAPTCHA support
+- URL encoding settings to further hide activity when using Ultraviolet
+- Configuration all done on the client-side via service-workers
+- Speed in comparison to other web proxies that fully proxy content
+- Blacklist setting and more for easy hosting
+- Security in mind and leak prevention
+- Frequent updates to improve site support or fix security issues
+
+### Supported Sites
+
+- [Youtube](https://www.youtube.com)
+- [CAPTCHA/hCAPTCHA](https://www.captcha.net)
+- [Spotify](https://spotify.com)
+- [Discord](https://discord.com)
+- [Reddit](https://reddit.com)
+- [GeForce NOW](https://play.geforcenow.com/) (Partially Supported)
+- And more!
+
+### Technologies Used
+
+- Service Workers
+- HTML, JS, CSS rewriting
+- Parse5
+- Acorn.js
+
+### Used by
+
+- [Incognito](https://github.com/caracal-js/Incognito), a popular web proxy service with focus on privacy
+- [Holy Unblocker](https://git.holy.how/holy/website), a popular web proxy service focusing on bypassing web filters and more
+- [Hypertabs](titaniumnetwork.org/), a web proxy service using a PWA browser as its frontend
+
+## Customization
+
+The static files (frontend) is generated in the [Ultraviolet-Static](https://github.com/titaniumnetwork-dev/Ultraviolet-Static) repository. You can follow the instructions within the repository to modify the frontend here.
+
+### Packaging the static bundle
+
+1. Clone the repository
+
+```sh
+$ git clone https://github.com/titaniumnetwork-dev/Ultraviolet-Static.git
+> Cloning into Ultraviolet-Static...
+$ cd Ultraviolet-Static
+```
+
+2. Install dependencies
+
+```sh
+$ npm install
+```
+
+3. Make your changes...
+4. Produce the `dist/` directory and import the Ultraviolet scripts
+
+```sh
+$ npm run build
+```
+
+5. Package for NPM to produce `ultraviolet-static.X.X.X.tar.gz` file
+
+```sh
+$ npm pack
+```
+
+### Install in [Ultraviolet-Node](https://github.com/titaniumnetwork-dev/Ultraviolet-Node.git)
+
+1. Follow installation steps until you need to run `npm install`
+2. Install the produced Ultraviolet-Static tgz (upload to Discord, Github, etc...) (see [Packaging](#packaging))
+
+```sh
+$ npm install https://github.com/titaniumnetwork-dev/Ultraviolet-Static/releases/download/v1.0.0/ultraviolet-static-1.0.0.tgz
+# OR
+$ npm install ../path/to/ultraviolet-static-1.0.0.tgz
+```
+
+3. Continue instructions...
+
+```sh
+$ npm start
+```
+
+
+### Walkthrough
+
+Follow the instructions for deployment found in other pages of the wiki. The following steps assume you are in a directory containing the content of Ultraviolet-Node.
+
+1. Clone Ultraviolet-Static
+
+```sh
+$ git clone https://github.com/titaniumnetwork-dev/Ultraviolet-Static.git
+> Cloning into Ultraviolet-Static...
+$ cd Ultraviolet-Static
+```
+
+2. Install dependencies
+
+```sh
+$ npm install
+```
+
+3. Make your changes
+
+You may go back to this step anytime, however we recommend you make your changes before applying them.
+
+The content inside `Ultraviolet-Static/public/` may be modified. This directory contains assets and HTML webpages.
+
+4. Install the modified module
+
+You should only have to do this once. Any future changes to `Ultraviolet-Static/public/` will immediately take effect.
+
+Enter the Ultraviolet-Node directory:
+
+```sh
+$ cd ..
+```
+
+Install the new module:
+
+```sh
+$ npm install ./Ultraviolet-Static
+```
+
+5. Start
+
+```sh
+$ npm start
+```
+
+## Configuration
+```js
+self.__uv$config = {
+    prefix: '/service/',
+    bare: '/bare/',
+    encodeUrl: Ultraviolet.codec.xor.encode,
+    decodeUrl: Ultraviolet.codec.xor.decode,
+    handler: '/uv/uv.handler.js',
+    bundle: '/uv/uv.bundle.js',
+    config: '/uv/uv.config.js',
+    sw: '/uv/uv.sw.js',
+};
+```
+The meaning for each configurable option can be found below:
+
+<table>
+    <tr>
+        <td>Configuration</td>
+        <td>Options and Explanation</td>
+    </tr>
+    <tr>
+        <td>Prefix</td>
+        <td>The prefix is the prefix that you want users to see. Ex: `https://example.com/service.` The default prefix is `service`.</td>
+    </tr>
+    <tr>
+        <td>Bare</td>
+        <td>Bare Servers can run on directories. For example, if the directory was /bare/ then the bare origin would look like `http://example.org/bare/`. The bare origin is passed to clients.</td>
+    </tr>
+    <tr>
+        <td>encodeUrl</td>
+        <td>EncodeUrl is how you want the URL a proxy site's visitors has to be encoded. Options include `Ultraviolet.codec.base64.encode`, `Ultraviolet.codec.plain.encode`, or `Ultraviolet.codec.xor.encode`. It is recommended that you use `xor` or `base64` as it hides the queries your visitors are searching and visiting.</td>
+    </tr>
+    <tr>
+        <td>decodeUrl</td>
+        <td>DecodeUrl is how you want the url to be decoded. It is recommended you keep it the same as `encodeUrl`.</td>
+    </tr>
+    <tr>
+        <td>Handler</td>
+        <td>Handler is the path to the UV handler. The default name and path to this file is `/uv/uv.handler.js`.</td>
+    </tr>
+    <tr>
+        <td>Bundle</td>
+        <td>Bundle is the path to the UV bundle file. The default name and path to this file is `uv/uv.bundle.js`.</td>
+    </tr>
+    <tr>
+        <td>Config</td>
+        <td>Config is the path to the UV config file. The default name and path to this file is `uv/uv.bundle.js`.</td>
+    </tr>
+    <tr>
+        <td>SW</td>
+        <td>SW is the path to the UV Service Worker file. The default name and path to this file is `uv/uv.sw.js`.</td>
+    </tr>
+</table>
