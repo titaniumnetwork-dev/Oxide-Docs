@@ -17,26 +17,10 @@ yarn build # build
 yarn serve # production build
 ```
 
-## Serving Systems
-Here is a quick overview if you wish to setup an open-source project from TitaniumNetwork on your own web server or just general SDK information in simple breakdowns.
-
-- [Ultraviolet](/ultraviolet-home)
-- [Rammerhead](/rammerhead-home)
-- [Holy Unblocker](/holyunblocker-home)
-- [Incognito](/incognito-home)
-- [Terbium UX](/terbiumux-home)
-- [Kajigs](/kajigs)
-
-## Guides
-The contents below are popular tutorials.
-
-- [VPS Hosting](/vps-hosting)
-- [Web Server Setup w/ NGINX](/nginx)
-- [SSL/TLS w LetsEncrypt](/ssl-guide)
-- [Filter Focus](/filter-optimization)
-- [UX/SEO Cues](/seo-guide)
-- [DNS Setup](/dns-setup)
-- [ProxDocs](/proxdocs-home)
+Common Issues: If you recieve an error involving `@emotion/core` run the following command at your own risk**:
+```
+npm i @emotion/core --force
+```
 
 ## Contributing
 If you wish to contribute please check out the Contributions section or commit to the GitHub! 

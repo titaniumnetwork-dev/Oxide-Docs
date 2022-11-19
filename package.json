@@ -1,5 +1,5 @@
 {
-  "name": "titanium-network-docs",
+  "name": "docs",
   "version": "1.0.5",
   "description": "The official documentations site for Titanium Network, an organization dedicated innovating web proxy technologies. Made with Docz.",
   "main": "index.js",
@@ -7,6 +7,7 @@
     "name": "QuiteAFancyEmerald",
     "email": "emerald@titaniumnetwork.org"
   },
+  "private": "true",
   "license": "GNU Affero",
   "repository": "https://github.com/titaniumnetwork-dev/Oxide-Docs",
   "scripts": {
@@ -20,6 +21,7 @@
     "gatsby": "^2.13.73",
     "gatsby-plugin-offline": "^2.2.7",
     "gatsby-plugin-sharp": "^2.2.18",
+    "gatsby-remark-vscode": "^3.3.1",
     "gatsby-theme-docz": "latest",
     "gatsby-transformer-sharp": "^2.2.7",
     "prop-types": "^15.7.2",
