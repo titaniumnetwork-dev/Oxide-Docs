@@ -3,3 +3,94 @@ name: Kajigs Repository
 route: /kajigs
 ---
 
+# Titanium Network Kajigs
+A repository of methods you can employ enabling you to bypass restrictions!
+
+**PLEASE DO NOT USE KAJIGS FOR ILLEGAL ACTIVITY**
+
+Limitations: Methods which are considered aggressive such as removing or damaging devices (e.g removing Enterprise Enrollment) are not allowed.
+
+For quality purposes, only `Featured` kajigs will be listed here.
+
+### Current Tags:
+  - Webview bypasses: kajigs that use a webview to operate
+  - Extension bypasses: kajigs that allow you to manipulate extensions (adding, disabling, etc.)
+  - Bookmarklets: bookmarks that run JavaScript code to do something, usually embedding proxies or similar into your current page
+  - Filter bypasses: kajigs that let you get around your filters
+  - Other: kajigs that do not fit in the aforementioned categories
+  - Mod post: mod posts. May or may not be kajigs, read them anyways
+  - Patched: these kajigs have been patched by software vendors. THIS DOES NOT MEAN THE KAJIG IS UNUSABLE. For example, see "Chrome100 - Downgrade your Chrome OS" 
+  - Featured: Extraordinary kajigs (chosen by mods)
+  - chromeOS: chromeOS specific kajigs
+  - Windows: Windows specific kajigs
+  - macOS: macOS specific kajigs
+  - Mobile: Mobile specific kajigs 
+
+## Permanently Remove Extensions (Past v106)
+Credits: CoolElectronics
+
+This exploit is currently the most flexible and effective method in TN right now as a result of the bounty made by luphoria. Criteria was to simply bypass the Enterprise Policy ArcEnabled: false but resulted in a much more effective exploit in the end.
+
+This exploit details another way to permanently delete extensions. Once done, you can update or restart your chromebook and the extensions will stay gone until you powerwash.
+
+You need a usb for downgrading, and rudimentary knowledge of bash is recommended.
+
+### STEPS:
+Downgrade to any version below 103. Instructions are in "Chrome100 - Downgrade your Chrome OS" . Do not ask for help downgrading here.
+
+Hit ctrl alt t to open a crosh window. If it’s blocked by extensions, use LTBEEF. If it’s policy blocked (“The person who set up this computer has chosen to block this site”) you can try downgrading to a version below 90, where crosh had a different URL
+Type in `set_cellular_ppp \';bash;exit;\'` and hit enter. 
+
+You now have access to a bash shell, logged in as chronos. More information about the permissions of this shell is at the bottom.
+
+Type `rm -rf ~/Extensions/*`. THIS WILL BREAK EVERY EXTENSION ON YOUR CHROMEBOOK. If there are extensions you want to keep, they can be selectively removed by ID.
+
+Run `chmod 000 ~/Extensions`. This marks the extension folder as read only, stopping it from updating in the future or any new extensions from being installed.
+
+You can now restart chrome, allowing it to update to the latest version. Once rebooted onto the latest version, all removed extensions will have the default icon and won’t function at all
+
+**UPDATE: ROOT IS NOW POSSIBLE! CHECK Root escalation**
+
+You can also run `set_cellular_ppp \'chmod 777 ~/Extensions;rm -rf ~/Extensions;mkdir ~/Extensions;chmod 000 ~/Extensions;echo done;exit\'`  in crosh to do it all in one step
+
+https://discord.com/channels/419123358698045453/1033121753263771709
+
+## Root Escalation
+Have the ability to run developer mode content, enable developer mode, bypass pretty much everything with one exploit. Will require the downgrade methods. 
+
+Has so many branches that I’m just going to link the Kajig discussion. Check the pins in the TN Discord server.
+
+https://discord.com/channels/419123358698045453/1033537020854800434
+
+## [swamp] FOR GOGUARDIAN ONLY: 
+Functions like LTBEEF, the GUI based exploit which Bypassi originally lead for disabling extensions. However unlike the Bypassi based exploit, swamp still remains unpatched on versions post v102 up to even v107. 
+
+This will allow you to:
+- Disable force-installed extensions similarly to LTBEEF even on Chrome 107 where it's patched
+- Run bookmarklets on any page even when they are blocked
+- Break GoGuardian until powerwash (or until you choose to turn it back on)
+- Run a custom DNS to block network requests without actually being on a DNS
+- Run your own custom code with access to most of the chrome API
+
+https://discord.com/channels/419123358698045453/1040775494406250548
+
+## KIOSK Exploit (DE-LICENSED) (Original):
+Although many variations of this exploit exist, this was the very original implementation of it. However, the process never went as far or flexible as a full Chrome browser window being able to be created out of this method rather than just a simple bypass within the KIOSK app. 
+
+Credits to B3AT and Divide for this exploit.
+
+This exploit allows you to open an unrestricted Chrome instance within a kiosk app, i.e. with the kiosk user account permissions.
+
+## Steps:
+- Any kiosk app installed
+- [for v77<=x<=v85] OOBE/fresh install
+- Sign out
+- Turn wifi off
+- Enable chromevox (ctrl+alt+z)
+- Open a kiosk app
+- Spam Search+o+k (you do have to re-click o and k)
+- While spamming click "Diagnose"
+
+Note: The exploit should work consistently v76 or below but it's still possible to pull off on v85 or below, but only once (right after you powerwash).
+
+
