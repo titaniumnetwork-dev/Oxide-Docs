@@ -1,7 +1,7 @@
 {
   "name": "docs",
   "version": "1.0.5",
-  "description": "The official documentations site for Titanium Network, an organization dedicated innovating web proxy technologies. Made with Docz.",
+  "description": "The official SDK documentation site for TitaniumNetwork. Here we provide advanced web proxy services through the progression of web proxy technologies. Otherwise look over the various guides to each of our services or community run projects.",
   "main": "index.js",
   "authors": {
     "name": "QuiteAFancyEmerald",

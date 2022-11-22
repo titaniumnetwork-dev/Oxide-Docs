@@ -8,7 +8,7 @@ const Wrapper = ({ children, doc }) => <React.Fragment>
         <title>Titanium Network | SDK Documentation</title>
         <link rel="icon" type="image/png" href="https://titaniumnetwork.org/logo.png"/>
         <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no"/>
-        <meta name="description" content="The official documentations site for Titanium Network, an organization dedicated innovating web proxy technologies. Made with Docz."/>
+        <meta name="description" content="The official SDK documentation site for TitaniumNetwork. Here we provide advanced web proxy services through the progression of web proxy technologies. Otherwise look over the various guides to each of our services or community run projects."/>
         <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#434c5e"/>
         <meta name="keywords" content="proxy, web proxy, unblock websites, unblock chromebook, free web proxy, proxy list, proxy sites, un block chromebook, online proxy, proxy server, proxysite, proxy youtube, bypass securly, bypass iboss, bypass lightspeed filter, holy unblocker, chromebooks, titanium network, unblock youtube, youtube proxy, unblocked youtube, youtube unblocked, Titanium Network, Hypertabs, Securly, iboss, Relay, Lightspeed, Unblock, Bypass, Chromebooks, Alloy Proxy"/>
         <meta name="googlebot" content="index, follow, snippet" />
