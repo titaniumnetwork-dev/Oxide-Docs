@@ -19,12 +19,12 @@ For quality purposes, only `Featured` kajigs will be listed here.
   - Filter bypasses: kajigs that let you get around your filters
   - Other: kajigs that do not fit in the aforementioned categories
   - Mod post: mod posts. May or may not be kajigs, read them anyways
-  - Patched: these kajigs have been patched by software vendors. THIS DOES NOT MEAN THE KAJIG IS UNUSABLE. For example, see "Chrome100 - Downgrade your Chrome OS" 
+  - Patched: these kajigs have been patched by software vendors. THIS DOES NOT MEAN THE KAJIG IS UNUSABLE. For example, see "Chrome100 - Downgrade your Chrome OS"
   - Featured: Extraordinary kajigs (chosen by mods)
   - chromeOS: chromeOS specific kajigs
   - Windows: Windows specific kajigs
   - macOS: macOS specific kajigs
-  - Mobile: Mobile specific kajigs 
+  - Mobile: Mobile specific kajigs
 
 ## Permanently Remove Extensions (Past v106)
 Credits: CoolElectronics
@@ -36,10 +36,10 @@ This exploit details another way to permanently delete extensions. Once done, yo
 You need a usb for downgrading, and rudimentary knowledge of bash is recommended.
 
 ### STEPS:
-Downgrade to any version below 103. Instructions are in "Chrome100 - Downgrade your Chrome OS" . Do not ask for help downgrading here.
+Downgrade to any version below 103. Instructions are in "Chrome100 - Downgrade your Chrome OS".
 
 Hit ctrl alt t to open a crosh window. If it’s blocked by extensions, use LTBEEF. If it’s policy blocked (“The person who set up this computer has chosen to block this site”) you can try downgrading to a version below 90, where crosh had a different URL
-Type in `set_cellular_ppp \';bash;exit;\'` and hit enter. 
+Type in `set_cellular_ppp \';bash;exit;\'` and hit enter.
 
 You now have access to a bash shell, logged in as chronos. More information about the permissions of this shell is at the bottom.
 
@@ -49,21 +49,21 @@ Run `chmod 000 ~/Extensions`. This marks the extension folder as read only, stop
 
 You can now restart chrome, allowing it to update to the latest version. Once rebooted onto the latest version, all removed extensions will have the default icon and won’t function at all
 
-**UPDATE: ROOT IS NOW POSSIBLE! CHECK Root escalation**
+**If you would like Root Access, go to Root Escalation**
 
 You can also run `set_cellular_ppp \'chmod 777 ~/Extensions;rm -rf ~/Extensions;mkdir ~/Extensions;chmod 000 ~/Extensions;echo done;exit\'`  in crosh to do it all in one step
 
 https://discord.com/channels/419123358698045453/1033121753263771709
 
 ## Root Escalation
-Have the ability to run developer mode content, enable developer mode, bypass pretty much everything with one exploit. Will require the downgrade methods. 
+Have the ability to run developer mode content, enable developer mode, bypass pretty much everything with one exploit. Will require the downgrade methods.
 
 Has so many branches that I’m just going to link the Kajig discussion. Check the pins in the TN Discord server.
 
 https://discord.com/channels/419123358698045453/1033537020854800434
 
-## [swamp] FOR GOGUARDIAN ONLY: 
-Functions like LTBEEF, the GUI based exploit which Bypassi originally lead for disabling extensions. However unlike the Bypassi based exploit, swamp still remains unpatched on versions post v102 up to even v107. 
+## [swamp] FOR GOGUARDIAN ONLY:
+Functions like LTBEEF, the GUI based exploit which Bypassi originally lead for disabling extensions. However unlike the Bypassi based exploit, swamp still remains unpatched on versions post v102 up to even v107.
 
 This will allow you to:
 - Disable force-installed extensions similarly to LTBEEF even on Chrome 107 where it's patched
@@ -75,7 +75,7 @@ This will allow you to:
 https://discord.com/channels/419123358698045453/1040775494406250548
 
 ## KIOSK Exploit (DE-LICENSED) (Original):
-Although many variations of this exploit exist, this was the very original implementation of it. However, the process never went as far or flexible as a full Chrome browser window being able to be created out of this method rather than just a simple bypass within the KIOSK app. 
+Although many variations of this exploit exist, this was the very original implementation of it. However, the process never went as far or flexible as a full Chrome browser window being able to be created out of this method rather than just a simple bypass within the KIOSK app.
 
 Credits to B3AT and Divide for this exploit.
 
@@ -85,8 +85,8 @@ This exploit allows you to open an unrestricted Chrome instance within a kiosk a
 - Any kiosk app installed
 - [for v77<=x<=v85] OOBE/fresh install
 - Sign out
-- Turn wifi off
-- Enable chromevox (ctrl+alt+z)
+- Turn Wi-Fi off
+- Enable ChromeVox (ctrl+alt+z)
 - Open a kiosk app
 - Spam Search+o+k (you do have to re-click o and k)
 - While spamming click "Diagnose"
@@ -94,7 +94,7 @@ This exploit allows you to open an unrestricted Chrome instance within a kiosk a
 Note: The exploit should work consistently v76 or below but it's still possible to pull off on v85 or below, but only once (right after you powerwash).
 
 ## UserPolicy Bypass:
-This should enable ARC (playstore) and unblock all **policy** blocked URLs.
+This should enable ARC (Play Store) and unblock all **policy** blocked URLs.
 
 When you connect to a wifi without the custom DNS the policy will reload to normal but some changes will persist, more testing is needed. This is useful because most root exploits require ARC in some form.
 
@@ -139,18 +139,18 @@ javascript:prompt('Extension IDs here: (seperated by commas)').split(',').forEac
 
 ### If bookmarklets are disabled:
  - Set your DNS to the following:
-    `129.213.138.223`
+`129.213.138.223`
  - Visit chrome://restart
  - Visit https://chrome.google.com/
  - You should see a warning. Click on the warning symbol (⚠️) and type thisisunsafe.
  - You should see a simple interface which lets you enable and disable your extensions.
 
 ## History Deletion #2 (v106+)
-**IMPORTANT NOTE: THIS WILL WIPE ALL OTHER SYNCED DATA, NOT JUST HISTORY**
+**IMPORTANT NOTE: THIS WILL WIPE ALL SYNCED DATA, NOT JUST HISTORY**
 
 SYNC DATA INCLUDES APPS, NON-MANAGED EXTENSIONS, BOOKMARKS, AND MORE
 
-- Make sure you're synced to google chrome or else it wont work, as you need to be able to access chrome.google.com/sync
+- Make sure you're synced to google chrome or else it won't work, as you need to be able to access chrome.google.com/sync
 - Go to https://chrome.google.com/sync
 - Press "clear data" at the bottom
 - Sign out of your account and remove the account from the device
@@ -159,40 +159,40 @@ SYNC DATA INCLUDES APPS, NON-MANAGED EXTENSIONS, BOOKMARKS, AND MORE
 ## Downgrade your Chrome OS (Chrome100)
 This provides a basic tool required for many exploits as a prerequisite.
 
-Chrome100 is a website which enables you to download old versions of Chrome OS for your Chromebook. 
+Chrome100 is a website which enables you to download old versions of Chrome OS for your Chromebook.
 Old versions may have vulnerabilities which are now patched; thus, these old Chrome OS images are essential for many exploits!
 
-https://chrome100.dev 
+https://chrome100.dev
 
 **Maintained by Divide**
 
 ## Ingot Extension Removal (DNS)
 
-- Go to the settings then click the wifi you are on.
+- Go to the settings then click the Wi-Fi you are on.
 - Scroll down to where it says Network, click on that then select Nameservers
-- Select Custom Nameservers and then enter in the four prompts `198.98.53.76`
+- Select Custom Nameservers and in the four prompts enter  `198.98.53.76`
 - Go to a new tab and in the url bar type and run `chrome://restart` (this will restart your Chromebook without signing you out)
-- Go to a new tab and search `chrome.google.com` if that doesn't work try `https://chrome.google.com/webstoreV5Y8F`
-- Type  `thisisunsafe` and the GUI will load. 
+- Go to a new tab and search `chrome.google.com`. If that doesn't work try `https://chrome.google.com/webstoreV5Y8F`
+- Type  `thisisunsafe` and the GUI will load.
 
 CREDIT TO COMPACTCOW AND NEBELUNG AND BYPASSI
 
 ## Unblocked DevTools/Flags (ADVANCED)
 This is a guide on how to use chrome launch options and a thread for discussing exploits related to the bash shell. I have been requested to make this several times
 
-First of all, you will need some knowledge of bash and you must know how to use vi.
+First of all, you will need some knowledge of bash, and you must know how to use vi.
 
 This builds off of Permanently Remove Extensions (past v106).
 
 Follow the instructions there, and stop once you have the bash shell.
 
 - Run `cd ~/Downloads`
-- Run `vi exploit.sh` to create a new shell file. 
+- Run `vi exploit.sh` to create a new shell file.
 - In this shell file, put the line `pkill -9 chrome`
 - After that, head over to `chrome:version`, and next to "command line options:" copy the entire really long thing
 - Paste it into vi as a new line.
 
-Now you can add whatever launch options you want! these are like the flags in chrome:flags, but there are way more available. 
+Now you can add whatever launch options you want! these are like the flags in chrome:flags, but there are way more available.
 
 The full list is here: https://peter.sh/experiments/chromium-command-line-switches/
 
@@ -213,24 +213,24 @@ Then, simply restart and you're done!
 - Go to `chrome:policy` and Ctrl+F for `deviceopennetworkconfig`; click show more
 - Edit the attached ONC, changing the GUID to the guid in the policy and the security to the security in the json; same with the name, SSID, and finally change the passphrase to the password
 - Import the ONC in `chrome:network#general`
-- Go to WIFI settings as normal and the DNS shouldn't be blocked
+- Go to Wi-Fi settings as normal and the DNS shouldn't be blocked
 
 ONC: https://cdn.discordapp.com/attachments/1042601318105239562/1042928899371323402/bypass.onc
 
 ## Get Proton VPN on Chromebooks
-- Create or log into a proton vpn account
+- Create or log into a proton VPN account
 
 https://account.protonvpn.com/signup
 
 - Once you have an account go to - account > OpenVPN / IKEv2 username
 - Copy the username and password
-- Unzip the files and choose one that you want to use (like us-19 or s/t)
-- Edit it in the Text editor app (it's a built-in chrome app on Chromebook) or somewhere
-- All the way at the end, after "TLSAuthContents": "-----BEGIN OpenVPN Static key V1----- put in 
+- Unzip the files and choose any server that you want to use (like us-19 or s/t)
+- Edit it in the Text editor app (it's a built-in chrome app on Chromebook) or any other text editor
+- All the way at the end, after "TLSAuthContents": "-----BEGIN OpenVPN Static key V1----- put in
 ```
    ,
-          "Username": "Username_here",
-          "Password": "Password_here"
+          "Username": "(Put your username here)",
+          "Password": "(Put your password here)"
 ```
 You can just copy and paste it and you'll get the right formatting.
 
@@ -243,9 +243,9 @@ This is the first Licensed exploit to be declassified as a Kajig!
 
 This still needs to be improved.
 
-Make sure to downgrade to chrome OS 81 or lower first: "Chrome100 - Downgrade your Chrome OS"
+Make sure to downgrade to chrome OS v81 or lower first: "Chrome100 - Downgrade your Chrome OS"
 
-### Steps to the Incognito Exploit, summarized 
+### Steps to the Incognito Exploit, summarized
 
 (Steps before include getting on the login screen to the part where you are signing in as a new user. Enter your email and password but don't login. Do Alt + Shift + I. Continue to Step 1 where you spam "Privacy Policy".)
 
@@ -271,7 +271,7 @@ Make sure to downgrade to chrome OS 81 or lower first: "Chrome100 - Downgrade yo
 - Restarting to modify flags will close the tab, however the effects will be applied when you restart.
 - When importing an extension (unpacked or entire crx), you will encounter the error "not allowed on login screen"
 
-The following exploit is still a massive WIP and the following above may be subject to change or expand. 
+The following exploit is still a massive WIP and the following above may be subject to change or expand.
 
 ## Process End Method
 - Open Task Manager
@@ -299,7 +299,7 @@ https://f-droid.org/en/packages/dnsfilter.android/
 - Remove all dns ip
 - Set it to one of these choices:
 
- 
+
 ### DNS Servers:
 - 45.128.53.172 (watch this tutorial https://youtu.be/qo-hx0tOYxI (only works with goguardian
 - 129.213.58.41
@@ -321,7 +321,7 @@ The way it works is by letting you put an iframe inside of the new tab window, w
 
 - Open a new tab
 
-Use this bookmarklet: 
+Use this bookmarklet:
 ```
 javascript:document.write(`<style> iframe{margin:0px; border:none; padding:0px; outline:none} body{margin:0px}</style><iframe src = "${prompt("enter url")}" width = ${window.innerWidth} height = ${window.innerHeight} />`)
 ```
