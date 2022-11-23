@@ -12,7 +12,8 @@ const Wrapper = ({ children, doc }) => <React.Fragment>
         <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#434c5e"/>
         <meta name="keywords" content="proxy, web proxy, unblock websites, unblock chromebook, free web proxy, proxy list, proxy sites, un block chromebook, online proxy, proxy server, proxysite, proxy youtube, bypass securly, bypass iboss, bypass lightspeed filter, holy unblocker, chromebooks, titanium network, unblock youtube, youtube proxy, unblocked youtube, youtube unblocked, Titanium Network, Hypertabs, Securly, iboss, Relay, Lightspeed, Unblock, Bypass, Chromebooks, Alloy Proxy"/>
         <meta name="googlebot" content="index, follow, snippet" />
-        <script src="https://titaniumnetwork.org/seo.js" type="application/ld+json"></script>
+        <script async src="https://arc.io/widget.min.js#2BzvQ1em"></script>
+        <script src="https://titaniumnetwork.org/seo.json" type="application/ld+json"></script>
     </Helmet>
     {children}
 </React.Fragment>
