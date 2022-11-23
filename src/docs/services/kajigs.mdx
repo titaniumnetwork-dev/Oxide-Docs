@@ -65,7 +65,54 @@ https://discord.com/channels/419123358698045453/1033537020854800434
 ## Linux Mint
 Boot different Operating Systems on your Chromebook; freeing you from all restrictions, including those that have to do with Chrome OS, itself.
 
-You must be in developer mode. There are ways to do this, which you will have to find out for yourself. You will need a USB of USB 3.0 or higher, and 32 GB or more of storage. You can buy a good USB here. https://www.amazon.com/SanDisk-256GB-Ultra-Flash-Drive/dp/B07857Y17V It's really small, so other people won't think anything. They'll just think it's the receiver for your wireless mouse or something. You will also need another computer. Step 1: Getting the Installer On your own computer, open Disk Management. Right-click on C; and select Shrink. Shrink the partition by 8192 MB. You will now have 8 GB of free space. Right-click on the free space, and select New Volume. Format it as FAT32, and name it Installer. Give it 8192 MB of storage.  Now, go to https://www.linuxmint.com/edition.php?id=299 and click "Torrent Download: 64-Bit" Open the file in your BitTorrent client. If you don't have one, download one here: https://www.qbittorrent.org/download.php Once you have your .iso file, open it in 7-Zip. You can download 7-Zip here: https://www.7-zip.org/download.html Copy all of the contents of the .iso file to the new drive partition that you've created. Restart your computer, and boot back into Windows. Step 2: Setting up the Installer On the login screen, press the power button in the bottom right corner, hold shift and select Restart. Keep shift held down. A blue screen will pop up. Select "Use a Device". Select Linux Mint, or whatever your UEFI has decided to call Linux Mint. On Acer computers, it may say "Linpus Lite". Plug in your USB. A desktop will appear, click "Install Linux Mint". Go on through the Installer until it asks you for "Installation Type" Select "Something Else". Click "Device for Bootloader Installation", and select the name of your USB Drive. Note the text to the left of the name of your USB; that is the path. It will usually say "/dev/sda" You'll want to scroll on the page of the Installer until you see the path that was shown next to the name of your USB. Select the existing partition(s) on the USB (/dev/sda1, /dev/sda2), and press "-" to make free space. Select the new free space, and press + to make a new partition. Make the size 500 MB, Type of partition: Primary, Location for the Partition: Beginning of this new space. Select the box that says "Use as", and select "EFI System Partition". Press OK. Select the remaining free space, and press + again. Make the size as large as possible, Type of partition: Primary, Location for the partition: Beginning of this new space. Select the box that says "Use as:", and select "Ext4 journaling system". Click the text box that says "Mount Point", and type a forward slash. (/) Press OK. Linux Mint 21 "Vanessa" - Linux Mint Linux Mint is an elegant, easy to use, up to date and comfortable desktop operating system. qBittorrent Official Website qBittorrent Official Website Once everything is ready, make sure to check one more time that your USB is set for bootloader installation, then press Install Now. Select your Time Zone. Create your user. Please make sure to select "Encrypt my Home Directory"! This is very important for your security, as anyone could take your USB and put it in THEIR computer, and read all of your information! While you wait for the installation to finish, do Step 3. Step 3: Firmware Turn on your Chromebook, and press CTRL + ALT + T to open Crosh. Make sure to type "shell" to enter bash. Type cd; curl -LO mrchromebox.tech/firmware-util.sh && sudo bash firmware-util.sh Make sure to run as Chronos. If you run as root, it will install to the wrong places, and mess things up. After things load, press 1. Please wait for it to finish, then reboot your Chromebook. Wait for the installation of Linux Mint to finish before proceeding. Insert your USB into your Chromebook. Press CTRL + L on the OS Verification screen, and press 1. Press escape once the prompt appears at the bottom of your screen, and select Boot Menu. Select your USB, and press enter. Enjoy!
+You must be in developer mode. There are ways to do this, which you will have to find out for yourself.
+You will need a USB of USB 3.0 or higher, and 32 GB or more of storage. You can buy a good USB here. https://www.amazon.com/SanDisk-256GB-Ultra-Flash-Drive/dp/B07857Y17V
+It's really small, so other people won't think anything. They'll just think it's the receiver for your wireless mouse or something.
+You will also need another computer.
+
+On your own computer, open Disk Management.
+Right-click on C; and select Shrink.
+Shrink the partition by 8192 MB.
+You will now have 8 GB of free space.
+Right-click on the free space, and select New Volume.
+Format it as FAT32, and name it Installer.
+Give it 8192 MB of storage.
+Now, go to https://www.linuxmint.com/edition.php?id=299 and click "Torrent Download: 64-Bit"
+Open the file in your BitTorrent client. If you don't have one, download one here: https://www.qbittorrent.org/download.php
+Once you have your .iso file, open it in 7-Zip. You can download 7-Zip here: https://www.7-zip.org/download.html
+Copy all of the contents of the .iso file to the new drive partition that you've created.
+Restart your computer, and boot back into Windows.
+Step 2: Setting up the Installer
+On the login screen, press the power button in the bottom right corner, hold shift and select Restart.
+Keep shift held down.
+A blue screen will pop up. Select "Use a Device".
+Select Linux Mint, or whatever your UEFI has decided to call Linux Mint. On Acer computers, it may say "Linpus Lite".
+Plug in your USB.
+A desktop will appear, click "Install Linux Mint".
+Go on through the Installer until it asks you for "Installation Type" Select "Something Else".
+Click "Device for Bootloader Installation", and select the name of your USB Drive. Note the text to the left of the name of your USB; that is the path. It will usually say "/dev/sda"
+You'll want to scroll on the page of the Installer until you see the path that was shown next to the name of your USB.
+Select the existing partition(s) on the USB (/dev/sda1, /dev/sda2), and press "-" to make free space.
+Select the new free space, and press + to make a new partition.
+Make the size 500 MB, Type of partition: Primary, Location for the Partition: Beginning of this new space. Select the box that says "Use as", and select "EFI System Partition". Press OK.
+Select the remaining free space, and press + again. Make the size as large as possible, Type of partition: Primary, Location for the partition: Beginning of this new space. Select the box that says "Use as:", and select "Ext4 journaling system".
+Click the text box that says "Mount Point", and type a forward slash. (/) Press OK.
+Once everything is ready, make sure to check one more time that your USB is set for bootloader installation, then press Install Now.
+Select your Time Zone.
+Create your user. Please make sure to select "Encrypt my Home Directory"! This is very important for your security, as anyone could take your USB and put it in THEIR computer, and read all of your information!
+While you wait for the installation to finish, do Step 3.
+Step 3: Firmware
+Turn on your Chromebook, and press CTRL + ALT + T to open Crosh.
+Make sure to type "shell" to enter bash.
+Type cd; curl -LO mrchromebox.tech/firmware-util.sh && sudo bash firmware-util.sh Make sure to run as Chronos. If you run as root, it will install to the wrong places, and mess things up.
+After things load, press 1.
+Please wait for it to finish, then reboot your Chromebook.
+Wait for the installation of Linux Mint to finish before proceeding.
+Insert your USB into your Chromebook.
+Press CTRL + L on the OS Verification screen, and press 1.
+Press escape once the prompt appears at the bottom of your screen, and select Boot Menu.
+Select your USB, and press enter.
+
 
 https://discord.com/channels/419123358698045453/1037176217696223332
 
