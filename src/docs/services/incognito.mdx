@@ -7,54 +7,44 @@ route: /incognito
 Access the world wide web! Incognito is a dynamic web proxy service stylized as a search engine.
 
 ## Setup
+
+> **Note**
+> If you are looking to deploy to cloud hosting services please check the [README](https://github.com/amethystnetwork-dev/Incognito#readme) for the deploy buttons.
+>
+> For hosting services that have a very limited storage space you can use [Incognito-Lite](https://github.com/amethystnetwork-dev/Incognito-Lite)
+
+As there is no official way to run Incognito, we will be using the deployable verison by Amethyst Network. You will need: [Git](https://git-scm.com/) and [NodeJS](https://nodejs.org).
+
+First, clone the repo:
+```sh
+git clone https://github.com/amethystnetwork-dev/Incognito.git
 ```
-git clone https://github.com/caracal-js/Incognito.git
+
+To install the required packages, you will need to cd into the repository you just cloned and then run `npm install`. The commands can be seen below:
+```sh
 cd Incognito
-git submodule update --init
+npm install
 ```
 
-## Ultraviolet
-Ultraviolet's bare server by default is set to Incognito's official bare server (https://incog.dev/bare/)
+To start Incognito, run the command below:
+```sh
+npm start
+```
 
-Change the bare server in `uv/uv.config.js` to whatever bare server you have.
-
-Folder prefixes in `uv.sw.js` and `uv.config.js` will have to be changed to where `uv/` is located
-
-`/uv.sw.js` --> `/uv/uv.sw.js`
+This starts the bare server and serves the static files on port 8080 by default.
 
 ## Config
+- To change the HTTP server port set the environment variable variable `PORT`.
 
-```json
-{
-    "port": 8080,
-    "ssl": false,
-    "prefix": "/service/",
-    "codec": "xor",
-    "proxy": true,
-    "blacklist": [],
-    "addresses": [],
-    "authorization": {
-        "name": "__incog_auth",
-        "value": "1"
-    },
-    "appearance": "bright",
-    "engine": "google"
-}
-```
+### SSL Config
+To enable SSL place your certificates in the SSL folder.
 
-- `port` HTTP Server Port
-- `ssl` (true / false) HTTP Server SSL
-- `prefix` Corrosion proxy prefix
-- `codec` Corrosion proxy codec
-- `proxy` (true / false) Have Corrosion be hosted on the Node.js application. Recommended to have Corrosion hosted elsewhere with large amounts of clients.
-- `blacklist` Array of hostnames to be blocked on the proxy.
-- `authorization` (Object { name: "...", value: "..." } / false) Proxy authorization cookie
-- `appearance` ("bright" / "midnight" / "ocean" / "lime" / "terminal") Default site appearance
-- `engine` ("google" / "bing" / "brave" / "youtube" / "twitter" / "reddit") Default search engine 
+The certificate should be named `cert.pem` and the private key named `key.pem`.
+
+When SSL is enabled only port 443 will be used.
+
+## Ultraviolet
+Ultraviolet's bare server by default is set to `/bare/` by default. If you would like to use a different bare server, change it in `static/uv/uv.config.js`.
 
 ## Games
-Games are not included by default due to the extremely large size of them. 
-
-```
-git clone https://github.com/caracal-js/gfiles.git source
-```
+All games are not included by default due to the extremely large size of them and some hosting services having limited storage space.
