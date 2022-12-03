@@ -26,6 +26,77 @@ For quality purposes, only `Featured` kajigs will be listed here.
   - macOS: macOS specific kajigs
   - Mobile: Mobile specific kajigs
 
+## Prevent Tab Close (GoGuardian, etc.)
+This is a really old exploit that originates all the way back to 2017/2018. Essentially it prevents your tab from being closed in the most simple way. Use as needed.
+
+```js
+javascript:onbeforeunload=i=>1
+```
+
+Paste the above in a bookmark and run it on whatever tab you want to prevent force closing!
+
+## Tab Disguise
+
+
+Disguises the icon and name of the tab you're on with the icon and name given in the code
+
+Setup: Create a bookmark, copy the provided code and paste it in as the URL (name it whatever you want).
+
+```js
+javascript:(function() {
+var link = document.querySelector("link[rel*='icon']") || document.createElement('link');
+link.type = 'image/x-icon';link.rel = 'shortcut icon';
+link.href = 'https://ssl.gstatic.com/docs/doclist/images/infinite_arrow_favicon_5.ico';
+document.title = 'My Drive - Google Drive';
+console.log(document.title);
+document.getElementsByTagName('head')[0].appendChild(link);})();
+```
+
+Alternatively, you can use this code to update the disguise every second (same setup)
+
+```js
+javascript:function gcloak() {
+var link = document.querySelector("link[rel*='icon']") || document.createElement('link');
+link.type = 'image/x-icon';
+link.rel = 'shortcut icon';
+link.href = 'https://ssl.gstatic.com/docs/doclist/images/infinite_arrow_favicon_5.ico';
+document.title = 'My Drive - Google Drive';
+console.log(document.title);
+document.getElementsByTagName('head')[0].appendChild(link) };
+gcloak();setInterval(gcloak, 1000);
+```
+
+The 2 scripts given use a Google Drive disguise as an example, but they can be customized
+-  To change the favicon, replace the link in line 4 with your own image link
+-  To change the title, replace the text in the ''s on line 5 with your own title
+-  To change the timing, replace the number in line 9 with your own timing (in milliseconds)
+ge link.href to change the favicon/logo.
+
+## Porta Proxy (Hapara)
+
+
+Allows you to access a given site within other tabs; bypasses Hapara
+
+Setup: Create a bookmark, copy the provided code and paste it in as the URL (name it whatever you want).
+
+```
+javascript:((function(){
+var a,b,c;c="WEBSITE HERE",
+b=document.createElement("iframe"),
+b.setAttribute("src",c),b.setAttribute("id","rusic-modal"),
+b.setAttribute("style","position: fixed; width: 100%; height: 100%; top: 0; left: 0; right: 0; bottom: 0; z-index: 99999999999; background-color: #fff;"),
+a=document.getElementsByTagName("body")[0],
+a.appendChild(b)})).call(this)
+```
+
+To close the Porta Proxy, create another bookmark with this code:
+
+```
+javascript: var element = document.getElementById("rusic-modal"); element.parentNode.removeChild(element);
+```
+
+In order to use Porta-Proxy, you must supply your own proxy website link in the bookmarklet; you put the link inside the quotation marks that read "WEBSITE HERE", and you have to include https://
+
 ## Permanently Remove Extensions (Past v106)
 Credits: CoolElectronics
 
@@ -361,5 +432,14 @@ Bookmark and open this in a new tab.
 ```
 javascript:window.open('https://discord.com/app?'+'e'.repeat(16384));
 ```
+
+## killcurly (Securly, v107+):
+RIP Cookie Dough to leaking. Regardless here is another exploit related to bypassing Securly.
+
+- Visit `chrome://settings/signOut` (the O must be capital) and click the blue button. If this is "blocked_by_administrator", DM `SprinkzMC#8421` for an alternate URL.
+- Visit `chrome://restart`. Alternatively, you can go to the Securly details in `chrome://extensions` and click "Allow access to file URLs" or just use `chrome://kill` on one of its extension pages. Securly will now reload and be broken.
+- Go to `https://tinyurl.com/addsession` and add your school account back (personal accounts may even work for some people).
+
+**This has to be repeated each time you sign out of your computer. Feel free to test this for other extensions too.**
 
 
