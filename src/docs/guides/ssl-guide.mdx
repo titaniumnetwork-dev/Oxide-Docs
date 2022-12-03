@@ -25,10 +25,13 @@ certbot plugins
 Standalone mode will be the priority for this tutorial.
 
 `--manual`: Specifies whether or not plugins will be used to make this automatic
+
 `--preferred-challenges`: Can either be DNS or HTTP. DNS is the preferred option as for verification you will resort to adding a TXT record to your zone.
+
 `--d`: Specifies the domain that will be used for renewal
 
-Note how the domain is wildcarded. This is particularly important for users who wish to maintain an active proxy service with many domains/subdomains.
-
-```sudo certbot certonly --manual --preferred-challenges dns -d \*.example.com
 ```
+sudo certbot certonly --manual --preferred-challenges dns -d \*.example.com
+```
+
+Note how the domain is wildcarded. This is particularly important for users who wish to maintain an active proxy service with many domains/subdomains.
