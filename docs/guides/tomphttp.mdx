@@ -1,9 +1,8 @@
 ---
-name: TompHTTP
-route: /tomphttp
+title: TompHTTP
 ---
 
-# TOMPHTTP Specifications
+## TOMPHTTP Specifications
 
 [**GitHub**](https://github.com/tomphttp)
 
@@ -528,7 +527,7 @@ See [RFC 8941: Structured Field Values for HTTP](https://www.rfc-editor.org/rfc/
 
 See implementation at https://github.com/tomphttp/bare-server-node/blob/master/splitHeaderUtil.js
 
-Due to very popular webservers forbidding very long header values, headers on V2 will be split. If x header value is over **3072** Bytes (3.5 KB), **do not expect a response from the server**. If the server receives the large header, it will send a a [`INVALID_BARE_HEADER`](./BareServerErrors.md) error. If the server doesn't receive the header, the response may vary in status codes depending on the server.
+Due to very popular webservers forbidding very long header values, headers on V2 will be split. If x header value is over **3072** Bytes (3.5 KB), **do not expect a response from the server**. If the server receives the large header, it will send a a [`INVALID_BARE_HEADER`](#errors) error. If the server doesn't receive the header, the response may vary in status codes depending on the server.
 
 Currently, header splitting only applies to X-Bare-Headers. Headers are split in both requests and responses. Split headers IDs begin from 0. A split header name looks like X-Bare-Split-ID. Every split value must begin with a semicolon, otherwise whitespace may be lost.
 
