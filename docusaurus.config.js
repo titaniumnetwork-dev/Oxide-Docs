@@ -36,8 +36,7 @@ const config = {
   ],
 
   scripts: [
-    { src: "https://titaniumnetwork.org/seo.json", type: "application/ld+json" },
-    { src: "https://arc.io/widget.min.js#2BzvQ1em", async: true }
+    { src: "https://titaniumnetwork.org/seo.json", type: "application/ld+json" }
   ],
 
   themeConfig:
@@ -54,7 +53,7 @@ const config = {
         defaultMode: 'dark'
       },
       navbar: {
-        title: 'Docs',
+        title: 'Titanium Network // Documentation',
         logo: {
           alt: 'TitaniumNetwork',
           src: 'https://titaniumnetwork.org/logo.png',
