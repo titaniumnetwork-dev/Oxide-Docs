@@ -12,10 +12,13 @@ Access the world wide web! Incognito is a dynamic web proxy service stylized as 
     The thing with doing that is if they change, I will have to make another PR with those changes.
     (and yes you can use HTML comments in md)
 -->
-> **Note**
-> If you are looking to deploy to cloud hosting services please check the [README](https://github.com/amethystnetwork-dev/Incognito#readme) for the deploy buttons.
->
-> For hosting services that have a very limited storage space you can use [Incognito-Lite](https://github.com/amethystnetwork-dev/Incognito-Lite)
+:::note
+
+If you are looking to deploy to cloud hosting services please check the [README](https://github.com/amethystnetwork-dev/Incognito#readme) for the deploy buttons.
+
+For hosting services that have a very limited storage space you can use [Incognito-Lite](https://github.com/amethystnetwork-dev/Incognito-Lite)
+
+:::
 
 As there is no official way to run Incognito, we will be using the deployable verison by Amethyst Network. You will need: [Git](https://git-scm.com/) and [NodeJS](https://nodejs.org).
 
@@ -38,14 +41,14 @@ npm start
 This starts the bare server and serves the static files on port 8080 by default.
 
 ## Config
-- To change the HTTP server port set the environment variable variable `PORT`.
+To change the HTTP server port set the environment variable variable `PORT`.
 
 ### SSL Config
 To enable SSL place your certificates in the SSL folder.
 
 The certificate should be named `cert.pem` and the private key named `key.pem`.
 
-When SSL is enabled only port 443 will be used.
+When SSL is enabled port 443 will be used instead of 8080.
 
 ## Ultraviolet
 Ultraviolet's bare server by default is set to `/bare/` by default. If you would like to use a different bare server, change it in `static/uv/uv.config.js`.
