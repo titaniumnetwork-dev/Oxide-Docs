@@ -1,12 +1,9 @@
 {
   "name": "docs",
   "version": "1.0.5",
-  "description": "The official SDK documentation site for TitaniumNetwork. Here we provide advanced web proxy services through the progression of web proxy technologies. Otherwise look over the various guides to each of our services or community run projects.",
-  "authors": {
-    "name": "QuiteAFancyEmerald",
-    "email": "emerald@titaniumnetwork.org"
-  },
-  "private": "true",
+  "description": "The official SDK documentation site for TitaniumNetwork.",
+  "homepage": "https://docs.titaniumnetwork.org/",
+  "private": true,
   "license": "AGPLv3",
   "repository": "https://github.com/titaniumnetwork-dev/Oxide-Docs",
   "scripts": {
@@ -45,6 +42,6 @@
     ]
   },
   "engines": {
-    "node": ">=16.14"
+    "node": ">=18"
   }
 }
