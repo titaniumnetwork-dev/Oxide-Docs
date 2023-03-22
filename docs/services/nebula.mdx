@@ -1,25 +1,32 @@
 ---
 title: Nebula
 ---
+
 # Nebula
+
 NebulaWeb is an official flagship of Nebula Services and Nebula Developer Labs. NebulaWeb is a stunning, sleek, and functional web-proxy with support for thousands of popular sites. With NebulaWeb, the sky is the limit.
 
-<img src="https://nebulaproxy.nebula.bio/images/logo.png" width="100px" height="100px"></img>
+<img
+  src="https://nebulaproxy.nebula.bio/images/logo.png"
+  width="100px"
+  height="100px"
+></img>
 
 [**GitHub**](https://github.com/NebulaServices/Nebula)
 
 ## Features
 
-- Stunning highly functional UI with multiple themes 
+- Stunning highly functional UI with multiple themes
 - XOR/Base64 Encrypts all traffic sent from Nebula
 - Hides your IP from sites
 - [List of officially supported sites](https://github.com/NebulaServices/Nebula/blob/main/docs/officially-supported-sites.md)
-- *limited* mobile support
+- _limited_ mobile support
 - StealthMode (buffed `about:blank` cloaking)
 - Advanced cloaking options
 - **NEW** Deployment option - Email OTP Verification (tutorial can be found below)
 
 ## OTP Verification Mode
+
 - change `"verification":false,` to `"verification":true,`
 - Make an account with Sendgrid (https://app.sendgrid.com/)
 - Verify email
@@ -31,12 +38,12 @@ NebulaWeb is an official flagship of Nebula Services and Nebula Developer Labs. 
 Credits to @ProgrammerIn-wonderland for writing this wonderful tutorial.
 
 - Create an account at https://www.cloudflare.com/
-- Create an account at https://www.freenom.com/ (or any registrars) 
+- Create an account at https://www.freenom.com/ (or any registrars)
 - Find a free domain name at Freenom
-- Click checkout 
-- Select (12 Months @ FREE) 
+- Click checkout
+- Select (12 Months @ FREE)
 - Select "Use DNS"
-- Select Use your own DNS 
+- Select Use your own DNS
 - Go to cloudflare, click add new site, and enter the free domain name
 - Select "Free Plan"
 - Click continue, ignore DNS
@@ -56,7 +63,7 @@ Credits to @ProgrammerIn-wonderland for writing this wonderful tutorial.
 ## Server Configuration
 
 - SSH into the server you'll be using, I'll assume its running Ubuntu 22.04 (though the commands are the same for debian 10+ versions, and Ubuntu versions 20.04+)
-- Run 
+- Run
 
 ```
 curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash - \ &&
@@ -71,14 +78,13 @@ sudo nohup PORT=80 node . &
 Make sure your firewall is configured to let through port 80 traffic!
 Note: Server will need to run `cd Nebula && sudo nohup PORT=80 node . &` on reboot
 
-
 ## Tech Stack
 
 - HTML, JS, CSS
-- Partical.JS 
-- UV Backend Proxy 
+- Partical.JS
+- UV Backend Proxy
 - Osana Backend Proxy
-- **Server:** Bare server on Node 
+- **Server:** Bare server on Node
 
 ## Support
 
@@ -87,4 +93,3 @@ For support, email chloe@nebula.bio or join our discord: discord.nebula.bio
 ## License
 
 Copyright Nebula Services 2021-2023. This project uses the AGLP GNU V3 license
-

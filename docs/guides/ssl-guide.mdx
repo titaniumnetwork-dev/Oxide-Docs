@@ -3,24 +3,28 @@ title: SSL Guide
 ---
 
 ## Getting Started
-For this tutorial Certbot will be used. Other open source clients which utilize __Let's Encrypt__ as well however.
+
+For this tutorial Certbot will be used. Other open source clients which utilize **Let's Encrypt** as well however.
 
 > Certbot is a free, open source software tool for automatically using Let’s Encrypt certificates on manually-administrated websites to enable HTTPS.
 
 Certbot is an interface with Let's Encrypt service, a CLI tool that can be used to generate and renew your certificates. With this example Canonical Ubuntu 20.04 will be used.
 
 First you will want to run essential commands:
+
 ```
 sudo apt update && upgrade
 sudo apt install certbot
 ```
 
 You can also look into installing either `python3-certbot-apache` or `python3-certbot-nginx` as well for automatic usage. The status of these plugins can be viewed using the command below:
+
 ```
 certbot plugins
 ```
 
 ## CLI Usage
+
 Standalone mode will be the priority for this tutorial.
 
 `--manual`: Specifies whether or not plugins will be used to make this automatic

@@ -7,7 +7,7 @@
     "email": "emerald@titaniumnetwork.org"
   },
   "private": "true",
-  "license": "GNU Affero",
+  "license": "AGPLv3",
   "repository": "https://github.com/titaniumnetwork-dev/Oxide-Docs",
   "scripts": {
     "docusaurus": "docusaurus",
@@ -31,7 +31,8 @@
     "react-dom": "^17.0.2"
   },
   "devDependencies": {
-    "@docusaurus/module-type-aliases": "2.2.0"
+    "@docusaurus/module-type-aliases": "2.2.0",
+    "prettier": "^2.8.6"
   },
   "browserslist": {
     "production": [

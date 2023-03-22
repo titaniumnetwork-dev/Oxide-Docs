@@ -4,6 +4,7 @@ slug: kajigs
 ---
 
 # Titanium Network Kajigs
+
 A repository of methods you can employ enabling you to bypass restrictions!
 
 **PLEASE DO NOT USE KAJIGS FOR ILLEGAL ACTIVITY**
@@ -13,67 +14,78 @@ Limitations: Methods which are considered aggressive such as removing or damagin
 For quality purposes, only `Featured` kajigs will be listed here.
 
 ### Current Tags:
-  - Webview bypasses: kajigs that use a webview to operate
-  - Extension bypasses: kajigs that allow you to manipulate extensions (adding, disabling, etc.)
-  - Bookmarklets: bookmarks that run JavaScript code to do something, usually embedding proxies or similar into your current page
-  - Filter bypasses: kajigs that let you get around your filters
-  - Other: kajigs that do not fit in the aforementioned categories
-  - Mod post: mod posts. May or may not be kajigs, read them anyways
-  - Patched: these kajigs have been patched by software vendors. THIS DOES NOT MEAN THE KAJIG IS UNUSABLE. For example, see "Chrome100 - Downgrade your Chrome OS"
-  - Featured: Extraordinary kajigs (chosen by mods)
-  - chromeOS: chromeOS specific kajigs
-  - Windows: Windows specific kajigs
-  - macOS: macOS specific kajigs
-  - Mobile: Mobile specific kajigs
+
+- Webview bypasses: kajigs that use a webview to operate
+- Extension bypasses: kajigs that allow you to manipulate extensions (adding, disabling, etc.)
+- Bookmarklets: bookmarks that run JavaScript code to do something, usually embedding proxies or similar into your current page
+- Filter bypasses: kajigs that let you get around your filters
+- Other: kajigs that do not fit in the aforementioned categories
+- Mod post: mod posts. May or may not be kajigs, read them anyways
+- Patched: these kajigs have been patched by software vendors. THIS DOES NOT MEAN THE KAJIG IS UNUSABLE. For example, see "Chrome100 - Downgrade your Chrome OS"
+- Featured: Extraordinary kajigs (chosen by mods)
+- chromeOS: chromeOS specific kajigs
+- Windows: Windows specific kajigs
+- macOS: macOS specific kajigs
+- Mobile: Mobile specific kajigs
 
 ## Prevent Tab Close (GoGuardian, etc.)
+
 This is a really old exploit that originates all the way back to 2017/2018. Essentially it prevents your tab from being closed in the most simple way. Use as needed.
 
 ```js
-javascript:onbeforeunload=i=>1
+javascript: onbeforeunload = (i) => 1;
 ```
 
 Paste the above in a bookmark and run it on whatever tab you want to prevent force closing!
 
 ## Tab Disguise
 
-
 Disguises the icon and name of the tab you're on with the icon and name given in the code
 
 Setup: Create a bookmark, copy the provided code and paste it in as the URL (name it whatever you want).
 
 ```js
-javascript:(function() {
-var link = document.querySelector("link[rel*='icon']") || document.createElement('link');
-link.type = 'image/x-icon';link.rel = 'shortcut icon';
-link.href = 'https://ssl.gstatic.com/docs/doclist/images/infinite_arrow_favicon_5.ico';
-document.title = 'My Drive - Google Drive';
-console.log(document.title);
-document.getElementsByTagName('head')[0].appendChild(link);})();
+javascript: (function () {
+  var link =
+    document.querySelector("link[rel*='icon']") ||
+    document.createElement("link");
+  link.type = "image/x-icon";
+  link.rel = "shortcut icon";
+  link.href =
+    "https://ssl.gstatic.com/docs/doclist/images/infinite_arrow_favicon_5.ico";
+  document.title = "My Drive - Google Drive";
+  console.log(document.title);
+  document.getElementsByTagName("head")[0].appendChild(link);
+})();
 ```
 
 Alternatively, you can use this code to update the disguise every second (same setup)
 
 ```js
-javascript:function gcloak() {
-var link = document.querySelector("link[rel*='icon']") || document.createElement('link');
-link.type = 'image/x-icon';
-link.rel = 'shortcut icon';
-link.href = 'https://ssl.gstatic.com/docs/doclist/images/infinite_arrow_favicon_5.ico';
-document.title = 'My Drive - Google Drive';
-console.log(document.title);
-document.getElementsByTagName('head')[0].appendChild(link) };
-gcloak();setInterval(gcloak, 1000);
+javascript: function gcloak() {
+  var link =
+    document.querySelector("link[rel*='icon']") ||
+    document.createElement("link");
+  link.type = "image/x-icon";
+  link.rel = "shortcut icon";
+  link.href =
+    "https://ssl.gstatic.com/docs/doclist/images/infinite_arrow_favicon_5.ico";
+  document.title = "My Drive - Google Drive";
+  console.log(document.title);
+  document.getElementsByTagName("head")[0].appendChild(link);
+}
+gcloak();
+setInterval(gcloak, 1000);
 ```
 
 The 2 scripts given use a Google Drive disguise as an example, but they can be customized
--  To change the favicon, replace the link in line 4 with your own image link
--  To change the title, replace the text in the ''s on line 5 with your own title
--  To change the timing, replace the number in line 9 with your own timing (in milliseconds)
-ge link.href to change the favicon/logo.
+
+- To change the favicon, replace the link in line 4 with your own image link
+- To change the title, replace the text in the ''s on line 5 with your own title
+- To change the timing, replace the number in line 9 with your own timing (in milliseconds)
+  ge link.href to change the favicon/logo.
 
 ## Porta Proxy (Hapara)
-
 
 Allows you to access a given site within other tabs; bypasses Hapara
 
@@ -98,6 +110,7 @@ javascript: var element = document.getElementById("rusic-modal"); element.parent
 In order to use Porta-Proxy, you must supply your own proxy website link in the bookmarklet; you put the link inside the quotation marks that read "WEBSITE HERE", and you have to include https://
 
 ## Permanently Remove Extensions (Past v106)
+
 Credits: CoolElectronics
 
 This exploit is currently the most flexible and effective method in TN right now as a result of the bounty made by luphoria. Criteria was to simply bypass the Enterprise Policy ArcEnabled: false but resulted in a much more effective exploit in the end.
@@ -107,6 +120,7 @@ This exploit details another way to permanently delete extensions. Once done, yo
 You need a usb for downgrading, and rudimentary knowledge of bash is recommended.
 
 ### STEPS:
+
 Downgrade to any version below 103. Instructions are in "Chrome100 - Downgrade your Chrome OS".
 
 Hit ctrl alt t to open a crosh window. If it’s blocked by extensions, use LTBEEF. If it’s policy blocked (“The person who set up this computer has chosen to block this site”) you can try downgrading to a version below 90, where crosh had a different URL
@@ -122,11 +136,12 @@ You can now restart chrome, allowing it to update to the latest version. Once re
 
 **If you would like Root Access, go to Root Escalation**
 
-You can also run `set_cellular_ppp \'chmod 777 ~/Extensions;rm -rf ~/Extensions;mkdir ~/Extensions;chmod 000 ~/Extensions;echo done;exit\'`  in crosh to do it all in one step
+You can also run `set_cellular_ppp \'chmod 777 ~/Extensions;rm -rf ~/Extensions;mkdir ~/Extensions;chmod 000 ~/Extensions;echo done;exit\'` in crosh to do it all in one step
 
 https://discord.com/channels/419123358698045453/1033121753263771709
 
 ## Root Escalation
+
 Have the ability to run developer mode content, enable developer mode, bypass pretty much everything with one exploit. Will require the downgrade methods.
 
 Has so many branches that I’m just going to link the Kajig discussion. Check the pins in the TN Discord server.
@@ -134,9 +149,11 @@ Has so many branches that I’m just going to link the Kajig discussion. Check t
 https://discord.com/channels/419123358698045453/1033537020854800434
 
 ## [swamp] FOR GOGUARDIAN ONLY:
+
 Functions like LTBEEF, the GUI based exploit which Bypassi originally lead for disabling extensions. However unlike the Bypassi based exploit, swamp still remains unpatched on versions post v102 up to even v107.
 
 This will allow you to:
+
 - Disable force-installed extensions similarly to LTBEEF even on Chrome 107 where it's patched
 - Run bookmarklets on any page even when they are blocked
 - Break GoGuardian until powerwash (or until you choose to turn it back on)
@@ -146,6 +163,7 @@ This will allow you to:
 https://discord.com/channels/419123358698045453/1040775494406250548
 
 ## KIOSK Exploit (DE-LICENSED) (Original):
+
 Although many variations of this exploit exist, this was the very original implementation of it. However, the process never went as far or flexible as a full Chrome browser window being able to be created out of this method rather than just a simple bypass within the KIOSK app.
 
 Credits to B3AT and Divide for this exploit.
@@ -153,6 +171,7 @@ Credits to B3AT and Divide for this exploit.
 This exploit allows you to open an unrestricted Chrome instance within a kiosk app, i.e. with the kiosk user account permissions.
 
 ### Steps:
+
 - Any kiosk app installed
 - [for v77<=x<=v85] OOBE/fresh install
 - Sign out
@@ -165,16 +184,19 @@ This exploit allows you to open an unrestricted Chrome instance within a kiosk a
 Note: The exploit should work consistently v76 or below but it's still possible to pull off on v85 or below, but only once (right after you powerwash).
 
 ## UserPolicy Bypass:
+
 This should enable ARC (Play Store) and unblock all **policy** blocked URLs.
 
 When you connect to a wifi without the custom DNS the policy will reload to normal but some changes will persist, more testing is needed. This is useful because most root exploits require ARC in some form.
 
 ### You need:
+
 - The ability to downgrade to a version below 102
-- A way to access crosh. If it's blocked via extension, use LTBEEF. If it's blocked by user policy, you must  use a combination of Incognito Exploit (v81) and Crosh Bypass (Daybreak)
+- A way to access crosh. If it's blocked via extension, use LTBEEF. If it's blocked by user policy, you must use a combination of Incognito Exploit (v81) and Crosh Bypass (Daybreak)
 - A router or hotspot capable of either blocking websites via parental control or setting a custom DNS (129.213.58.41)
 
 ### Steps:
+
 - Downgrade to a version
 - Open crosh (ctrl+alt+t)
 - Elevate to a chronos shell by typing in set_cellular_ppp \';bash;exit\'
@@ -191,32 +213,48 @@ Results should prompt you about a PIN and Google Play then drop you into an acco
 https://discord.com/channels/419123358698045453/1040639727595950180
 
 ## LTBEEF - Disable ANY Extension
+
 LTBEEF is an incredibly powerful exploit which can be utilized to disable any extension, including GoGuardian, Securly, Lightspeed, ....
 
 Credits to Bypassi and CompactCow.
 
 ### Bookmarklets
+
 **Option A - GUI Based**
+
 ```js
-javascript:fetch("https://compactcow.com/ltbeef/exploit.js").then(data=>{data.text().then(text=>{eval(text)})});
+javascript: fetch("https://compactcow.com/ltbeef/exploit.js").then((data) => {
+  data.text().then((text) => {
+    eval(text);
+  });
+});
 ```
+
 Click it once (not on a new tab) to get to the correct webstore page, then again to open the UX.
 
 **Option B - if Option A doesn't load**
+
 - Go to https://chrome.google.com/webstorex and run this bookmarklet
+
 ```js
-javascript:prompt('Extension IDs here: (seperated by commas)').split(',').forEach(i=>{chrome.management.setEnabled(i.trim(),!1)})
+javascript: prompt("Extension IDs here: (seperated by commas)")
+  .split(",")
+  .forEach((i) => {
+    chrome.management.setEnabled(i.trim(), !1);
+  });
 ```
 
 ### If bookmarklets are disabled:
- - Set your DNS to the following:
-`129.213.138.223`
- - Visit chrome://restart
- - Visit https://chrome.google.com/
- - You should see a warning. Click on the warning symbol (⚠️) and type thisisunsafe.
- - You should see a simple interface which lets you enable and disable your extensions.
+
+- Set your DNS to the following:
+  `129.213.138.223`
+- Visit chrome://restart
+- Visit https://chrome.google.com/
+- You should see a warning. Click on the warning symbol (⚠️) and type thisisunsafe.
+- You should see a simple interface which lets you enable and disable your extensions.
 
 ## History Deletion #2 (v106+)
+
 **IMPORTANT NOTE: THIS WILL WIPE ALL SYNCED DATA, NOT JUST HISTORY**
 
 SYNC DATA INCLUDES APPS, NON-MANAGED EXTENSIONS, BOOKMARKS, AND MORE
@@ -228,6 +266,7 @@ SYNC DATA INCLUDES APPS, NON-MANAGED EXTENSIONS, BOOKMARKS, AND MORE
 - Sign back in and history should be gone
 
 ## Downgrade your Chrome OS (Chrome100)
+
 This provides a basic tool required for many exploits as a prerequisite.
 
 Chrome100 is a website which enables you to download old versions of Chrome OS for your Chromebook.
@@ -241,14 +280,15 @@ https://chrome100.dev
 
 - Go to the settings then click the Wi-Fi you are on.
 - Scroll down to where it says Network, click on that then select Nameservers
-- Select Custom Nameservers and in the four prompts enter  `198.98.53.76`
+- Select Custom Nameservers and in the four prompts enter `198.98.53.76`
 - Go to a new tab and in the url bar type and run `chrome://restart` (this will restart your Chromebook without signing you out)
 - Go to a new tab and search `chrome.google.com`. If that doesn't work try `https://chrome.google.com/webstoreV5Y8F`
-- Type  `thisisunsafe` and the GUI will load.
+- Type `thisisunsafe` and the GUI will load.
 
 CREDIT TO COMPACTCOW AND NEBELUNG AND BYPASSI
 
 ## Unblocked DevTools/Flags (ADVANCED)
+
 This is a guide on how to use chrome launch options and a thread for discussing exploits related to the bash shell. I have been requested to make this several times
 
 First of all, you will need some knowledge of bash, and you must know how to use vi.
@@ -272,14 +312,17 @@ Some notable ones are: `--force-devtools-available` (devtools), `--bwsi` (guest 
 To execute chrome with the launch options set, exit vi (impossible), and run `sh <(cat exploit.sh) & disown`
 
 ## IStealYourDNS (DNS)
+
 IStealYourDNS is a TitaniumNetwork-partnered service. With it, you can seamlessly block many web filters (GoGuardian, Lightspeed, ...) and never think about bypassing filters ever again.
 
 ### Installation
+
 To install it, simply open your Wi-Fi's DNS settings, and set the name servers to "Custom" - replace any options available with `72.5.33.65`. If you have multiple boxes, set the last one to `1.1.1.1`.
 
 Then, simply restart and you're done!
 
 ## Better DNS Bypass (DNS)
+
 - Know the credentials of your School's WIFI or utilize a hotspot
 - Go to `chrome:policy` and Ctrl+F for `deviceopennetworkconfig`; click show more
 - Edit the attached ONC, changing the GUID to the guid in the policy and the security to the security in the json; same with the name, SSID, and finally change the passphrase to the password
@@ -289,6 +332,7 @@ Then, simply restart and you're done!
 ONC: https://cdn.discordapp.com/attachments/1042601318105239562/1042928899371323402/bypass.onc
 
 ## Get Proton VPN on Chromebooks
+
 - Create or log into a proton VPN account
 
 https://account.protonvpn.com/signup
@@ -298,18 +342,22 @@ https://account.protonvpn.com/signup
 - Unzip the files and choose any server that you want to use (like us-19 or s/t)
 - Edit it in the Text editor app (it's a built-in chrome app on Chromebook) or any other text editor
 - All the way at the end, after "TLSAuthContents": "-----BEGIN OpenVPN Static key V1----- put in
+
 ```
    ,
           "Username": "(Put your username here)",
           "Password": "(Put your password here)"
 ```
+
 You can just copy and paste it and you'll get the right formatting.
 
 Make sure that you start the paste right after the end quotation mark.
+
 - Save the onc file
 - Upload it to `chrome://network#general` all the way at the bottom where it says Import ONC File (don't worry if you don't notice anything, just try scrolling down a little more and it should say `Networks imported: 1` (regardless of how many you actualy imported)
 
 ## Incognito Exploit (v81)
+
 This is the first Licensed exploit to be declassified as a Kajig!
 
 This still needs to be improved.
@@ -345,6 +393,7 @@ Make sure to downgrade to chrome OS v81 or lower first: "Chrome100 - Downgrade y
 The following exploit is still a massive WIP and the following above may be subject to change or expand.
 
 ## Process End Method
+
 - Open Task Manager
 - Press 'search'+'esc'
 - Scroll all the way to the bottom and find your blocker extension and highlight it (click on it)
@@ -360,6 +409,7 @@ If Task Manager is blocked:
 - Change the URL to `chrome://kill` (I recommend making it a bookmark (if your school blocked bookmarklets this one will still work))
 
 ## personalDNSfilter/Hotspot
+
 https://f-droid.org/en/packages/dnsfilter.android/
 
 - Download personalDNSfilter from the link
@@ -370,13 +420,14 @@ https://f-droid.org/en/packages/dnsfilter.android/
 - Remove all dns ip
 - Set it to one of these choices:
 
-
 ### DNS Servers:
+
 - 45.128.53.172 (watch this tutorial https://youtu.be/qo-hx0tOYxI (only works with goguardian
 - 129.213.58.41
 - 51.161.64.196
 
 ### Extras
+
 - wifi network + usb tethering
 - cellular network + hotspot
 - cellular network + hotspot app
@@ -384,6 +435,7 @@ https://f-droid.org/en/packages/dnsfilter.android/
 You may need to update the DNS servers on your current phone WIFI network.
 
 ## Stealth (Lightspeed)
+
 This trick is specifically for when your chromebook is "locked" by a teacher, and any site you go to will get closed instantly. It can also hide the tab from the teachers and get around the "[teacher's name] has blocked this site" screen.
 
 The way it works is by letting you put an iframe inside of the new tab window, where most chrome extensions don't have permission. This means that if a page is "temporarily blocked" by a teacher or they lock your chromebook you can still access almost every page that works in an iframe. I don't know what it shows up as on the teacher screen, but they likely will just see the new tab and not the actual site.
@@ -393,6 +445,7 @@ The way it works is by letting you put an iframe inside of the new tab window, w
 - Open a new tab
 
 Use this bookmarklet:
+
 ```
 javascript:document.write(`<style> iframe{margin:0px; border:none; padding:0px; outline:none} body{margin:0px}</style><iframe src = "${prompt("enter url")}" width = ${window.innerWidth} height = ${window.innerHeight} />`)
 ```
@@ -400,10 +453,12 @@ javascript:document.write(`<style> iframe{margin:0px; border:none; padding:0px; 
 Enter a url that you want to visit.
 
 Notes:
+
 - This only works if bookmarklets are enabled
 - Works ONLY with Lightspeed
 
 ## Playstore Bypass (v106+)
+
 Make sure you are upgrading or powerwashing/recovering. Chrome Device Manager's notification should appear otherwise this will not work.
 
 **MAKE SURE TO HAVE A HOME ACCOUNT ADDED!**
@@ -415,27 +470,35 @@ Add accounts in `settings -> your school account name -> add account`. You don't
 
 **EASIER GUIDE**
 After Powerwash, Recovering, removing account and adding it back in:
+
 - The moment `Chrome Device Manager` pops up ( 💼 ) do `chrome://restart`
 - After that open Google Play and switch to your home account
 
 ## GoGuardian Discord Unblock
+
 This only works for Discord and Youtube.
 
 ### Type 1
+
 ```
 data:text/html,<script>window.location.href='https://discord.com/app?%27+%27e%27.repeat(16380)%3C/script%3E
 ```
+
 Open this in a new tab.
 
 ### Type 2
+
 Bookmark and open this in a new tab.
+
 ```
 javascript:window.open('https://discord.com/app?'+'e'.repeat(16384));
 ```
 
 ## killcurly (Securly, v107+):
+
 RIP Cookie Dough to leaking. Regardless here is another exploit related to bypassing Securly.
+
 - Visit `chrome://settings/signOut` (the O must be capital) and click the blue button. If this is "blocked_by_administrator", DM `SprinkzMC#8421` for an alternate URL.
 - Visit `chrome://restart`. Alternatively, you can go to the Securly details in `chrome://extensions` and click "Allow access to file URLs" or just use `chrome://kill` on one of its extension pages. Securly will now reload and be broken.
 - Go to `https://tinyurl.com/addsession` and add your school account back (personal accounts may even work for some people).
-**This has to be repeated each time you sign out of your computer. Feel free to test this for other extensions too.**
+  **This has to be repeated each time you sign out of your computer. Feel free to test this for other extensions too.**

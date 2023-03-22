@@ -5,10 +5,13 @@ title: VPN Setup
 # VPN Setup
 
 ## Making a VPN Server
-Credits to __OnlyCS__ for the original Kajig and awsame for the
+
+Credits to **OnlyCS** for the original Kajig and awsame for the
 
 ### Prerequisites
+
 To make a VPN server, you will need:
+
 - A VPS running Ubuntu 20.04 (DigitalOcean Recommended)
 - A chromebook for testing
 - Forwarded Ports
@@ -24,9 +27,11 @@ To make a VPN server, you will need:
   - basic knowledge of commands like `ls`, `cd`, etc
 
 ### Installing and Configuring
+
 Make sure ports 500 and 4500 are enabled and run `sudo apt install strongswan strongswan-pki libcharon-extra-plugins libcharon-extauth-plugins libstrongswan-extra-plugins`
-Next, __make sure to backup__  `/etc/ipsec.conf` and then open it in `vim` or `nano`
+Next, **make sure to backup** `/etc/ipsec.conf` and then open it in `vim` or `nano`
 Replace the contents of the file with
+
 ```
 config setup
     charondebug="ike 1, knl 1, cfg 0"
@@ -57,6 +62,7 @@ conn ikev2-vpn
 ```
 
 backup `/etc/ipsec.secrets` and replace its contents with:
+
 ```
 # This file holds shared secrets or RSA private keys for authentication.
 
@@ -67,7 +73,9 @@ backup `/etc/ipsec.secrets` and replace its contents with:
 ```
 
 ### Firewall & IP Routing
+
 run these four commands:
+
 ```
 sudo ufw allow OpenSSH
 sudo ufw allow 500,4500/udp
@@ -81,8 +89,9 @@ Keep note of the text where I have left device. This could be something like `et
 
 Edit `/etc/ufw/before.rules`
 Above `*filter`, insert (replacing DEVICE_HERE with your device name):
- ```
- *nat
+
+```
+*nat
 -A POSTROUTING -s 10.10.10.0/24 -o DEVICE_HERE -m policy --pol ipsec --dir out -j ACCEPT
 -A POSTROUTING -s 10.10.10.0/24 -o DEVICE_HERE -j MASQUERADE
 COMMIT
@@ -90,15 +99,17 @@ COMMIT
 *mangle
 -A FORWARD --match policy --pol ipsec --dir in -s 10.10.10.0/24 -o DEVICE_HERE -p tcp -m tcp --tcp-flags SYN,RST SYN -m tcpmss --mss 1361:1536 -j TCPMSS --set-mss 1360
 COMMIT
- ```
+```
 
 Below the `*filter` section (below `:ufw-not-local - [0:0]`):
- ```
- -A ufw-before-forward --match policy --pol ipsec --dir in --proto esp -s 10.10.10.0/24 -j ACCEPT
+
+```
+-A ufw-before-forward --match policy --pol ipsec --dir in --proto esp -s 10.10.10.0/24 -j ACCEPT
 -A ufw-before-forward --match policy --pol ipsec --dir out --proto esp -d 10.10.10.0/24 -j ACCEPT
 ```
 
 In `/etc/ufw/sysctl.conf`, bottom of the file
+
 ```
 net/ipv4/ip_forward=1
 net/ipv4/conf/all/accept_redirects=0
@@ -107,12 +118,14 @@ net/ipv4/ip_no_pmtu_disc=1
 ```
 
 Restart ufw with:
+
 ```
 sudo ufw disable
 sudo ufw enable
 ```
 
 Finally, start the vpn server
+
 ```
 sudo systemctl enable strongswan-starter
 sudo systemctl start strongswan-starter
@@ -125,12 +138,13 @@ First, Install Pi-Hole:
 
 Make `1.1.1.1` (Cloudflare's DNS) the upstream and enable the Web UI/Admin Panel
 
-__In your Browser__, go to the server IP. Port 80 should be open.
+**In your Browser**, go to the server IP. Port 80 should be open.
 
 Open the filter list: This is where we block URLs
 Click the Regex Filter button
 
 There are many regex filters, and they can be found [here](https://gist.github.com/KozmikNano/2833ff805639b2b42788d51fc7b69003). Make sure to convert these to Regex to use them, as they are in Adguard format. Here is an example of some links in Regex format:
+
 ```
 (\.|^)goguardian\.com$
 (\.|^)securly\.com$
@@ -140,8 +154,8 @@ In the Admin Panel, go to Settings > DNS > Interface Settings
 Select permit all origins
 Scroll to bottom and hit save
 
-
 ### Troubleshooting
+
 If you're having trouble go to [discord.gg/unblock](https://discord.gg/unblock) and look for the making your own vpn server kajig for assistance.
 
 A common error that occurs is that your VPN will connect but you will have no internet connection. In this case, try: `sudo iptables -I FORWARD 1 -j ACCEPT`
@@ -158,7 +172,4 @@ Click the Pre-Shared Key and put the value you added in for the password in `ips
 In local identity put your name or anything else
 And in remote identity put the server and click Connect.
 
-
 #### You can now bypass web filters :D
-
-

@@ -3,6 +3,7 @@ title: DNS Setup
 ---
 
 ## Get Started
+
 DNS management is the entire process of properly getting your own domain name actually pointed to your origin server.
 This is all done through the management of DNS records. When doing any zone changes (set of DNS records) please note that visible changes may take up to 48 hours due to DNS propagation.
 
@@ -12,6 +13,7 @@ The first thing you would need to do is purchase a domain name. A domain name 
 - NameSilo
 
 ### Freenom Disclaimer
+
 For beginners, Freenom is a good provider for obtaining domains for free. However the catch is that you can only use properly "Freenom" domains for free being .cf, .ml, .gq, ga and .tk. However these can be blocked rather easily.
 
 If you prefer to obtain premium domains (TLDs) then use <a href="https://porkbun.com">Porkbun</a>, which offers domains for amazing prices. Literally a `.net` domain normally costs around $10. On Porkbun for the first year it costs $3 so its definitely a deal.
@@ -21,7 +23,11 @@ If you prefer to obtain premium domains (TLDs) then use <a href="https://porkbun
 After you have selected a decent VPS (refer to the VPS Hosting guide), use Cloudflare for the DNS records for both the site and the subdomains for the proxies. You could manually do this as well but Cloudflare is recommended for ease.
 
 This is an example of DNS records. Self-hosting will require `A records` preferably.
-<img src="https://raw.githubusercontent.com/titaniumnetwork-dev/Holy-Unblocker/master/views/assets/img/dnssetup.png" width="500"></img>
+
+<img
+  src="https://raw.githubusercontent.com/titaniumnetwork-dev/Holy-Unblocker/master/views/assets/img/dnssetup.png"
+  width="500"
+></img>
 
 - `@` and `www.example.ml` for the local Ultraviolet proxy or any locally hosted proxy with your frontend; or just your frontend
 - `client.example.ml` for external web proxy #1
@@ -31,7 +37,8 @@ This is an example of DNS records. Self-hosting will require `A records` prefera
 The actual subdomain is all dependant on **your** setup.
 
 ## Cloudflare Steps
-- Use Cloudflare (make an account), add your domain name (Freenom Domain or other TLD) and then add your various DNS records to your zone. Make sure you add Cloudflare's nameservers which will be given later when you are adding your domain name. 
+
+- Use Cloudflare (make an account), add your domain name (Freenom Domain or other TLD) and then add your various DNS records to your zone. Make sure you add Cloudflare's nameservers which will be given later when you are adding your domain name.
 
 Make sure they are CNAME although A records also work and try to follow this structure:
 
@@ -52,15 +59,18 @@ Make sure they are CNAME although A records also work and try to follow this str
 0.0.0.0 being an obvious example.
 
 ## NGINX
-A common question here would be "how would I get my public VPS IP actually directed to an instance (ex: PORT)?" 
+
+A common question here would be "how would I get my public VPS IP actually directed to an instance (ex: PORT)?"
 
 For this you need to utilize a reverse web proxy. Essentially, a reverse proxy is a server that sits in front of web servers and forwards client (e.g. web browser) requests to those web servers. Reverse proxies are implemented to help increase security, performance, and reliability but in this case for ease of setup.
 
 More information regarding this can be found within the NGINX guide.
 
 ## Free Hosting Issues
+
 A typical issue that arisies with free hosting is the situation with adding or managing CNAME/A records to these services. Due to having to use panels steps for each may vary and they might fall under the SSL guide below.
 
 ## SSL
+
 Make sure HTTPS is forced and have SSL set to Flexible for any free hosting options. **Otherwise you can have SSL set to Full.**
 Cloudflare will try to automatically select Flexible so be sure to check your setup if you have any issues with DNS management.

@@ -14,7 +14,7 @@ TOMP (acronym for Too Many Proxies) is an organization containing new standards 
 ## Why should I use the TOMP specifications?
 
 Many proxies have been successful without following any specifications. Although the proxies may run very well, there is no unified backend or protocol. Prior to the TOMP model, if you wanted to set up 10 proxies, you needed to set up 10 servers. The TOMP model accomplishes a unified backend. In practice, you can have 10 implementations that use only one bare server, saving not only resources but the maintenance required for multiple servers.
- 
+
 Creating specifications allows for productivity. One developer can implement the TOMP model without having to write an entire backend, instead they can set up a Bare Server. This not only saves valuable time but allows the developer to focus more on the code they write, not HTTP/S frameworks or URL parsing libraries.
 
 ### Listing
@@ -48,6 +48,7 @@ Bare Servers can run on directories. For example, if the directory was `/bare/` 
 Due to the nature of header values being large, you must configure your web server to allow these large headers.
 
 NGINX:
+
 ```
 server {
 	# ...
@@ -69,9 +70,9 @@ server {
 
 ### Request server info
 
-| Method | Endpoint  |
-| ------ | --------- |
-| `GET`  | /         |
+| Method | Endpoint |
+| ------ | -------- |
+| `GET`  | /        |
 
 This endpoint is not subject to change. It will remain the same across versions.
 
@@ -85,39 +86,36 @@ Response Body:
 
 ```json
 {
-	"versions": [
-		"v1",
-		"v2"
-	],
-	"language": "NodeJS",
-	"memoryUsage": 1.04,
-	"maintainer": {
-		"email": "maintenance@example.org",
-		"website": "https://projects.example.org/"
-	},
-	"project": {
-		"name": "Project",
-		"description": "Unique TOMP implementation",
-		"email": "development@example.org",
-		"website": "https://git.example.org/",
-		"repository": "https://git.example.org/dev/project.git",
-		"version": "1.0.0"
-	}
+  "versions": ["v1", "v2"],
+  "language": "NodeJS",
+  "memoryUsage": 1.04,
+  "maintainer": {
+    "email": "maintenance@example.org",
+    "website": "https://projects.example.org/"
+  },
+  "project": {
+    "name": "Project",
+    "description": "Unique TOMP implementation",
+    "email": "development@example.org",
+    "website": "https://git.example.org/",
+    "repository": "https://git.example.org/dev/project.git",
+    "version": "1.0.0"
+  }
 }
 ```
 
 A ? after the property indicates it's optional.
 
 - maintainer {Object}?
-	- email {String}?
-	- website {String}?
+  - email {String}?
+  - website {String}?
 - project {Object}?: The project's information.
-	- name {String}?
-	- description {String}?
-	- email {String}?
-	- website {String}?
-	- repository {String}?: A link to the project's .git file.
-	- version {String}?: The [semver](https://semver.org/) version number of this project's backend.
+  - name {String}?
+  - description {String}?
+  - email {String}?
+  - website {String}?
+  - repository {String}?: A link to the project's .git file.
+  - version {String}?: The [semver](https://semver.org/) version number of this project's backend.
 - versions {Array{String}}: A list of version names this server supports. (resolvable to http://server/versionName/)
 - language {String{NodeJS,Deno,Bun,ServiceWorker,Java,PHP,Rust,C,C++,C#,Ruby,Go,Crystal,Shell}}: The runtime. "language" is kept for legacy purposes.
 - memoryUsage {Number}?: The memory used by the server in base MB.
@@ -125,7 +123,7 @@ A ? after the property indicates it's optional.
 In NodeJS, memoryUsage should be calculated by:
 
 ```js
-Math.round((process.memoryUsage().heapUsed / 1024 / 1024) * 100) / 100
+Math.round((process.memoryUsage().heapUsed / 1024 / 1024) * 100) / 100;
 ```
 
 ## Proxy Model
@@ -171,23 +169,24 @@ const { scope } = registration;
 const splitURL = /^(js|css)\/(.*?)$/;
 
 async function onFetch(request) {
-	// isolate the content after /scope/ in the URL
-	const sliced = request.url.slice(scope);
-	// request.url = `http://localhost/scope/js/https%3A%2F%2Fsys32.dev%2F`
-	// sliced = `js/https%3A%2F%2Fsys32.dev%2F`
-	const [, service, url] = sliced.match(splitURL) || [];
+  // isolate the content after /scope/ in the URL
+  const sliced = request.url.slice(scope);
+  // request.url = `http://localhost/scope/js/https%3A%2F%2Fsys32.dev%2F`
+  // sliced = `js/https%3A%2F%2Fsys32.dev%2F`
+  const [, service, url] = sliced.match(splitURL) || [];
 
-	if (!service || !url) return new Response('Unknown URL', { status: 404 });
+  if (!service || !url) return new Response("Unknown URL", { status: 404 });
 
-	const decodedURL = new URL(decodeURIComponent(url));
+  const decodedURL = new URL(decodeURIComponent(url));
 
-	// Do logic according to service...
+  // Do logic according to service...
 }
 ```
 
 ### How it will look
 
 You should attempt to produce an identical website (CSS, HTML, JS) by leveraging rewriting scripts. We recommend the following libraries:
+
 - [parse5](https://www.npmjs.com/package/parse5)
 - [meriyah](https://www.npmjs.com/package/meriyah)
 - [acorn-loose](https://www.npmjs.com/package/acorn-loose)
@@ -217,6 +216,7 @@ Such as `fetch(url, opts)`, `XMLHttpRequest.prototype.open(method, url, ...etc)`
 JS apis will have their responses unrewritten, and may contain data that calling `res.text()` will result in being lost. Run logic to determine what to convert the response to.
 
 Example:
+
 - `/xhr/`: Don't touch the response. Use `new Response(res.body)` to produce a response with the body being piped. Loads `fetch()`, `XMLHttpRequest`, and images.
 - `/js/`: Covert to a string using `res.text()` then rewrite.
 - `/css/`: Covert to a string using `res.text()` then rewrite.
@@ -265,9 +265,9 @@ Identifying errors:
 
 ```json
 {
-	"code": "UNKNOWN",
-	"id": "request",
-	"message": "The Bare Server encountered an unknown error relating to the request."
+  "code": "UNKNOWN",
+  "id": "request",
+  "message": "The Bare Server encountered an unknown error relating to the request."
 }
 ```
 
@@ -301,7 +301,7 @@ Error IDs are in `<object>?.<key>` format.
 ### Objects
 
 - `error`: A container for types such as Exception,TypeError,Error,SyntaxError
-- `unknown` 
+- `unknown`
 - `request`: The client's HTTP implementation.
 - `request.headers`
 - `request.body` {No key}
@@ -319,14 +319,14 @@ Keys are optional. The object could be `request.headers` and this will reference
 ### Example of keys
 
 - `request.headers.x-bare-headers`
-	- Object: `request.headers`
-	- Key: `x-bare-headers`
+  - Object: `request.headers`
+  - Key: `x-bare-headers`
 - `bare.headers.x-custom_header`
-	- Object: `bare.headers`
-	- Key: `x-custom_header`
+  - Object: `bare.headers`
+  - Key: `x-custom_header`
 - `bare.headers.x-custom.header.a`
-	- Object: `bare.headers`
-	- Key: `x-custom.header.a`
+  - Object: `bare.headers`
+  - Key: `x-custom.header.a`
 
 ## Bare Server V1 Endpoints
 
@@ -336,9 +336,9 @@ The endpoint `/` on V1 would be `/v1/`
 
 ### Request the server to fetch a URL from the remote.
 
-| Method | Endpoint   |
-| ------ | ---------- |
-| `*`    | /       |
+| Method | Endpoint |
+| ------ | -------- |
+| `*`    | /        |
 
 Request Body:
 
@@ -367,7 +367,7 @@ The headers below are required. Not specifying a header will result in a 400 sta
 The headers below are optional and will default to `[]` if they are not specified. They are intended to be used for caching purposes.
 
 - X-Bare-Pass-Headers: A JSON-serialized array of case-insensitive headers. If these headers are present in the remote response, the values will be added to the server response.
-The list must not include the following: `vary`, `connection`, `transfer-encoding`, `access-control-allow-headers`, `access-control-allow-methods`, `access-control-expose-headers`, `access-control-max-age`, `access-control-request-headers`, `access-control-request-method`.
+  The list must not include the following: `vary`, `connection`, `transfer-encoding`, `access-control-allow-headers`, `access-control-allow-methods`, `access-control-expose-headers`, `access-control-max-age`, `access-control-request-headers`, `access-control-request-method`.
 - X-Bare-Pass-Status: A JSON-serialized array of HTTP status codes, like 204 and 304. If the remote response status code is present in this list, the server response status will be set to the remote response status.
 
 Response Headers:
@@ -390,7 +390,7 @@ Response Body:
 
 The remote's response body will be sent as the response body.
 
-A random character sequence used to identify the WebSocket and it's metadata. 
+A random character sequence used to identify the WebSocket and it's metadata.
 
 ### Request a new WebSocket ID.
 
@@ -414,9 +414,9 @@ ABDCFE009023
 
 ### Request the server to create a WebSocket tunnel to the remote.
 
-| Method | Endpoint  |
-| ------ | --------- |
-| `GET`  | /         |
+| Method | Endpoint |
+| ------ | -------- |
+| `GET`  | /        |
 
 Request Headers:
 
@@ -431,24 +431,24 @@ The JSON object looks like:
 
 ```json
 {
-	"remote": {
-		"host": "example.org",
-		"port": 80,
-		"path": "/ws-path",
-		"protocol": "ws:"
-	},
-	"headers": {
-		"Origin": "http://example.org",
-		"Sec-WebSocket-Protocol": "original_websocket_protocol"
-	},
-	"forward_headers": [
-		"accept-encoding",
-		"accept-language",
-		"sec-websocket-extensions",
-		"sec-websocket-key",
-		"sec-websocket-version"
-	],
-	"id": "UniqueID_123"
+  "remote": {
+    "host": "example.org",
+    "port": 80,
+    "path": "/ws-path",
+    "protocol": "ws:"
+  },
+  "headers": {
+    "Origin": "http://example.org",
+    "Sec-WebSocket-Protocol": "original_websocket_protocol"
+  },
+  "forward_headers": [
+    "accept-encoding",
+    "accept-language",
+    "sec-websocket-extensions",
+    "sec-websocket-key",
+    "sec-websocket-version"
+  ],
+  "id": "UniqueID_123"
 }
 ```
 
@@ -503,15 +503,13 @@ Response Body:
 
 ```json
 {
-	"headers": {
-		"Set-Cookie": [
-			"Cookie",
-			"Cookie"
-		],
-		"Sec-WebSocket-Accept": "original_websocket_protocol"
-	}
+  "headers": {
+    "Set-Cookie": ["Cookie", "Cookie"],
+    "Sec-WebSocket-Accept": "original_websocket_protocol"
+  }
 }
 ```
+
 ## Bare Server V2 Endpoints
 
 All endpoints are prefixed with `/v{version}/`
@@ -579,6 +577,7 @@ Cache:
 ## Bare Request Headers v2
 
 Example:
+
 ```
 X-Bare-Port: 80
 X-Bare-Protocol: http:
@@ -614,9 +613,9 @@ X-Bare-Headers: {"Content-Type": "text/html"}
 
 ## Send and receive data from a remote v2
 
-| Method | Endpoint   |
-| ------ | ---------- |
-| `*`    | /          |
+| Method | Endpoint |
+| ------ | -------- |
+| `*`    | /        |
 
 Request Body:
 
@@ -643,6 +642,7 @@ Request headers are almost identical to `/` with the exception of protocol.
 See [Bare Request Headers](#bare-request-headers)
 
 Example:
+
 ```
 X-Bare-Host: example.org
 X-Bare-Port: 80
@@ -659,7 +659,7 @@ Content-Type: text/plain
 
 Response Body:
 
-A random WebSocket-protocol-safe character sequence used to identify the WebSocket and it's metadata. 
+A random WebSocket-protocol-safe character sequence used to identify the WebSocket and it's metadata.
 
 ```
 ABDCFE009023
@@ -667,9 +667,9 @@ ABDCFE009023
 
 ## Create a WebSocket tunnel to a remote v2
 
-| Method | Endpoint  |
-| ------ | --------- |
-| `GET`  | /         |
+| Method | Endpoint |
+| ------ | -------- |
+| `GET`  | /        |
 
 Request Headers:
 
@@ -678,7 +678,7 @@ Upgrade: websocket
 Sec-WebSocket-Protocol: bare, ...
 ```
 
-Sec-WebSocket-Protocol: The protocol is the meta ID. 
+Sec-WebSocket-Protocol: The protocol is the meta ID.
 
 Response Body:
 
@@ -705,4 +705,3 @@ An expired or invalid X-Bare-ID will result in a 400 status code.
 Response Headers:
 
 See [Bare Response Headers](#bare-response-headers)
-

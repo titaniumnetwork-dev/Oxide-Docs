@@ -1,10 +1,10 @@
 # Welcome to Oxide Docs contributing guide <!-- omit in toc -->
+
 Original document by Github
 
-Thank you for investing your time in contributing to our project! Any contribution you make will be reflected on [docs.titaniumnetwork.org](https://docs.titaniumnetwork.org/) ✨. 
+Thank you for investing your time in contributing to our project! Any contribution you make will be reflected on [docs.titaniumnetwork.org](https://docs.titaniumnetwork.org/) ✨.
 
 In this guide you will get an overview of the contribution workflow from opening an issue, creating a PR, reviewing, and merging the PR.
-
 
 ## New contributor guide
 
@@ -15,10 +15,9 @@ To get an overview of the project, read the [README](README.md). Here are some r
 - [GitHub flow](https://docs.github.com/en/get-started/quickstart/github-flow)
 - [Collaborating with pull requests](https://docs.github.com/en/github/collaborating-with-pull-requests)
 
-
 #### Create a new issue
 
-If you spot a problem with the docs, [search if an issue already exists](https://docs.github.com/en/github/searching-for-information-on-github/searching-on-github/searching-issues-and-pull-requests#search-by-the-title-body-or-comments). If a related issue doesn't exist, you can open a new issue using a relevant [issue form](https://github.com/titaniumnetwork-dev/Oxide-Docs/issues/new/choose). 
+If you spot a problem with the docs, [search if an issue already exists](https://docs.github.com/en/github/searching-for-information-on-github/searching-on-github/searching-issues-and-pull-requests#search-by-the-title-body-or-comments). If a related issue doesn't exist, you can open a new issue using a relevant [issue form](https://github.com/titaniumnetwork-dev/Oxide-Docs/issues/new/choose).
 
 #### Solve an issue
 
@@ -28,8 +27,7 @@ Scan through our [existing issues](https://github.com/github/docs/issues) to fin
 
 #### Make changes in the UI
 
-Click **Make a contribution** at the bottom of any docs page to make small changes such as a typo, sentence fix, or a broken link. This takes you to the `.md` file where you can make your changes and [create a pull request](#pull-request) for a review. 
-
+Click **Make a contribution** at the bottom of any docs page to make small changes such as a typo, sentence fix, or a broken link. This takes you to the `.md` file where you can make your changes and [create a pull request](#pull-request) for a review.
 
 #### Make changes in a codespace
 
@@ -40,7 +38,9 @@ For more information about using a codespace for working on GitHub documentation
 1. [Install Git LFS](https://docs.github.com/en/github/managing-large-files/versioning-large-files/installing-git-large-file-storage).
 
 2. Fork the repository.
+
 - Using GitHub Desktop:
+
   - [Getting started with GitHub Desktop](https://docs.github.com/en/desktop/installing-and-configuring-github-desktop/getting-started-with-github-desktop) will guide you through setting up Desktop.
   - Once Desktop is set up, you can use it to [fork the repo](https://docs.github.com/en/desktop/contributing-and-collaborating-using-github-desktop/cloning-and-forking-repositories-from-github-desktop)!
 
@@ -58,27 +58,26 @@ Commit the changes once you are happy with them.
 ### Pull Request
 
 When you're finished with the changes, create a pull request, also known as a PR.
-- Fill the "Ready for review" template so that we can review your PR. This template helps reviewers understand your changes as well as the purpose of your pull request. 
+
+- Fill the "Ready for review" template so that we can review your PR. This template helps reviewers understand your changes as well as the purpose of your pull request.
 - Don't forget to [link PR to issue](https://docs.github.com/en/issues/tracking-your-work-with-issues/linking-a-pull-request-to-an-issue) if you are solving one.
 - Enable the checkbox to [allow maintainer edits](https://docs.github.com/en/github/collaborating-with-issues-and-pull-requests/allowing-changes-to-a-pull-request-branch-created-from-a-fork) so the branch can be updated for a merge.
-Once you submit your PR, a Docs team member will review your proposal. We may ask questions or request additional information.
+  Once you submit your PR, a Docs team member will review your proposal. We may ask questions or request additional information.
 - We may ask for changes to be made before a PR can be merged, either using [suggested changes](https://docs.github.com/en/github/collaborating-with-issues-and-pull-requests/incorporating-feedback-in-your-pull-request) or pull request comments. You can apply suggested changes directly through the UI. You can make any other changes in your fork, then commit them to your branch.
 - As you update your PR and apply changes, mark each conversation as [resolved](https://docs.github.com/en/github/collaborating-with-issues-and-pull-requests/commenting-on-a-pull-request#resolving-conversations).
 - If you run into any merge issues, checkout this [git tutorial](https://github.com/skills/resolve-merge-conflicts) to help you resolve merge conflicts and other issues.
 
 ### Your PR is merged!
 
-Congratulations 🎉🎉 The Oxide Docs team thanks you ✨. 
+Congratulations 🎉🎉 The Oxide Docs team thanks you ✨.
 
-Once your PR is merged, your contributions will be publicly visible on the [TN Docs](https://docs.titaniumnetwork.org/). 
-
+Once your PR is merged, your contributions will be publicly visible on the [TN Docs](https://docs.titaniumnetwork.org/).
 
 ## Windows
 
 This site can be developed on Windows, however a few potential gotchas need to be kept in mind:
 
-
 1. Bash: Not every Windows developer has a terminal that fully supports Bash, so it's generally preferred to write [scripts](/script) in JavaScript instead of Bash.
 2. Filename too long error: There is a 260 character limit for a filename when Git is compiled with `msys`. While the suggestions below are not guaranteed to work and could cause other issues, a few workarounds include:
-    - Update Git configuration: `git config --system core.longpaths true`
-    - Consider using a different Git client on Windows
+   - Update Git configuration: `git config --system core.longpaths true`
+   - Consider using a different Git client on Windows
