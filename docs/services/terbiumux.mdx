@@ -6,7 +6,8 @@ title: TerbiumUX
 
 ## About
 
-TerbiumOS is a project which aims to create a webOS packed with various features such as basic text editors, media streaming and web emulation all through a proxied instance.
+Terbium is a webOS that is packed full of features ***AND MUCH MORE TO COME***
+![image](https://github.com/TerbiumOS/webOS/blob/main/Terbium.png?raw=true)
 
 <img
   src="https://github.com/TerbiumOS/webOS/blob/main/Terbium.png?raw=true"
@@ -34,16 +35,24 @@ TerbiumOS is a project which aims to create a webOS packed with various features
 
 ## Setup
 
-TerbiumUX is frameworkless! Simply add as a static asset to your web server or application. Below is a small example implementation guide:
+TerbiumOS is frameworkless! Simply add as a static asset to your web server or application. Below is a small example implementation guide:
 
 ### Static
 
-```
-curl https://github.com/TerbiumOS/webOS/blob/main/static.zip -L -o static.zip
-unzip /static.zip # replace if needed
-```
+For this Demonstration I will be using Cloudflare Pages.
+
+1. First go to [pages.dev](https://pages.dev) or to your [cloudflare dashboard](https://dash.cloudflare.com) and login or create a free account! Once you are in the dashboard page in the side bar select pages. If you can't find pages refer to the image below.
+![image](https://github.com/z1g-project/Terbium/assets/72810050/05dac13e-d284-4ff3-8bf9-afedae2b1181)
+2. Once your at the Cloudflare Pages Dashboard Select Create Project then Select Import from Github.
+![image](https://github.com/z1g-project/Terbium/assets/72810050/7e0bce1b-92ce-47fb-bb1a-28b0af9681f4)
+3. Now once your here you must Fork this Repository then Authenticate your Github Account with Cloudflare. Once you complete that you should see a page like this: ![image](https://github.com/z1g-project/Terbium/assets/72810050/42ddd88a-1c8d-4091-a0b2-2e0a27e97235)
+4. Once you Select the repository you will see build options and your going to want to change the build command to this specificly and the output to this also specificly **exactly what is shown in the image below** 
+![image](https://github.com/z1g-project/Terbium/assets/72810050/1f15be5a-5944-4096-9ea7-b184bd3a662e)
+5. After that it should build and deploy successfully! 
 
 ### Backend Example
+
+Want a HTTP Server or your hosting this on a VPS Heres how to get it on your system.
 
 ```
 git clone https://github.com/TerbiumOS/webOS.git
@@ -52,9 +61,11 @@ npm install
 npm start
 ```
 
+**⚠️NOTE This is a example for starting the http server on localhost:6969 and if you wish to actually deploy this you will need to setup nginx or something similar to it**
+
 ## Contributing
 
-TerbiumUX is an ongoing project with updates freqently. If you wish to expand upon the documentation here please head to the official Oxide-Docs repo.
+TerbiumOS is an ongoing project with updates freqently. If you want to contribute feel free to create a pull request! If you wish to expand upon the documentation here please head to the official Oxide-Docs repo.
 
 <a href="https://github.com/TerbiumOS/webOS">
   https://github.com/TerbiumOS/webOS
