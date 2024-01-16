@@ -2,15 +2,66 @@
 title: VPS Hosting
 ---
 
-# VPS Hosting
+<head>
+    <meta content="IE=edge" http-equiv="X-UA-Compatible" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no" />
+    <meta content="1.0.10" name="version" />
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#434c5e" />
+    <link rel="canonical" href="https://holyunblocker.net/" />
+    <meta name="keywords" content="unblock, proxy, web proxy, unblock websites, unblock chromebook, free web proxy, proxy list, proxy sites, un block chromebook, online proxy, proxy server, proxysite, proxy youtube, bypass securly, bypass iboss, bypass fortiguard, bypass lightspeed filter, holy unblocker, chromebooks, titanium network, unblock youtube, youtube proxy, unblocked youtube, youtube unblocked, unblock school chromebook, chromebook exploits" />
+    
+    <meta property="og:site_name" content="Titanium Network Documentation" />
+	<meta property="og:url" content="https://docs.titaniumnetwork.org/" />
+	<meta property="og:title" content="Titanium Network VPS Guide" />
+	<meta property="og:type" content="website" />
+	<meta property="og:description" content="In this guide we cover hosting a web proxy service, the most governing factors for a server purhcase are bandwidth and CPU specifications." />
+	<meta property="og:image" content="https://raw.githubusercontent.com/titaniumnetwork-dev/Oxide/master/public/logo.png" />
+	<meta property="og:image:secure_url" content="https://raw.githubusercontent.com/titaniumnetwork-dev/Oxide/master/public/logo.png" />
+	<meta property="twitter:image" content="https://raw.githubusercontent.com/titaniumnetwork-dev/Oxide/master/public/logo.png" />
+	<meta name="twitter:site" content="@TitaniumNetDev" />
+	<meta name="twitter:creator" content="@TitaniumNetDev" />
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:title" content="Titanium Network Docs" />
+	<meta name="twitter:description" content="Open Source Proxy Organization; Here we provide advanced web proxy services through the progression of web proxy technologies." />
+    
+    <link rel="icon" type="image/png" href="https://titaniumnetwork.org/logo.png" />
+	<link rel="apple-touch-icon" sizes="180x180" href="https://titaniumnetwork.org/logo.png" />
+	<link rel="icon" type="image/png" sizes="32x32" href="https://titaniumnetwork.org/logo.png" />
+	<link rel="icon" type="image/png" sizes="16x16" href="https://titaniumnetwork.org/logo.png" />
+	<link rel="mask-icon" href="https://titaniumnetwork.org/logo.png" color="#b4213b" />
+	
+	<meta name="msapplication-TileColor" content="#b4213b" />
+	<link rel="manifest" href="https://titaniumnetwork.org/manifest.json" />
+
+</head>
+
+# VPS Hosting (2024)
 
 When it comes to hosting a web proxy service, the most governing factors for a server purhcase are bandwidth and CPU specifications.
 Although most of the proxies built by TitaniumNetwork have been built to be optimal with resource usage, web proxies still tend to be heavy on the CPU.
-If you are hosting a rather large service or planning to host a large service using TitaniumNetwork's SDK then consider proritizing bandwidth. Being able to handle
+If you are hosting a rather large service or planning to host a large service using TitaniumNetwork's SDK then consider proritizing bandwidth. Being able to handle this all is essential.
+
+Simple metrics?
+
+If you are getting around one million users per month you should at least have a 1 GBPS port public or 800 GBPS private. Always go for private ports.
+
+If you are getting over a million consider a 1-10GBPS port on a dedicated instance.
 
 ## Providers
 
 This will provide a list of free and paid hosting providers.
+
+## Domains
+https://porkbun.com/
+
+### Paid Options
+
+| Hosting Provider                  | Pros and Cons of each provider                                                                                                                                                                   |
+| --------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| [Crunchbits](https://crunchbits.com)  | By far the best hosting provider you can utilize right now offering dedicated server plans with 10 GBPS down while being open to heavy bandwidth usage. Second choice would be OVH.    |
+| [Contabo](https://contabo.com)    | Contabo is a widely used hosting service that has very good specs for the cheapest prices. There are many issues with Contabo though, such as bad customer service and port speeds.              |
+| [OVH Cloud](https://ovhcloud.com) | OVH Cloud is a well-known hosting provider, with cheap and good servers and speeds. Some issues are that customer support is more on the poor side, and servers may take some time to be set up. |
+| [Scaleway](https://scaleway.com)  | Scaleway is a decently well-known hosting provider. They have services like Dedicated Servers, Web Hosting, Domain Registration, and more! The prices for their services are very reasonable.    |
 
 ### Free Options
 
@@ -18,14 +69,4 @@ This will provide a list of free and paid hosting providers.
 | ----------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | [Oracle Cloud Free Tier](https://www.oracle.com/cloud/free) | Oracle Cloud is remarkable in that it is free. You can pretty much get a full VPS (virtual private server) experience for no cost to you.                                                                                                                                                              |
 | [Repl.it](https://repl.it)                                  | Replit is a well known hosting option. It provides free hosting as well as a web code editor. However, hosting proxies violates Replit's terms of service and can result in your account getting suspended or permanently banned.                                                                      |
-| [Glitch](https://glitch.com)                                | Glitch is very similar to Replit in that it is well known and provides a web code editor. As far as I am aware, hosting proxies on Glitch is not a violation of their terms of service, however, assuming hosting proxies is a violation of Glitch's terms of service, it is still largely unenforced. |
-
-### Paid Options
-
-| Hosting Provider                  | Pros and Cons of each provider                                                                                                                                                                   |
-| --------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| [Contabo](https://contabo.com)    | Contabo is a widely used hosting service that has very good specs for the cheapest prices. There are many issues with Contabo though, such as bad customer service and port speeds.              |
-| [Dedipath](https://dedipath.com)  | Dedipath is a great hosting provider in all categories. With fairly cheap servers with good specs, they are a go-to solution for many.                                                           |
-| [OVH Cloud](https://ovhcloud.com) | OVH Cloud is a well-known hosting provider, with cheap and good servers and speeds. Some issues are that customer support is more on the poor side, and servers may take some time to be set up. |
-| [Scaleway](https://scaleway.com)  | Scaleway is a decently well-known hosting provider. They have services like Dedicated Servers, Web Hosting, Domain Registration, and more! The prices for their services are very reasonable.    |
-| [Heroku](https://heroku.com)      | Heroku, much like Replit, is a well known hosting option. Hosting proxies on Heroku can also result in your account being suspended or permenantly banned.                                       |
+| [Vercel](https://vercel.com)                                | For static hosting only but a rather modern choice. |
