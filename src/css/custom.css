@@ -1,6 +1,6 @@
 @media (min-width: 1000px) {
     nav.navbar.navbar--fixed-top {
-      backdrop-filter: blur(25px);
+      backdrop-filter: blur(10px);
       background: var(--ifm-top-menu-color);
     }
 }
