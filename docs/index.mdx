@@ -6,32 +6,196 @@ title: Getting Started
 
 # Titanium Network | SDK Documentation
 
-Welcome to the official documentation site for Titanium Network. Here we provide advanced web proxy services through the progression of web proxy technologies.
-This composes from advanced URL rewriting proxies, webOS projects, web-based emulation built from libretro, kajigs (a repository of device/OS exploits) and also web browser experimentations with service-workers.
+<head>
+    <meta content="IE=edge" http-equiv="X-UA-Compatible" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no" />
+    <meta content="1.0.10" name="version" />
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#434c5e" />
+    <link rel="canonical" href="https://holyunblocker.net/" />
+    <meta name="keywords" content="proxy, web proxy, unblock websites, unblock chromebook, free web proxy, proxy list, proxy sites, un block chromebook, online proxy, proxy server, proxysite, proxy youtube, bypass securly, bypass iboss, bypass lightspeed filter, holy unblocker, chromebooks, titanium network, unblock youtube, youtube proxy, unblocked youtube, youtube unblocked" />
+    
+    <meta property="og:site_name" content="Titanium Network Documentation" />
+	<meta property="og:url" content="https://docs.titaniumnetwork.org/" />
+	<meta property="og:title" content="Titanium Network Docs" />
+	<meta property="og:type" content="website" />
+	<meta property="og:description" content="Titanium Network composes from advanced URL rewriting proxies, webOS projects, web-based emulation built from libretro, kajigs (a repository of device/OS exploits) and also web browser experimentations with service-workers." />
+	<meta property="og:image" content="https://raw.githubusercontent.com/titaniumnetwork-dev/Oxide/master/public/logo.png" />
+	<meta property="og:image:secure_url" content="https://raw.githubusercontent.com/titaniumnetwork-dev/Oxide/master/public/logo.png" />
+	<meta property="twitter:image" content="https://raw.githubusercontent.com/titaniumnetwork-dev/Oxide/master/public/logo.png" />
+	<meta name="twitter:site" content="@TitaniumNetDev" />
+	<meta name="twitter:creator" content="@TitaniumNetDev" />
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:title" content="Titanium Network Docs" />
+	<meta name="twitter:description" content="Open Source Proxy Organization; Here we provide advanced web proxy services through the progression of web proxy technologies." />
+    
+    <link rel="icon" type="image/png" href="https://titaniumnetwork.org/logo.png" />
+	<link rel="apple-touch-icon" sizes="180x180" href="https://titaniumnetwork.org/logo.png" />
+	<link rel="icon" type="image/png" sizes="32x32" href="https://titaniumnetwork.org/logo.png" />
+	<link rel="icon" type="image/png" sizes="16x16" href="https://titaniumnetwork.org/logo.png" />
+	<link rel="mask-icon" href="https://titaniumnetwork.org/logo.png" color="#b4213b" />
+	
+	<meta name="msapplication-TileColor" content="#b4213b" />
+	<link rel="manifest" href="https://titaniumnetwork.org/manifest.json" />
+	
+    <script type="application/ld+json">
+    {JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+        {
+            "@type": "Question",
+            "name": "What is Titanium Network?",
+            "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Titanium Network is an organization dedicated to providing services related to bypassing internet censorship. Our projects expect to provide users, and itself, with a less restrictive browsing experience. For this, TN prioritizes the production and improvement of web proxy technologies."
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "Can I use Titanium Network to evade website blocks?",
+            "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Of course, whether it's at your school or in the workplace, our robust proxies allow you to bypass web filters, including iBoss, Cisco, and more."
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "Does Titanium Network help protect my online privacy?",
+            "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes! Just like a VPN, TN hides your IP address and also prevents site data from being stored locally in an identifiable manner."
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "How do I unblock websites at school?",
+            "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Using Titanium Network's various services such as Holy Unblocker, a free web proxy service with frequent updates and domain restocks, you can unblock sites at school! If a Holy Unblocker site gets blocked, simply join the TN Discord to request a newer site. Restocks occur monthly to prevent mass blocking."
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "What sites can I unblock with Holy Unblocker?",
+            "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "With Holy Unblocker, you can access sites such as Discord, Spotify, YouTube, and other game sites!"
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "Are web proxies safe?",
+            "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yep! Check out our Privacy Policy for more information. We don't collect or log any information as it defeats our main moral with ending internet censorship and providing a more private experience without downloading anything. We are also open-source."
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "Does Holy Unblocker hide my search history?",
+            "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes! Change your Tab appearance via Settings > Tab Cloak and use Stealth mode when browsing."
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "What is the main project Titanium Network has worked on with web proxy technologies?",
+            "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Ultraviolet, a highly sophisticated proxy used for evading internet censorship or accessing websites in a controlled sandbox using the power of service-workers and more!"
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "Where can I obtain more proxy sites?",
+            "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Be sure to join the Titanium Network discord at discord.gg/unblock! Then simply type \"/proxy\" in our bots channel for a site to be sent to you via DMs using our bot."
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "Is Holy Unblocker open-source?",
+            "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes! Check out our GitHub where you can deploy or host your own instance of Holy Unblocker."
+            }
+        }
+        ]
+    })}
+    </script>
+
+</head>
+
+The official documentation for Titanium Network, an organization dedicated to providing services related to bypassing internet censorship. Our projects expect to provide users, and itself, with a less restrictive browsing experience. Here we provide advanced web proxy services through the progression of web proxy technologies.
+
+These projects compose from advanced URL rewriting proxies, webOS projects, web-based emulation built from libretro, kajigs (a repository of device/OS exploits) and also web browser experimentations with service-workers.
 As a result a wide variety of sites are supported, speed is prioritized and resource consumption has also been significantly optimized compared to previous technologies.
 
-## Main
+<img width="700px" src="https://raw.githubusercontent.com/titaniumnetwork-dev/Oxide/master/public/banner.png"></img>\
 
-Please check out the various documentation posts for these projects if you wish to contribute to TitaniumNetwork.
+## Getting Started
 
-- [Ultraviolet](proxies/ultraviolet)
+### Unblocking
 
-Highly sophisticated proxy used for evading internet censorship or accessing websites in a controlled sandbox using the power of service-workers.
+You simply need to use a site that hosts Ultraviolet, the web proxy project maintained by Titanium Network or the other various web proxy projects. Simply join the Titanium Network discord server and enter in the proxy command in the #proxy channel to obtain a restocked URL.
 
-- [TompHTTP](tomphttp)
+With this resource you are able to unblock websites on a website in plain terms. The best part about web proxies or a project in Titanium Network is that even after being blocked there are always new URLs or links. You can't block them all. Sites such as Discord and all are supported on it.
 
-TOMP (acronym for Too Many Proxies) is an organization containing new standards and implementations for web proxies built on Service Workers.
+#### Or self-host for full privacy control!!
+
+### Obtaining Links
+Join the TN discord server at: https://discord.gg/unblock
+
+Type out `/proxy` in the #proxy channel and our discord bot will direct message you a link. You can do this three/nine times per month and we restock these links every month to make sure they remain unblocked!
+
+## Proxies
+### [Ultraviolet](proxies/ultraviolet)
+
+<img align="right" width="200px" src="https://raw.githubusercontent.com/titaniumnetwork-dev/Ultraviolet-Static/main/public/uv.png"></img>
+
+- Highly sophisticated proxy used for evading internet censorship or accessing websites in a controlled sandbox using the power of service-workers.
+
+Starting from v2, Ultraviolet only supports Bare servers v3+.
+
+If you operate an outdated Bare server, we encourage you to update. If you're using an outdated Bare server, we encourage you to find an updated Bare server or host your own.
+
+If you're too lazy to do either of the above, you can install an outdated and unsupported version of Ultraviolet.
+
+```
+npm install @titaniumnetwork-dev/ultraviolet@1
+```
+
+### [TompHTTP](tomphttp)
+
+#### NOTE: Our standards are currently being reworked with a much newer project to address past issues.
+
+- TOMP (acronym for Too Many Proxies) is an organization containing new standards and implementations for web proxies built on Service Workers.
 
 <!--
     Note:
     Docusaurus provides a index page for a category.
 -->
 
-## [Serving Systems](category/services)
+## Open Source Projects
 
-[Here](category/services) is a quick overview if you wish to setup an open-source project from TitaniumNetwork on your own web server or just general SDK information in simple breakdowns.
+Titanium Network is composed of various open-source projects hosted in production. Being open source in nature, users can self-host any of these official projects for their privacy control.
 
-## [Guides](category/guides)
+- [Anura OS](https://anura.pro/)
+- [Holy Unblocker](https://holyubofficial.net/)
+- [Flow Works](https://flow-works.me/)
+- [Kazwire](https://kazwire.com/)
+- [Ludicrous](https://ludicrous.icu/)
+- [DNS Setup](https://radon.games/)
+- [VPN Setup](https://totallyscience.co/)
+
+<img width="700px" src="https://raw.githubusercontent.com/titaniumnetwork-dev/Oxide/master/public/image.png"></img>
+
+### Documentation
+[Here](category/services) is a quick overview if you wish to setup an open-source project from Titanium Network on your own web server or just general SDK information in simple breakdowns.
+
+## Guides
 
 The contents below are popular tutorials.
 
@@ -39,11 +203,11 @@ The contents below are popular tutorials.
 - [Web Server Setup w/ NGINX](guides/nginx)
 - [SSL/TLS w LetsEncrypt](guides/ssl-guide)
 - [Filter Focus](guides/filter-optimization) \*
-- [UX/SEO Cues](guides/seo-guide) \*
+- [UX/SEO Cues](guides/seo-guide)
 - [DNS Setup](guides/dns-setup)
 - [VPN Setup](guides/vpn-setup)
 
-Mark indicates the documentation page is a WIP.
+Mark indicates the documentation page is a work-in-progress. Feel free to submit any pull requests to update pages correctly.
 
 ## Contributing
 
@@ -59,4 +223,5 @@ https://gnu.org/licenses/agpl-3.0.html
 ## TODO (for contributions)
 
 - Kajig docs
-- To be updated
+- Filter focus pages
+- Detailed web proxy practices for production hosting
