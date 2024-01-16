@@ -46,6 +46,12 @@ const config = {
             'https://github.com/titaniumnetwork-dev/Oxide-Docs/tree/master/docs/',
           routeBasePath: '/',
         },
+        sitemap: {
+          changefreq: 'weekly',
+          priority: 0.8,
+          ignorePatterns: ['/tags/**'],
+          filename: 'sitemap.xml',
+        },
       }),
     ],
   ],
