@@ -100,7 +100,7 @@ const config = {
         title: 'Titanium Network // Documentation',
         logo: {
           alt: 'TitaniumNetwork',
-          src: 'https://titaniumnetwork.org/logo.png',
+          src: 'https://avatars.githubusercontent.com/u/47227492',
         },
         items: [
           {
