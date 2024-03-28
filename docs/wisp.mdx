@@ -1,0 +1,36 @@
+---
+sidebar_position: 1
+title: Wisp
+---
+
+## Wisp Specifications
+
+[**GitHub**](https://github.com/MercuryWorkshop/wisp-protocol)
+
+## What is Wisp?
+
+Wisp is designed to be a low-overhead, easy to implement protocol for proxying multiple TCP and UDP sockets over a single websocket connection.
+
+## What does this have to do with proxies?
+
+Prior to the creation of Wisp, proxy traffic over backends such as the Bare Server or Rammerhead are sent completely unencrypted to the server host. This may work fine if you are hosting your own proxy, but when using public links you obtain from a discord server the risk of the host stealing your tokens from proxy usage might be a problem. 
+
+Since Wisp can proxy all TCP traffic, transports like Epoxy or Libcurl will encrypt your traffic with TLS, making even the server host unable to access any data besides the hostnames of the sites you visit.
+
+## Server Implementations:
+- **[wisp-server-python](https://github.com/MercuryWorkshop/wisp-server-python)** - by [@ading2210](https://github.com/ading2210)
+- **[wisp-server-node](https://github.com/MercuryWorkshop/wisp-server-node)** - by [@ProgrammerIn-wonderland](https://github.com/ProgrammerIn-wonderland)
+- [epoxy-server](https://github.com/MercuryWorkshop/epoxy-tls/tree/multiplexed/server) (Rust) - by [@r58Playz](https://github.com/r58Playz)
+- [WispServerCpp](https://github.com/FoxMoss/WispServerCpp) - by [@FoxMoss](https://github.com/FoxMoss)
+
+## Client Implementations:
+- **[wisp-client-js](https://github.com/MercuryWorkshop/wisp-client-js)** - by [@ading2210](https://github.com/ading2210)
+- [wisp-mux](https://crates.io/crates/wisp-mux) (Rust) - by [@r58Playz](https://github.com/r58Playz)
+
+## Software Using Wisp:
+- [libcurl.js](https://github.com/ading2210/libcurl.js) - A port of libcurl to WebAssembly, for proxying HTTPS requests from the browser with full TLS encryption
+- [epoxy-tls](https://github.com/MercuryWorkshop/epoxy-tls) - An encrypted proxy for browser javascript, written in Rust.
+- [Ultraviolet](https://github.com/titaniumnetwork-dev/Ultraviolet/) - A sophisticated web proxy, which uses either libcurl.js or epoxy. 
+- [Whisper](https://github.com/MercuryWorkshop/Whisper) - A client for Wisp that exposes the connection over a TUN device.
+
+The Wisp protocol specifications were written by [@ading2210](https://github.com/ading2210).
