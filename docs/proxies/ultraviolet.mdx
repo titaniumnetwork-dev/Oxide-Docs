@@ -37,11 +37,11 @@ title: Ultraviolet
 
 <img width="200px" align="right" src="https://raw.githubusercontent.com/titaniumnetwork-dev/Ultraviolet-Static/main/public/uv.png" height="250"></img>
 
-Ultraviolet is a highly advanced web proxy used for evading internet censorship or accessing websites in a controlled sandbox. It is designed with security and performance in mind. Ultraviolet intercepts HTTP requests with a service worker, while adhering to the [TompHTTP specifications](https://github.com/tomphttp) and is a leader in innovative web proxy technologies.
+Ultraviolet is a highly advanced web proxy used for evading internet censorship or accessing websites in a controlled sandbox. It is designed with security and performance in mind. Ultraviolet intercepts HTTP requests with a service worker, while adhering to the while using [libcurl.js](https://github.com/ading2210/libcurl.js) or [epoxy-tls](https://github.com/MercuryWorkshop/epoxy-tls) with [Wisp](https://github.com/MercuryWorkshop/wisp-protocol) and is a leader in innovative web proxy technologies.
 
 ## Features
 
-Ultraviolet offers several features that set it apart from its predecessors, including CAPTCHA and hCAPTCHA support, URL encoding settings for added security, client-side configuration via service-workers, high speed compared to other web proxies, blacklist settings and more for easy hosting, leak prevention, regular updates, and improved resource usage and speed for better setups with a dedicated server instance.
+Ultraviolet offers several features that set it apart from its predecessors, including CAPTCHA and hCAPTCHA support, URL encoding settings for added security, full end to send encryption, client-side configuration via service-workers, high speed compared to other web proxies, blacklist settings and more for easy hosting, leak prevention, regular updates, and improved resource usage and speed for better setups with a dedicated server instance.
 
 ## Supported Sites
 
@@ -67,7 +67,7 @@ Some of the popular websites that Ultraviolet supports include:
 
 ## Upgrading
 
-A guide for updating from v1 to v2 can be found [here](./docs/V2-UPGRADE-GUIDE.md).
+A guide for updating from v2 to v3 can be found [here](https://github.com/titaniumnetwork-dev/Ultraviolet/wiki/Upgrading).
 
 ## Older Bare servers
 
@@ -115,8 +115,6 @@ $ npm run build
 
 You can extract the scripts from the NPM package in the [releases section](https://github.com/titaniumnetwork-dev/Ultraviolet/releases). All the scripts you would typically look for (`uv.bundle.js`, `uv.handler.js`, `uv.sw.js`, and `uv.config.js`) are found within the `dist` directory.
 
-If you cannot open the tar.gz (Chrome OS?), use a [converter](https://cloudconvert.com/tar.gz-to-zip). We can only do so much to make the scripts accessible.
-
 ## Installation
 
 > This will provide built files and the JS API to access the path of dist files.
@@ -137,6 +135,35 @@ $ npm pack
 Package will be named `ultraviolet-X.X.X.tgz`
 
 ## Changelogs
+
+# 3.0.0
+
+-   This version of Ultraviolet has support for using [bare-mux](https://github.com/MercuryWorkshop/bare-mux) transports, allowing for use for other implementations like [EpoxyTransport](https://github.com/MercuryWorkshop/EpoxyTransport), [CurlTransport](https://github.com/MercuryWorkshop/CurlTransport), and the existing implementation [Bare-Client](https://github.com/MercuryWorkshop/Bare-as-module3).
+
+# v2.0.0
+
+-   This version of Ultraviolet has support for Bare server v3
+-   Support for older Bare servers was dropped.
+
+# v1.0.10
+
+-   This version of Ultraviolet fixes an NPM versioning error.
+
+# v1.0.8
+
+-   This version of Ultraviolet improves error messages.
+
+# v1.0.7
+
+-   This version of Ultraviolet correctly sets the `cache` option when making a request.
+
+# v1.0.6
+
+-   This version of Ultraviolet upgrades [@tomphttp/bare-client](https://www.npmjs.com/package/@tomphttp/bare-client). As a result, refreshing can fix errors with the Bare metadata being fetched.
+
+# v1.0.5
+
+-   This version of Ultraviolet fixes a minor bug with `blob:` URLs.
 
 ### v1.0.4
 
