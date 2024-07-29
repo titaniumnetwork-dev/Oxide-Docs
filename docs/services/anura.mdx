@@ -1,6 +1,7 @@
 ---
 title: Anura OS
 slug: anuraos
+description: The next-gen webOS and development environment with full linux emulation
 ---
 
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=MercuryWorkshop_anuraOS&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=MercuryWorkshop_anuraOS)
@@ -16,10 +17,11 @@ The next-gen webOS and development environment with full linux emulation
 
 An entirely local browser "OS" and development environment with complete graphical linux emulation, visually based on chromiumOS. See a demo [here](https://anura.pro), fully in your browser.
 
-> [!NOTE]  
-> Due to numerous issues with Firefox's implementation of certain web standards, it is not supported on Anura.
-> Please use a chromium-based browser or you will have a significantly diminished user experience.
-> Safari is also fully compatible, as long as you have MacOS Sonoma, or iPadOS/iOS 17 or later.
+:::note
+Due to numerous issues with Firefox's implementation of certain web standards, it is not supported on Anura.
+Please use a chromium-based browser or you will have a significantly diminished user experience.
+Safari is also fully compatible, as long as you have MacOS Sonoma, or iPadOS/iOS 17 or later.
+:::
 
 Anura uses the features of a progressive-web-app to make its environment work fully offline, providing a virtual filesystem (synced with the linux emulator), a code editor, and a modular and extensible app system. You can even edit Anura's code live while inside of it!
 
@@ -31,16 +33,18 @@ Anura shows as more of a proof-of-concept with what's possible on the modern web
 
 # Development
 
-> [!IMPORTANT]  
-> Anura will not build on Windows. Please use a Linux VM or WSL
+:::important 
+Anura will not build on Windows. Please use a Linux VM or WSL
+:::
 
 ### Easy Install (When in a codespace)
 
 -   Run `bash codespace-basic-setup.sh`
 
-**NOTE**: If you are not in a codespace skip to the regular installation steps.
-
-**NOTE**: This does NOT build RootFS.
+:::note
+If you are not in a codespace skip to the regular installation steps.
+This does NOT build RootFS.
+:::
 
 ### Installation
 
