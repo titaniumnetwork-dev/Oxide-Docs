@@ -92,7 +92,7 @@ const config = {
               'https://github.com/titaniumnetwork-dev',
               'https://twitter.com/titaniumnetdev',
               'https://www.youtube.com/channel/UC6LaREFvs9L72SK1s2PcxNg',
-              'https://holyubofficial.net'
+              'https://holyunblocker.org'
             ]
           })
         }
@@ -167,7 +167,7 @@ const config = {
               },
               {
                 label: "Holy Unblocker",
-                href: "https://holyubofficial.net",
+                href: "https://holyunblocker.org",
               },
               {
                 label: "Nebula Proxy",
@@ -178,8 +178,8 @@ const config = {
                 href: "https://github.com/BinBashBanana/webretro",
               },
               {
-                label: "Flow Works",
-                href: "https://flow-works.me",
+                label: "Alu",
+                href: "https://aluu.xyz",
               },
               {
                 label: "Kazwire",
@@ -197,15 +197,15 @@ const config = {
                 label: "Totally Science",
                 href: "https://totallyscience.co",
               },
+              {
+                label: "AnuraOS",
+                href: "https://anura.pro",
+              },
             ],
           },
           {
             title: "Archived",
             items: [
-              {
-                label: "Holy Unblocker (Old)",
-                href: "https://github.com/QuiteAFancyEmerald/Holy-Unblocker",
-              },
               {
                 label: "Incognito",
                 href: "https://github.com/caracal-js/Incognito",
