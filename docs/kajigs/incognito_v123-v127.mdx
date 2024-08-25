@@ -1,0 +1,30 @@
+---
+title: Incognito (v123-127)
+slug: incognito_v123-127
+---
+
+
+:::note
+This relies on you being under version 128. See [Kernel Versions](/kajigs/kernverinfo).
+:::
+
+:::note
+- This is completely patched from chromeOS v128. (This is patched from v126 but you can use temporary unexpire flags - look at step 1)
+- You need to be able to go to chrome://flags.
+:::
+
+## **Instructions:**
+1. Go to chrome://flags/#captive-portal-popup-window. If you're on v126-v127 use the temporary unexpire flags: chrome://flags/#temporary-unexpire-flags-m124 (v126) and chrome://flags/#temporary-unexpire-flags-m125 (v126 and v127).
+2. If it doesn’t exist, make sure to be on chromeOS v123-v127. If you're on v128+, you need to downgrade to v123-v127.
+3. Enable it.
+4. Restart.
+5. If the flag didn’t reset, you can continue. Else you cannot.
+6. Go to Settings.
+7. Click Wifi in the Network section.
+8. Click your wifi.
+9. Click Network.
+10. Set Name servers to Custom name servers.
+11. Set the first box to detectportal.firefox.com OR captive.apple.com OR 150.136.163.0 (yes you can use the v105 dns)
+12. A sign in pop up should appear from your wifi. Click Sign in.
+13. Do CTRL+T and you're now in Incognito mode!
+14. Set Name servers back to what it was before.

@@ -14,6 +14,7 @@ const config = {
   onBrokenLinks: 'warn',
   onBrokenMarkdownLinks: 'warn',
   favicon: 'https://titaniumnetwork.org/logo.png',
+  staticDirectories: ['static'],
 
   organizationName: 'titaniumnetwork-dev',
   projectName: 'Oxide-Docs',
