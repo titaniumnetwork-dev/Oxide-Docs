@@ -8,59 +8,147 @@ Access the world wide web! Incognito is a dynamic web proxy service stylized as 
 
 ## Setup
 
-<!--
-    Yes, I am linking to the github repo instead of pasting them here.
-    The thing with doing that is if they change, I will have to make another PR with those changes.
-    (and yes you can use HTML comments in md)
--->
+## Deployment
 
-:::note
+### Terminal
 
-If you are looking to deploy to cloud hosting services please check the [README](https://github.com/amethystnetwork-dev/Incognito#readme) for the deploy buttons.
+Prerequisites:
+- Node & npm
+- Git
 
-For hosting services that have a very limited storage space you can use [Incognito-Lite](https://github.com/amethystnetwork-dev/Incognito-Lite)
-
-:::
-
-As there is no official way to run Incognito, we will be using the deployable verison by Amethyst Network. You will need: [Git](https://git-scm.com/) and [NodeJS](https://nodejs.org).
-
-First, clone the repo:
-
-```sh
-git clone https://github.com/amethystnetwork-dev/Incognito.git
+1. Clone the repo:
+```bash
+git clone https://github.com/titaniumnetwork-dev/incognito && cd incognito
 ```
 
-To install the required packages, you will need to cd into the repository you just cloned and then run `npm install`. The commands can be seen below:
-
-```sh
-cd Incognito
-npm install
+2. Install all of the dependencies:
+```bash
+npm i
 ```
 
-To start Incognito, run the command below:
+3. Create a .env file
+```bash
+cp .env.example .env
+```
 
-```sh
+4. Modify the .env file to you liking (docs [here](#environment))
+```
+nano .env
+```
+
+5. Build the frontend:
+```bash
+npm run build
+```
+
+6. Start the server
+```bash
 npm start
 ```
+> You can run `npm run bstart` to build and start together
+---
 
-This starts the bare server and serves the static files on port 8080 by default.
+### Games
 
-## Config
+- By default, games are reverse proxied by the server
+    - Game assets are located [here](https://github.com/ruby-network/ruby-assets)
+- To turn off Games, and access to them see [#environment](#environment)
 
-To change the HTTP server port set the environment variable variable `PORT`.
 
-### SSL Config
+### Docker
 
-To enable SSL place your certificates in the SSL folder.
+- There are two ways to deploy with docker:
+    - [Normal docker](#normal-docker)
+    - [Docker Compose](#docker-compose)
 
-The certificate should be named `cert.pem` and the private key named `key.pem`.
+#### Normal Docker
 
-When SSL is enabled port 443 will be used instead of 8080.
+Prerequisites:
+- Git
+- Docker
 
-## Ultraviolet
+1. Clone the repo (skip if using prebuilt image):
+```bash
+git clone https://github.com/titaniumnetwork/incognito && cd incognito
+```
 
-Ultraviolet's bare server by default is set to `/bare/` by default. If you would like to use a different bare server, change it in `static/uv/uv.config.js`.
+2. Create an .env file (if using prebuilt image, copy the example from the repo):
+```bash
+cp .env.example .env
+```
 
-## Games
+3. Modify the .env file to your liking (docs [here](#environment))
+```bash
+nano .env
+```
 
-All games are not included by default due to the extremely large size of them and some hosting services having limited storage space.
+4. Build the docker image (skip if using prebuilt):
+```bash
+docker build --build-arg BARE_SERVER_OPTION=true GAMES_LINK=true RAMMERHEAD_OPTION=true -t incog:latest
+```
+For info on the build arg check [here](#environment)
+
+5. Run the docker images:
+
+    - Prebuilt:
+    ```bash
+    docker run --env-file ./.env motortruck1221/incognito:latest
+    ```
+    - Image you built yourself:
+    ```bash
+    docker run --env-file ./.env incog:latest
+    ```
+
+#### Docker Compose
+
+Prerequisites:
+- Git
+- Docker w/compose
+
+1. Clone the repo (skip if using prebuilt image):
+```bash
+git clone https://github.com/titaniumnetwork-dev/incognito
+```
+
+2. Create an .env file (if using prebuilt image, copy the example from the repo):
+```bash
+cp .env.example .env
+```
+
+3. Modify the .env file to your liking (docs on that [here](#environment)]
+```bash
+nano .env
+```
+
+4. Build the docker image (skip if using prebuilt):
+```bash
+docker compose -f ./docker-compose.build.yml build
+```
+
+5. Run the docker image:
+
+    - Prebuilt:
+    ```bash
+    docker compose up
+    ```
+    - Image you built yourself:
+    ```bash
+    docker compose -f ./docker-compose.build.yml up
+    ```
+---
+
+## Environment
+
+- There are a couple of environment variables for incognito. Most of the time, the defaults are fine, but there are instances where you may not want certain options enabled or certain things running.
+
+| Variable               | Description                                                                                              | Default |
+|------------------------|----------------------------------------------------------------------------------------------------------|---------|
+| `MASQR`                | Enables (`true`)/Disables (`false`) Masqr (most people don't want this)                                   | `false` |
+| `BARE_SERVER_ENABLED`  | Enables (`true`)/Disables (`false`) the integrated bare server. Use this if you already have a server (e.g., reverse proxy) or don't want users accessing it. | `true`  |
+| `PORT`                 | The port that the server listens on ***IGNORED IN THE DOCKER ENVIRONMENTS***                              | `8080` |
+| `GAMES` | Disable (`false`)/Enable (`true`) the reverse proxy for Games | `true` |
+| `RAMMERHEAD_SERVER_ENABLED` | Disable (`false`)/Enabled (`true`) the integrated Rammerhead server | `true` |
+| `SITE` | Your websites domain (eg: https://example.com) | `http://localhost:8080` |
+| `BARE_SERVER_OPTION`   | Enables (`true`)/Disables (`false`) the option to use a bare server in the frontend. ***THIS IS A BUILD TIME ONLY VARIABLE*** | `true`  |
+| `GAMES_LINK` | Enables (`true`)/Disables (`false`) access to the games page ***BUILD TIME ONLY*** | `true` |
+| `RAMMERHEAD_OPTION` | Enabled (`true`)/Disables (`false`) the option to use Rammerhead in the frontend. ***BUILD TIME ONLY*** | `true` |

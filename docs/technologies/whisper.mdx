@@ -1,0 +1,36 @@
+---
+title: Whisper
+---
+
+# Whisper
+Wisp protocol client that exposes the Wisp connection over a TUN device.
+
+## When is this useful?
+Many instutions are employing [NGFW (Next Generation Firewall)](https://www.cloudflare.com/learning/security/what-is-next-generation-firewall-ngfw/) technlogy that can identify and block encrypted VPN traffic through the use of DPI (deep packet inspection).
+To circumvent this, Whisper can be used to create a TUN device that routes all internet traffic through a select Wisp server. All traffic will be undifferentiable from typical WebSocket traffic.
+
+## Whisper usage examples
+
+### Linux
+`whisper --tun tun0 --url wss://nebulaproxy.io/wisp/`
+### Windows
+`whisper.exe --tun tun0 --url wss://nebulaproxy.io/wisp/`
+
+## Arguments
+
+| Argument | Description                                                                                   |
+|----------|-----------------------------------------------------------------------------------------------|
+| wisp     | Name of created TUN device                                                                    |
+| tun      | MTU of created TUN device                                                                     |
+| ip       | IP address of created TUN device                                                              |
+| mask     | Mask of created TUN device (defaults to /0)                                                   |
+| dest     | Destination of created TUN device (defaults to 0.0.0.0)                                       |
+| cf       | Use cloudflared access. URL must be specified. You must be logged into cloudflared.           |
+| wisp_v2  | Use wisp v2.                                                                                  |
+
+## Compiling
+Whisper should compile on all major operating systems.
+
+Ensure you have the Rust Nightly Toolchain installed.
+
+`cargo build --release`
