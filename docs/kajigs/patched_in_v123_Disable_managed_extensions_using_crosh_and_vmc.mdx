@@ -1,0 +1,26 @@
+---
+title: "Disable managed extensions using crosh and vmc"
+slug: "patched_in_v123_Disable_managed_extensions_using_crosh_and_vmc"
+description: "Disables managed extensions with Crosh and VMC"
+---
+
+# (patched in v123) Disable managed extensions using crosh and vmc
+
+Disable managed extensions with crosh and vmc:
+This method was found independently by me, @vk6. You are free to share this with whomever you like, just don't try to claim credit for its discovery. This has only been tested to work in the latest v111, but it probably works on pretty much any ChromeOS version.
+
+This is also available on my website: https://ading.dev/vmc.html
+
+## Requirements:
+- A managed Chromebook with crosh enabled
+- The ```VmManagementCliAllowed``` policy either unset or set to true
+- Some form of removable media for noting down extension IDs (only useful for the second method and not required, but this prevents you from mistyping an extension ID).
+- A willingness to powerwash
+
+## There are two variations to this method:
+1. Disabling all extensions. This is probably the most reliable, but you'd be left without useful extensions such as any adblockers. You also aren't able to install anything from the Chrome Web Store either.
+2. Disabling specific extensions. This is less reliable, since this only becomes possible once Chrome OS has installed at least one extension already, which could be one that you're trying to disable.
+
+## Testing if the method is possible:
+1. Open crosh by hitting ctr+alt+t. If a command line pops up then you have crosh enabled and you can move on to step 2.
+2. Test the ```VmManagementCliAllowed``` policy by running the ```vmc``` command. If a list of subcommands is shown, then you're good to go.

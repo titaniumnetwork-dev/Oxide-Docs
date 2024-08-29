@@ -1,0 +1,15 @@
+---
+title: "Better DNS Bypass (DNS)"
+slug: "Better_DNS_Bypass_DNS"
+description: "Edits DNS to bypass wifi settings"
+---
+
+# Better DNS Bypass (DNS)
+
+- Know the credentials of your School's WIFI or utilize a hotspot
+- Go to `chrome:policy` and Ctrl+F for `deviceopennetworkconfig`; click show more
+- Edit the attached ONC, changing the GUID to the guid in the policy and the security to the security in the json; same with the name, SSID, and finally change the passphrase to the password
+- Import the ONC in `chrome:network#general`
+- Go to Wi-Fi settings as normal and the DNS shouldn't be blocked
+
+ONC: https://cdn.discordapp.com/attachments/1042601318105239562/1042928899371323402/bypass.onc

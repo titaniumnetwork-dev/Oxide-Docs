@@ -1,0 +1,51 @@
+---
+title: "Unblock any website on a ChromeOS device without a proxy"
+slug: "Unblock_any_website_on_a_ChromeOS_device_without_a_proxy"
+description: "Unblock devices using group tabs"
+---
+
+# Unblock any website on a ChromeOS device without a proxy
+
+tested with Mobile Guardian on 290724, didn't test with other extensions except for the extensions listed below so idk if it works for others, but it def works with mobile guardian :P
+
+## Tested versions:
+tested 290724 - mobile guardian v2.2.59 :icons_Correct: 
+
+tested 290724 - lightspeed user agent :icons_Wrong: 
+
+tested 010824 - securly ❓ 
+
+## Note
+1. works on some districts and doesnt for some????
+2. works on securely, however redirects are blocked. inserting a url directly into a tab works so thats a workaround
+
+tested 020824 - cisco umbrella(will never work ever due to how it works) :icons_Wrong:
+
+## Steps
+1. Open a new tab in chrome
+2. Right click on the tab and a menu should appear
+3. Click "Add tab to new group"
+4. Now, a new group should have been made with the new tab. a menu to control the group should appear. if it doesnt appear, right click on the newly created group
+5. Turn on the "Save Group" function
+6. Now all tabs in the tab group should be unblocked
+
+if you want to add more tabs to the group, just right click on the group and press "New tab in group"
+
+## Aditional info
+
+### Theory:
+for some reason mobile guardian cannot track the tabs or change the tabs in the group when the "Save group" is used, idk why this happens.
+
+### found by appleflyer on 29/07/24
+
+### WEBSITES BLOCKED BY A FILTER/chromeOS policy blocks WOULD NOT WORK WITH THIS
+e.g. Fortinet, websites under the policy URLBlocklist
+
+### Testing credits
+mobile guardian tested by: appleflyer, ambigio, doyourclanwars
+
+lightspeed tested by: doxr
+
+securly tested by: pkp10738, alandoesidekwhat, sipthatlean., lionhitch
+
+cisco umbrella tested by: questionedlife 

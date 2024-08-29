@@ -1,0 +1,32 @@
+---
+title: Masqr
+slug: masqr
+description: An open source alternative to Double Counter. 
+---
+
+[**GitHub**](https://github.com/titaniumnetwork-dev/MasqrProject)
+
+# The MASQR project
+
+This repository contains the backend for Masqr, and two example clients, using Express middleware and just browser side JS.
+
+## What is MASQR?
+
+Think of Masqr as a "anti link leaking" authentication system that allows you to use your proxy bot domain only on one device to prevent filters from grabbing on and to help developers not spend so much money on buying hundereds of domains just for them to be blocked because of link leakers.
+
+## How can I deploy this?
+
+This is fairly easy to deploy to your backend using `express` as seen in the `MasqrBackend` example, and you can implement this into different backends fairly similarly.  
+`LicensingServer/index.js` is the backend server to run, while `MasqrBackend` and `MasqrFront` are examples for how to deploy this  
+In `MasqrBackend/index.js`, change the `LICENSE_SERVER_URL` variable to the domain you set for the licensing server, as well as changing the `whiteListedDomains` variable.  
+In `MasqrFront/masqr.js`, change the `LICENSE_SERVER_URL` variable to the domain you set for the licensing server.
+
+
+## How it works
+
+How masqr works is really simple. When you get a link from a proxy bot of some sorts (for demonstration purposes I will be referencing Titanium Networks Proxy Bot) and you will be told to click on a link with some strange characters that will create a cookie which is "your license" then when you visit the site afterwards It will check the cookie with the one in the licensing server's database to make sure it wasn't tampered with then your in!
+
+### Credits
+
+&copy; Mercury Workshop 2024
+Licensed under the AntiSkip License

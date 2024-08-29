@@ -1,0 +1,21 @@
+---
+title: "Process End Method"
+slug: "Process_End_Method"
+description: "Uses Task Manager to kill blocker extensions running"
+---
+
+# Process End Method
+
+- Open Task Manager
+- Press 'search'+'esc'
+- Scroll all the way to the bottom and find your blocker extension and highlight it (click on it)
+- Click 'End Process' it or press 'enter'
+- Immediately go to your page and see that it's unblocked
+- This will not last unless you use this bookmarklet javascript:onbeforeunload=i=>1
+
+## If Task Manager is blocked:
+
+- Go to `chrome-extension://` + your Extension ID + `/_generated_background_page.html`
+- You can find the Extension ID by going to the puzzle piece, clicking on the 3 dots next to your filter and click manage extension and the is will be in the url
+- The link for GoGuardian is `chrome-extension://haldlgldplgnggkjaafhelgiaglafanh/_generated_background_page.html`
+- Change the URL to `chrome://kill` (I recommend making it a bookmark (if your school blocked bookmarklets this one will still work))

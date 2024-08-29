@@ -1,0 +1,22 @@
+---
+title: "How To Install almost any app using powershell"
+slug: "How_To_Install_almost_any_app_using_powershell"
+description: "Installs apps using PowerShell"
+---
+
+# How To Install almost any app using powershell
+
+This is limited to the apps that are available, but most apps can be discovered.
+Edit: THIS ONLY WORKS IF YOU ARE ABLE TO OPEN POWERSHELL AND RUN COMMANDS
+1. open powershell
+2. run the command  Set-ExecutionPolicy RemoteSigned -Scope CurrentUser (this allows you to paste a third-party script for the first time)
+3. run the command irm get.scoop.sh | iex (this should install scoop)
+4. now, run the command scoop install git (installing git gives you the ability to install apps)
+5. run the command scoop bucket add games AND scoop bucket add extras
+6. type scoop install file (replace file with one of the names from here https://github.com/Calinou/scoop-games/tree/master/bucket
+7. or here
+8. https://sedlar.me/scoop-frontend/
+9. do not add the .json, just the name)
+10. look up the name of the app in windows search
+Enjoy!
+(If you want to add more buckets, learn more at https://scoop-docs.vercel.app/docs/concepts/Buckets.html#installing-from-other-buckets, and use https://rasa.github.io/scoop-directory/search for more buckets) 

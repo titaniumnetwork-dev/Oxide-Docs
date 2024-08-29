@@ -1,0 +1,24 @@
+---
+title: "Skiovox Breakout"
+slug: "Skiovox_Breakout"
+description: "Modified version of Skiovox to bypass restrictions with Kiosk app"
+---
+
+# Skiovox Breakout
+
+This extension helps you get permanent code execution in mv2/mv3 extensions in your school profile. That means you can execute code in these extensions, even when logged in normally, without skiovox.
+Initial PoC was made by me.
+@akabutnice  improved it, tested it and fixed issues with it. 
+While this looks barebones, we will add updates to fix and improvements upon this project.
+
+If you have any payloads please share them!
+
+
+## Usage instructions
+1. Extract this extension and install it to chrome://extensions as an unpacked extension. If there is an error loading manifest.json, check for any subdirectories. If you have the correct folder, it should contain 5 files.
+2. Click on the extension in the toolbar, and type in the first 5 letters of your blocker ext id. Also remove all text from the text area below the id.
+3. Open up any page of that extension in the school window
+- For GoGuardian, open up ```chrome-extension://haldlgldplgnggkjaafhelgiaglafanh/background.html```
+- For iBoss, open up ```chrome-extension://kmffehbidlalibfeklaefnckpidbodff/_generated_background_page.html``` in your school browser window.
+5. Save the link it tells you to save in your bookmarks and then reboot, and login into your school account.
+6. Open the saved link (copy link, place in url bar, and press alt-shift-enter) and type in your payload.

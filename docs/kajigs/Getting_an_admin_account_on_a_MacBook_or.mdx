@@ -1,0 +1,31 @@
+---
+title: "Getting an admin account on a MacBook or"
+slug: "Getting_an_admin_account_on_a_MacBook_or"
+description: "Enables admin account access on Macbooks"
+---
+
+# Getting an admin account on a MacBook or
+
+## Requirements:
+1. SIP (System Integrity Protection) Needs to be disabled (Look it up)
+2. A MacBook or iMac?
+3. Proficient knowledge in Linux/Unix.
+
+## Stage 1
+Shut down your MacBook / iMac
+Next, Hold Command and the S key while holding, press the Power Button.
+[image](https://anshnk.dev/images/epicmacbook.png)
+
+You should get to this screen:
+[image](https://anshnk.dev/images/SingleUserMode.jpg)
+
+Once there, move on to Stage 2
+
+## Stage 2
+Once in Single User Mode, Run the Following commands
+```
+mount -uw / # This mounts the the root file system with read and write permissions
+rm /var/db/.AppleSetupDone # This removes a file that checks for if the first setup is done
+```
+## Stage 3
+Now on boot, you should see the macbook setup screen.

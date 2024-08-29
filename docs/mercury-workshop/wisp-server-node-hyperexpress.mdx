@@ -1,0 +1,42 @@
+---
+title: wisp-server-node HYPEREXPRESS VERSION!
+slug: wisp-server-node-hyperexpress
+description: A wisp protocol server implementation, written in NodeJS.
+---
+
+# wisp-server-node HYPEREXPRESS VERSION!
+
+A [wisp protocol](https://github.com/MercuryWorkshop/wisp-protocol) server implementation, written in NodeJS.
+
+This version has a feature called REALLY BAD MEMORY LEAK, under simple-wisp-client it gets to and stays at 10.2 GB memory usage, gotta love it!
+### Usage ✨
+
+This one is not drag and drop to bare server node, if you want that, use the [Normal wisp-server-node](https://github.com/MercuryWorkshop/wisp-server-node)
+
+Simple usage is pretty simple
+```js
+Router.ws('/*', {
+    idle_timeout: 60,
+    max_payload_length: 32 * 1024,
+    message_type: "Buffer"
+}, (ws: HyperExpress.Websocket) => {
+    wisp.routeRequest(ws);
+});
+```
+
+
+wisp-server-node doesn't need to handle regular requests, just upgrade events.
+
+### Is it fast? 🚀
+
+its pretty fast, at leaking memory!
+
+### Is it API stable? 🐎
+
+no!
+
+### Is it stable stable? 🐎🐎
+
+Not in the slightest, it literally leaks gigs of memory
+
+#### https://github.com/MercuryWorkshop/wisp-server-node-hyperexpress

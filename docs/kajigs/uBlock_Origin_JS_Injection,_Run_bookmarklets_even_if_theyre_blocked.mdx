@@ -1,0 +1,21 @@
+---
+title: "uBlock Origin JS Injection, Run bookmarklets even if they're blocked"
+slug: "uBlock_Origin_JS_Injection,_Run_bookmarklets_even_if_theyre_blocked"
+description: "Inject Javascript to run Bookmarklets even if they're blocked"
+---
+
+# uBlock Origin JS Injection, Run bookmarklets even if they're blocked
+
+if your school allows the ublock origin chrome extension, then running any bookmarklet is possible via an obscure feature of the extension
+
+userscript injection has existed as a feature since 2017, but not many people know about it
+
+## Steps
+
+1. Install ublock origin (https://chrome.google.com/webstore/detail/ublock-origin/cjpalhdlnbpafiamejdnhcphjbkeiagm)
+2. Go to the extension's settings
+3. Under the settings tab, check the "i am an advanced user" box and click on the cog icon (image 1)
+4. Inside the advanced settings, change userResourcesLocation from unset to https://pastebin.com/raw/PPZ1T7uh (image 2)
+5. In the custom filters tab of the settings, add *##+js(execute_script.js) as a filter (image 3)
+6. Now you can press ctr+alt+tilde (~) to run any js on the current page
+7. If you want to run a bookmarklet, just paste in the javascript: url and press enter on the popup

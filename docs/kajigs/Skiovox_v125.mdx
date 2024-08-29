@@ -1,0 +1,54 @@
+---
+title: "Skiovox v125"
+slug: "Skiovox_v125"
+description: "Skiovox for v125"
+---
+
+# Skiovox v125
+(v126 may work)
+
+## Summary
+Skiovox is an exploit that allows for browsing within a completely unblocked Chrome
+browser. It works on ChromeOS 118 and a wide range of previous versions.
+- Skiovox utilizes a bug in kiosk apps
+- Very similar to a bug from 3 years ago
+Within the unblocked browser, you can
+- Install extensions
+- Bypass pretty much all blocks
+
+## Stage 1
+0. Make sure you are logged in
+1. Reboot your chromebook.
+2. Turn off your wifi
+3. Enter a kiosk app (bottom left corner is a button called "Apps", if it isn't there than this exploit will not work).
+4. Wait until it allows you to add a network, then click add a network with a random name (for example "a")
+5. (Do the next steps as quickly as possible, because there is a time limit)
+6. Now quickly click "diagnose", then click "wifi", and "open in settings". (The settings window will open behind the kiosk window so you can't see it)
+7. Close the diagnose popup, and quickly do "Ctrl + Alt + Shift + R"
+8. It will now say "Powerwash your chromebook", but instead of powerwashing we press cancel, and we quickly login.
+
+(Now it is safe to take your time)
+There are three methods to get to the unmanaged window:
+1. You close the managed window. (You can't get it back)
+2. You double click the top of the managed window (This will make it so that the managed window is difficult to get back in fullscreen)
+3. You open the settings menu, click "More tools", and open the task manager. Then you double click a window called "Settings" (The best way)
+
+You are now done with the first steps.
+
+## Stage 2
+
+Now you need to:
+1. Go to the settings menu, and click on new window. (This will give you a better window and is required to do the next step)
+
+2. Install the extension (You only have to install the extension once):
+3. Go to 'https://github.com/blitzbrian/Skiovox-v125' and press the green code button and click download as zip.
+4. Go to 'chrome://extensions', and enable developer mode (Top right corner).
+5. Click 'Load unpacked extension', and right click on the zip you downloaded and extract it.
+6. Now double click on the newly created folder and click 'Open'.
+7. Then you need to put in all of the shortcuts, it says which combination you need to press between the brackets.
+
+Congrats, now you are done! 
+
+## Tips:
+I'm stuck in fullscreen help!
+Press 'Ctrl+T' and then the fullscreen button.

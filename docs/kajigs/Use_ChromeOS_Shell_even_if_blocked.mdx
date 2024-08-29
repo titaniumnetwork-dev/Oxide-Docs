@@ -1,0 +1,33 @@
+---
+title: "Use ChromeOS Shell even if blocked"
+slug: "Use_ChromeOS_Shell_even_if_blocked"
+description: "Opens CROSH even if blocked"
+---
+
+# Use ChromeOS Shell even if blocked
+
+Before you attempt this, go to chrome-untrusted:crosh.
+-If it says something along the lines of Crosh is blocked, you can't do this
+-If it says Application Disabled By Administrator, this should work for you.
+This has been tested up to version 108
+
+## Requirements:
+- Some kiosk apps, don't believe it matters which ones, although you may have to do several.
+- Some patience.
+- Ability to turn off wifi
+- An account on the device (This means you can't do this during OOBE)
+- Fast typing
+
+## Steps
+1. First off, open chrome, and sign out of the device.
+2. When you get to the login screen, turn off your wifi.
+3. Open one of your kiosk apps.
+4. It should take a couple seconds to load, and then realize it has wifi off.
+5. You should get to  a screen with something like Connect to wifi to continue. There will be a button that says Add Another Network, click it, and then spam Escape until at login.
+6. You should be at the login screen, but this time, there will be no Apps or Add New User buttons in the corner. If there are, maybe try steps 3-5 again?
+7. Log in to your account AS FAST AS POSSIBLE
+8. You should most likely get a prompt that says Administrator has disabled multiple sign-in. If you don't, check chrome:policy about multiple sign-in and if it allows it, continue(?). If not, you probably screwed something up.
+9. Press Escape(Esc) to close this prompt.
+10. You should have a chrome window open, but there will be no taskbar and you can't open other windows. Don't close the window
+11. Go to the URL bar, and type in Chrome-untrusted:crosh. If all was successful, you should be greeted with the familiar face of crosh. If not, feel free to ask for help down below.
+12. Congratulations, you now have access to crosh. Feel free to experiment with this limbo signed-in state, as there may be more bypasses within it.

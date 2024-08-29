@@ -1,0 +1,85 @@
+---
+title: "CryptoSmite"
+slug: "CryptoSmite"
+description: "Unenrollment exploit"
+---
+
+# CryptoSmite
+Unenrollment exploit that uses stateful files to unenroll.
+use stateful "backups" that basically allows us to change the encrypted contents of the stateful partition, to arbritary contents. This data is useful for enrollment status, so we changed it to make the device appear unenrolled. On the OOBE, it starts the AutoEnrollmentController, which chains into the ash ownership system, and then the ownership system checks for a file. If this file exists, it removes FWMP.
+
+## Kernel Version
+To check your kernver, start going to recovery mode.
+The kernver located in the top right black and white text after pressing tab saying ```kernver={kernver}```, it should end in either 2, 1, or 0. If it doesn't end in any of these digits, your chromebook isn't supported. if it is supported, [downgrade](https://docs.google.com/presentation/d/1NCXDfjsBVDSR3JrpRXy4C-jz48mkIFaBVntpcbnJX_0/edit#slide=id.p_) to 118, and proceed with the exploit.
+If you have already [downgraded](https://docs.google.com/presentation/d/1NCXDfjsBVDSR3JrpRXy4C-jz48mkIFaBVntpcbnJX_0/edit#slide=id.p) to a version before 118, stay on that version. The minimum version is V63, so don't worry about it.
+
+## Items to download
+RAW RMA SHIM: Check sh1mmer server
+
+Stateful: [stateful.tar.xz](https://drive.google.com/file/d/19-NPB9Mukn6JdHZ7FUUn4QwEKMMh85C1/view?usp=sharing) or smallstate.tar.xz
+
+Cryptsetup chroot: [st.tar.xz](https://drive.google.com/file/d/1YlgNDslOIrOAQJuQ-AoL0FuE7Xve71Co/view?usp=sharing)
+Before starting keep all of these ready.
+
+## Clone the cryptocrafter repository
+be sure to have the installed files ready before running commands.
+In the linux terminal (or WSL) run commands below:
+```git clone https://github.com/FWSmasher/CryptoCrafter
+cd CryptoCrafter
+
+./cryptosmite_host.sh <raw rma shim path> <cryptsetup chroot path> <stateful.tar.xz path>
+```
+
+## Prepare the new RMA shim for flashing
+
+Open the [Chromebook Recovery Utility](https://chromewebstore.google.com/detail/chromebook-recovery-utili/pocpnlppkickgojjlmhdmidojbmbodfm), and in the top right corner, select use local image. The image should be the modified rma shim.
+Then select the USB Drive to flash
+
+## Boot the RMA shim
+1. You will first need to enter recovery mode.
+2. After entering recovery mode, enable developer mode
+3. Developer mode will be blocked
+4. Press ESC + Refresh + Powerbutton, and then plug in the USB you just flashed
+
+## Running the injected CryptoSmite file
+
+1. Run the cryptomite.sh in the inject RMA Shim.
+2. In the Bash prompt in the edit stateful bash screen, run ```tar -xvf /mnt/shim_stateful/stateful.tar.xz -C /mnt/stateful
+exit```
+3. The system will reboot into verified.
+
+## Out of box expierence (OOBE)
+
+1. in temporary unenroll mode press the ok buttom at the OOBE screen.
+2.  add your profile to chromeOS
+
+## Enable dev mode.
+If you don't get to this screen(it gets stuck), make a [GitHub issue](https://github.com/FWSmasher/CryptoSmite/issues)
+1. Press ESC+Refresh+Powerbutton
+2. Press CRTL+D
+From here there are two possible ways to proceed. You could stick around for the five minute wait by pressing CRTL+D, or skip the devmode transition below.
+
+## Skipping 5 minute devmode wait
+
+Once you have reached the devmode is on screen, press ESC+Refresh+Powerbutton and boot into RMA Shim. Select the bash shell, and run the following commands or as a Bash script
+```
+mkfs.ext4 /dev/mmcblk0p1 /tmp -F
+mount -o loop, rw /dev/mmcblk0p1 / tmp
+touch /tmp/.developer_mode
+unmount /tmp && sync
+reboot
+```
+On "enrollment" branch shims, this script is already included within the new menu
+
+## Running the last two commands in VT2
+After enabling devmode, you need to boot into the operating system, and run these following commands (by pressing CTRIL+ALT+F2, and entering `root`) These commands will NOT run in a shim, and run them quickly after you boot
+
+```
+vpd -i RW_VPD -s check_enrollment=0
+cryptohome --action=remove_firmware_management_parameters
+```
+if you don't get the timing right, powerwash and try again.
+
+## Kernel Version Switcher
+This will only work on Unenrolled ChromeBooks.
+The kernel version switcher by @kxtz, is an unenrolled only method to change kernel versions. Modifying kernel rollback index in the TPM allows for the usage of newer versions of ChromeOS, without the fear of not being able to downgrade to unenroll again after re-enrollment

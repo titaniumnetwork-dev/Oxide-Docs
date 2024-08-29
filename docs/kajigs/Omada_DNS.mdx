@@ -1,0 +1,31 @@
+---
+title: "Omada DNS"
+slug: "Omada_DNS"
+description: "Changes DNS setting to block filtering Extensions"
+---
+
+# Omada DNS
+Omada  is a community and small group of people working on hosting free and open source services on the basis of freedom, privacy and decentralization. 
+One of these services are Omada DNS, which breaks lightspeed, securly, goguardian and more from working simply using a network setting. This also breaks chromeOS updates.
+
+If your school has "Managed networks" on, use ⁠cauDNS
+
+## Guide
+1. Go to settings -> Wi-Fi -> Known Networks
+2. Select a network
+3. Dropdown the "Network" option
+4. Click "Name servers -> Custom name servers
+5. Set the first field to 38.175.197.10, the second field to 66.94.105.229, the third field to 167.86.91.171, and the fourth to 0.0.0.0
+6. Repeat steps 3-5 on all other networks
+7. Restart your chromebook to clear cached blocked websites.
+
+## Notes
+- GG is working once again! this will likely be patched again soon.
+- Lightspeed is semi-patched. It takes a cache of blocked websites. Simply keep the DNS on for 10 days or more and the cache will be cleared.
+- Securly schools have settings disabled because of caudns 💀
+- iboss is patched
+- Contentkeeper is patched, both the network level version and ck-express. 
+- If you're already using omadadns, continue to do so, and DO NOT connect to a wifi network without it, unless your extensions may update and be patched.
+- This does NOT work on network level filters such as fortinet, iboss, or some cisco configurations
+- The full ext removal method breaks locked mode quizes, to fix them revert the DNS then remove your user and add it back.
+- This very commonly breaks locked mode quizes. To fix this, turn off omadadns and then restart your chromebook, go to chrome://policy, and then refresh policies. Wait for it to refresh, wait five minutes, then do another restart. If this doesn't fix, turn off omadadns and powerwash your chromebook or remove and readd your user. 

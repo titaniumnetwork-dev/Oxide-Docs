@@ -1,0 +1,30 @@
+---
+title: "ChromeOS Terminal Open Redirect"
+slug: "ChromeOS_Terminal_Open_Redirect"
+description: "Uses the Terminal to bypass extensions"
+---
+
+# ChromeOS Terminal Open Redirect
+
+This is an exploit that lets you open nearly any page from the ChromeOS terminal, even when SSH is disabled :)
+## How do I use this?
+1. Open the Terminal app on your ChromeOS laptop (doesn't matter if you can use SSH or not, it'll work anyway as long as you can open the Terminal app)
+2. Create a new SSH connection with this configuration:
+3. Set Command: ```chronos@127.0.0.1``` (this part doesn't matter, just needs to follow the format for a SSH user@host)
+4. Set SSH relay server options as: ```--proxy-host=blocked_site_you_want_to_access.tld/path# --proxy-port=443 --use-ssl=true```
+5. Right-click on the Terminal app icon and select your new SSH connection.
+
+Enjoy getting to access your site without blocking.
+## Notes
+- This only works for the first page load on a blocked site, subsequent page reloads will probably still be blocked (e.g. if google.com is blocked and you do --proxy-host=google.com/#, it'll probably work, but once you search for something, that page will get blocked)
+- This might not work for all extensions
+### Extensions this is known to work for
+- Securly
+(I haven't tested any others, let me know if you find more)
+### Extensions known to not work
+- Cisco Umbrella (that one can be bypassed another way though)
+- Lightspeed (one person got it to work, but other people haven't had it work)
+### Extensions this partially works with
+GoGuardian (apparently blocks after about 5 minutes in most cases, ⁠kajigs⁠ChromeOS Terminal Open Redirect)
+### How do I access Discord?
+Set the SSH relay server options to --proxy-host=discord.com/app# --proxy-port=443 --use-ssl=true. 

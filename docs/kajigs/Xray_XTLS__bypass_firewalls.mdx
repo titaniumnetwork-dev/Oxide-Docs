@@ -1,0 +1,59 @@
+---
+title: "Xray/XTLS: bypass firewalls"
+slug: "Xray_XTLS__bypass_firewalls"
+description: "Bypass network firewall"
+---
+
+# Xray/XTLS: bypass firewalls
+
+Xray is a program used to get around internet censorship, mostly used by people in China to bypass the Great Firewall, but we can use it to bypass restrictions on school wifi.
+
+Prerequisites:
+your school actually blocks stuff through a firewall (otherwise this would be useless)
+a server outside of the firewall (generic linux server should do)
+although I will try to make it as easy to follow and understand, some familiarity with using linux and the command line would be handy
+
+This will only work if your school has a network firewall
+
+How to determine if your school uses a network firewall:
+Go find a blocked site (usually github, chatgpt, twitter, instagram, discord) and make sure none of your extensions are blocking them
+Then, connect to hotspot and see if it has been unblocked 
+
+This method will make your chromebook run the Xray-core program, which requires access to the terminal.
+If you are enrolled, you can use something like e-halcyon/TerraOS chromeos to do this
+E-halcyon setup guide is at https://fog.gay/
+If you can't use your chromebook as the xray client, you can use an android device to run it (for xray, use AnXray on f-droid, for sing-box, use NekoBox on f-droid) but I don't have instructions for that yet 
+
+## Chromebook Setup
+This section shows you how to:
+download Xray-core
+set up config files using symlinks
+use initctl to auto start Xray-core on boot
+set up the proxy in chromeos wifi settings
+
+### Download Xray-core from GitHub
+Go here to find the latest release https://github.com/XTLS/Xray-core/releases/latest
+Download Xray-linux-64.zip from the Assets section and save it to your downloads
+Unzip it in the Files app by right clicking and selecting "Extract all"
+
+In my case, I will just run everything as root instead of chronos
+To get root in crosh type shell and then sudo -i or go to VT2 by pressing ctrl+alt+forward arrow (the one at the top of your keyboard, not the right arrow) and log in as root
+
+Note: If you are planning to install chromebrew (package manager for chromeos), you should probably do that first, otherwise you won't be able to unless you move stuff out of /usr/local
+```bash
+# create directory /usr/local/gabe and /usr/local/gabe/xray (you can rename gabe to something else
+mkdir -p /usr/local/gabe/xray
+# Rename and move the folder to the directory
+mv /home/chronos/user/Downloads/Xray-linux-64 /usr/local/gabe/xray
+
+Setting up config files with symlinks
+
+For convenience you can use symlinks to quickly alternate between configs
+If you change configs, make sure both the client and server are consistent. That is why using symlinks is convenient, because you can swap them with a single command
+
+cd /usr/local/gabe/xray
+# edit a config file with a text editor
+vi config_number_one.json
+# now, make a symlink to config.json
+ln -sf config_number_one.json ./config.json
+```

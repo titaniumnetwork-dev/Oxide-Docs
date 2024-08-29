@@ -1,0 +1,37 @@
+---
+title: "Disable Hardware WP via CCD"
+slug: "Disable_Hardware_WP_via_CCD"
+description: "Disables hardware write protection with opening it"
+---
+
+# Disable Hardware WP via CCD
+
+## Summary 
+This method lets you disable hardware write protection (WP) on your Chromebook without needing to open it. Still requires FWMP off / Unenrolled with dev mode.
+
+
+## Note
+This will allow you to disable Hardware WP without opening your device, and this may not work on all devices. You also need to be unenrolled first or have FWMP off with Developer Mode on.
+
+Please note to do this Kajig you need to own a SuzyQ cable or adapter, I won't be guiding you on where to buy one but if you would like to make one here are some schematics:  https://cdn.sparkfun.com/assets/9/e/f/8/2/951-00273-01_20180607_suzyqable_SCH_1.pdf
+
+Now that you got your SuzyQ, here's what you do next.
+
+1. Open a root shell on your Chromebook, this can be on a shim or within crosh, doesn't matter
+2. Run gsctool -a -o, whenever it tells you to Press PP, press the power button
+At the end of that process it'll restart and you'll be out of Developer Mode, turn it back on and head back to the terminal
+3. Plug in your SuzyQ, on most devices you'd use the Right USB C port and then plug the USB A in anywhere, try your other ports if that doesn't work for you.
+Once it's plugged in, in the lsusb command you should see the CR50 with an 18d1:5014 USB ID, if you don't see this try replugging.
+Now that you see that, make sure that the TTY is open via running ls /dev/ttyUSB*, you should see TTY 0, 1, and 2.
+4. To disable WP, run each of these one by one
+
+```echo "wp false" > /dev/ttyUSB0```
+
+```echo "wp false atboot" > /dev/ttyUSB0```
+
+```echo "ccd reset factory" > /dev/ttyUSB0```
+
+5. Reboot, then run
+```flashrom --wp-disable```
+
+6. Run crossystem wpsw_cur, this should output 0

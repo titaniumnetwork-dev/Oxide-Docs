@@ -1,0 +1,88 @@
+---
+title: dreamland-router
+slug: dreamland-router
+description: react-router but for dreamland.js
+---
+
+# dreamland-router
+react-router but for [dreamland.js](https://github.com/MercuryWorkshop/dreamlandjs)
+
+```js
+import { Router, Route, Redirect } from 'dreamland-router'
+
+new Router(
+  <Route>
+    <Route path="/feed" show={<Feeds />}>
+      <Route path="/home" show={<TimelineView kind="home" />} />
+      <Route path="/public" show={<TimelineView kind="public" />} />
+      <Route path="/bubble" show={<TimelineView kind="timelines" />} />
+      <Route path="/bookmarks" show={<TimelineView kind="bookmarks" />} />
+
+      <Redirect path="" to="/feed/public" />
+    </Route>
+
+    <Route path="/notice/:id" show={<Notice />} />
+    <Route path="/user/:id" show={<User />} />
+
+    <Route path="/settings" show={<Settings />} />
+
+    <Redirect path="/" to="/feed" />
+    <Route path="*" show={<PageNotFound />} />
+  </Route>
+).mount(document.querySelector('#app')!)
+```
+
+
+## quick docs
+- routes will match top down, more specific routes go at the top and your catchall 404 at the bottom
+- `Route` is a container for routes, it can have a `show` prop which is either a dreamland element or a function `(path: string, pathparams) => Component<any>` that returns a dreamland element, which you might want to use if you don't want to construct it at launch
+- `Redirect` is a route that will redirect to another route when matched, it has a `to` prop which is the path to redirect to. The `to` prop can also be a function `(path: string, pathparams) => string` that returns the path to redirect to
+- path can contain url parameters such as `/user/:uid/post/:pid` which will be passed to the components as properties, or as an object in the `pathparams` argument of the `show` function (if it's a function)
+```js
+
+function Post() {
+  useChange([this.uid, this.pid], ()=>{
+    console.log('post changed', this.uid, this.pid)
+  })
+}
+
+
+let router = new Router(
+  <Route>
+    <Route path="/user/:uid/post/:pid" show={<Post /> } />
+  </Route>
+)
+```
+- if the path contains a wildcard `*` it will match anything after that (useful for 404 pages)
+- if the path has subroutes, the matched subroute will be passed to the parent route's component as the property `outlet`
+```js
+
+function Home(){ 
+  return (
+    <div>
+      <h1>Home</h1>
+      <Link href="/home/settings">Settings</Link>
+      <Link href="/home/feed">Feed</Link>
+
+
+      <div>
+        {use(this.outlet)}
+      </div>
+    </div>
+  )
+}
+
+let router = new Router(
+  <Route>
+    <Route path="/home" show={<Home />}>
+      <Route path="/settings" show={<Settings />} />
+      <Route path="/feed" show={<Feed />} />
+    </Route>
+  </Route>
+).mount(document.querySelector('#app')!)
+```
+- the root component can have a `show` property so that outlets can be rendered
+- you can use the `Link` component to navigate to a route. Link is a *leaky component* meaning that it is affected by outside css
+- you can call `router.navigate(path: string)` to manually go to a route
+
+# https://github.com/MercuryWorkshop/dreamland-router

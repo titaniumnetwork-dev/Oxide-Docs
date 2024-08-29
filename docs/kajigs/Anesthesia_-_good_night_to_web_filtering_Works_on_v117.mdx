@@ -1,0 +1,24 @@
+---
+title: "Anesthesia - good night to web filtering (Works on v117)"
+slug: "Anesthesia_-_good_night_to_web_filtering_Works_on_v117"
+description: "Disable admin installed extensions with printing"
+---
+
+# Anesthesia - good night to web filtering (Works on v117)
+Disable admin installed extensions with printing.
+
+## Steps
+1. Find your extension's largest file. This can usually be found by poking around in your extension's manifest.json.
+2. Go to that page. and hit Ctrl+P. A print window shoudl show up, with a number of pages in the top right.
+3. Do everything you can to increase that number. Shrink down margins, change layout to landscape, anything you can. The higher you can get that number, the longer the effect will last.
+4. Hit reload. The page should start hanging.
+5. Go to your extension's settings page. This is in chrome://extensions.
+6. Duplicate your "printing" tab, and go back to your extension's settings page.
+7. Flip any switch you can find there. Usually there'll be one titled "Allow Access to File:// [URI]s".
+8. Presto! Go have fun on the (probably) unblocked web.
+
+## FAQ:
+Where do I find my extension's manifest.json?
+First find your extension's ID. This is a 32-character code that can be found in your extension's settings page, normally near or at the top. Then go to chrome-extension://your-32-char-id-goes-here/manifest.json
+
+Credit to Bypassi for the original LTMEAT framework, and HUGE thanks to Swordmaster4321 for discovering that pages can be hanged with printing and lots of help and suggestions along the way. 

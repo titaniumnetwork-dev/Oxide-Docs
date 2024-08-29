@@ -1,0 +1,19 @@
+---
+title: EpoxyTransport
+slug: expoytransport
+description: EpoxyTransport is a transport for bare-mux which allows you to use epoxy-tls in your bare client.
+---
+
+# EpoxyTransport
+
+EpoxyTransport is a transport for bare-mux which allows you to use [epoxy-tls](https://github.com/MercuryWorkshop/epoxy-tls) in your bare client.
+
+Usage of this transport is as simple as setting the transport and providing a wisp server. An example is shown below where you get connected to the public testing wisp server.
+
+```js
+import { SetTransport } from '@mercuryworkshop/bare-mux';
+
+SetTransport("EpxMod.EpoxyClient", { wisp: "wss://wisp.mercurywork.shop/" });
+```
+
+#### https://github.com/MercuryWorkshop/EpoxyTransport

@@ -1,0 +1,29 @@
+---
+title: "Unblocked DevTools/Flags (ADVANCED)"
+slug: "Unblocked_DevTools_Flags_ADVANCED"
+description: "Use Chrome Launch Options to remove extensions"
+---
+
+# Unblocked DevTools/Flags (ADVANCED)
+
+This is a guide on how to use chrome launch options and a thread for discussing exploits related to the bash shell. I have been requested to make this several times
+
+First of all, you will need some knowledge of bash, and you must know how to use vi.
+
+This builds off of Permanently Remove Extensions (past v106).
+
+Follow the instructions there, and stop once you have the bash shell.
+
+- Run `cd ~/Downloads`
+- Run `vi exploit.sh` to create a new shell file.
+- In this shell file, put the line `pkill -9 chrome`
+- After that, head over to `chrome:version`, and next to "command line options:" copy the entire really long thing
+- Paste it into vi as a new line.
+
+Now you can add whatever launch options you want! these are like the flags in chrome:flags, but there are way more available.
+
+The full list is here: https://peter.sh/experiments/chromium-command-line-switches/
+
+Some notable ones are: `--force-devtools-available` (devtools), `--bwsi` (guest mode), `--kiosk`(useless but funny), `--oauth-client-id`(breaks policy updating and profile syncing), `--disable-extensions-except`, `--show-login-dev-overlay`/`--show-oobe-dev-overlay`, `--enable-hangout-services-extension-for-testing`(adds a bunch of useless extensions), and more.
+
+To execute chrome with the launch options set, exit vi (impossible), and run `sh <(cat exploit.sh) & disown`
