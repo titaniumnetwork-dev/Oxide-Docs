@@ -14,6 +14,7 @@ const config = {
   onBrokenLinks: 'warn',
   onBrokenMarkdownLinks: 'warn',
   favicon: 'https://titaniumnetwork.org/logo.png',
+  staticDirectories: ['static'],
 
   organizationName: 'titaniumnetwork-dev',
   projectName: 'Oxide-Docs',
@@ -142,7 +143,7 @@ const config = {
             items: [
               {
                 label: "Get Started",
-                to: "/services",
+                to: "/",
               },
               {
                 label: "Guides",
@@ -153,8 +154,8 @@ const config = {
                 to: "/category/proxies",
               },
               {
-                label: "Exploits",
-                to: "/services/kajigs",
+                label: "Kajigs",
+                to: "/category/kajigs",
               },
             ],
           },
@@ -186,20 +187,12 @@ const config = {
                 href: "https://kazwire.com",
               },
               {
-                label: "Ludicrous",
-                href: "https://ludicrous.icu",
-              },
-              {
                 label: "Radon Games",
                 href: "https://radon.games",
               },
               {
                 label: "Totally Science",
                 href: "https://totallyscience.co",
-              },
-              {
-                label: "AnuraOS",
-                href: "https://anura.pro",
               },
             ],
           },
