@@ -9,54 +9,54 @@ title: DNS Setup
     <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#434c5e" />
     <link rel="canonical" href="https://titaniumnetwork.org/" />
     <meta name="keywords" content="titanium network, dns, web proxies" />
-    
-    <meta property="og:site_name" content="DNS Setup" />
-	<meta property="og:url" content="https://docs.titaniumnetwork.org/guides/dns-setup" />
-	<meta property="og:title" content="DNS Setup" />
-	<meta property="og:type" content="website" />
-	<meta property="og:description" content="DNS management is the entire process of properly getting your own domain name actually pointed to your origin server." />
-	<meta property="og:image" content="https://raw.githubusercontent.com/titaniumnetwork-dev/Oxide/master/public/logo.png" />
-	<meta property="og:image:secure_url" content="https://raw.githubusercontent.com/titaniumnetwork-dev/Oxide/master/public/logo.png" />
-	<meta property="twitter:image" content="https://raw.githubusercontent.com/titaniumnetwork-dev/Oxide/master/public/logo.png" />
-	<meta name="twitter:site" content="@TitaniumNetDev" />
-	<meta name="twitter:creator" content="@TitaniumNetDev" />
-	<meta name="twitter:card" content="summary_large_image" />
-	<meta name="twitter:title" content="Titanium Network Docs" />
-	<meta name="twitter:description" content="Open Source Proxy Organization; Here we provide advanced web proxy services through the progression of web proxy technologies." />
-    
-  <link rel="icon" type="image/png" href="https://titaniumnetwork.org/logo.png" />
-	<link rel="apple-touch-icon" sizes="180x180" href="https://titaniumnetwork.org/logo.png" />
-	<link rel="icon" type="image/png" sizes="32x32" href="https://titaniumnetwork.org/logo.png" />
-	<link rel="icon" type="image/png" sizes="16x16" href="https://titaniumnetwork.org/logo.png" />
-	<link rel="mask-icon" href="https://titaniumnetwork.org/logo.png" color="#b4213b" />
-	
-	<meta name="msapplication-TileColor" content="#b4213b" />
-	<link rel="manifest" href="https://titaniumnetwork.org/manifest.json" />
 
+    <meta property="og:site_name" content="DNS Setup" />
+    <meta property="og:url" content="https://docs.titaniumnetwork.org/guides/dns-setup" />
+    <meta property="og:title" content="DNS Setup" />
+    <meta property="og:type" content="website" />
+    <meta property="og:description" content="DNS management is the entire process of properly getting your own domain name actually pointed to your origin server." />
+    <meta property="og:image" content="https://raw.githubusercontent.com/titaniumnetwork-dev/Oxide/master/public/logo.png" />
+    <meta property="og:image:secure_url" content="https://raw.githubusercontent.com/titaniumnetwork-dev/Oxide/master/public/logo.png" />
+    <meta property="twitter:image" content="https://raw.githubusercontent.com/titaniumnetwork-dev/Oxide/master/public/logo.png" />
+    <meta name="twitter:site" content="@TitaniumNetDev" />
+    <meta name="twitter:creator" content="@TitaniumNetDev" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Titanium Network Docs" />
+    <meta name="twitter:description" content="Open Source Proxy Organization; Here we provide advanced web proxy services through the progression of web proxy technologies." />
+
+    <link rel="icon" type="image/png" href="https://titaniumnetwork.org/logo.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="https://titaniumnetwork.org/logo.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="https://titaniumnetwork.org/logo.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="https://titaniumnetwork.org/logo.png" />
+    <link rel="mask-icon" href="https://titaniumnetwork.org/logo.png" color="#b4213b" />
+
+    <meta name="msapplication-TileColor" content="#b4213b" />
+    <link rel="manifest" href="https://titaniumnetwork.org/manifest.json" />
 </head>
 
 ## Get Started
 
-DNS management is the entire process of properly getting your own domain name actually pointed to your origin server.
-This is all done through the management of DNS records. When doing any zone changes (set of DNS records) please note that visible changes may take up to 48 hours due to DNS propagation.
+DNS management is the process of properly getting your domain name pointed to your origin server.
+This is all done through the management of DNS records. When making any zone changes (set of DNS records), please note that visible changes may take up to 48 hours due to DNS propagation.
 
-The first thing you would need to do is purchase a domain name. A domain name is your website address which purchase a domain name through a registrar. Some good registrars are listed below:
+The first thing you would need to do is purchase a domain name. A domain name is your website address, and you can purchase a domain name through a registrar. Some good registrars are listed below:
 
 - Namecheap
 - NameSilo
 - Njalla
+- Cloudflare
 
 ### Freenom Disclaimer
 
-For beginners, Freenom is a good provider for obtaining domains for free. However the catch is that you can only use properly "Freenom" domains for free being .cf, .ml, .gq, ga and .tk. However these can be blocked rather easily.
+For beginners, Freenom is a good provider for obtaining domains for free. However, the catch is that you can only use some "Freenom" domains for free: .cf, .ml, .gq, ga, and .tk. However, these can be blocked rather easily.
 
-If you prefer to obtain premium domains (TLDs) at a cheap price, then use <a href="https://namecheap.com">Namecheap</a>, which offers domains for good prices.
+If you prefer to obtain premium domains (TLDs) at a low price, then use <a href="https://namecheap.com">Namecheap</a>, which offers domains for good prices.
 
-If you're a privacy nut, then use <a href="https://njal.la">Njalla</a>, who don't even <i>ask</i> you for WHOIS information, and accept private payment methods like XMR, but charge a pretty hefty upmark.
+If you're a privacy nut, then use <a href="https://njal.la">Njalla</a> or <a href="https://incognet.io/">IncogNet</a>, who don't even <i>ask</i> you for WHOIS information, and accept private payment methods like XMR, but may charge more compared to other providers.
 
 ## Zone Setup
 
-After you have selected a decent VPS (refer to the VPS Hosting guide), use Cloudflare for the DNS records for both the site and the subdomains for the proxies. You could manually do this as well but Cloudflare is recommended for ease.
+After you have selected a decent VPS (refer to the VPS Hosting guide), use Cloudflare for the DNS records for both the site and the subdomains for the proxies. You could manually do this as well, but Cloudflare is recommended for ease of use.
 
 This is an example of DNS records. Self-hosting will require `A records` preferably.
 
@@ -68,15 +68,15 @@ This is an example of DNS records. Self-hosting will require `A records` prefera
 - `@` and `www.example.ml` for the local Ultraviolet proxy or any locally hosted proxy with your frontend; or just your frontend
 - `client.example.ml` for external web proxy #1
 - `a.example.ml` for external web proxy #2
-- `cdn.example.ml`for a nice external web proxy #3
+- `cdn.example.ml` for a nice external web proxy #3
 
-The actual subdomain is all dependant on **your** setup.
+The actual subdomain is all dependent on **your** setup.
 
 ## Cloudflare Steps
 
-- Use Cloudflare (make an account), add your domain name (Freenom Domain or other TLD) and then add your various DNS records to your zone. Make sure you add Cloudflare's nameservers which will be given later when you are adding your domain name.
+Use Cloudflare (make an account), add your domain name (Freenom Domain or other TLD), and then add your various DNS records to your zone. Make sure you add Cloudflare's nameservers, which will be given later when you add your domain name.
 
-Make sure they are CNAME although A records also work and try to follow this structure:
+Make sure they are CNAME, although A records also work, and try to follow this structure:
 
 **Type | Name | Target**
 
@@ -92,21 +92,21 @@ Make sure they are CNAME although A records also work and try to follow this str
 `A | cdn | 0.0.0.0` (External Proxy)
 `A | rh | 0.0.0.0` (External Proxy)
 
-0.0.0.0 being an obvious example.
+0.0.0.0 being an example IP, you would replace this with your actual VPS instance IP.
 
 ## NGINX
 
-A common question here would be "how would I get my public VPS IP actually directed to an instance (ex: PORT)?"
+A common question here is, "How would I get my public VPS IP to actually be directed to an instance (e.g., PORT)?"
 
-For this you need to utilize a reverse web proxy. Essentially, a reverse proxy is a server that sits in front of web servers and forwards client (e.g. web browser) requests to those web servers. Reverse proxies are implemented to help increase security, performance, and reliability but in this case for ease of setup.
+To do this, you need to utilize a reverse web proxy. Essentially, a reverse proxy is a server that sits in front of web servers and forwards client (e.g. web browser) requests to those web servers. Reverse proxies are implemented to help increase security, performance, and reliability, but in this case, for ease of setup.
 
 More information regarding this can be found within the NGINX guide.
 
 ## Free Hosting Issues
 
-A typical issue that arisies with free hosting is the situation with adding or managing CNAME/A records to these services. Due to having to use panels steps for each may vary and they might fall under the SSL guide below.
+A typical issue that arises with free hosting is adding or managing CNAME/A records to these services. Because you have to use panels, the steps for each may vary, and they might fall under the SSL guide below.
 
 ## SSL
 
-Make sure HTTPS is forced and have SSL set to Flexible for any free hosting options. **Otherwise you can have SSL set to Full.**
-Cloudflare will try to automatically select Flexible so be sure to check your setup if you have any issues with DNS management.
+Make sure HTTPS is forced and have SSL set to Flexible for free hosting options. **Otherwise, you can have SSL set to Full.**
+Cloudflare will try to select Flexible automatically, so check your setup if you have any issues with DNS management.

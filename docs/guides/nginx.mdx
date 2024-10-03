@@ -1,7 +1,6 @@
 ---
 title: NGINX
 ---
-
 <head>
     <meta content="IE=edge" http-equiv="X-UA-Compatible" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no" />
@@ -9,35 +8,34 @@ title: NGINX
     <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#434c5e" />
     <link rel="canonical" href="https://holyunblocker.net/" />
     <meta name="keywords" content="nginx, titanium network, web proxies" />
-    
-    <meta property="og:site_name" content="NGINX Setup" />
-	<meta property="og:url" content="https://docs.titaniumnetwork.org/guides/nginx" />
-	<meta property="og:title" content="NGINX Setup" />
-	<meta property="og:type" content="website" />
-	<meta property="og:description" content="Nginx is a common tool used for load balancing as well as reverse-proxying." />
-	<meta property="og:image" content="https://raw.githubusercontent.com/titaniumnetwork-dev/Oxide/master/public/logo.png" />
-	<meta property="og:image:secure_url" content="https://raw.githubusercontent.com/titaniumnetwork-dev/Oxide/master/public/logo.png" />
-	<meta property="twitter:image" content="https://raw.githubusercontent.com/titaniumnetwork-dev/Oxide/master/public/logo.png" />
-	<meta name="twitter:site" content="@TitaniumNetDev" />
-	<meta name="twitter:creator" content="@TitaniumNetDev" />
-	<meta name="twitter:card" content="summary_large_image" />
-	<meta name="twitter:title" content="Titanium Network Docs" />
-	<meta name="twitter:description" content="Open Source Proxy Organization; Here we provide advanced web proxy services through the progression of web proxy technologies." />
-    
-    <link rel="icon" type="image/png" href="https://titaniumnetwork.org/logo.png" />
-	<link rel="apple-touch-icon" sizes="180x180" href="https://titaniumnetwork.org/logo.png" />
-	<link rel="icon" type="image/png" sizes="32x32" href="https://titaniumnetwork.org/logo.png" />
-	<link rel="icon" type="image/png" sizes="16x16" href="https://titaniumnetwork.org/logo.png" />
-	<link rel="mask-icon" href="https://titaniumnetwork.org/logo.png" color="#b4213b" />
-	
-	<meta name="msapplication-TileColor" content="#b4213b" />
-	<link rel="manifest" href="https://titaniumnetwork.org/manifest.json" />
 
+    <meta property="og:site_name" content="NGINX Setup" />
+    <meta property="og:url" content="https://docs.titaniumnetwork.org/guides/nginx" />
+    <meta property="og:title" content="NGINX Setup" />
+    <meta property="og:type" content="website" />
+    <meta property="og:description" content="Nginx is a common tool used for load balancing as well as reverse-proxying." />
+    <meta property="og:image" content="https://raw.githubusercontent.com/titaniumnetwork-dev/Oxide/master/public/logo.png" />
+    <meta property="og:image:secure_url" content="https://raw.githubusercontent.com/titaniumnetwork-dev/Oxide/master/public/logo.png" />
+    <meta property="twitter:image" content="https://raw.githubusercontent.com/titaniumnetwork-dev/Oxide/master/public/logo.png" />
+    <meta name="twitter:site" content="@TitaniumNetDev" />
+    <meta name="twitter:creator" content="@TitaniumNetDev" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Titanium Network Docs" />
+    <meta name="twitter:description" content="Open Source Proxy Organization; Here we provide advanced web proxy services through the progression of web proxy technologies." />
+
+    <link rel="icon" type="image/png" href="https://titaniumnetwork.org/logo.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="https://titaniumnetwork.org/logo.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="https://titaniumnetwork.org/logo.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="https://titaniumnetwork.org/logo.png" />
+    <link rel="mask-icon" href="https://titaniumnetwork.org/logo.png" color="#b4213b" />
+
+    <meta name="msapplication-TileColor" content="#b4213b" />
+    <link rel="manifest" href="https://titaniumnetwork.org/manifest.json" />
 </head>
 
 # NGINX
 
-Nginx is a common tool used for load balancing as well as reverse-proxying. We will be using Nginx to pass your instance to your domains as well as to add SSL to your site.
+Nginx is a common tool for load balancing and reverse-proxying. We will use Nginx to pass your instance to your domains and add SSL to your site.
 
 Assuming you are running a Linux system based off of Debian, run the following command to install nginx:
 
@@ -45,7 +43,7 @@ Assuming you are running a Linux system based off of Debian, run the following c
 $ sudo apt install nginx
 ```
 
-After you have Nginx installed, configure it in `/etc/nginx/nginx.conf`. The configuration I would recommend can be found below:
+After installing Nginx, configure it in `/etc/nginx/nginx.conf`. The configuration I would recommend can be found below:
 
 ```nginx
 user root; # change this to be the user you are hosting your instance on
@@ -78,7 +76,7 @@ http {
         server_name your.domain.com; # replace with your actual domain
 
         location /wisp {
-            proxy_pass http://127.0.0.1:8080; # change this to the port of your wisp server. i reccomend epoxy-server for optimal speed and performance.
+            proxy_pass http://127.0.0.1:8080; # change this to the port of your wisp server. I recommend an epoxy server for optimal speed and performance.
             proxy_http_version 1.1;
             proxy_set_header Upgrade $http_upgrade;
             proxy_set_header Connection "Upgrade";
@@ -104,7 +102,7 @@ http {
             proxy_buffers 4 256k;
             proxy_busy_buffers_size 256k;
             proxy_temp_file_write_size 256k;
-            # The small block below will block googlebot
+            # The small block below will block Google search crawlers
             if ($http_user_agent ~ (Googlebot)) {
                 return 403;
             }
