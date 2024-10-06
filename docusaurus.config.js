@@ -15,14 +15,8 @@ const config = {
   onBrokenMarkdownLinks: 'warn',
   favicon: 'https://titaniumnetwork.org/logo.png',
   staticDirectories: ['static'],
-
   organizationName: 'titaniumnetwork-dev',
   projectName: 'Oxide-Docs',
-  i18n: {
-    defaultLocale: 'en',
-    locales: ['en'],
-  },
-
   themes: [
     [
       require.resolve('@easyops-cn/docusaurus-search-local'),
@@ -90,10 +84,10 @@ const config = {
             'url': 'https://docs.titaniumnetwork.org',
             'logo': 'https://titaniumnetwork.org/logo.png',
             'sameAs': [
-              'https://github.com/titaniumnetwork-dev',
-              'https://twitter.com/titaniumnetdev',
-              'https://www.youtube.com/channel/UC6LaREFvs9L72SK1s2PcxNg',
-              'https://holyunblocker.org'
+                'https://github.com/titaniumnetwork-dev',
+                'https://twitter.com/titaniumnetdev',
+                'https://www.youtube.com/channel/UC6LaREFvs9L72SK1s2PcxNg',
+                'https://holyunblocker.org'
             ]
           })
         }
