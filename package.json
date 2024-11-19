@@ -1,48 +1,24 @@
 {
   "name": "docs",
-  "version": "2.0.0",
   "description": "The official SDK documentation site for TitaniumNetwork.",
   "homepage": "https://docs.titaniumnetwork.org/",
-  "private": true,
   "license": "AGPLv3",
   "repository": "https://github.com/titaniumnetwork-dev/Oxide-Docs",
+  "type": "module",
+  "version": "3.0.0",
   "scripts": {
-    "docusaurus": "docusaurus",
-    "start": "docusaurus start",
-    "build": "docusaurus build",
-    "swizzle": "docusaurus swizzle",
-    "deploy": "docusaurus deploy",
-    "clear": "docusaurus clear",
-    "serve": "docusaurus serve",
-    "write-translations": "docusaurus write-translations",
-    "write-heading-ids": "docusaurus write-heading-ids"
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro check && astro build",
+    "preview": "astro preview",
+    "astro": "astro"
   },
   "dependencies": {
-    "@docusaurus/core": "^3.5.2",
-    "@docusaurus/plugin-sitemap": "^3.5.2",
-    "@docusaurus/preset-classic": "^3.5.2",
-    "@easyops-cn/docusaurus-search-local": "^0.44.5",
-    "prism-react-renderer": "^2.0.0",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0"
-  },
-  "devDependencies": {
-    "@docusaurus/module-type-aliases": "^3.5.2",
-    "prettier": "^2.8.6"
-  },
-  "browserslist": {
-    "production": [
-      ">0.5%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  },
-  "engines": {
-    "node": ">=18"
+    "@astrojs/check": "^0.9.4",
+    "@astrojs/starlight": "^0.29.0",
+    "@fontsource/raleway": "^5.1.0",
+    "astro": "^4.16.10",
+    "sharp": "^0.32.5",
+    "typescript": "^5.6.3"
   }
 }

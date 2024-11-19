@@ -1,0 +1,26 @@
+:root {
+  --sl-font: "Raleway", serif;
+}
+
+:root[data-theme="dark"] {
+  --sl-color-gray-2: white;
+  --sl-color-black: #281838;
+  --sl-color-gray-7: #442664;
+  --sl-color-bg-nav: #281838;
+  --sl-color-bg: #200042;
+  --sl-color-bg-sidebar: #281838;
+  --sl-color-gray-3: white;
+  --sl-color-white: white;
+}
+
+:root[data-theme="light"] {
+  --sl-color-text-accent: #896bab;
+}
+
+body {
+  background-image: url("/background.svg");
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  background-attachment: fixed;
+}

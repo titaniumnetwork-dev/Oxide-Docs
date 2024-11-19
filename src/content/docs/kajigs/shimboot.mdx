@@ -1,0 +1,58 @@
+---
+title: Shimboot
+---
+
+:::note
+This requires a linux computer.
+:::
+
+# Info
+Shimboot is a collection of scripts for patching a Chrome OS RMA shim to serve as a bootloader for a standard Linux distribution. It allows you to boot a full desktop Debian install on a Chromebook, without needing to unenroll it or modify the firmware.
+
+
+# Explanation
+Chrome OS RMA shims are bootable disk images which are designed to run a variety of diagnostic utilities on Chromebooks, and they'll work even if the device is enterprise enrolled. Unfortunately for Google, there exists a security flaw in which the root filesystem of the RMA shim is not verified. This lets us replace the rootfs with anything we want, including a full Linux distribution.
+
+Simply replacing the shim's rootfs doesn't work, however, as it boots to an environment friendly to the RMA shim, not regular Linux distros. To get around this, a separate bootloader is required to transition from the shim environment to the main rootfs. This bootloader then does a pivot_root to enter the rootfs, where it runs the init system.
+
+Another problem is encountered at this stage: the Chrome OS kernel will complain about systemd's mounts, and the boot process will hang. A simple workaround is to apply a patch to systemd, and then it can be recompiled and hosted at a repo somewhere.
+
+After copying all the firmware from the recovery image and shim to the rootfs, we're able to boot to a mostly working XFCE desktop.
+
+
+# Prebuilt Images
+Prebuilt images are available here. If there is not a prebuilt image for your board, you must manually build the shimboot image. 
+
+For these images, the root password is "root". The name of the default user is "user" and its password is "user" as well. You should change these credentials as soon as possible.
+
+# Build Instructions
+1. Find the board name of your Chromebook. You can search for the model name on [chrome100.dev](https://chrome100.dev).
+2. Run `git clone https://github.com/ading2210/shimboot && cd shimboot`
+3. Run `sudo ./build_complete.sh [board_name]` to download the required data and build the disk image.
+
+Alternatively, you can run each of the steps manually:
+1. Grab a Chrome OS RMA Shim from somewhere. Most of them have already been leaked and aren't too difficult to find.
+2. Download a Chrome OS recovery image for your board.
+3. Run `mkdir -p data/rootfs` to create a directory to hold the rootfs.
+4. Run `sudo ./build_rootfs.sh data/rootfs bookworm` to build the base rootfs.
+5. Run `sudo ./patch_rootfs.sh path_to_shim path_to_reco data/rootfs` to patch the base rootfs and add any needed drivers.
+6. Run `sudo ./build.sh image.bin path_to_shim data/rootfs` to generate a disk image at `image.bin`. 
+
+
+# Booting the Image
+Booting the Image:
+1. Obtain a shimboot image by downloading a prebuilt one or building it yourself. 
+2. Flash the shimboot image to a USB drive or SD card. Use the Chromebook Recovery Utility or dd if you're on Linux.
+3. Enable developer mode on your Chromebook. If the Chromebook is enrolled, follow the instructions on the sh1mmer website (see the "Executing on Chromebook" section).
+4. Plug the USB into your Chromebook and enter recovery mode. It should detect the USB and run the shimboot bootloader.
+5. Boot into Debian and log in with the username and password that you configured earlier. The default username/password for the prebuilt images is `user/user`.
+6. Expand the rootfs partition so that it fills up the entire disk by running `sudo growpart /dev/sdX 4` (replacing `sdX` with the block device corresponding to your disk) to expand the partition, then running `sudo resize2fs /dev/sdX4` to expand the filesystem.
+7. Change the root password and regular user password by running `sudo passwd root` and `passwd user`.
+
+
+# Copyright
+Shimboot is licensed under the GNU GPL v3. Unless otherwise indicated, all code has been written by ading2210.
+
+The source code for this project is available here: https://github.com/ading2210/shimboot
+
+Credit for fixing the original bug in systemd goes to @r58playz.

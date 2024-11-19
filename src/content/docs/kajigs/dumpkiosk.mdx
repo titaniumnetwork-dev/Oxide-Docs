@@ -1,0 +1,30 @@
+---
+title: Dump ChromeOS Kiosk Apps as Chrome Apps
+---
+
+
+:::note
+You need to have linux experience for this.
+:::
+
+1. Enable devmode using sh1mmer
+2. Add your personal Google account
+3. Add your school account
+4. Open a crosh shell (ctrl+alt+T), run `shell`, go to /home/chronos/(hash of your user account)/extentions/kiosk/ and find the ID that goes with your kiosk apps
+
+|  Kiosk  | ID
+|---------|----------------------------------|
+| TestNav | mdmkkicfmmkgmpkmkdikhlbggogpicma |
+| SecureTestBrowser | hblfbmjdaalalhifaajnnodlkiloengc |
+| NWEA    | omkghcboodpimaoimdkmigofhjcpmpeb |
+| CollegeBoard | joaneffahikmmipmidpkeedopejmhbbm |
+
+5. Back it up to your downloads folder with `cp /home/chronos/(hash of your user account)/extentions/kiosk/(app ID) /home/chronos/<hash of your account id>/Downloads/`.
+6. Zip it with the file manager
+7. Go into the folder and edit the manifest.json and delete the line `"kiosk_only" : true"`
+8. Backup the folder anywhere you would like, USB, Google Drive, it doesn't matter
+9. Unenroll again and go to any user
+10. Copy the backup over to your chromebook and unzip it into a folder
+11. Go to chrome://extensions and click the "developer mode" switch
+12. Click "Load Unpacked"
+13. Select the folder you extracted the ZIP to
