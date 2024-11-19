@@ -1,9 +1,0 @@
-{
-    "label": "Transports",
-    "position": 2,
-    "link": {
-      "type": "generated-index",
-      "description": "Transports that can be used by UV."
-    }
-  }
-  
