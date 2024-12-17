@@ -35,8 +35,6 @@ title: VPN Setup
 </head>
 
 
-# VPN Setup
-
 ## Making a VPN Server
 
 Credits to **OnlyCS** for the original Kajig and awsame for also helping
@@ -111,7 +109,7 @@ backup `/etc/ipsec.secrets` and replace its contents with:
 
 run these four commands:
 
-```
+```bash
 sudo ufw allow OpenSSH
 sudo ufw allow 500,4500/udp
 sudo ufw allow 5
@@ -153,14 +151,14 @@ net/ipv4/ip_no_pmtu_disc=1
 
 Restart ufw with:
 
-```
+```bash
 sudo ufw disable
 sudo ufw enable
 ```
 
 Finally, start the VPN server
 
-```
+```bash
 sudo systemctl enable strongswan-starter
 sudo systemctl start strongswan-starter
 ```
@@ -169,7 +167,9 @@ sudo systemctl start strongswan-starter
 
 First, Install Pi-Hole:
 
-`curl -sSL https://install.pi-hole.net | bash`
+```bash
+curl -sSL https://install.pi-hole.net | bash
+```
 
 Make `1.1.1.1` (Cloudflare's DNS) the upstream and enable the Web UI/Admin Panel
 

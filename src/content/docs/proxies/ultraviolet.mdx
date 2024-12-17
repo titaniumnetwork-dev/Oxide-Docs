@@ -75,7 +75,7 @@ If you operate an outdated Bare server, we encourage you to update. If you're us
 
 If you're too lazy to do either of the above, you can install an outdated and unsupported version of Ultraviolet.
 
-```sh
+```bash
 npm install @titaniumnetwork-dev/ultraviolet@1
 ```
 
@@ -91,46 +91,30 @@ Documentation can be found in the [wiki](https://github.com/titaniumnetwork-dev/
 
 1. Clone the repository
 
-```sh
-$ git clone https://github.com/titaniumnetwork-dev/Ultraviolet.git
-> Cloning into Ultraviolet...
-$ cd Ultraviolet
+```bash
+git clone https://github.com/titaniumnetwork-dev/Ultraviolet
+cd Ultraviolet
 ```
 
 2. Install dependencies
 
-```sh
-$ npm install
+```bash
+npm install
 ```
 
 3. Produce the `dist/` directory and compile scripts
 
-```sh
-$ npm run build
+```bash
+npm run build
 ```
-
-### I don't care about building, where are the scripts for my website?!
-
-You can extract the scripts from the NPM package in the [releases section](https://github.com/titaniumnetwork-dev/Ultraviolet/releases). All the scripts you would typically look for (`uv.bundle.js`, `uv.handler.js`, `uv.sw.js`, and `uv.config.js`) are found within the `dist` directory.
 
 ## Installation
 
 > This will provide built files and the JS API to access the path of dist files.
 
-Currently, we don't have an NPM package. As a current solution, you can install from a [GitHub release](https://github.com/titaniumnetwork-dev/Ultraviolet/releases). Copy the link to the `.tgz` and install using NPM.
-
-````sh
-$ npm install https://github.com/titaniumnetwork-dev/Ultraviolet/releases/download/v1.0.1/ultraviolet-1.0.1.tgz
-
-## Packaging
-
-This is intended for releasing on hosting the package as a file, not on NPM.
-
-```sh
-$ npm pack
-````
-
-Package will be named `ultraviolet-X.X.X.tgz`
+```bash
+npm install @titaniumnetwork-dev/ultraviolet
+```
 
 ## Changelogs
 
@@ -216,8 +200,6 @@ You are still required to specify all paths in `uv.config.js`.
 <h1 align="center">Ultraviolet-Node</h1>
 
 The deployable all-in-one bundle for Ultraviolet, a highly sophisticated proxy used for evading internet censorship or accessing websites in a controlled sandbox using the power of service-workers and more!
-
-## Deployment
 
 [![Deploy to Heroku](https://binbashbanana.github.io/deploy-buttons/buttons/remade/heroku.svg)](https://github.com/titaniumnetwork-dev/Ultraviolet-Node/wiki/Deploy-to-Heroku)
 [![Run on Replit](https://binbashbanana.github.io/deploy-buttons/buttons/remade/replit.svg)](https://github.com/titaniumnetwork-dev/Ultraviolet-Node/wiki/Run-on-Replit)

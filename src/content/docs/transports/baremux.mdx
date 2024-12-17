@@ -1,7 +1,7 @@
 ---
 title: bare-mux
 ---
-Bare mux is system for managing http transports in a project such as [Ultraviolet](https://github.com/Titaniumnetwork-dev/Ultraviolet) and [Scramjet](https://github.com/MercuryWorkshop/Scramjet).
+Bare-mux is a system for managing HTTP transports in projects like [Ultraviolet](https://github.com/Titaniumnetwork-dev/Ultraviolet) or [Scramjet](https://github.com/MercuryWorkshop/Scramjet).
 It is responsible for whether Libcurl, Epoxy, Bare as module v3, or any other transport is used in those projects. 
 
 Written to make the job of creating new standards for transporting http data seamless.
@@ -38,11 +38,9 @@ export interface BareTransport {
 }
 ```
 
-A guide to making a transport can be found [here](./documentation/Transport.md).
-
 ## Upgrading
 
-A guide for updating from v1 to v2 can be found [here](./documentation/Upgrading.md).
+A guide for updating from v1 to v2 can be found [here](https://github.com/MercuryWorkshop/bare-mux/blob/master/documentation/Upgrading.md).
 
 ### Older bare-mux versions
 
@@ -52,7 +50,7 @@ If you operate using an older bare-mux, we encourage you to update.
 
 If you're too lazy to do either of the above, you can install an outdated and unsupported version of bare-mux.
 
-```sh
+```bash
 npm install @mercuryworkshop/bare-mux@1
 ```
 

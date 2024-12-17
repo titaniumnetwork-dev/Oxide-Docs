@@ -2,16 +2,13 @@
 title: Masqr
 ---
 
-# MASQR
-
 ## What is MASQR?
-
-Think of Masqr as a "anti link leaking" authentication system that allows you to use your proxy bot domain only on one device to prevent filters from grabbing on and to help developers not spend so much money on buying hundereds of domains just for them to be blocked because of link leakers.
+Think of it like an "anti link leaking" system for proxy bots. The link you recieve is unique and will only work once, which can prevent filters from catching on and help proxy site owners by not making them buy new links that will just get blocked.
 
 ## How can I deploy this?
 
-This is fairly easy to deploy to your backend using `express` as seen in the [https://github.com/titaniumnetwork-dev/MasqrProject/blob/master/MasqrBackend/index.js](`MasqrBackend` example), and you can implement this into different backends fairly similarly.
-You can also use [https://github.com/titaniumnetwork-dev/masqr-middleware](masqr-middleware) if you'd like to avoid implementing masqr yourself.
+This is fairly easy to deploy to your backend using `express`, as seen in the [`MasqrBackend` example](https://github.com/titaniumnetwork-dev/MasqrProject/blob/master/MasqrBackend/index.js), and you can implement this into different backends fairly similarly.
+You can also use [`masqr-middleware`](https://github.com/titaniumnetwork-dev/masqr-middleware) if you'd like to avoid implementing it yourself.
 
 To set this up you'll want to create a few files, in addition to adding this to your app.
 Those files include 
@@ -20,11 +17,11 @@ Those files include
 
 Optionally, place a folder named `Masqrd` in your server directory
 Inside `Masqrd`, an individual masqd page for when domain fails for EACH domain
-for example, if anura.christmas fails to validate, it will serve `./Masqrd/anura.christma.html.`
+for example, if anura.christmas fails to validate, it will serve `./Masqrd/anura.christmas.html.`
 
 ## How it works
 
-How masqr works is really simple. When you get a link from a proxy bot of some sorts (for demonstration purposes I will be referencing Titanium Networks Proxy Bot) and you will be told to click on a link with some strange characters that will create a cookie which is "your license" then when you visit the site afterwards, it will check the cookie with the one in the licensing server's database to make sure it wasn't tampered with then your in!
+MASQR is pretty simple. Links from proxy bots (eg. Titanium Network's bot) will give you a link that looks like this: `https://u:abc123@example.com`. The `u:abc123` part is a one-time use password for HTTP authentication. The server then generates a license that's saved as a cookie, and whenever you visit that site, it checks your cookie with the one in the server. If you visit the site without a valid password or cookie, it sends you the fallback site.
 
 ### Credits
 
