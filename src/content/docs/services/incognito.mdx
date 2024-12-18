@@ -2,18 +2,28 @@
 title: Incognito
 ---
 
-# Incognito
+[![Incognito](https://socialify.git.ci/titaniumnetwork-dev/incognito/image?description=1&font=Inter&forks=1&issues=1&language=1&name=1&owner=1&pattern=Circuit%20Board&pulls=1&stargazers=1&theme=Dark)](https://github.com/titaniumnetwork-dev/incognito)
 
 Access the world wide web! Incognito is a dynamic web proxy service stylized as a search engine.
 
-## Setup
+[![repo size](https://img.shields.io/github/repo-size/titaniumnetwork-dev/incognito?style=for-the-badge)](https://github.com/titaniumnetwork-dev/incognito)
+[![website status](https://img.shields.io/website?url=https%3A%2F%2Fincog.works&style=for-the-badge)](https://incog.works)
+[![commit a week](https://img.shields.io/github/commit-activity/w/titaniumnetwork-dev/incognito?style=for-the-badge)](https://github.com/titaniumnetwork-dev/Incognito/commits/main/)
+[![original repo](https://img.shields.io/badge/Original-Repo-gray?style=for-the-badge&link=https%3A%2F%2Fgithub.com%2Fcaracal-js%2Fincognito)](https://github.com/caracal-js/incognito)
+
+# Setup
 
 ## Deployment
+To get started, press one of the buttons below to deploy Incognito
+
+[![Terminal](https://img.shields.io/badge/terminal-%23121011.svg?style=for-the-badge&logo=gnu-bash&logoColor=white)](#terminal)
+[![Docker](https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white)](#docker)
 
 ### Terminal
 
 Prerequisites:
 - Node & npm
+- Deno 2
 - Git
 
 1. Clone the repo:
@@ -23,37 +33,38 @@ git clone https://github.com/titaniumnetwork-dev/incognito && cd incognito
 
 2. Install all of the dependencies:
 ```bash
-npm i
+deno install --allow-scripts
 ```
 
 3. Create a .env file
 ```bash
-cp .env.example .env
+cp config.example.toml config.toml
 ```
 
-4. Modify the .env file to you liking (docs [here](#environment))
-```
-nano .env
+4. Modify the config.toml file to you liking (docs [here](#environment))
+```bash
+nano config.toml
 ```
 
 5. Build the frontend:
 ```bash
-npm run build
+deno task build
 ```
 
 6. Start the server
 ```bash
-npm start
+deno task start
 ```
-> You can run `npm run bstart` to build and start together
+:::note
+You can run `deno task start:standalone` to use Hono over Fastify, recommended if you're using an external Wisp server like [Epoxy Server](https://github.com/mercuryworkshop/epoxy-tls)
+
+You can run `deno task bstart` to build and start the server at the same time
+
+You can run `deno task bstart:standalone` to do the same as above but use the Hono server instead
+
+The Hono server has no built-in Wisp server so you'll have to provide one.
+:::
 ---
-
-### Games
-
-- By default, games are reverse proxied by the server
-    - Game assets are located [here](https://github.com/ruby-network/ruby-assets)
-- To turn off Games, and access to them see [#environment](#environment)
-
 
 ### Docker
 
@@ -72,31 +83,31 @@ Prerequisites:
 git clone https://github.com/titaniumnetwork/incognito && cd incognito
 ```
 
-2. Create an .env file (if using prebuilt image, copy the example from the repo):
+2. Create an config.toml file (if using prebuilt image, copy the example from the repo):
 ```bash
-cp .env.example .env
+cp config.example.toml config.toml
 ```
 
-3. Modify the .env file to your liking (docs [here](#environment))
+3. Modify the config.toml file to your liking (docs [here](#config))
 ```bash
-nano .env
+nano config.toml
 ```
 
 4. Build the docker image (skip if using prebuilt):
 ```bash
-docker build --build-arg BARE_SERVER_OPTION=true GAMES_LINK=true RAMMERHEAD_OPTION=true -t incog:latest
+docker build -t incog:latest
 ```
-For info on the build arg check [here](#environment)
+For info on the build arg check [here](#config)
 
 5. Run the docker images:
 
     - Prebuilt:
     ```bash
-    docker run --env-file ./.env motortruck1221/incognito:latest
+    docker run --volume ./config.toml:/app/config.toml motortruck1221/incognito:latest
     ```
     - Image you built yourself:
     ```bash
-    docker run --env-file ./.env incog:latest
+    docker run --volume ./config.toml:/app/config.toml incog:latest
     ```
 
 #### Docker Compose
@@ -110,14 +121,14 @@ Prerequisites:
 git clone https://github.com/titaniumnetwork-dev/incognito
 ```
 
-2. Create an .env file (if using prebuilt image, copy the example from the repo):
+2. Create an config.toml file (if using prebuilt image, copy the example from the repo):
 ```bash
-cp .env.example .env
+cp config.example.toml config.toml
 ```
 
-3. Modify the .env file to your liking (docs on that [here](#environment)]
+3. Modify the config.toml file to your liking (docs on that [here](#config))
 ```bash
-nano .env
+nano config.toml
 ```
 
 4. Build the docker image (skip if using prebuilt):
@@ -137,18 +148,28 @@ docker compose -f ./docker-compose.build.yml build
     ```
 ---
 
-## Environment
+### Games
 
-- There are a couple of environment variables for incognito. Most of the time, the defaults are fine, but there are instances where you may not want certain options enabled or certain things running.
+- By default, games are reverse proxied by the server
+    - Game assets are located [here](https://github.com/ruby-network/ruby-assets)
+- To turn off Games, and access to them see [#config](#config)
 
-| Variable               | Description                                                                                              | Default |
-|------------------------|----------------------------------------------------------------------------------------------------------|---------|
-| `MASQR`                | Enables (`true`)/Disables (`false`) Masqr (most people don't want this)                                   | `false` |
-| `BARE_SERVER_ENABLED`  | Enables (`true`)/Disables (`false`) the integrated bare server. Use this if you already have a server (e.g., reverse proxy) or don't want users accessing it. | `true`  |
-| `PORT`                 | The port that the server listens on ***IGNORED IN THE DOCKER ENVIRONMENTS***                              | `8080` |
-| `GAMES` | Disable (`false`)/Enable (`true`) the reverse proxy for Games | `true` |
-| `RAMMERHEAD_SERVER_ENABLED` | Disable (`false`)/Enabled (`true`) the integrated Rammerhead server | `true` |
-| `SITE` | Your websites domain (eg: https://example.com) | `http://localhost:8080` |
-| `BARE_SERVER_OPTION`   | Enables (`true`)/Disables (`false`) the option to use a bare server in the frontend. ***THIS IS A BUILD TIME ONLY VARIABLE*** | `true`  |
-| `GAMES_LINK` | Enables (`true`)/Disables (`false`) access to the games page ***BUILD TIME ONLY*** | `true` |
-| `RAMMERHEAD_OPTION` | Enabled (`true`)/Disables (`false`) the option to use Rammerhead in the frontend. ***BUILD TIME ONLY*** | `true` |
+
+## Config
+
+- The config is rather simple and quick, it's done in TOML and there are only two objects: `buildOpts` & `server`.
+- Below, there will be 2 tables showcasing the possible values.
+:::note
+As it says, `buildOpts` will only apply when building the website. This can be changed in the docker-compose files.
+:::
+
+#### Build Opts
+| Variable  | Description                                        | Default |
+|-----------|----------------------------------------------------|---------|
+| `games`   | Enables (`true`)/Disables (`false`) the games page | `true`  |
+
+#### Server
+| Variable  | Description                                                                                                      | Default |
+|-----------|------------------------------------------------------------------------------------------------------------------|---------|
+| `port`    | Change the default port. Note: the environment var `PORT` takes precedence                                       | `8000`  |
+| `wisp`    | Disable or enables the in built wisp server. (Note: when using the Hono server there is no built-in wisp server) | `true`  |

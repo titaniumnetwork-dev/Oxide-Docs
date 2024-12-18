@@ -45,14 +45,15 @@ Certbot is an interface with the Let's Encrypt service, a CLI tool for generatin
 
 First, you will want to run some essential commands:
 
-```
-sudo apt update && upgrade
+```bash
+sudo apt update 
+sudo apt upgrade
 sudo apt install certbot
 ```
 
 You can also look into installing either `python3-certbot-apache` or `python3-certbot-nginx` as well for automatic usage. The status of these plugins can be viewed using the command below:
 
-```
+```bash
 certbot plugins
 ```
 
@@ -66,7 +67,7 @@ Standalone mode will be the priority for this tutorial.
 
 `--d`: Specifies the domain that will be used for renewal
 
-```
+```bash
 sudo certbot certonly --manual --preferred-challenges dns -d \*.example.com
 ```
 

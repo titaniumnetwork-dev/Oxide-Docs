@@ -2,7 +2,6 @@
 title: Whisper
 ---
 
-# Whisper
 Wisp protocol client that exposes the Wisp connection over a TUN device.
 
 ## When is this useful?
@@ -12,9 +11,13 @@ To circumvent this, Whisper can be used to create a TUN device that routes all i
 ## Whisper usage examples
 
 ### Linux
-`whisper --tun tun0 --url wss://nebulaproxy.io/wisp/`
+```bash
+whisper --tun tun0 --url wss://nebulaproxy.io/wisp/
+```
 ### Windows
-`whisper.exe --tun tun0 --url wss://nebulaproxy.io/wisp/`
+```bash
+whisper.exe --tun tun0 --url wss://nebulaproxy.io/wisp/
+```
 
 ## Arguments
 
@@ -33,4 +36,6 @@ Whisper should compile on all major operating systems.
 
 Ensure you have the Rust Nightly Toolchain installed.
 
-`cargo build --release`
+```bash
+cargo build --release
+```

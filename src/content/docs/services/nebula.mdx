@@ -1,40 +1,28 @@
 ---
 title: Nebula
 ---
-<div align="center">
          
-<img src="https://socialify.git.ci/nebulaservices/nebula/image?description=1&font=Inter&forks=1&issues=1&language=1&name=1&owner=1&pattern=Circuit%20Board&pulls=1&stargazers=1&theme=Dark" alt="ruby" width="640" height="320" />
+[![repo](https://socialify.git.ci/nebulaservices/nebula/image?description=1&font=Inter&forks=1&issues=1&language=1&name=1&owner=1&pattern=Circuit%20Board&pulls=1&stargazers=1&theme=Dark)](https://github.com/nebulaservices/nebula)
 
-<img alt="repo size" src="https://img.shields.io/github/repo-size/nebulaservices/nebula?style=for-the-badge"></img>
-<img alt="website status" src="https://img.shields.io/website?url=https%3A%2F%2Fnebulaproxy.io&style=for-the-badge"></img>
-<img alt="commit a week" src="https://img.shields.io/github/commit-activity/w/nebulaservices/nebula?style=for-the-badge"></img>
+[![repo size](https://img.shields.io/github/repo-size/nebulaservices/nebula?style=for-the-badge)](https://github.com/nebulaservices/nebula)
+[![website status](https://img.shields.io/website?url=https%3A%2F%2Fnebulaproxy.io&style=for-the-badge)](https://nebulaproxy.io)
+[![commit a week](https://img.shields.io/github/commit-activity/w/nebulaservices/nebula?style=for-the-badge)](https://github.com/NebulaServices/Nebula/commits/main/)
 
-</div>
+    ## Get started
+    To get started, press one of the buttons below to deploy Nebula
+    
+    [![Terminal](https://img.shields.io/badge/terminal-%23121011.svg?style=for-the-badge&logo=gnu-bash&logoColor=white)](#terminal)
+    [![Docker](https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white)](#docker)
 
-<div align="center">
-    <h2>Get Started</h2>
-    <a>To get started, press one of the buttons below to deploy Nebula</a>
-    <br />
-    <br />
-    <a href="#terminal">
-        <img src="https://img.shields.io/badge/terminal-%23121011.svg?style=for-the-badge&logo=gnu-bash&logoColor=white" alt="Terminal">
-        </img>
-    </a>
-    <a href="#docker">
-        <img src="https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white" alt="Docker">
-        </img>
-    </a>
-</div>
+:::danger
+This will **NOT** deploy on GitHub Pages, Netlify, Vercel, Gitlab Pages, or any other *static* host
 
-## NOTE:
-
--   This will **NOT** deploy on GitHub Pages, Netlify, Vercel, Gitlab Pages, or any other _static_ host
--   This will **NOT** work on Render
----
+This will **NOT** work on Render
+:::
 
 ## How to get links
 
-[![Nebula Services Discord](https://invidget.switchblade.xyz/unblocker?theme=darl)](https://discord.gg/unblocker)
+[![Nebula Services Discord](https://invidget.switchblade.xyz/unblocker?theme=dark)](https://discord.gg/unblocker)
 [![Titanium Network Discord](https://invidget.switchblade.xyz/unblock?theme=dark)](https://discord.gg/unblock)
 
 ---
@@ -43,7 +31,7 @@ title: Nebula
 
 -   Multiple Proxy "Backends":
     -   [Ultraviolet](https://github.com/titaniumnetwork-dev/ultraviolet)
-    -   [RammerHead](https://github.com/binary-person/rammerhead)
+    -   [Rammerhead](https://github.com/binary-person/rammerhead)
 ---
 
 ## Contributors
@@ -57,7 +45,7 @@ title: Nebula
 -   [Astro](https://astro.build)
 -   [Fastify](https://fastify.dev)
 -   [Ultraviolet](https://github.com/titaniumnetwork-dev/ultraviolet)
--   [RammerHead](https://github.com/binary-person/rammerhead)
+-   [Rammerhead](https://github.com/binary-person/rammerhead)
 -   [Epoxy](https://github.com/mercuryworkshop/epoxy-tls)
 -   [Libcurl.js](https://github.com/ading2210/libcurl.js)
 -   HTML, CSS, and JavaScript (DUH)
@@ -97,23 +85,23 @@ title: Nebula
 }
 ```
 
-> [!NOTE]
->
-> You can add a custom font as well! To do so, add this to your `:root`
-> 
-> ```css
-> --font-family: /* Font family name */;
-> ```
-> 
-> And this to the bottom of your CSS file/submission:
-> ```css
-> @font-face {
->    font-family: /* Name */;
->    src: url(/* Where the font is located! Local or external work! */);
->   }
->  ```
->
-> A good example of using a custom font is the built-in `retro` theme [here](./database_assets/com.nebula.retro)
+:::note
+You can add a custom font as well! To do so, add this to your `:root`
+ 
+```css
+--font-family: /* Font family name */;
+```
+
+And this to the bottom of your CSS file/submission:
+```css
+@font-face {
+    font-family: /* Name */;
+    src: url(/* Where the font is located! Local or external work! */);
+   }
+ ```
+
+A good example of using a custom font is the built-in `retro` theme [here](./database_assets/com.nebula.retro)
+:::
 
 2. Add your colors and test! (Either with a self-hosted version of Nebula OR via a live preview (no clue when this will happen)
 
@@ -172,12 +160,13 @@ touch index.js
     self.entryFunc = setup; //DO NOT call the function here. Only assign the reference; otherwise, it will result in an error.
     ```
 
-> [!WARNING]
-> The only *allowed* way to pass code to the `function` param is either a string or an arrow function. Named functions ***WILL NOT WORK***.
->
-> Example of a named function: `function example() {/* Some form of code */}`.
->
-> If a named function is used where it shouldn't be, your plugin will not be approved, nor will it work properly.
+:::caution
+The only *allowed* way to pass code to the `function` param is either a string or an arrow function. Named functions ***WILL NOT WORK***.
+
+Example of a named function: `function example() {/* Some form of code */}`.
+
+If a named function is used where it shouldn't be, your plugin will not be approved, nor will it work properly.
+:::
 
 3. Submit your plugin in the [Discord](https://discord.gg/unblocker)!
 
@@ -248,9 +237,9 @@ npm run build
 npm start
 ```
 
-> [!NOTE]
-> You can run `npm run bstart` to build and start together
----
+:::note
+You can run `npm run bstart` to build and start together
+:::
 
 ### Docker
 
