@@ -1,49 +1,18 @@
 ---
-title: NGINX
+title: NGINX Setup
+description: In this guide we cover creating putting your proxy behind NGINX.
+keywords: ["proxy-sites"]
 ---
 
-<head>
-    <meta content="IE=edge" http-equiv="X-UA-Compatible" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no" />
-    <meta content="1.0.10" name="version" />
-    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#434c5e" />
-    <link rel="canonical" href="https://docs.titaniumnetwork.org/" />
-    <meta name="keywords" content="seo guide, guidebook, search engine optimization" />
-    
-    <meta property="og:site_name" content="NGINX Setup" />
-    <meta property="og:url" content="https://docs.titaniumnetwork.org/guides/nginx" />
-    <meta property="og:title" content="NGINX Setup" />
-    <meta property="og:type" content="website" />
-    <meta property="og:description" content="In this guide we cover creating putting your proxy behind NGINX." />
-    <meta property="og:image" content="https://raw.githubusercontent.com/titaniumnetwork-dev/Oxide/master/public/logo.png" />
-    <meta property="og:image:secure_url" content="https://raw.githubusercontent.com/titaniumnetwork-dev/Oxide/master/public/logo.png" />
-    <meta property="twitter:image" content="https://raw.githubusercontent.com/titaniumnetwork-dev/Oxide/master/public/logo.png" />
-    <meta name="twitter:site" content="@TitaniumNetDev" />
-    <meta name="twitter:creator" content="@TitaniumNetDev" />
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Titanium Network Docs" />
-    <meta name="twitter:description" content="Open Source Proxy Organization; Here we provide advanced web proxy services through the progression of web proxy technologies." />
-    
-    <link rel="icon" type="image/png" href="https://titaniumnetwork.org/logo.png" />
-    <link rel="apple-touch-icon" sizes="180x180" href="https://titaniumnetwork.org/logo.png" />
-    <link rel="icon" type="image/png" sizes="32x32" href="https://titaniumnetwork.org/logo.png" />
-    <link rel="icon" type="image/png" sizes="16x16" href="https://titaniumnetwork.org/logo.png" />
-    <link rel="mask-icon" href="https://titaniumnetwork.org/logo.png" color="#b4213b" />
-	
-    <meta name="msapplication-TileColor" content="#b4213b" />
-    <link rel="manifest" href="https://titaniumnetwork.org/manifest.json" />
-</head>
+NGINX is a common tool for load balancing and reverse-proxying. We will use NGINX to pass your instance to your domains and add SSL to your site.
 
-
-Nginx is a common tool for load balancing and reverse-proxying. We will use Nginx to pass your instance to your domains and add SSL to your site.
-
-Assuming you are running a Linux system based off of Debian, run the following command to install nginx:
+Assuming you are running a Linux system based off of Debian, run the following command to install NGINX:
 
 ```bash
 sudo apt install nginx
 ```
 
-After installing Nginx, configure it in `/etc/nginx/nginx.conf`. The configuration I would recommend can be found below:
+After installing NGINX, configure it in `/etc/nginx/nginx.conf`. The configuration I would recommend can be found below:
 
 ```nginx
 user root; # change this to be the user you are hosting your instance on
@@ -52,7 +21,7 @@ pid /run/nginx.pid;
 include /etc/nginx/modules-enabled/*.conf;
 
 events {
-        worker_connections 1024;
+    worker_connections 1024;
 }
 
 http {

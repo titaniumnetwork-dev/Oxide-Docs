@@ -1,0 +1,104 @@
+---
+import type { Props } from "@astrojs/starlight/props";
+
+/**
+ * Custom overrides for the frontmatter data used for the OpenGraph metadata. Extends the existing frontmatter setup.
+ */
+interface MetadataFrontmatter {
+  title: string;
+  description?: string;
+  image?: string;
+  keywords?: string[];
+  version?: string;
+  themeColor?: string;
+}
+
+const { entry } = Astro.props as Props;
+const { data: frontmatter } = entry;
+const { title, description } = frontmatter;
+
+/**
+ * The default frontmatter data, which will be the data used for the OpenGraph metadata defaults.
+ */
+const defaults = {
+  siteName: "Titanium Network Docs",
+  twitterHandle: "@TitaniumNetDev",
+  defaultImage:
+    "https://raw.githubusercontent.com/titaniumnetwork-dev/Oxide/master/public/logo.png",
+  defaultDescription:
+    "Open Source Proxy Organization; Here we provide advanced web proxy services through the progression of web proxy technologies.",
+  version: "1.0.10",
+  themeColor: "#434c5e",
+} as const;
+
+const metadataFrontmatter = frontmatter as MetadataFrontmatter;
+const image = metadataFrontmatter.image || defaults.defaultImage;
+const keywords = metadataFrontmatter.keywords || [];
+const version = metadataFrontmatter.version || defaults.version;
+const themeColor = metadataFrontmatter.themeColor || defaults.themeColor;
+const path = Astro.url.pathname;
+const canonicalUrl = Astro.site ? new URL(path, Astro.site).href : undefined;
+---
+
+<!-- Unofficial Web Standards -->
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1.0, shrink-to-fit=no"
+/>
+<link rel="manifest" href="https://titaniumnetwork.org/manifest.json" />
+{canonicalUrl && <link rel="canonical" href={canonicalUrl} />}
+<link rel="icon" type="image/png" href="https://titaniumnetwork.org/logo.png" />
+<link
+  rel="apple-touch-icon"
+  sizes="180x180"
+  href="https://titaniumnetwork.org/logo.png"
+/>
+<link
+  rel="icon"
+  type="image/png"
+  sizes="32x32"
+  href="https://titaniumnetwork.org/logo.png"
+/>
+<link
+  rel="icon"
+  type="image/png"
+  sizes="16x16"
+  href="https://titaniumnetwork.org/logo.png"
+/>
+<link
+  rel="mask-icon"
+  href="https://titaniumnetwork.org/logo.png"
+  color="#b4213b"
+/>
+<meta name="msapplication-TileColor" content="#b4213b" />
+<meta name="version" content={version} />
+<meta
+  name="theme-color"
+  media="(prefers-color-scheme: dark)"
+  content={themeColor}
+/>
+<title>{title || "Untitled Page"}</title>
+{description && <meta name="description" content={description} />}
+{keywords.length > 0 && <meta name="keywords" content={keywords.join(", ")} />}
+
+<!-- OpenGraph metadata -->
+<meta property="og:title" content={title || "Untitled Page"} />
+{description && <meta property="og:description" content={description} />}
+<meta property="og:image" content={image} />
+<meta property="og:site_name" content={defaults.siteName} />
+<meta property="og:type" content="website" />
+{canonicalUrl && <meta property="og:url" content={canonicalUrl} />}
+<meta property="og:image:secure_url" content={image} />
+
+<!-- Twitter Card metadata -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:site" content={defaults.twitterHandle} />
+<meta name="twitter:creator" content={defaults.twitterHandle} />
+<meta name="twitter:title" content={title || defaults.siteName} />
+<meta
+  name="twitter:description"
+  content={description || defaults.defaultDescription}
+/>
+<meta name="twitter:image" content={image} />

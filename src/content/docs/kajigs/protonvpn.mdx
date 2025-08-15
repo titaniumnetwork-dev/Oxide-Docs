@@ -1,21 +1,22 @@
 ---
-title: Proton VPN on ChromeOS
+title: Proton VPN on ChromeOS (<v129)
+description: Documentation for Proton VPN.
+keywords: ["chromeos exploits", "vpn"]
 ---
-
 
 :::note
 This relies on you being below version 129. See [ChromeOS Versioning](/kajigs/crosver).
 :::
 
-1. Create or log into a proton VPN account
+1. Create or log into a Proton VPN account
 
-https://account.protonvpn.com/signup
+[https://account.protonvpn.com/signup](https://account.protonvpn.com/signup)
 
-2. Once you have an account go to - account > OpenVPN / IKEv2 username
+2. Once you have an account go to "account" > "OpenVPN / IKEv2 username"
 3. Copy the username and password
-4. Unzip the files and choose any server that you want to use (like us-19 or s/t)
-5. Edit it in the Text editor app (it's a built-in chrome app on Chromebook) or any other text editor
-6. All the way at the end, after "TLSAuthContents": "-----BEGIN OpenVPN Static key V1----- put in
+4. Unzip the files and choose any server that you want to use (like `us-19` or similar)
+5. Edit it in the Text editor app (it's a built-in Chrome app on Chromebook) or any other text editor
+6. All the way at the end, after `"TLSAuthContents": "-----BEGIN OpenVPN Static key V1-----"` put in:
 
 ```
    ,
@@ -27,5 +28,5 @@ You can just copy and paste it and you'll get the right formatting.
 
 Make sure that you start the paste right after the end quotation mark.
 
-- Save the onc file
-- Upload it to `chrome://network#general` all the way at the bottom where it says Import ONC File (don't worry if you don't notice anything, just try scrolling down a little more and it should say `Networks imported: 1` (regardless of how many you actualy imported)
+7. Save the `.onc` file
+8. Upload it to `chrome://network#general` all the way at the bottom where it says "Import ONC File" (don't worry if you don't notice anything, just try scrolling down a little more and it should say `Networks imported: 1` regardless of how many you actually imported)

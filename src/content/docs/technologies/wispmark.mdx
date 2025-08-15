@@ -1,13 +1,17 @@
 ---
 title: WispMark
+description: A benchmarking tool for Wisp protocol implementations.
+keywords: ["transport", "benchmarking"]
 ---
 
 WispMark is a benchmarking tool for [Wisp](/wisp) protocol implementations.
 
 ## Installation:
-To run this repository, install the Xonsh shell, and all the dependencies for the Wisp implementations. 
+
+To run this repository, install the Xonsh shell, and all the dependencies for the Wisp implementations.
 
 You need:
+
 - Git
 - CPython and PyPy
 - NodeJS
@@ -18,10 +22,13 @@ You need:
 Then run `./wispmark.xsh` to start the tests.
 
 ## Methodology:
-This program pairs each Wisp server with each Wisp client, with a TCP echo server running on port 6002. The amount of traffic passing through that port is used to calculate the bandwidth that was achieved with each configuration. 
+
+This program pairs each Wisp server with each Wisp client, with a TCP echo server running on port 6002. The amount of traffic passing through that port is used to calculate the bandwidth that was achieved with each configuration.
 
 ### Implementations Tested:
+
 Server:
+
 - [wisp-server-node](https://github.com/MercuryWorkshop/wisp-server-node)
 - [wisp-js](https://github.com/MercuryWorkshop/wisp-client-js/blob/rewrite)
 - [wisp-server-python](https://github.com/MercuryWorkshop/wisp-server-python)
@@ -29,10 +36,12 @@ Server:
 - [WispServerCpp](https://github.com/FoxMoss/WispServerCpp)
 
 Client:
+
 - [wisp-client-js](https://github.com/MercuryWorkshop/wisp-client-js/)
 - [wisp-mux](https://github.com/MercuryWorkshop/epoxy-tls/tree/multiplexed/simple-wisp-client)
 
 ## Usage:
+
 ```
 usage: wispmark.xsh [-h] [--duration DURATION]
 
@@ -44,7 +53,9 @@ options:
 ```
 
 ## Current Results:
+
 Note that test results can vary wildly across CPUs.
+
 ```
 CPU: AMD EPYC 7763 64-Core Processor (x4)
 Test duration: 60s
@@ -94,7 +105,9 @@ epoxy-server                 | 866.1 MiB/s        | 1154.24 MiB/s       | 1297.0
 -----------------------------+--------------------+---------------------+---------------+---------------
 WispServerCpp                | 385.36 MiB/s       | 728.39 MiB/s        | 540.07 MiB/s  | 567.05 MiB/s 
 ```
+
 ## Copyright:
+
 This program is licensed under the GNU GPL v3.
 
 ```
@@ -114,4 +127,5 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 ```
+
 Written largely by [ading2210](https://github.com/MercuryWorkshop/ading2210)

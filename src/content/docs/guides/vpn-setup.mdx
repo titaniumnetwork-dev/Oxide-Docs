@@ -1,39 +1,8 @@
 ---
-title: VPN Setup
+title: VPN Guide
+description: In this guide we cover creating our own VPN setup.
+keywords: ["vpn"]
 ---
-
-<head>
-    <meta content="IE=edge" http-equiv="X-UA-Compatible" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no" />
-    <meta content="1.0.10" name="version" />
-    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#434c5e" />
-    <link rel="canonical" href="https://docs.titaniumnetwork.org/" />
-    <meta name="keywords" content="seo guide, guidebook, search engine optimization" />
-    
-    <meta property="og:site_name" content="Titanium Network VPN Guide" />
-    <meta property="og:url" content="https://docs.titaniumnetwork.org/guides/vpn-setup" />
-    <meta property="og:title" content="Titanium Network VPN Guide" />
-    <meta property="og:type" content="website" />
-    <meta property="og:description" content="In this guide we cover creating our own VPN setup." />
-    <meta property="og:image" content="https://raw.githubusercontent.com/titaniumnetwork-dev/Oxide/master/public/logo.png" />
-    <meta property="og:image:secure_url" content="https://raw.githubusercontent.com/titaniumnetwork-dev/Oxide/master/public/logo.png" />
-    <meta property="twitter:image" content="https://raw.githubusercontent.com/titaniumnetwork-dev/Oxide/master/public/logo.png" />
-    <meta name="twitter:site" content="@TitaniumNetDev" />
-    <meta name="twitter:creator" content="@TitaniumNetDev" />
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Titanium Network Docs" />
-    <meta name="twitter:description" content="Open Source Proxy Organization; Here we provide advanced web proxy services through the progression of web proxy technologies." />
-    
-    <link rel="icon" type="image/png" href="https://titaniumnetwork.org/logo.png" />
-    <link rel="apple-touch-icon" sizes="180x180" href="https://titaniumnetwork.org/logo.png" />
-    <link rel="icon" type="image/png" sizes="32x32" href="https://titaniumnetwork.org/logo.png" />
-    <link rel="icon" type="image/png" sizes="16x16" href="https://titaniumnetwork.org/logo.png" />
-    <link rel="mask-icon" href="https://titaniumnetwork.org/logo.png" color="#b4213b" />
-	
-    <meta name="msapplication-TileColor" content="#b4213b" />
-    <link rel="manifest" href="https://titaniumnetwork.org/manifest.json" />
-</head>
-
 
 ## Making a VPN Server
 
@@ -94,7 +63,7 @@ conn ikev2-vpn
     esp=chacha20poly1305-sha512,aes256gcm16-ecp384,aes256-sha256,aes256-sha1,3des-sha1!
 ```
 
-backup `/etc/ipsec.secrets` and replace its contents with:
+Backup `/etc/ipsec.secrets` and replace its contents with:
 
 ```
 # This file holds shared secrets or RSA private keys for authentication.
@@ -107,7 +76,7 @@ backup `/etc/ipsec.secrets` and replace its contents with:
 
 ### Firewall & IP Routing
 
-run these four commands:
+Run these four commands:
 
 ```bash
 sudo ufw allow OpenSSH
@@ -120,7 +89,7 @@ Then run `ip route show default`. You should get `default via [your_server_ip] d
 
 Keep note of the text where I have left device. This could be something like `eth0` or `wlan0`
 
-Edit `/etc/ufw/before.rules` above `*filter`, insert (replacing DEVICE_HERE with your device name):
+Edit `/etc/ufw/before.rules` above `*filter`, insert (replacing DEVICE\_HERE with your device name):
 
 ```
 *nat
@@ -184,7 +153,7 @@ There are many regex filters, and they can be found [here](https://gist.github.c
 (\.|^)securly\.com$
 ```
 
-In the Admin Panel, go to Settings > DNS > Interface Settings. Select permit all origins. Scroll to the bottom and hit save
+In the Admin Panel, go to "Settings" → "DNS" → "Interface Settings". Select "permit all origins". Scroll to the bottom and hit "save"
 
 ### Troubleshooting
 
@@ -194,14 +163,14 @@ A common error that occurs is that your VPN will connect, but you will have no i
 
 ### Connecting with a Chromebook
 
-1. Go to chrome://flags and enable the ikev2 VPN flag
-2. Then open network settings and add a network connection
-3. Click built in VPN
-4. Click provider, then ipsec (ikev2)
-5. Click Authentication Type > Pre-Shared Key
-6. Click server hostname, then put the IP address
-7. Click the Pre-Shared Key and put the value you added in for the password in `ipsec.secrets`
-8. In local identity, put your name or anything else
-9. In remote identity, put the server and click Connect.
+1. Go to `chrome://flags` and enable the IKEv2 VPN flag
+2. Then open "network settings" and add a network connection
+3. Click "built in VPN"
+4. Click "provider", then "ipsec (ikev2)"
+5. Click "Authentication Type" → "Pre-Shared Key"
+6. Click "server hostname", then put the IP address
+7. Click the "Pre-Shared Key" and put the value you added in for the password in `ipsec.secrets`
+8. In "local identity", put your name or anything else
+9. In "remote identity", put the server and click "Connect".
 
 You can now bypass web filters :D
