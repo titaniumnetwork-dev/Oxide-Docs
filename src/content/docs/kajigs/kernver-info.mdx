@@ -1,0 +1,33 @@
+---
+title: ChromeOS Kernel Versions
+description: Documentation for ChromeOS Kernel Versions.
+keywords: ["chromeos exploits"]
+---
+
+## What is a kernver and what does it mean for me?
+
+Kernel versions, often referred to as kernvers, are what Chromebooks use to lock down how low of a version you can update to.
+
+If you are on these kernvers, these are the minimum ChromeOS versions you can use.
+
+| Kernver | Minimum ChromeOS Version |
+| ------- | ------------------------ |
+| `0`     | any                      |
+| `1`     | any                      |
+| `2`     | v111                     |
+| `3`     | v120                     |
+| `4`     | v125                     |
+| `5`     | v132.0.6834.201          |
+| `6`     | v138.0.7204.221          |
+
+## Determining your kernver
+
+1. Hold <kbd>Esc</kbd> + <kbd>Power</kbd> + <kbd>Refresh</kbd> for a bit less than a second
+2. Once the recovery screen appears, press <kbd>Tab</kbd>
+3. It should show a line that starts with "TPM:" and ends with "0", "1", "2", "3", "4", "5", or "6". If it's a higher number, this doc is probably not up to date. The number it ends with is your kernver.
+
+![Image Showing where the line is and what the menu looks like, the TPM line ends with "3", so it is on kernver 3.](/img/kernver.png)
+
+## How to downgrade
+
+For info on how to downgrade, go [here](/kajigs/downgrading).

@@ -1,35 +1,8 @@
 ---
 title: DNS Setup
+description: DNS management is the entire process of properly getting your own domain name actually pointed to your origin server.
+keywords: ["dns"]
 ---
-
-<head>
-    <meta content="IE=edge" http-equiv="X-UA-Compatible" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no" />
-    <meta content="1.0.10" name="version" />
-    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#434c5e" />
-    <link rel="canonical" href="https://titaniumnetwork.org/" />
-    <meta name="keywords" content="titanium network, dns, web proxies" />
-    <meta property="og:site_name" content="DNS Setup" />
-    <meta property="og:url" content="https://docs.titaniumnetwork.org/guides/dns-setup" />
-    <meta property="og:title" content="DNS Setup" />
-    <meta property="og:type" content="website" />
-    <meta property="og:description" content="DNS management is the entire process of properly getting your own domain name actually pointed to your origin server." />
-    <meta property="og:image" content="https://raw.githubusercontent.com/titaniumnetwork-dev/Oxide/master/public/logo.png" />
-    <meta property="og:image:secure_url" content="https://raw.githubusercontent.com/titaniumnetwork-dev/Oxide/master/public/logo.png" />
-    <meta property="twitter:image" content="https://raw.githubusercontent.com/titaniumnetwork-dev/Oxide/master/public/logo.png" />
-    <meta name="twitter:site" content="@TitaniumNetDev" />
-    <meta name="twitter:creator" content="@TitaniumNetDev" />
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Titanium Network Docs" />
-    <meta name="twitter:description" content="Open Source Proxy Organization; Here we provide advanced web proxy services through the progression of web proxy technologies." />
-    <link rel="icon" type="image/png" href="https://titaniumnetwork.org/logo.png" />
-    <link rel="apple-touch-icon" sizes="180x180" href="https://titaniumnetwork.org/logo.png" />
-    <link rel="icon" type="image/png" sizes="32x32" href="https://titaniumnetwork.org/logo.png" />
-    <link rel="icon" type="image/png" sizes="16x16" href="https://titaniumnetwork.org/logo.png" />
-    <link rel="mask-icon" href="https://titaniumnetwork.org/logo.png" color="#b4213b" />
-    <meta name="msapplication-TileColor" content="#b4213b" />
-    <link rel="manifest" href="https://titaniumnetwork.org/manifest.json" />
-</head>
 
 ## Get Started
 
@@ -38,12 +11,14 @@ This is all done through the management of DNS records. When making any zone cha
 
 The first thing you would need to do is purchase a domain name. A domain name is your website address, and you can purchase a domain name through a registrar. Some good registrars are listed below:
 
-- Namecheap
-- NameSilo
-- Njalla
-- Cloudflare
+- [Porkbun](https://porkbun.com/)
+- [Namecheap](https://namecheap.com/)
+- [NameSilo](https://namesilo.com/)
+- [Njalla](https://njal.la/)
+- [Cloudflare](https://cloudflare.com/)
 
 If you prefer to obtain premium domains at a low price, then use [Namecheap](https://namecheap.com), which offers domains for good prices.
+[Porkbun](https://porkbun.com/) provides domains at a decent middleground
 
 If you're a privacy nut, then use [Njalla](https://njal.la) or [IncogNet](https://incognet.io/), who don't even *ask* you for WHOIS information, and accept private payment methods like XMR, but may charge more compared to other providers.
 
@@ -51,7 +26,7 @@ If you're a privacy nut, then use [Njalla](https://njal.la) or [IncogNet](https:
 
 After you have selected a decent VPS (refer to the VPS Hosting guide), use Cloudflare for the DNS records for both the site and the subdomains for the proxies. You could manually do this as well, but Cloudflare is recommended for ease of use.
 
-This is an example of DNS records. Self-hosting will require `A records` preferably.
+This is an example of DNS records. Self-hosting will require A records preferably.
 
 ![dnssetup](https://raw.githubusercontent.com/QuiteAFancyEmerald/Holy-Unblocker/master/views/assets/img/dnssetup.png)
 
@@ -64,35 +39,35 @@ The actual subdomain is all dependent on **your** setup.
 
 ## Cloudflare Steps
 
-Use Cloudflare (make an account), add your domain, and then add your various DNS records to your zone. Make sure you add Cloudflare's nameservers, which will be given after add your domain name.
+Use [Cloudflare](https://cloudflare.com/) (make an account), add your domain, and then add your various DNS records to your zone. Make sure you add Cloudflare's nameservers, which will be given after add your domain name.
 
 Make sure they are CNAME, although A records also work, and try to follow this structure:
 
-**Type | Name | Target**
+### CNAME Records (Recommended)
 
-`CNAME | @ | example-main-record.com` (Frontend or Backend Proxy)
+| Type    | Name  | Target                                        | Purpose                   |
+| ------- | ----- | --------------------------------------------- | ------------------------- |
+| `CNAME` | `@`   | `example-main-record.com`                     | Frontend or Backend Proxy |
+| `CNAME` | `www` | `example-main-record.com`                     | Frontend or Backend Proxy |
+| `CNAME` | `cdn` | `example-main-record-with-external-proxy.com` | External Proxy            |
+| `CNAME` | `rh`  | `example-main-record-with-external-proxy.com` | External Proxy            |
 
-`CNAME | www | example-main-record.com` (Frontend or Backend Proxy)
-
-`CNAME | cdn | example-main-record-with-external-proxy.com` (External Proxy)
-
-`CNAME | rh | example-main-record-with-external-proxy.com` (External Proxy)
+### A Records (Alternative)
 
 **OR using your public VPS instance IP (also the steps for setting up the main CNAME record that you could use above):**
 
-`A | @ | 0.0.0.0` (Frontend or Backend Proxy)
+| Type | Name  | Target    | Purpose                   |
+| ---- | ----- | --------- | ------------------------- |
+| `A`  | `@`   | `0.0.0.0` | Frontend or Backend Proxy |
+| `A`  | `www` | `0.0.0.0` | Frontend or Backend Proxy |
+| `A`  | `cdn` | `0.0.0.0` | External Proxy            |
+| `A`  | `rh`  | `0.0.0.0` | External Proxy            |
 
-`A | www | 0.0.0.0` (Frontend or Backend Proxy)
-
-`A | cdn | 0.0.0.0` (External Proxy)
-
-`A | rh | 0.0.0.0` (External Proxy)
-
-0.0.0.0 being an example IP, you would replace this with your actual VPS instance IP.
+`0.0.0.0` being an example IP, you would replace this with your actual VPS instance IP.
 
 ## NGINX
 
-A common question here is, "How would I get my public VPS IP to actually be directed to an instance (e.g., PORT)?"
+A common question here is, *"How would I get my public VPS IP to actually be directed to an instance (e.g., PORT)?"*
 
 To do this, you need to utilize a reverse web proxy. Essentially, a reverse proxy is a server that sits in front of web servers and forwards client (e.g. web browser) requests to those web servers. Reverse proxies are implemented to help increase security, performance, and reliability, but in this case, for ease of setup.
 
@@ -104,5 +79,5 @@ A typical issue that arises with free hosting is adding or managing CNAME/A reco
 
 ## SSL
 
-Make sure HTTPS is forced and have SSL set to Flexible for free hosting options. **Otherwise, you can have SSL set to Full.**
-Cloudflare will try to select Flexible automatically, so check your setup if you have any issues with DNS management.
+Make sure HTTPS is forced and have SSL set to "Flexible" for free hosting options. **Otherwise, you can have SSL set to "Full".**
+Cloudflare will try to select "Flexible" automatically, so check your setup if you have any issues with DNS management.

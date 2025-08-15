@@ -1,0 +1,56 @@
+{
+  "format_on_save": "on",
+  "formatter": "biome",
+  "languages": {
+    "TypeScript": {
+      "formatter": "biome",
+      "format_on_save": "on"
+    },
+    "JavaScript": {
+      "formatter": "biome",
+      "format_on_save": "on"
+    },
+    "JSON": {
+      "formatter": "biome",
+      "format_on_save": "on"
+    },
+    "CSS": {
+      "formatter": "biome",
+      "format_on_save": "on"
+    },
+    "Astro": {
+      "formatter": "biome",
+      "format_on_save": "on"
+    },
+    "Markdown": {
+      "formatter": {
+        "external": {
+          "command": "npx",
+          "arguments": ["remark", "--output", "--silent"]
+        }
+      },
+      "format_on_save": "on"
+    },
+    "MDX": {
+      "formatter": {
+        "external": {
+          "command": "npx",
+          "arguments": ["remark", "--output", "--silent"]
+        }
+      },
+      "format_on_save": "on"
+    }
+  },
+  "lsp": {
+    "biome": {
+      "settings": {
+        "require_config_file": true
+      }
+    }
+  },
+  "tab_size": 2,
+  "hard_tabs": false,
+  "preferred_line_length": 80,
+  "remove_trailing_whitespace_on_save": true,
+  "ensure_final_newline_on_save": true
+}

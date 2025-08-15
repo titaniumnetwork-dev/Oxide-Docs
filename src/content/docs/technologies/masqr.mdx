@@ -1,8 +1,11 @@
 ---
 title: Masqr
+description: Masqr is an "anti link leaking" authentication system that allows you to use a domain on specific devices to prevent web filters from detecting a web service.  The project also is a go-to method for site cloaking with other web sources protecting the main domain.
+keywords: ["filtering protection"]
 ---
 
 ## What is MASQR?
+
 Think of it like an "anti link leaking" system for proxy bots. The link you recieve is unique and will only work once, which can prevent filters from catching on and help proxy site owners by not making them buy new links that will just get blocked.
 
 ## How can I deploy this?
@@ -11,7 +14,8 @@ This is fairly easy to deploy to your backend using `express`, as seen in the [`
 You can also use [`masqr-middleware`](https://github.com/titaniumnetwork-dev/masqr-middleware) if you'd like to avoid implementing it yourself.
 
 To set this up you'll want to create a few files, in addition to adding this to your app.
-Those files include 
+Those files include
+
 - Checkfailed.html - this will be your fallback failure page
 - placeholder.svg, a default image for v0.dev sites
 
@@ -25,7 +29,7 @@ MASQR is pretty simple. Links from proxy bots (eg. Titanium Network's bot) will 
 
 ### Credits
 
-&copy; Mercury Workshop 2024
+© Mercury Workshop 2024
 Licensed under the AntiSkip License
 
 The Masqr docs were written largely by [@ProgrammerIn-wonderland](https://github.com/ProgrammerIn-wonderland).

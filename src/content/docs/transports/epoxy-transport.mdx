@@ -1,5 +1,7 @@
 ---
 title: EpoxyTransport
+description: A bare transport that implements end-to-end encryption with epoxy-tls and wisp.
+keywords: ["sw proxy", "transport"]
 ---
 
 EpoxyTransport is a transport for bare-mux which allows you to use [epoxy-tls](https://github.com/MercuryWorkshop/epoxy-tls) in your bare client.
@@ -11,7 +13,9 @@ import { SetTransport } from '@mercuryworkshop/bare-mux';
 
 SetTransport("EpxMod.EpoxyClient", { wisp: "wss://wisp.mercurywork.shop/" });
 ```
+
 ## Building
+
 ```bash
 npm i
 npm run build
