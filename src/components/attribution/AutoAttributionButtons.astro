@@ -1,0 +1,49 @@
+---
+const frontmatter = Astro.props.frontmatter || Astro.props;
+const { github, discord, "official-link": officialLink } = frontmatter;
+
+import SocialIconsClone from "./SocialIconsClone.astro";
+
+const links = [];
+
+if (github) {
+  links.push({
+    href: github,
+    label: "View on GitHub",
+    icon: "github" as const,
+  });
+}
+
+if (discord) {
+  links.push({
+    href: discord,
+    label: "Join Discord Server",
+    icon: "discord" as const,
+  });
+}
+
+if (officialLink) {
+  links.push({
+    href: officialLink,
+    label: "Visit Official Site",
+    icon: "external" as const,
+  });
+}
+---
+
+{
+  links.length > 0 && (
+    <div class="attribution-buttons">
+      <SocialIconsClone links={links} />
+    </div>
+  )
+}
+
+<style>
+  .attribution-buttons {
+    display: inline-flex;
+    margin-left: 0.75rem;
+    gap: 1rem;
+    align-items: center;
+  }
+</style>

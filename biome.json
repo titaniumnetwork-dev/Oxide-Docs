@@ -1,10 +1,11 @@
 {
   "files": {
     "includes": [
-      "!node_modules/**",
-      "!dist/**",
-      "!.astro/**",
-      "!.vscode/**",
+      "**",
+      "!node_modules",
+      "!dist",
+      "!.astro",
+      "!.vscode",
       "!**/*.mdx",
       "!**/*.md",
       "!LICENSE",

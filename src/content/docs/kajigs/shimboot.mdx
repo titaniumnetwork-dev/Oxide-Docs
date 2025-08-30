@@ -16,7 +16,7 @@ Shimboot is a collection of scripts for patching a Chrome OS RMA shim to serve a
 
 Chrome OS RMA shims are bootable disk images which are designed to run a variety of diagnostic utilities on Chromebooks, and they'll work even if the device is enterprise enrolled. Unfortunately for Google, there exists a security flaw in which the root filesystem of the RMA shim is not verified. This lets us replace the rootfs with anything we want, including a full Linux distribution.
 
-Simply replacing the shim's `rootfs` doesn't work, however, as it boots to an environment friendly to the RMA shim, not regular Linux distros. To get around this, a separate bootloader is required to transition from the shim environment to the main `rootfs`. This bootloader then does a `pivot_root` to enter the `rootfs`, where it runs the init system.
+Simply replacing the shim's `rootfs` doesn't work, however, as it boots to an environment friendly to the RMA shim, not regular Linux distros. To get around this, a separate bootloader is required to transition from the shim environment to the main `rootfs`. This bootloader then does a `pivot_root{:sh}` to enter the `rootfs`, where it runs the init system.
 
 Another problem is encountered at this stage: the Chrome OS kernel will complain about `systemd`'s mounts, and the boot process will hang. A simple workaround is to apply a patch to `systemd`, and then it can be recompiled and hosted at a repo somewhere.
 

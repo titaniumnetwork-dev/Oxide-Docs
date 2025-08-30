@@ -13,7 +13,7 @@ Please refer to [Kernel Version Info](/kajigs/kernverinfo) to see what versions 
 ## What do I need?
 
 - USB drive (8 GB+)
-- One of the following: [Chromebook Recovery Utility](https://chrome.google.com/webstore/detail/chromebook-recovery-utili/pocpnlppkickgojjlmhdmidojbmbodfm) (ChromeOS, Windows, MacOS), `dd` (Linux/macOS/POSIX-compliant), or balenaEtcher (Linux, MacOS, Windows)
+- One of the following: [Chromebook Recovery Utility](https://chrome.google.com/webstore/detail/chromebook-recovery-utili/pocpnlppkickgojjlmhdmidojbmbodfm) (ChromeOS, Windows, MacOS), `dd{:sh}` (Linux/macOS/POSIX-compliant), or balenaEtcher (Linux, MacOS, Windows)
 
 ## Step 1: Find your board name
 
@@ -59,8 +59,8 @@ Then proceed to the next step but instead of board name assume device name (i.e.
 
 ### Option 3: Using dd (Linux/macOS/POSIX-compliant):
 
-1. Unzip the `.zip` file either through GUI, or through a command like `unzip`
-2. Identify your USB device by running `sudo fdisk -l` (Linux) or using macOS Disk Utility. It should say something like `Disk /dev/sd...` (Linux) and in macOS open Disk Utility, select it under "External" and you should see `Device:`. You will want to use `/dev/INSERTTHATNAMEHERE` instead of `/dev/sdX`. Other OSes will have to see relevant documentation for identifying the proper USB device.
+1. Unzip the `.zip` file either through GUI, or through a command like `unzip{:sh}`
+2. Identify your USB device by running `sudo fdisk -l{:sh}` (Linux) or using macOS Disk Utility. It should say something like `Disk /dev/sd...` (Linux) and in macOS open Disk Utility, select it under "External" and you should see `Device:`. You will want to use `/dev/INSERTTHATNAMEHERE` instead of `/dev/sdX`. Other OSes will have to see relevant documentation for identifying the proper USB device.
 3. Write the image (replace `/dev/sdX` and file path. Remember to use the unzipped file):
 
 ```bash
@@ -76,4 +76,4 @@ Double-check the device name to avoid data loss!
 1. Enter recovery mode: <kbd>Esc</kbd> + <kbd>Refresh</kbd> + <kbd>Power</kbd>
 2. Insert recovery USB
 3. Follow prompts to reinstall Chrome OS
-4. Remove USB when done. You can wipe it in Chrome OS Recovery Utility with gear icon → "erase recovery media". You can `mkfs.ext4` on the block device in Linux (on Mac use Disk Utility or CRU).
+4. Remove USB when done. You can wipe it in Chrome OS Recovery Utility with gear icon → "erase recovery media". You can `mkfs.ext4{:sh}` on the block device in Linux (on Mac use Disk Utility or CRU).
