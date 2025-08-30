@@ -2,6 +2,8 @@
 title: Nebula
 description: A stunning and sleek web proxy with support for hundreds of popular sites.
 keywords: ["proxy sites"]
+github: "https://github.com/NebulaServices/Nebula"
+official-link: "https://nebulaproxy.io"
 ---
 
 [![repo](https://socialify.git.ci/nebulaservices/nebula/image?description=1\&font=Inter\&forks=1\&issues=1\&language=1\&name=1\&owner=1\&pattern=Circuit%20Board\&pulls=1\&stargazers=1\&theme=Dark)](https://github.com/nebulaservices/nebula)
@@ -33,8 +35,8 @@ This will **NOT** work on Render
 ## Features
 
 - Multiple Proxy "Backends":
-  - [Ultraviolet](https://github.com/titaniumnetwork-dev/ultraviolet)
-  - [Rammerhead](https://github.com/binary-person/rammerhead)
+  - [Ultraviolet](/proxies/ultraviolet)
+  - [Rammerhead](/proxies/rammerhead)
 
 ---
 
@@ -49,9 +51,9 @@ This will **NOT** work on Render
 
 - [Astro](https://astro.build)
 - [Fastify](https://fastify.dev)
-- [Ultraviolet](https://github.com/titaniumnetwork-dev/ultraviolet)
-- [Rammerhead](https://github.com/binary-person/rammerhead)
-- [Epoxy](https://github.com/mercuryworkshop/epoxy-tls)
+- [Ultraviolet](/proxies/ultraviolet)
+- [Rammerhead](/proxies/rammerhead)
+- [Epoxy](/technologies/epoxy-server)
 - [Libcurl.js](https://github.com/ading2210/libcurl.js)
 - HTML, CSS, and JavaScript (DUH)
 
@@ -94,7 +96,7 @@ This will **NOT** work on Render
 ```
 
 :::note
-You can add a custom font as well! To do so, add this to your `:root`
+You can add a custom font as well! To do so, add this to your `:root{:css}`
 
 ```css
 --font-family: /* Font family name */;
@@ -130,7 +132,7 @@ A good example of using a custom font is the built-in `retro` theme [here](./dat
 
 ##### Serviceworker plugin:
 
-- These plugins are handled by Workerware see [here](https://github.com/mercuryworkshop/workerware) for docs.
+- These plugins are handled by Workerware see [here](/technologies/workerware) for docs.
 
 1. Create an index.js (or other file name) file:
 
@@ -146,7 +148,7 @@ touch index.js
        return {
            function: `console.log('Example code.')`,
            name: 'com.example', // Technically, it could be named anything. It is recommended to use the same name for everything (name when submitting and this)        
-           events: ['fetch'] // See: https://github.com/mercuryworkshop/workerware for the event types you can use. (Also typed if you are using typescript)
+           events: ['fetch'] // See: /technologies/workerware for the event types you can use. (Also typed if you are using typescript)
        }
    }
 
@@ -164,7 +166,7 @@ touch index.js
        return {
            function: example, //Do not call the function, only assign the reference to the function.
            name: 'com.example', // Technicall could be name anything. Recommended to use the same name for everything (name when submitting and this)
-           event: ['fetch'] // Se https://github.com/mercuryworkshop/workerware for the event types you can use. (Also typed if using typescript)
+           event: ['fetch'] // See /technologies/workerware for the event types you can use. (Also typed if using typescript)
        }
    }
 
@@ -175,7 +177,7 @@ touch index.js
 :::caution
 The only *allowed* way to pass code to the `function` param is either a string or an arrow function. Named functions ***WILL NOT WORK***.
 
-Example of a named function: `function example() {/* Some form of code */}`.
+Example of a named function: `function example() {/* Some form of code */}{:js}`.
 
 If a named function is used where it shouldn't be, your plugin will not be approved, nor will it work properly.
 :::
@@ -259,7 +261,7 @@ npm start
 ```
 
 :::note
-You can run `npm run bstart` to build and start together
+You can run `npm run bstart{:sh}` to build and start together
 :::
 
 ### Docker

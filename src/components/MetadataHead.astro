@@ -2,14 +2,13 @@
 import type { Props } from "@astrojs/starlight/props";
 
 /**
- * Custom overrides for the frontmatter data used for the OpenGraph metadata. Extends the existing frontmatter setup.
+ * The expected frontmatter to configure metadata tag generation
  */
 interface MetadataFrontmatter {
   title: string;
   description?: string;
   image?: string;
   keywords?: string[];
-  version?: string;
   themeColor?: string;
 }
 
@@ -18,26 +17,34 @@ const { data: frontmatter } = entry;
 const { title, description } = frontmatter;
 
 /**
- * The default frontmatter data, which will be the data used for the OpenGraph metadata defaults.
+ * The default frontmatter data
  */
-const defaults = {
+const DEFAULT_METADATA = {
   siteName: "Titanium Network Docs",
   twitterHandle: "@TitaniumNetDev",
   defaultImage:
     "https://raw.githubusercontent.com/titaniumnetwork-dev/Oxide/master/public/logo.png",
   defaultDescription:
     "Open Source Proxy Organization; Here we provide advanced web proxy services through the progression of web proxy technologies.",
-  version: "1.0.10",
   themeColor: "#434c5e",
 } as const;
 
-const metadataFrontmatter = frontmatter as MetadataFrontmatter;
-const image = metadataFrontmatter.image || defaults.defaultImage;
-const keywords = metadataFrontmatter.keywords || [];
-const version = metadataFrontmatter.version || defaults.version;
-const themeColor = metadataFrontmatter.themeColor || defaults.themeColor;
-const path = Astro.url.pathname;
-const canonicalUrl = Astro.site ? new URL(path, Astro.site).href : undefined;
+/**
+ * The frontmatter for an MDX doc
+ */
+const FRONTMATTER = frontmatter as MetadataFrontmatter;
+/**
+ * The image to generate for the metadata
+ */
+const IMAGE = FRONTMATTER.image || DEFAULT_METADATA.defaultImage;
+/**
+ * The keywords to generate for the metadata
+ */
+const KEYWORDS = FRONTMATTER.keywords || [];
+/**
+ * The theme color to generate for the metadata
+ */
+const THEME_COLOR = FRONTMATTER.themeColor || DEFAULT_METADATA.themeColor;
 ---
 
 <!-- Unofficial Web Standards -->
@@ -48,7 +55,6 @@ const canonicalUrl = Astro.site ? new URL(path, Astro.site).href : undefined;
   content="width=device-width, initial-scale=1.0, shrink-to-fit=no"
 />
 <link rel="manifest" href="https://titaniumnetwork.org/manifest.json" />
-{canonicalUrl && <link rel="canonical" href={canonicalUrl} />}
 <link rel="icon" type="image/png" href="https://titaniumnetwork.org/logo.png" />
 <link
   rel="apple-touch-icon"
@@ -73,32 +79,30 @@ const canonicalUrl = Astro.site ? new URL(path, Astro.site).href : undefined;
   color="#b4213b"
 />
 <meta name="msapplication-TileColor" content="#b4213b" />
-<meta name="version" content={version} />
 <meta
   name="theme-color"
   media="(prefers-color-scheme: dark)"
-  content={themeColor}
+  content={THEME_COLOR}
 />
 <title>{title || "Untitled Page"}</title>
 {description && <meta name="description" content={description} />}
-{keywords.length > 0 && <meta name="keywords" content={keywords.join(", ")} />}
+{KEYWORDS.length > 0 && <meta name="keywords" content={KEYWORDS.join(", ")} />}
 
 <!-- OpenGraph metadata -->
 <meta property="og:title" content={title || "Untitled Page"} />
 {description && <meta property="og:description" content={description} />}
-<meta property="og:image" content={image} />
-<meta property="og:site_name" content={defaults.siteName} />
+<meta property="og:image" content={IMAGE} />
+<meta property="og:site_name" content={DEFAULT_METADATA.siteName} />
 <meta property="og:type" content="website" />
-{canonicalUrl && <meta property="og:url" content={canonicalUrl} />}
-<meta property="og:image:secure_url" content={image} />
+<meta property="og:image:secure_url" content={IMAGE} />
 
 <!-- Twitter Card metadata -->
 <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:site" content={defaults.twitterHandle} />
-<meta name="twitter:creator" content={defaults.twitterHandle} />
-<meta name="twitter:title" content={title || defaults.siteName} />
+<meta name="twitter:site" content={DEFAULT_METADATA.twitterHandle} />
+<meta name="twitter:creator" content={DEFAULT_METADATA.twitterHandle} />
+<meta name="twitter:title" content={title || DEFAULT_METADATA.siteName} />
 <meta
   name="twitter:description"
-  content={description || defaults.defaultDescription}
+  content={description || DEFAULT_METADATA.defaultDescription}
 />
-<meta name="twitter:image" content={image} />
+<meta name="twitter:image" content={IMAGE} />

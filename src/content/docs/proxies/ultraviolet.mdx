@@ -3,11 +3,16 @@ title: Ultraviolet
 description: A highly sophisticated proxy used for evading internet censorship or accessing websites in a controlled sandbox using the power of service-workers. Works by intercepting HTTP requests with a service worker script that follows the TompHTTP specifications.
 image: https://raw.githubusercontent.com/titaniumnetwork-dev/Ultraviolet-Static/main/public/uv.png
 keywords: ["web proxy", "sw proxy"]
+github: "https://github.com/titaniumnetwork-dev/Ultraviolet"
 ---
+
+:::note
+Ultraviolet is now unmaintained, and you are highly recommended to switch to [Scramjet](./scramjet.mdx)! We will not be providing further support for use of Ultraviolet.
+:::
 
 <img width="200px" align="right" src="https://raw.githubusercontent.com/titaniumnetwork-dev/Ultraviolet-Static/main/public/uv.png" height="250" />
 
-Ultraviolet is a highly advanced web proxy used for evading internet censorship or accessing websites in a controlled sandbox. It is designed with security and performance in mind. Ultraviolet intercepts HTTP requests with a service worker, using [libcurl.js](https://github.com/ading2210/libcurl.js) or [epoxy-tls](https://github.com/MercuryWorkshop/epoxy-tls) with [Wisp](https://github.com/MercuryWorkshop/wisp-protocol) and is a leader in innovative web proxy technologies.
+Ultraviolet is a web proxy used for evading internet censorship or accessing websites in a controlled sandbox. It is designed with security and performance in mind. Ultraviolet intercepts HTTP requests with a service worker, using a [BareMux transport](../transports/using.mdx).
 
 ## Features
 
@@ -18,20 +23,16 @@ Ultraviolet offers several features that set it apart from its predecessors, inc
 Some of the popular websites that Ultraviolet supports include:
 
 - [Google](https://google.com)
-- [Youtube](https://www.youtube.com)
-- [Spotify](https://spotify.com)
 - [Discord](https://discord.com)
 - [Reddit](https://reddit.com)
-- [GeForce NOW](https://play.geforcenow.com/)
-- [now.gg](https://now.gg)
 
 ## Used by
 
-- [Holy Unblocker](https://github.com/QuiteAFancyEmerald/Holy-Unblocker)
+- [Holy Unblocker](/services/holy-unblocker)
 - [Hypertabs](https://hypertabs.cc/)
-- [Terbium](https://github.com/TerbiumOS/webOS)
-- [Incognito](https://github.com/caracal-js/Incognito)
-- [Nebula](https://github.com/NebulaServices/Nebula)
+- [Terbium](/services/terbiumos)
+- [Incognito](/services/incognito)
+- [Nebula](/services/nebula)
 - [Noctura](https://github.com/NebulaServices/Noctura)
 - [Metallic](https://github.com/Metallic-Web/Metallic)
 
@@ -92,7 +93,7 @@ npm install @titaniumnetwork-dev/ultraviolet
 
 # 3.0.0
 
-- This version of Ultraviolet has support for using [bare-mux](https://github.com/MercuryWorkshop/bare-mux) transports, allowing for use for other implementations like [EpoxyTransport](https://github.com/MercuryWorkshop/EpoxyTransport), [CurlTransport](https://github.com/MercuryWorkshop/CurlTransport), and the existing implementation [Bare-Client](https://github.com/MercuryWorkshop/Bare-as-module3).
+- This version of Ultraviolet has support for using [bare-mux](/transports/bare-mux) transports, allowing for use for other implementations like [EpoxyTransport](/transports/epoxy-transport), [CurlTransport](/transports/curl-transport), and the existing implementation [Bare-Client](https://github.com/MercuryWorkshop/Bare-as-module3).
 
 # v2.0.0
 
