@@ -1,10 +1,32 @@
-// @ts-check
 import { defineConfig } from "astro/config";
 import starlight from "@astrojs/starlight";
 import starlightTypeDoc, { typeDocSidebarGroup } from "starlight-typedoc";
+import rehypeAstroRelativeMarkdownLinks from "astro-rehype-relative-markdown-links";
+import rehypeShiki from "@shikijs/rehype";
 
 // https://astro.build/config
 export default defineConfig({
+  site: "https://docs.titaniumnetwork.org",
+  markdown: {
+    rehypePlugins: [
+      [
+        rehypeAstroRelativeMarkdownLinks,
+        {
+          collectionBase: false,
+        },
+      ],
+      [
+        rehypeShiki,
+        {
+          inline: "tailing-curly-colon",
+          themes: {
+            light: "tokyo-night",
+            dark: "tokyo-night",
+          },
+        },
+      ],
+    ],
+  },
   integrations: [
     starlight({
       title: "Titanium Network",
@@ -35,6 +57,10 @@ export default defineConfig({
           },
         })
       ],
+      components: {
+        Head: "./src/components/MetadataHead.astro",
+        PageTitle: "./src/components/PageTitle.astro",
+      },
       sidebar: [
         {
           label: "Guides",
@@ -48,7 +74,8 @@ export default defineConfig({
           label: "Proxies",
           items: [
             "proxies/rammerhead",
-            "proxies/ultraviolet", 
+            "proxies/ultraviolet",
+            "proxies/scramjet",
             typeDocSidebarGroup,
           ],
         },

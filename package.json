@@ -11,16 +11,40 @@
     "start": "astro dev",
     "build": "astro check && astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "typecheck": "astro check",
+    "typecheck-full": "astro check && tsc --noEmit --skipLibCheck",
+    "fmt": "remark \"src/content/docs/**/*.{md,mdx}\" --output && biome format --write .",
+    "fmt-check": "remark \"src/content/docs/**/*.{md,mdx}\" && biome format .",
+    "lint": "remark \"src/content/docs/**/*.{md,mdx}\" --output && biome lint --write .",
+    "lint-check": "remark \"src/content/docs/**/*.{md,mdx}\" && biome lint .",
+    "check": "remark \"src/content/docs/**/*.{md,mdx}\" --output && biome check --write .",
+    "check-ci": "remark \"src/content/docs/**/*.{md,mdx}\" && biome check ."
   },
   "dependencies": {
     "@astrojs/check": "^0.9.4",
     "@astrojs/starlight": "^0.35.2",
     "@fontsource/raleway": "^5.2.6",
+    "@shikijs/rehype": "^3.12.0",
+    "@shikijs/themes": "^3.12.0",
     "astro": "^5.13.5",
+    "astro-rehype-relative-markdown-links": "^0.18.1",
+    "gray-matter": "^4.0.3",
     "sharp": "^0.32.6",
     "starlight-typedoc": "^0.21.3",
     "typedoc": "^0.28.11",
     "typescript": "^5.9.2"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^2.2.2",
+    "@mdx-js/mdx": "^3.1.1",
+    "remark": "^15.0.1",
+    "remark-cli": "^12.0.1",
+    "remark-frontmatter": "^5.0.0",
+    "remark-gfm": "^4.0.1",
+    "remark-mdx": "^3.1.1",
+    "remark-stringify": "^11.0.0",
+    "remark-yaml-config": "^7.0.0",
+    "unified": "^11.0.5"
   }
 }

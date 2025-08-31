@@ -23,3 +23,7 @@ pnpm-debug.log*
 
 # Starlight-TypeDoc generated
 src/content/docs/api
+
+# Git
+package-lock.json
+pnpm-lock.yaml

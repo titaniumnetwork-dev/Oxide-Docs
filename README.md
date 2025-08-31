@@ -8,6 +8,7 @@ This composes from advanced URL rewriting proxies, webOS projects, web-based emu
 ## Installation
 
 Requirements are Node.js (v20+).
+Using `pnpm` is more recommended.
 
 ```
 git clone https://github.com/titaniumnetwork-dev/Oxide-Docs.git --recursive
@@ -21,3 +22,4 @@ npm run build # build static files
 ## Contributing
 
 If you wish to contribute please check out the Contributions section or commit to the GitHub!
+Please run `pnpm fmt` and `pnpm lint` before finishing your comits.

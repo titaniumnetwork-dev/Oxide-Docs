@@ -1,64 +1,77 @@
 ---
 title: Incognito
+description: The official, up to date version of incognito.
+keywords: ["proxy sites"]
+github: "https://github.com/titaniumnetwork-dev/incognito"
+official-link: "https://incog.works"
 ---
 
-[![Incognito](https://socialify.git.ci/titaniumnetwork-dev/incognito/image?description=1&font=Inter&forks=1&issues=1&language=1&name=1&owner=1&pattern=Circuit%20Board&pulls=1&stargazers=1&theme=Dark)](https://github.com/titaniumnetwork-dev/incognito)
+[![Incognito](https://socialify.git.ci/titaniumnetwork-dev/incognito/image?description=1\&font=Inter\&forks=1\&issues=1\&language=1\&name=1\&owner=1\&pattern=Circuit%20Board\&pulls=1\&stargazers=1\&theme=Dark)](https://github.com/titaniumnetwork-dev/incognito)
 
 Access the world wide web! Incognito is a dynamic web proxy service stylized as a search engine.
 
 [![repo size](https://img.shields.io/github/repo-size/titaniumnetwork-dev/incognito?style=for-the-badge)](https://github.com/titaniumnetwork-dev/incognito)
-[![website status](https://img.shields.io/website?url=https%3A%2F%2Fincog.works&style=for-the-badge)](https://incog.works)
+[![website status](https://img.shields.io/website?url=https%3A%2F%2Fincog.works\&style=for-the-badge)](https://incog.works)
 [![commit a week](https://img.shields.io/github/commit-activity/w/titaniumnetwork-dev/incognito?style=for-the-badge)](https://github.com/titaniumnetwork-dev/Incognito/commits/main/)
-[![original repo](https://img.shields.io/badge/Original-Repo-gray?style=for-the-badge&link=https%3A%2F%2Fgithub.com%2Fcaracal-js%2Fincognito)](https://github.com/caracal-js/incognito)
+[![original repo](https://img.shields.io/badge/Original-Repo-gray?style=for-the-badge\&link=https%3A%2F%2Fgithub.com%2Fcaracal-js%2Fincognito)](https://github.com/caracal-js/incognito)
 
 # Setup
 
 ## Deployment
+
 To get started, press one of the buttons below to deploy Incognito
 
-[![Terminal](https://img.shields.io/badge/terminal-%23121011.svg?style=for-the-badge&logo=gnu-bash&logoColor=white)](#terminal)
-[![Docker](https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white)](#docker)
+[![Terminal](https://img.shields.io/badge/terminal-%23121011.svg?style=for-the-badge\&logo=gnu-bash\&logoColor=white)](#terminal)
+[![Docker](https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge\&logo=docker\&logoColor=white)](#docker)
 
 ### Terminal
 
 Prerequisites:
+
 - Node & npm
 - Deno 2
 - Git
 
 1. Clone the repo:
+
 ```bash
 git clone https://github.com/titaniumnetwork-dev/incognito && cd incognito
 ```
 
 2. Install all of the dependencies:
+
 ```bash
 deno install --allow-scripts
 ```
 
 3. Create a .env file
+
 ```bash
 cp config.example.toml config.toml
 ```
 
-4. Modify the config.toml file to you liking (docs [here](#environment))
+4. Modify the `config.toml` file to your liking (docs [here](#config))
+
 ```bash
 nano config.toml
 ```
 
 5. Build the frontend:
+
 ```bash
 deno task build
 ```
 
 6. Start the server
+
 ```bash
 deno task start
 ```
-:::note
-You can run `deno task start:standalone` to use Hono over Fastify, recommended if you're using an external Wisp server like [Epoxy Server](https://github.com/mercuryworkshop/epoxy-tls)
 
-You can run `deno task bstart` to build and start the server at the same time
+:::note
+You can run `deno task start:standalone{:sh}` to use Hono over Fastify, recommended if you're using an external Wisp server like [Epoxy Server](/technologies/epoxy-server)
+
+You can run `deno task bstart{:sh}` to build and start the server at the same time
 
 You can run `deno task bstart:standalone` to do the same as above but use the Hono server instead
 
@@ -69,107 +82,126 @@ The Hono server has no built-in Wisp server so you'll have to provide one.
 ### Docker
 
 - There are two ways to deploy with docker:
-    - [Normal docker](#normal-docker)
-    - [Docker Compose](#docker-compose)
+  - [Normal docker](#normal-docker)
+  - [Docker Compose](#docker-compose)
 
 #### Normal Docker
 
 Prerequisites:
+
 - Git
 - Docker
 
 1. Clone the repo (skip if using prebuilt image):
+
 ```bash
 git clone https://github.com/titaniumnetwork/incognito && cd incognito
 ```
 
 2. Create an config.toml file (if using prebuilt image, copy the example from the repo):
+
 ```bash
 cp config.example.toml config.toml
 ```
 
 3. Modify the config.toml file to your liking (docs [here](#config))
+
 ```bash
 nano config.toml
 ```
 
 4. Build the docker image (skip if using prebuilt):
+
 ```bash
 docker build -t incog:latest
 ```
+
 For info on the build arg check [here](#config)
 
 5. Run the docker images:
 
-    - Prebuilt:
-    ```bash
-    docker run --volume ./config.toml:/app/config.toml motortruck1221/incognito:latest
-    ```
-    - Image you built yourself:
-    ```bash
-    docker run --volume ./config.toml:/app/config.toml incog:latest
-    ```
+   - Prebuilt:
+
+   ```bash
+   docker run --volume ./config.toml:/app/config.toml motortruck1221/incognito:latest
+   ```
+
+   - Image you built yourself:
+
+   ```bash
+   docker run --volume ./config.toml:/app/config.toml incog:latest
+   ```
 
 #### Docker Compose
 
 Prerequisites:
+
 - Git
 - Docker w/compose
 
 1. Clone the repo (skip if using prebuilt image):
+
 ```bash
 git clone https://github.com/titaniumnetwork-dev/incognito
 ```
 
 2. Create an config.toml file (if using prebuilt image, copy the example from the repo):
+
 ```bash
 cp config.example.toml config.toml
 ```
 
 3. Modify the config.toml file to your liking (docs on that [here](#config))
+
 ```bash
 nano config.toml
 ```
 
 4. Build the docker image (skip if using prebuilt):
+
 ```bash
 docker compose -f ./docker-compose.build.yml build
 ```
 
 5. Run the docker image:
 
-    - Prebuilt:
-    ```bash
-    docker compose up
-    ```
-    - Image you built yourself:
-    ```bash
-    docker compose -f ./docker-compose.build.yml up
-    ```
+   - Prebuilt:
+
+   ```bash
+   docker compose up
+   ```
+
+   - Image you built yourself:
+
+   ```bash
+   docker compose -f ./docker-compose.build.yml up
+   ```
+
 ---
 
 ### Games
 
 - By default, games are reverse proxied by the server
-    - Game assets are located [here](https://github.com/ruby-network/ruby-assets)
+  - Game assets are located [here](https://github.com/ruby-network/ruby-assets)
 - To turn off Games, and access to them see [#config](#config)
-
 
 ## Config
 
 - The config is rather simple and quick, it's done in TOML and there are only two objects: `buildOpts` & `server`.
 - Below, there will be 2 tables showcasing the possible values.
-:::note
-As it says, `buildOpts` will only apply when building the website. This can be changed in the docker-compose files.
-:::
+  :::note
+  As it says, `buildOpts` will only apply when building the website. This can be changed in the docker-compose files.
+  :::
 
 #### Build Opts
-| Variable  | Description                                        | Default |
-|-----------|----------------------------------------------------|---------|
-| `games`   | Enables (`true`)/Disables (`false`) the games page | `true`  |
+
+| Variable | Description                                        | Default |
+| -------- | -------------------------------------------------- | ------- |
+| `games`  | Enables (`true`)/Disables (`false`) the games page | `true`  |
 
 #### Server
-| Variable  | Description                                                                                                      | Default |
-|-----------|------------------------------------------------------------------------------------------------------------------|---------|
-| `port`    | Change the default port. Note: the environment var `PORT` takes precedence                                       | `8000`  |
-| `wisp`    | Disable or enables the in built wisp server. (Note: when using the Hono server there is no built-in wisp server) | `true`  |
+
+| Variable | Description                                                                                                      | Default |
+| -------- | ---------------------------------------------------------------------------------------------------------------- | ------- |
+| `port`   | Change the default port. Note: the environment var `PORT` takes precedence                                       | `8000`  |
+| `wisp`   | Disable or enables the in built wisp server. (Note: when using the Hono server there is no built-in wisp server) | `true`  |

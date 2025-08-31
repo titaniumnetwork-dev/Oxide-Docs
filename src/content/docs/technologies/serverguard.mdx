@@ -1,40 +1,53 @@
 ---
 title: Serverguard
+description: TN's Double Counter alternative; known locally as ProxyGuard or Cybermonay.
+keywords: ["discord bot"]
+github: "https://github.com/titaniumnetwork-dev/serverguard"
 ---
 
 An open source alternative to Double Counter. Known within the Titanium Network community as "Cybermonay" or "Proxyguard". Created in response to mistrust of DC's development team as well as a desire to put control of network data back in the hands of our users.
 
 ## Prerequisites
-Bun (1.0.0+)
-PostgreSQL
+
+- Bun (1.0.0+)
+- PostgreSQL
 
 ## Running
+
 Copy `example.env` to `.env`
+
 ```bash
 cp example.env .env
 ```
+
 From there, edit the `.env` file with the required details. Do not share the `.env` file with anyone, as it will allow them to take full control of Serverguard.
 
-- `DISCORD_TOKEN` - The token for your discord bot.
-- `APPLICATION_ID` - The application ID of your discord bot.
-- `CLIENT_ID` - The client ID of your discord bot.
-- `CLIENT_SECRET` - The client secret of your discord bot.
+- `DISCORD_TOKEN` - The token for your Discord bot.
+
+- `APPLICATION_ID` - The application ID of your Discord bot.
+
+- `CLIENT_ID` - The client ID of your Discord bot.
+
+- `CLIENT_SECRET` - The client secret of your Discord bot.
+
 - `REDIRECT_URI` - A redirect URI that will be navigated to by the user once they verify with Serverguard.
 
-
 - `DB_USER` - PostgreSQL username
-- `DB_HOST` - Host for your PostgreSQL server (probably localhost)
-- `DB_PASSWORD` - Password for your PostgreSQL server
-- `DB_PORT` - Port for your PostgreSQL server (probably 5432)
 
+- `DB_HOST` - Host for your PostgreSQL server (probably `localhost`)
+
+- `DB_PASSWORD` - Password for your PostgreSQL server
+
+- `DB_PORT` - Port for your PostgreSQL server (probably `5432`)
 
 - `SALT` - A custom salt to be added to the user IP address before hashing.
 
-
 - `ROLE_ID` - Verification role
+
 - `ALT_ROLE_ID` - A role to assign flagged alt accounts
+
 - `GUILD_ID` - The ID of the server you wish to use Serverguard in
+
 - `MUTED_ROLE_ID` - The ID of a role that mutes a user.
 
-
-- `WEBHOOK_URL` - A webhook URL that Serverguard will send details to, such as succesful verifications and flagged alt accounts.
+- `WEBHOOK_URL` - A webhook URL that Serverguard will send details to, such as successful verifications and flagged alt accounts.

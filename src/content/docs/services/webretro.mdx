@@ -1,12 +1,13 @@
 ---
 title: webretro
+description: RetroArch in your browser.
+keywords: ["emulator"]
+github: "https://github.com/BinBashBanana/webretro"
+official-link: "https://binbashbanana.github.io/webretro"
 ---
 
-[RetroArch](https://github.com/libretro) ported to WebAssembly with [emscripten](https://emscripten.org/)!
+[RetroArch](https://github.com/libretro) ported to WebAssembly with [emscripten](https://emscripten.org)!
 
-[**Official Instance**](https://binbashbanana.github.io/webretro/)
-
-[**GitHub**](https://github.com/BinBashBanana/webretro)
 
 ### Latest version: v6.5
 
@@ -69,7 +70,7 @@ The asset bundle will be fetched from GitHub using jsdelivr by default. You can 
 
 Query string options:
 
-- `core` - specify the libretro core _library_ to use, i.e. `genesis_plus_gx`, `mgba`, `mupen64plus_next`, `nestopia`, `snes9x`, etc. `autodetect` can also be used, which attempts to find the correct core for the ROM (slower to load because the core is loaded after the ROM) (if not specified, the user will be shown a list of the default cores).
+- `core` - specify the libretro core *library* to use, i.e. `genesis_plus_gx`, `mgba`, `mupen64plus_next`, `nestopia`, `snes9x`, etc. `autodetect` can also be used, which attempts to find the correct core for the ROM (slower to load because the core is loaded after the ROM) (if not specified, the user will be shown a list of the default cores).
 - `system` - same as above, but will attempt to detect the core based on the specified system, i.e. `gba`, `genesis`, `nes`, `nintendo 64`, `snes`, etc. If both `core` and `system` are specified, `core` will override `system`.
 - `rom` - will attempt to fetch a ROM from the `./roms/` directory on the server, or an absolute url (including protocol), e.g. `mario3.nes` (if not specified, the user will be prompted to upload a ROM).
 - `nobundle` - skips the bundle fetch.
@@ -90,7 +91,7 @@ Example OK query uris:
 
 You can easily embed webretro on your site by using the api provided in `embed/embed.js`. You can see an example of it [here](https://binbashbanana.github.io/webretro/embed/embed-example.html).
 
-How to use: `webretroEmbed(domNodeToAppendTo, webretroPath, queries)` (returns the new iframe node that it creates)
+How to use: `webretroEmbed(domNodeToAppendTo, webretroPath, queries){:js}` (returns the new iframe node that it creates)
 
 - `domNodeToAppendTo` - the element that you want webretro to load into.
 - `webretroPath` - the path to the index of the webretro instance.

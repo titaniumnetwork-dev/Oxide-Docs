@@ -1,14 +1,17 @@
 ---
 title: anuraOS
-description: The next-gen webOS and development environment with full linux emulation
+description: A web "OS" and development environment with full linux emulation.
+keywords: ["webos", "proxy sites"]
+github: "https://github.com/MercuryWorkshop/anuraOS"
+official-link: "https://anura.pro"
 ---
 
 [![AnuraOS logo](https://raw.githubusercontent.com/MercuryWorkshop/anuraOS/main/assets/logo_dark.png)](https://github.com/MercuryWorkshop/anuraOS)
 
 The next-gen webOS and development environment with full linux emulation.
 
-[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=MercuryWorkshop_anuraOS&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=MercuryWorkshop_anuraOS)
-[![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=MercuryWorkshop_anuraOS&metric=ncloc)](https://sonarcloud.io/summary/new_code?id=MercuryWorkshop_anuraOS)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=MercuryWorkshop_anuraOS\&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=MercuryWorkshop_anuraOS)
+[![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=MercuryWorkshop_anuraOS\&metric=ncloc)](https://sonarcloud.io/summary/new_code?id=MercuryWorkshop_anuraOS)
 
 ---
 
@@ -32,7 +35,7 @@ Anura will not build on Windows. Please use a Linux VM or WSL.
 
 ### Easy Install for GitHub Codespaces
 
--   Run `source codespace-basic-setup.sh`
+- Run `source codespace-basic-setup.sh{:sh}`
 
 :::note
 If you are not in a codespace skip to the regular installation steps.
@@ -41,22 +44,22 @@ This does NOT build RootFS.
 
 ### Dependencies
 
--   Recent versions of `node.js` and `npm`
--   `wget`
--   A recent version of `java` (11+)
--   `inotifytools`
--   `rustup`
--   `wasm-opt`
--   `make`
--   `gcc` (`gcc-multilib` on Debian and Ubuntu x86_64)
--   `clang`
--   `uuid-runtime`
--   `jq`
--   `docker`
--   An x86(-64) Linux PC (`make rootfs-alpine` build depends on x86 specific tools)
+- Recent versions of `node.js` and `npm`
+- `wget`
+- A recent version of `java` (11+)
+- `inotifytools`
+- `rustup`
+- `wasm-opt`
+- `make`
+- `gcc` (`gcc-multilib` on Debian and Ubuntu x86\_64)
+- `clang`
+- `uuid-runtime`
+- `jq`
+- `docker`
+- An x86(-64) Linux PC (`make rootfs-alpine` build depends on x86 specific tools)
 
 :::note
-You will have to install the required Rust toolchains by running `rustup target add wasm32-unknown-unknown` and `rustup target add i686-unknown-linux-gnu` if you are planning to build v86 images.
+You will have to install the required Rust toolchains by running `rustup target add wasm32-unknown-unknown{:sh}` and `rustup target add i686-unknown-linux-gnu{:sh}` if you are planning to build v86 images.
 :::
 
 ### Building
@@ -67,12 +70,12 @@ make all
 ```
 
 :::tip
-You can use `make all -B` instead if you want to force a full build.
+You can use `make all -B{:sh}` instead if you want to force a full build.
 :::
 
 ### Building the Linux RootFS
 
--   Make sure you have `Docker` installed and running.
+- Make sure you have `Docker` installed and running.
 
 ```bash
 make rootfs

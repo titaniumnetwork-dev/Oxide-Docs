@@ -1,4 +1,19 @@
 {
-  "recommendations": ["astro-build.astro-vscode"],
-  "unwantedRecommendations": []
+	"recommendations": [
+		"astro-build.astro-vscode",
+		"unifiedjs.vscode-mdx",
+		"yoavbls.pretty-ts-errors",
+		"bierner.emojisense",
+		"biomejs.biome",
+		"dbaeumer.vscode-eslint",
+		"wix.vscode-import-cost",
+		"bierner.markdown-image-size",
+		"sndst00m.vscode-native-svg-preview",
+		"christian-kohler.npm-intellisense",
+		"christian-kohler.path-intellisense",
+		"antfu.vite",
+		"matthewpi.caddyfile-support",
+		"editorconfig.editorconfig"
+	],
+	"unwantedRecommendations": []
 }
