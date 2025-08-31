@@ -1,5 +1,6 @@
 import { defineConfig } from "astro/config";
 import starlight from "@astrojs/starlight";
+import starlightTypeDoc, { typeDocSidebarGroup } from "starlight-typedoc";
 import rehypeAstroRelativeMarkdownLinks from "astro-rehype-relative-markdown-links";
 import rehypeShiki from "@shikijs/rehype";
 
@@ -30,10 +31,32 @@ export default defineConfig({
     starlight({
       title: "Titanium Network",
       favicon: "/favicon.png",
-      social: {
-        github: "https://github.com/titaniumnetwork-dev/Oxide-Docs",
-        discord: "https://discord.gg/unblock",
-      },
+      social: [
+        {
+          icon: "github",
+          label: "GitHub",
+          href: "https://github.com/titaniumnetwork-dev/Oxide-Docs",
+        },
+        {
+          icon: "discord",
+          label: "Discord",
+          href: "https://discord.gg/unblock",
+        },
+      ],
+      plugins: [
+        starlightTypeDoc({
+          entryPoints: ["./typedoc-repos/scramjet/src/entry.ts"],
+          tsconfig: "./tsconfig-scramjet.json",
+          sidebar: {
+            label: "Scramjet API",
+          },
+          typeDoc: {
+            skipErrorChecking: true,
+            excludeNotDocumented: false,
+            treatWarningsAsErrors: false,
+          },
+        })
+      ],
       components: {
         Head: "./src/components/MetadataHead.astro",
         PageTitle: "./src/components/PageTitle.astro",
@@ -49,7 +72,12 @@ export default defineConfig({
         },
         {
           label: "Proxies",
-          autogenerate: { directory: "proxies" },
+          items: [
+            "proxies/rammerhead",
+            "proxies/ultraviolet",
+            "proxies/scramjet",
+            typeDocSidebarGroup,
+          ],
         },
         {
           label: "Technologies",

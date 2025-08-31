@@ -5,6 +5,7 @@ dist/
 
 # dependencies
 node_modules/
+pnpm-lock.yaml
 
 # logs
 npm-debug.log*
@@ -20,5 +21,9 @@ pnpm-debug.log*
 # macOS-specific files
 .DS_Store
 
+# Starlight-TypeDoc generated
+src/content/docs/api
+
+# Git
 package-lock.json
 pnpm-lock.yaml

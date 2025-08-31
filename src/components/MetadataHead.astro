@@ -13,7 +13,8 @@ interface MetadataFrontmatter {
 }
 
 const { entry } = Astro.props as Props;
-const { data: frontmatter } = entry;
+
+const frontmatter = entry?.data || {};
 const { title, description } = frontmatter;
 
 /**
@@ -36,15 +37,15 @@ const FRONTMATTER = frontmatter as MetadataFrontmatter;
 /**
  * The image to generate for the metadata
  */
-const IMAGE = FRONTMATTER.image || DEFAULT_METADATA.defaultImage;
+const IMAGE = FRONTMATTER?.image || DEFAULT_METADATA.defaultImage;
 /**
  * The keywords to generate for the metadata
  */
-const KEYWORDS = FRONTMATTER.keywords || [];
+const KEYWORDS = FRONTMATTER?.keywords || [];
 /**
  * The theme color to generate for the metadata
  */
-const THEME_COLOR = FRONTMATTER.themeColor || DEFAULT_METADATA.themeColor;
+const THEME_COLOR = FRONTMATTER?.themeColor || DEFAULT_METADATA.themeColor;
 ---
 
 <!-- Unofficial Web Standards -->

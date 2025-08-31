@@ -23,14 +23,16 @@
   },
   "dependencies": {
     "@astrojs/check": "^0.9.4",
-    "@astrojs/starlight": "^0.29.3",
+    "@astrojs/starlight": "^0.35.2",
     "@fontsource/raleway": "^5.2.6",
     "@shikijs/rehype": "^3.12.0",
     "@shikijs/themes": "^3.12.0",
-    "astro": "^4.16.19",
+    "astro": "^5.13.5",
     "astro-rehype-relative-markdown-links": "^0.18.1",
     "gray-matter": "^4.0.3",
     "sharp": "^0.32.6",
+    "starlight-typedoc": "^0.21.3",
+    "typedoc": "^0.28.11",
     "typescript": "^5.9.2"
   },
   "devDependencies": {

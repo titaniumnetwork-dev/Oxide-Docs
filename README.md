@@ -11,7 +11,7 @@ Requirements are Node.js (v20+).
 Using `pnpm` is more recommended.
 
 ```
-git clone https://github.com/titaniumnetwork-dev/Oxide-Docs.git
+git clone https://github.com/titaniumnetwork-dev/Oxide-Docs.git --recursive
 cd Oxide-Docs
 npm i
 
