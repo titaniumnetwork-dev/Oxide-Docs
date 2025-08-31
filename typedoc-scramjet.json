@@ -1,0 +1,28 @@
+{
+  "$schema": "https://typedoc.org/schema.json",
+  "skipErrorChecking": true,
+  "entryPointStrategy": "resolve",
+  "excludeExternals": true,
+  "exclude": [
+    "**/__tests__/**",
+    "**/*.spec.ts", 
+    "**/*.test.ts",
+    "**/rewriters/**",
+    "**/shared/rewriters/**",
+    "**/worker/fetch/**",
+    "**/worker/rewrite/**",
+    "**/worker/fakesw.ts"
+  ],
+  "excludePrivate": true,
+  "excludeProtected": false,
+  "excludeInternal": true,
+  "excludeNotDocumented": false,
+  "includeVersion": true,
+  "sort": ["source-order"],
+  "categorizeByGroup": true,
+  "categoryOrder": ["Window Context", "Service Worker Context"],
+  "defaultCategory": "Window Context",
+  "searchInComments": true,
+  "searchInDocuments": true,
+  "treatWarningsAsErrors": false
+}

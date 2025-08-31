@@ -10,7 +10,7 @@ This composes from advanced URL rewriting proxies, webOS projects, web-based emu
 Requirements are Node.js (v20+).
 
 ```
-git clone https://github.com/titaniumnetwork-dev/Oxide-Docs.git
+git clone https://github.com/titaniumnetwork-dev/Oxide-Docs.git --recursive
 cd Oxide-Docs
 npm i
 

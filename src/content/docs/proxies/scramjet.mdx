@@ -1,0 +1,108 @@
+---
+title: Scramjet
+description: An experimental interception-based web proxy designed to evade internet censorship, bypass arbitrary web browser restrictions and innovate web proxy technologies.
+keywords: ["web proxy", "sw proxy", "interception proxy"]
+github: "https://github.com/MercuryWorkshop/scramjet"
+official-link: "https://scramjet.mercurywork.shop"
+---
+
+<img width="200px" align="right" src="https://raw.githubusercontent.com/MercuryWorkshop/scramjet/refs/heads/main/assets/scramjet.png" alt="Official Scramjet Logo" height="250" />
+
+Scramjet is an interception-based web proxy designed to evade internet censorship, bypass arbitrary web browser restrictions and innovate web proxy technologies. It strives to maintain security, developer friendliness and performance unlike many other web proxies regardless of its open source nature.
+
+Scramjet is currently the flagship web proxy made by [Mercury Workshop](https://mercurywork.shop) and it is **highly recommended that you switch to it**. Don't worry, it is stable enough for most use cases to go into production!
+
+:::note
+In the proxy community, you may see it abbreviated as "SJ".
+:::
+
+# How to setup Scramjet on your proxy site
+
+1. Install the package: `pnpm install https://github.com/MercuryWorkshop/scramjet/releases/download/latest/mercuryworkshop-scramjet-1.0.2-dev.tgz{:sh}` (PNPM is recommended unless you use an alternative runtime like Bun)
+
+2. [Setup a transport on your site](../transports/using.mdx)
+
+3. Serve the Scramjet build under your specified route using the path `import { scramjetPath } from "@mercuryworkshop/scramjet/path"{:ts}`. We will use `/scram/` as a route for these examples.
+
+4. Write a SW
+
+`sw.js`:
+
+```js
+importScripts("/scram/scramjet.all.js");
+
+const { ScramjetServiceWorker } = $scramjetLoadWorker();
+const scramjet = new ScramjetServiceWorker();
+
+self.addEventListener("fetch", (event) => {
+	event.respondWith(async () => {
+    await scramjet.loadConfig();
+    if (scramjet.route(event)) {
+      return scramjet.fetch(event);
+    }
+
+    return fetch(event.request);
+  });
+});
+```
+
+5. Initialize `BareMux` and `ScramjetController`, and register your SW.
+
+Import the scripts in this order:
+
+1. BareMux
+2. BareMux Transport of your chioce
+3. Scramjet all bundle
+
+In your JS Script:
+
+```js
+const { ScramjetController } = $scramjetLoadController();
+
+const scramjet = new ScramjetController({
+  files: {
+	  wasm: "/scram/scramjet.wasm.wasm",
+	  all: "/scram/scramjet.all.js",
+	  sync: "/scram/scramjet.sync.js",
+  }
+});
+
+scramjet.init();
+
+navigator.serviceWorker.register("sw.js");
+
+// Init BareMux
+const connection = new BareMux.BareMuxConnection("/baremux/worker.js");
+// Set the transport yourself
+connection.setTransport(...);
+```
+
+## Learn from examples
+
+[Here is an example setup of Scramjet as a proxy site](https://github.com/MercuryWorkshop/Scramjet-App). If you get lost and need a reference along the way, you can fork it or take inspiration from it. It's essentially Ultraviolet-App, but with Scramjet as the SW proxy instead.
+
+## Upgrading to 1.0.2-dev+
+
+Now, Scramjet uses a new main bundle `scramjet.all.js`, which combines the former scripts.
+Replaces these bundles:
+
+```html
+<link rel="prefetch" href="/scram/scramjet.worker.js" />
+<link rel="prefetch" href="/scram/scramjet.shared.js" />
+...
+<script src="/scram/scramjet.controller.js"></script>
+```
+
+With:
+
+```html
+<script src="/scram/scramjet.all.js"></script>
+```
+
+## Upgrading from Ultraviolet
+
+Scramjet is easier to setup than UV. You may still use UV alongside Scramjet if you really find it necessary, however UV is unmaintained software and has far less site support than Scramjet.
+
+# Official docs
+
+You can read the [full Scramjet Typedocs](https://scramjet.mercurywork.shop/typedoc) for better API documentation.

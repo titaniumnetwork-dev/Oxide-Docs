@@ -1,6 +1,7 @@
 // @ts-check
 import { defineConfig } from "astro/config";
 import starlight from "@astrojs/starlight";
+import starlightTypeDoc, { typeDocSidebarGroup } from "starlight-typedoc";
 
 // https://astro.build/config
 export default defineConfig({
@@ -8,10 +9,32 @@ export default defineConfig({
     starlight({
       title: "Titanium Network",
       favicon: "/favicon.png",
-      social: {
-        github: "https://github.com/titaniumnetwork-dev/Oxide-Docs",
-        discord: "https://discord.gg/unblock",
-      },
+      social: [
+        {
+          icon: "github",
+          label: "GitHub",
+          href: "https://github.com/titaniumnetwork-dev/Oxide-Docs",
+        },
+        {
+          icon: "discord",
+          label: "Discord",
+          href: "https://discord.gg/unblock",
+        },
+      ],
+      plugins: [
+        starlightTypeDoc({
+          entryPoints: ["./typedoc-repos/scramjet/src/entry.ts"],
+          tsconfig: "./tsconfig-scramjet.json",
+          sidebar: {
+            label: "Scramjet API",
+          },
+          typeDoc: {
+            skipErrorChecking: true,
+            excludeNotDocumented: false,
+            treatWarningsAsErrors: false,
+          },
+        })
+      ],
       sidebar: [
         {
           label: "Guides",
@@ -23,7 +46,11 @@ export default defineConfig({
         },
         {
           label: "Proxies",
-          autogenerate: { directory: "proxies" },
+          items: [
+            "proxies/rammerhead",
+            "proxies/ultraviolet", 
+            typeDocSidebarGroup,
+          ],
         },
         {
           label: "Technologies",
@@ -39,7 +66,6 @@ export default defineConfig({
         },
       ],
       customCss: [
-        // Relative path to your custom CSS file
         "./src/styles/custom.css",
         "@fontsource/raleway/400.css",
         "@fontsource/raleway/600.css",

@@ -1,0 +1,3 @@
+[submodule "typedoc-repos/scramjet"]
+	path = typedoc-repos/scramjet
+	url = https://github.com/MercuryWorkshop/scramjet.git
