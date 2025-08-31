@@ -32,7 +32,7 @@
     "editor.formatOnSave": true
   },
   "[mdx]": {
-    "editor.defaultFormatter": "vscode.typescript-language-features",
+    "editor.defaultFormatter": "unifiedjs.vscode-mdx",
     "editor.formatOnSave": true,
     "editor.codeActionsOnSave": {
       "source.fixAll.eslint": "explicit"

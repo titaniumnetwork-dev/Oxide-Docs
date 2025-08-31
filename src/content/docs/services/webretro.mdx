@@ -2,13 +2,12 @@
 title: webretro
 description: RetroArch in your browser.
 keywords: ["emulator"]
+github: "https://github.com/BinBashBanana/webretro"
+official-link: "https://binbashbanana.github.io/webretro"
 ---
 
-[RetroArch](https://github.com/libretro) ported to WebAssembly with [emscripten](https://emscripten.org/)!
+[RetroArch](https://github.com/libretro) ported to WebAssembly with [emscripten](https://emscripten.org)!
 
-[**Official Instance**](https://binbashbanana.github.io/webretro/)
-
-[**GitHub**](https://github.com/BinBashBanana/webretro)
 
 ### Latest version: v6.5
 
@@ -92,7 +91,7 @@ Example OK query uris:
 
 You can easily embed webretro on your site by using the api provided in `embed/embed.js`. You can see an example of it [here](https://binbashbanana.github.io/webretro/embed/embed-example.html).
 
-How to use: `webretroEmbed(domNodeToAppendTo, webretroPath, queries)` (returns the new iframe node that it creates)
+How to use: `webretroEmbed(domNodeToAppendTo, webretroPath, queries){:js}` (returns the new iframe node that it creates)
 
 - `domNodeToAppendTo` - the element that you want webretro to load into.
 - `webretroPath` - the path to the index of the webretro instance.

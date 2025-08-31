@@ -1,0 +1,41 @@
+---
+import { getCollection } from "astro:content";
+import type { CollectionEntry } from "astro:content";
+import AutoAttributionButtons from "./attribution/AutoAttributionButtons.astro";
+
+/** Extracted slug from the current URL. */
+const SLUG = Astro.url.pathname.replace(/^\/+|\/+$/g, "");
+/** All documents from the 'docs' content collection. */
+const DOCS = await getCollection("docs");
+/** Document matching the current slug if found. */
+const MATCHING_DOC: CollectionEntry<"docs"> | undefined = DOCS.find(
+  (doc: CollectionEntry<"docs">) => doc.slug === SLUG
+);
+/** Frontmatter data from the matching document, or empty object as fallback. */
+const FRONTMATTER_DATA = MATCHING_DOC?.data ?? {
+  title: "No Title",
+  description: "",
+  github: undefined,
+  discord: undefined,
+  "official-link": undefined,
+};
+/** Page title from frontmatter with fallback. */
+const TITLE = FRONTMATTER_DATA.title || "No Title";
+/** Whether the document has a GitHub link configured. */
+const HAS_GITHUB = Boolean(FRONTMATTER_DATA.github);
+/** Whether the document has a Discord link configured. */
+const HAS_DISCORD = Boolean(FRONTMATTER_DATA.discord);
+/** Whether the document has an official link configured. */
+const HAS_OFFICIAL_LINK = Boolean(FRONTMATTER_DATA["official-link"]);
+/** Whether to show attribution buttons based on available links. */
+const SHOULD_SHOW_BUTTONS = HAS_GITHUB || HAS_DISCORD || HAS_OFFICIAL_LINK;
+---
+
+<h1 id="_top">{TITLE}</h1>
+{
+  SHOULD_SHOW_BUTTONS && (
+    <div class="attribution-wrapper">
+      <AutoAttributionButtons frontmatter={FRONTMATTER_DATA} />
+    </div>
+  )
+}

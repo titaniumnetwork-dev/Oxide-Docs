@@ -1,8 +1,8 @@
 {
-	"label": "Services",
-	"position": 2,
-	"link": {
-		"type": "generated-index",
-		"description": "Here is a quick overview if you wish to setup an open-source project from TitaniumNetwork on your own web server or just general SDK information in simple breakdowns."
-	}
+  "label": "Services",
+  "position": 2,
+  "link": {
+    "type": "generated-index",
+    "description": "Here is a quick overview if you wish to setup an open-source project from TitaniumNetwork on your own web server or just general SDK information in simple breakdowns."
+  }
 }
