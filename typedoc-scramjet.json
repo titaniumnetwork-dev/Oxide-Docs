@@ -5,7 +5,7 @@
   "excludeExternals": true,
   "exclude": [
     "**/__tests__/**",
-    "**/*.spec.ts", 
+    "**/*.spec.ts",
     "**/*.test.ts",
     "**/rewriters/**",
     "**/shared/rewriters/**",

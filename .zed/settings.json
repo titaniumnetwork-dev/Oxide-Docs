@@ -52,5 +52,10 @@
   "hard_tabs": false,
   "preferred_line_length": 80,
   "remove_trailing_whitespace_on_save": true,
-  "ensure_final_newline_on_save": true
+  "ensure_final_newline_on_save": true,
+  "auto_install_extensions": {
+    "html": true,
+    "astro": true,
+    "biome": true
+  }
 }

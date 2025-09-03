@@ -55,7 +55,7 @@ export default defineConfig({
             excludeNotDocumented: false,
             treatWarningsAsErrors: false,
           },
-        })
+        }),
       ],
       components: {
         Head: "./src/components/MetadataHead.astro",

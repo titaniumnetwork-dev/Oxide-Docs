@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "target": "ES2022",
-    "moduleResolution": "Bundler", 
+    "moduleResolution": "Bundler",
     "module": "ES2022",
     "skipLibCheck": true,
     "lib": ["ES2022", "WebWorker", "DOM"],
@@ -22,7 +22,7 @@
     "node_modules",
     "**/__tests__/**",
     "**/*.spec.ts",
-    "**/*.test.ts", 
+    "**/*.test.ts",
     "**/rewriters/**",
     "**/shared/rewriters/**",
     "**/client/**",
