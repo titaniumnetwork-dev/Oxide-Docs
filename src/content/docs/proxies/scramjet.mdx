@@ -2,6 +2,7 @@
 title: Scramjet
 description: An experimental interception-based web proxy designed to evade internet censorship, bypass arbitrary web browser restrictions and innovate web proxy technologies.
 keywords: ["web proxy", "sw proxy", "interception proxy"]
+themeColor: "#ffa660"
 github: "https://github.com/MercuryWorkshop/scramjet"
 official-link: "https://scramjet.mercurywork.shop"
 ---
@@ -77,11 +78,14 @@ const connection = new BareMux.BareMuxConnection("/baremux/worker.js");
 connection.setTransport(...);
 ```
 
-## Learn from examples
+## Note about upgrading to a new CI build
 
-[Here is an example setup of Scramjet as a proxy site](https://github.com/MercuryWorkshop/Scramjet-App). If you get lost and need a reference along the way, you can fork it or take inspiration from it. It's essentially Ultraviolet-App, but with Scramjet as the SW proxy instead.
+Until Scramjet has an NPM package, you have to use the CI builds, which run every time a commit is pushed to `main`.
+If you want to upgrade to a new CI build and you use PNPM, you must type `pnpm cache delete @mercuryworkshop/scramjet` and then install it again.
 
-## Upgrading to 1.0.2-dev+
+# Upgrading
+
+## To 1.0.2-dev+
 
 Now, Scramjet uses a new main bundle `scramjet.all.js`, which combines the former scripts.
 Replaces these bundles:
@@ -93,16 +97,20 @@ Replaces these bundles:
 <script src="/scram/scramjet.controller.js"></script>
 ```
 
+## From Ultraviolet
+
+Scramjet is easier to setup than UV. You may still use UV alongside Scramjet if you really find it necessary, however UV is unmaintained software and has far less site support than Scramjet.
+
 With:
 
 ```html
 <script src="/scram/scramjet.all.js"></script>
 ```
 
-## Upgrading from Ultraviolet
+# Learn from examples
 
-Scramjet is easier to setup than UV. You may still use UV alongside Scramjet if you really find it necessary, however UV is unmaintained software and has far less site support than Scramjet.
+[Here is an example setup of Scramjet as a proxy site](https://github.com/MercuryWorkshop/Scramjet-App). If you get lost and need a reference along the way, you can fork it or take inspiration from it. It's essentially Ultraviolet-App, but with Scramjet as the SW proxy instead.
 
 # Official docs
 
-You can read the [full Scramjet Typedocs](https://scramjet.mercurywork.shop/typedoc) for better API documentation.
+You can read the [full Scramjet Typedocs](https://scramjet.mercurywork.shop/typedoc) for **better API documentation**.
