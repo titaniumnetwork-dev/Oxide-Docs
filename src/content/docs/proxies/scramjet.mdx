@@ -19,11 +19,11 @@ In the proxy community, you may see it abbreviated as "SJ".
 
 # How to setup Scramjet on your proxy site
 
-1. Install the package: `pnpm install https://github.com/MercuryWorkshop/scramjet/releases/download/latest/mercuryworkshop-scramjet-1.0.2-dev.tgz{:sh}` (PNPM is recommended unless you use an alternative runtime like Bun)
+1. Install the package: `pnpm i @mercuryworkshop/scramjet@2.0.0-alpha{:sh}` 
 
 2. [Setup a transport on your site](../transports/using.mdx)
 
-3. Serve the Scramjet build under your specified route using the path `import { scramjetPath } from "@mercuryworkshop/scramjet/path"{:ts}`. We will use `/scram/` as a route for these examples.
+3. Serve the Scramjet build under your specified route using the path `import { scramjetPath } from "@mercuryworkshop/scramjet/path"{:js}`. We will use `/scram/` as a route for these examples.
 
 4. Write a SW
 
@@ -77,11 +77,6 @@ const connection = new BareMux.BareMuxConnection("/baremux/worker.js");
 // Set the transport yourself
 connection.setTransport(...);
 ```
-
-## Note about upgrading to a new CI build
-
-Until Scramjet has an NPM package, you have to use the CI builds, which run every time a commit is pushed to `main`.
-If you want to upgrade to a new CI build and you use PNPM, you must type `pnpm cache delete @mercuryworkshop/scramjet` and then install it again.
 
 # Upgrading
 
