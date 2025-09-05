@@ -78,6 +78,19 @@ const connection = new BareMux.BareMuxConnection("/baremux/worker.js");
 connection.setTransport(...);
 ```
 
+## How to setup the Scramjet global types
+
+Add to your `tsconfig.json`:
+
+```json
+{
+  "compilerOptions": {
+    "typeRoots": ["./node_modules/@mercuryworkshop/scramjet/lib"]
+  },
+  "include": ["node_modules/@mercuryworkshop/scramjet/lib/types.d.ts"]
+}
+```
+
 # Upgrading
 
 ## To 1.0.2-dev+
