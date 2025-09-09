@@ -1,6 +1,6 @@
 ---
 title: Scramjet
-description: An experimental interception-based web proxy designed to evade internet censorship, bypass arbitrary web browser restrictions and innovate web proxy technologies.
+description: An interception-based web proxy designed to evade internet censorship, bypass arbitrary web browser restrictions and innovate web proxy technologies.
 keywords: ["web proxy", "sw proxy", "interception proxy"]
 themeColor: "#ffa660"
 github: "https://github.com/MercuryWorkshop/scramjet"
@@ -19,7 +19,7 @@ In the proxy community, you may see it abbreviated as "SJ".
 
 # How to setup Scramjet on your proxy site
 
-1. Install the package: `pnpm i @mercuryworkshop/scramjet@2.0.0-alpha{:sh}` 
+1. Install the package: `pnpm i @mercuryworkshop/scramjet@2.0.0-alpha{:sh}`
 
 2. [Setup a transport on your site](../transports/using.mdx)
 
@@ -85,9 +85,8 @@ Add to your `tsconfig.json`:
 ```json
 {
   "compilerOptions": {
-    "typeRoots": ["./node_modules/@mercuryworkshop/scramjet/lib"]
+    "typeRoots": ["@mercuryworkshop/scramjet"]
   },
-  "include": ["node_modules/@mercuryworkshop/scramjet/lib/types.d.ts"]
 }
 ```
 
