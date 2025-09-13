@@ -1,0 +1,265 @@
+---
+title: Rewriting
+description: This document explains how and what to rewrite in an interception proxy
+order: 3
+---
+
+# What needs to be rewritten
+
+In proxies, there are a couple of things you need to rewrite:
+
+- Resource URLs - Any time you import a resource, the URL needs to be rewritten to be
+- **JS** - You have to rewrite
+- Sourcemaps - These aren't necessary, and if it is your first time in
+- **Manifests** - When I say this, I particularly mean Web App Manifests and soon Sub App Manifests. Cache Manifests are deprecated now and removed from all major browsers, so they aren't a concern. These are important because it allows the site to spawn a PWA, but you can only have one PWA per-origin. It's best to remove all references to PWAs and let proxy browser implementations use your sandboxing system
+
+# Rewriting Specifics
+
+## HTML Rewriting
+
+### Recommended Libraries
+
+The [DOMUtils libraries](https://domutils.js.org/index.html) will take you a long way, and is recommended for beginners.
+The Rust crate [tl](https://docs.rs/tl/latest/tl/) is recommended for speed, however you can use [tljs](https://github.com/y21/tljs) if you don't want to write Rust code, but still take advantage of the performance gains.
+
+### The `MutationObserver` approach and why it is not recommended
+
+It's slow...
+TODO: ...
+
+#### A short overview on DOM painting
+
+## CSS Rewriting
+
+Don't even bother, RegExp is good enough. You only need to rewrite [`import(){:css}` at-rule statements](https://developer.mozilla.org/en-US/docs/Web/CSS/@import)
+
+> PLEASE **do not use RegExp for rewriting anything, except for CSS**
+
+## JS Rewriting
+
+JS Rewriting is requried because you can't monkeypatch location objects, since they are non-configurable properties and trying to reassign it to another object results in a navigation, or eval, because of web limitations. JS rewriting is the biggest hurdle you will have when making your proxy, until you get to advanced emulation features. It is considered the test, and once you pass it you become a proper proxy dev.
+
+### Recommended Libraries
+
+- [Oxc Parser](https://www.npmjs.com/package/oxc-parser)
+- [Oxc Walker](https://www.npmjs.com/package/oxc-walker)
+
+> Watch out and don't use unmaintained libraries like esprima, where you will be stuck with ES5-only
+
+Feel free to experiment with your own stack along the way. [SWC](https://swc.rs/) is also a strong choice if you favor an expansive ecosystem with plugins and features like transformers. You may also use the direct Rust libraries and use WASM Bindgen like how Scramjet does if you are familiar with and prefer Rust.
+
+### Methods
+
+#### ⭐ DPSC
+
+DPSC is short for Deep Property Scope Checking
+
+DPSC involves rewriting the JS
+
+It is recommended that you use this stack
+
+- [https://www.npmjs.com/package/oxc-parser](https://www.npmjs.com/package/oxc-parser)
+- [https://www.npmjs.com/package/oxc-walker](https://www.npmjs.com/package/oxc-walker)
+
+:::note
+Feel free to experiment with your own stack along the way. [SWC](https://swc.rs) is also a strong choice if you favor an expansive ecosystem with plugins and features like transformers. You may also use the direct Rust libraries and use WASM Bindgen like how Scramjet does if you are familiar with and prefer Rust.
+:::
+
+Parse the script into AST, and then walk through it with a compatible AST walker. Try to find any possible object property access (through `MemberExpression` traversal in the AST) and check if it is to `window.location`. You can do this by wrapping the access in a function and checking if it is `window.location`. Remember, bracket access is a thing, too. You don't want to overwhelm the call stack, so don't blindly try to wrap every possible object property access. What I mean by this is check for any global object references such as `window`, `self`, `globalthis`, `parent`, `top`, and start looking for possible accesses only if it starts with the base object identifier being these. There you go, full DPSC (oversimplified).
+
+:::note
+You should also proxify `document.URL` and `document.baseURI`, but it is configurable with `Object.defineProperty`, but that is interception-focused, so it won't be mentioned here.
+:::
+
+##### Location Escapes
+
+I wish it was as simple as above, but there are edge-cases, where the site can escape your JS rewriting.
+I show examples where a popup of the real URL shows whenever a location escape is found.
+
+###### Location Set
+
+Escape: `location = "javascript:alert(location.href)"{:js}`
+
+Solved with Try Set
+
+\####### Location for...of Set
+
+Escape: `for (location of ["javascript:alert(location.href)"]);{:js}`
+
+Solved with Try Set+
+
+###### Window Destructure
+
+Escape:
+
+```js
+const { location: x } = window;
+alert(location.href)
+```
+
+##### Window Object Spread
+
+Escape:
+
+```js
+const x = { ...window };
+alert(x.location.href);
+```
+
+###### Update Expressions
+
+Escape:
+
+```js
+(window.x = window).y += 0
+alert(x.location.href)
+```
+
+###### Base URL Normalization
+
+Escape:
+
+```js
+const a = document.createElement("a");
+a.href = ".";
+alert(a.href);
+```
+
+Escape (alt 1):
+
+```js
+const img = new Image()
+img.src = "."
+alert(img.src)
+```
+
+Escape (alt 2):
+
+```js
+const form = document.createElement("form")
+alert(form.action)
+```
+
+Escape (alt 3):
+
+```js
+alert(new Request(".").url)
+```
+
+This may differ with other Base URLs being set
+
+Escape 2:
+
+```js
+const base = document.createElement("base");
+base.href = location.origin;
+document.head.prepend(base);
+
+const x = document.createElement("a")
+x.href = "."
+// Will only alert the origin
+alert(x.href);
+
+base.remove()
+```
+
+###### Indirect Eval Global
+
+Escape: `alert((0, eval)("location.href")){:js}`
+
+###### Function Constructor Global
+
+Escape: `alert(Function("return this")().location.href){:js}`
+
+###### Reflect
+
+Escape: `alert(Reflect.get(location, "href", location)){:js}`
+
+###### Getter Rebind
+
+###### Throw Window
+
+Escape:
+
+```js
+try {
+  throw window;
+} catch ({...x}) {
+  alert(x.location.href)
+}
+```
+
+###### ES6 Proxy object
+
+```js
+ const win = new Proxy(window, {
+  get(target, prop, receiver) {
+    alert(target.location.href);
+  },
+}).x
+```
+
+:::note
+This is one of the few escapes, which work even when in a jail.
+:::
+
+You can take a proxify approach if you want to avoid heavy AST tree traversal for patching this escape, however it is very hacky in nature.
+
+```js
+{
+  const REGEXP_REVEAL_ORIGINAL_TARGET = /Error\\n\s\s\s\sat\s([a-zA-Z.]*)/;
+  const proxyProxy = new Proxy(Proxy, {
+    construct(target, args) {
+      let [pTarget, handler] = args;
+
+      if ("apply" in handler) {
+        const originalApplyHandler = handler.apply;
+        args[1] = (_target, _that, pArgs) => {
+          // _that is `null`
+          // _target doesn't work here
+          const pTargetBak = pTarget;
+          pTarget = () => new Error().stack;
+          const revealingStackError = pTarget();
+          // Restore functionality of the target method
+          pTarget = pTargetBak;
+          // Get the parents that contain the method
+          const targetName = pTarget.name;
+          const parentObjTree = [
+            ...revealingStackError.matchAll(REGEXP_REVEAL_ORIGINAL_TARGET),
+          ][0].split(`.${targetName}`)[0];
+          let pThat = window[parentObjTree];
+          if (pThat === window)
+            // @ts-ignore
+            pThat = proxyProxy;
+          return originalApplyHandler(pTarget, pThat, pArgs);
+        };
+      }
+
+      return Reflect.construct(target, args);
+    },
+  });
+  Proxy = proxyProxy;
+}
+```
+
+###### contentEditable Script
+
+You don't have to worry about this, since it requires specific user interaction to trigger anyway.
+
+#### ⭐ Eval rewriting
+
+No matter what method you chose, will also need to rewrite calls to eval, since that can't be overridden, even inside of a jail system. Don't worry about jail systems; they are shortcuts that only work in bundle scripts and are not worth even having an implementation of one in your proxy.
+
+All you have to do here is rewrite the script passed inside of eval by putting a function inside of the call to get the script content being passed into it and check if it is a string before writing, of course.
+
+You can't proxify eval, because it would change the scope in which it is being executed.
+
+:::note
+Be careful, though. In strict mode, reassigning eval is strictly forbidden, and all of the evaled code has its own scope distinct from the current scope.
+:::
+
+#### Jails
+
+Jails is highly discouraged. It can be used as a shortcut in the beginning, but eventually you are going to need to use DPSC. You can have a hybrid appoach, but at that point, why bother?
+
+Jails is most useful for rewriting module scripts, since the variables defined in it are not globally scoped by default. This means that you can have very minimal rewriting for most bundles, and completely get away with it on sites like Discord.
