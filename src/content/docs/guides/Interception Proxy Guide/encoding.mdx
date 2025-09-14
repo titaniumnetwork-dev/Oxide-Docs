@@ -20,4 +20,4 @@ Base64 is simple and you can use [native APIs](https://developer.mozilla.org/en-
 
 1. Add encode and decode methods to your configuration.
 2. Have these stringified when sent to the SW via your Controller APIs, as we discussed in [Getting Started](./getting-started.mdx).
-3. Have your codebase use these methods defined on the config. Remember to eval the stringified version on the SW, for when decoding in the SW, and then stringify it again for the injects.
+3. Have your codebase use these methods defined on the config. Remember to eval the stringified version on the SW with `new Function()`, for when decoding in the SW, and then stringify it again for the injects.
