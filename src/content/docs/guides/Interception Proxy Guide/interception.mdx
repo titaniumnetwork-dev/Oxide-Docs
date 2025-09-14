@@ -59,6 +59,16 @@ We cannot share specific exmaples of this kind of revealer, as they are incredib
 
 ### SW
 
+### Sandboxed Iframe
+
+## Request URL
+
+It's not recommended to use interception for Request URLs. The methods are either limited, or they expose the real URLs to the filtering extensions
+
+### Catch-all SW Request Interception
+
+A method, which uses clients to rewrite the source URLs in the SW, requiring less rewrites, favoring interception, but it comes at a *large cost* of making the requests easily blockable by web extensions, since they intercept the requests and responses before being handled by the SW, if they block a URL, then the SW proxy won't be abel to unblock the site's resources with this method.
+
 #### Catch-all SW Request Interception
 
 Catch-all SW Request Interception can be useful because it bypasses the need to rewrite cross-origin request URLs from the source (where the resources are linked or imported from), since `FetchEvent.request.url` only shows the URL past the path, because you can correct this by using either force-referrer or Clients API.
@@ -81,17 +91,9 @@ if (event.clientId !== "") {
 }
 ```
 
-### Sandboxed Iframe
-
-## Request URL
-
-### Catch-all SW Request Interception
-
-a method, which uses clients to rewrite the source URLs in the SW, requiring less rewrites, favoring interception, but it comes at a *large cost* of making the requests easily blockable by web extensions, since they intercept the requests and responses before being handled by the SW, if they block a URL, then the SW proxy won't be abel to unblock the site's resources with this method.
-
 ### Base URL
 
-This is only useful for relative URLs...
+This refers to setting a base URL to be under the route that the SW handles under its prefix. This is only useful for relative URLs. There's no point of doing this, because you also need to handle absolute URLs.
 
 ## Proxification
 
