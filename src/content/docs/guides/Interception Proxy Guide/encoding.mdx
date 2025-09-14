@@ -1,7 +1,23 @@
 ---
-title: Emulation
+title: Encoding (Advanced)
 description: In this part of the guide, we explain the types of encoding that are recommended for web proxies, and how you should implement encoding.
 order: 6
 ---
 
-TODO: ...
+Encoding is useful to prevent extension blockers from blocking your requests. It's useless for network filters when making an interception proxy, since you intercept the requests and responses on the client and not the server, however extension filters can block your requests before they reach the SW.
+
+# Types of effective encoding for proxies
+
+## XOR
+
+The advantage of XOR encoding is that you can cypher. See [this site](https://cryptools.github.io/XORCipher/) for an explanation.
+
+## Base64
+
+Base64 is simple and you can use [native APIs](https://developer.mozilla.org/en-US/docs/Glossary/Base64#javascript_support).
+
+# How to implement
+
+1. Add encode and decode methods to your configuration.
+2. Have these stringified when sent to the SW via your Controller APIs, as we discussed in [Getting Started](./getting-started.mdx).
+3. Have your codebase use these methods defined on the config. Remember to eval the stringified version on the SW, for when decoding in the SW, and then stringify it again for the injects.
