@@ -1,0 +1,23 @@
+---
+title: Adding server-side support (Advanced)
+description: In this part of the guide, we explain how to abstract out your SW's logic
+order: 8
+---
+
+:::note
+This is still an emerging development, and Scramjet is currently working on adding server-side support.
+:::
+
+Fetch Handlers refer to an abstracted part of the SW fetch event handler, which will:
+
+1. Take in destructured Requests, dynamic persisted data usually comes from IndexedDB, a BareMux Client.
+2. Rewrite the content like usual.
+3. Return a destructured Response.
+
+You would create these Fetch Handlers when you determine it is time to make your SW proxy run in the server.
+This is important because not every environment supports SWs, including webviews, some mobile browsers, and browsers that use legacy browser engines such as [Goanna](https://www.palemoon.org/tech/goanna.shtml).
+
+To reduce repeated code, you can use an IndexedDB shim like [indexeddbshim](https://www.npmjs.com/package/indexeddbshim).
+Replace client \<-\> message RPC with a WS-based API.
+
+You should also make an ENV var to load a Scramjet config on disk, and have a default config location.
