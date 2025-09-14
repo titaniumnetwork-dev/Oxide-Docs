@@ -258,6 +258,22 @@ You can't proxify eval, because it would change the scope in which it is being e
 Be careful, though. In strict mode, reassigning eval is strictly forbidden, and all of the evaled code has its own scope distinct from the current scope.
 :::
 
+#### ⭐ Source Mapping
+
+Another hurdle for rewriting JS is dealing with `Function.prototype.toString`. This function obtains the verbatim source code of a function, meaning rewritten functions would show their rewrites in it. To combat that problem, you can start by intercepting `Function.prototype.toString`, and then use
+
+##### Byte Span Rewrites
+
+This method limits what your rewriter can do in terms of output. Namely, it must create raw text strings and either insert or replace them at certain locations in the original source. This means plugins and transformers which operate on the AST won't work, as well as requiring creative ways of handling JS output. A span of bytes which delimit a sourcemap-style structure is then associated with each function. In your interception, you can then find the byte span and use it to "unrewrite" your source code.
+
+[Scramjet](../../proxies/scramjet.mdx) uses this method to achieve speed, at the cost of forbidding AST (in Scramjet's case, the OXC AST) manipulation and thus any plugins or transformers.
+
+##### Source Replacement Rewrites
+
+This method is significatly less efficient than Byte Span Rewrites, but allows any transformation to be done to the AST of the source. The whole original source is associated with each function, and your interception can read it out and display it when called.
+
+This method is currently not used in Titanium Network proxies, but can be found in generic rewriters such as [rewd](https://github.com/portal-co/rewd).
+
 #### Jails
 
 Jails is highly discouraged. It can be used as a shortcut in the beginning, but eventually you are going to need to use DPSC. You can have a hybrid appoach, but at that point, why bother?

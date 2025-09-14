@@ -47,6 +47,12 @@ const navEntries = performance.getEntriesByType("navigation")
 if (navEntries) alert(nav.name);
 ```
 
+### Prototype methods
+
+Methods on native prototypes can be intercepted by malicious pages to attempt to alter a proxy's inner workings' behavior. Interceptors may be able to get by by `Object.freeze`ing native prototypes or leaving them alone, but have to deal with their implications: either that the prototypes are unmodifiable to pages or that any method could be overridden by a page.
+
+We cannot share specific exmaples of this kind of revealer, as they are incredibly hard to patch compared to native APIs, which can simply be intercepted.
+
 # Methods of interception
 
 ## Request/Response
