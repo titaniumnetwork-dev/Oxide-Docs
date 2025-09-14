@@ -1,0 +1,382 @@
+---
+title: Testing and CI (Advanced)
+description: In this part of the guide, we explain how to write playwright integration tests to prevent regressions on support of specific sites, and how to integrate WPT-diff, which has become standard for regression-proofing SW proxies.
+order: 7
+---
+
+:::note
+This is one of the last things you will do in the dev of the proxy before getting ready to publish stable releases, along with [emulation](./emulators.mdx) that you just learned.
+:::
+
+# Package Structure Testing
+
+You should use a lightweight unit testing framework such as [ava](https://github.com/avajs/ava)
+You may also use the [built-in Node Test Runner](https://nodejs.org/api/test.html) if you prefer.
+
+You should then setting up arrays of globs with [glob](https://www.npmjs.com/package/glob), which ensure that all of the output bundles and types are properly included, before you run `pnpm prepack` and publish manually or publish through CI. You should then execute these globs in tests, where you ensure the expected file structure and core bundles and build types that are required are present.
+
+# Creating integration tests
+
+You should make your integration tests in [Playwright](https://playwright.dev).
+
+## Making your `setupPage`
+
+`setupPage` is a standardized function, in that it is required for WPT-diff, and started from Scramjet.
+This is is a function, which will let you provide a URL, initialize the SW proxy once, and then navigate the specified site under the proxy for you.
+This will let your tests interact with the browser context and test whatever you expect from the site.
+
+### Structure
+
+```ts
+import { expect, FrameLocator, Page } from "@playwright/test";
+import { registerInspect } from "./inspectConsole";
+
+export async function setupPage(
+	page: Page,
+	url: string
+): Promise<FrameLocator> {
+	// Hack to disable HTTP cache.
+	await page.route("**", (route) => route.continue());
+	// Goto base url defined in config.
+	await page.goto("/");
+
+  // Here you should find and validate the URL bar
+  // ...
+
+	await page.waitForTimeout(1000);
+
+	await bar.press("Enter");
+
+	registerInspect(page);
+
+	return frame;
+}
+```
+
+# CI
+
+:::note
+This section assumes you are using [GitHub Workflows](https://docs.github.com/en/actions/concepts/workflows-and-actions/workflows).
+:::
+
+## WPT-diff
+
+[WPT-diff](https://github.com/MercuryWorkshop/WPT-diff) is a testing suite, which let's you run the WPT under your SW Proxy via its own test harness, and provides CI support. You should use the [action](https://github.com/MercuryWorkshop/WPT-diff/blob/main/action.yml) to make your own workflow.
+
+## Setting up WPT-diff Test Map
+
+:::note
+TODO: Right now, WPT-diff does not support Test Maps, but it will in the near future. This is a planned feature, so this section will remain as a placeholder for now to remind me to finish it.
+:::
+
+## Workflows
+
+### WPT-diff Epoch
+
+Setup along the lines of:
+
+```yml
+name: WPT Full Test Results
+
+on:
+  schedule:
+    # Every monday night at 0:30 UTC
+    - cron: "30 0 * * 1"
+  workflow_dispatch:
+    inputs:
+      shard_count:
+        description: "Number of shards to run"
+        required: false
+        default: "2"
+        type: string
+      max_tests:
+        description: "Maximum total number of tests (divided across shards)"
+        required: false
+        default: ""
+        type: string
+      skip_combiner:
+        description: "Skip the report combination step"
+        required: false
+        default: false
+        type: boolean
+
+jobs:
+  check-changes:
+    name: Check for changes
+    runs-on: ubuntu-latest
+    outputs:
+      should-run: ${{ steps.check.outputs.should-run }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Check for recent changes
+        id: check
+        run: |
+          # Check if there were any commits in the last day
+          PROXY_CHANGED=$(git log --since="24 hours ago" --oneline | wc -l)
+
+          # Check WPT-diff repo
+          git clone --shallow-since="24 hours ago" https://github.com/MercuryWorkshop/WPT-diff.git wpt-diff-check
+          cd wpt-diff-check
+          WPTDIFF_CHANGED=$(git log --since="24 hours ago" --oneline | wc -l)
+          cd ..
+
+          # Check WPT upstream
+          # They are always committing (it must be the final hours of the world when they don't)
+          git clone --shallow-since="24 hours ago" https://github.com/web-platform-tests/wpt.git wpt-check
+          cd wpt-check
+          WPT_CHANGED=$(git log --since="24 hours ago" --oneline | wc -l)
+          cd ..
+
+          # Run tests if any repo has changes or if manually triggered
+          if [ "$PROXY_CHANGED" -gt 0 ] || [ "$WPTDIFF_CHANGED" -gt 0 ] || [ "$WPT_CHANGED" -gt 0 ] || [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            echo "should-run=true" >> "$GITHUB_OUTPUT"
+            echo "Changes detected or manually triggered (will run tests)"
+          else
+            echo "should-run=false" >> "$GITHUB_OUTPUT"
+            echo "No changes detected (skipping tests)"
+          fi
+
+  # Here you should build your SW proxy
+  # This ellipses should be your proxy name
+  build-...:
+    ...
+
+  generate-matrix:
+    name: Generate shard matrix
+    runs-on: ubuntu-latest
+    needs: check-changes
+    if: needs.check-changes.outputs.should-run == 'true'
+    outputs:
+      shards: ${{ steps.generate.outputs.shards }}
+    steps:
+      - name: Generate shard list
+        id: generate
+        run: |
+          SHARD_COUNT="${{ github.event.inputs.shard_count || '2' }}"
+          SHARDS=$(seq -s'", "' 1 $SHARD_COUNT)
+          echo "shards=[\"$SHARDS\"]" >> "$GITHUB_OUTPUT"
+
+  run-wpt-tests:
+    name: WPT tests (shard ${{ matrix.shard }})
+    runs-on: ubuntu-latest
+    needs: [build-scramjet, generate-matrix]
+    timeout-minutes: 350
+    strategy:
+      matrix:
+        shard: ${{ fromJson(needs.generate-matrix.outputs.shards) }}
+      fail-fast: false
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Download build artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: scramjet-dist
+          path: dist
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: latest
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: latest
+          cache: pnpm
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Checkout WPT-diff
+        uses: actions/checkout@v4
+        with:
+          repository: MercuryWorkshop/WPT-diff
+          path: wpt-diff
+
+      - name: Copy setupPage
+        # Here you should find your setupPage module, and copy it over to `wpt-diff/src/page/setupPage.ts`, which defaults to Scramjet's setupPage.
+
+      - name: Checkout WPT
+        uses: actions/checkout@v4
+        with:
+          repository: web-platform-tests/wpt
+          ref: epochs/daily
+          path: wpt-diff/wpt
+          fetch-depth: 1
+
+      - name: Setup WPT hosts
+        run: |
+          cd wpt-diff/wpt
+          ./wpt make-hosts-file | sudo tee -a /etc/hosts
+
+      - name: Restore Playwright browsers cache
+        id: playwright-cache
+        uses: actions/cache/restore@v4
+        with:
+          path: |
+            ~/.cache/ms-playwright
+            ~/Library/Caches/ms-playwright
+            C:\\Users\\runneradmin\\AppData\\Local\\ms-playwright
+          key: ${{ runner.os }}-playwright-${{ hashFiles('wpt-diff/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-playwright-
+
+      - name: Restore Typia validators cache
+        id: typia-cache
+        uses: actions/cache/restore@v4
+        with:
+          path: wpt-diff/generatedValidators/
+          key: ${{ runner.os }}-typia-${{ hashFiles('wpt-diff/src/util/validators/**/*.ts', 'wpt-diff/types/**/*.ts', 'wpt-diff/tsconfig.json') }}
+          restore-keys: |
+            ${{ runner.os }}-typia-
+
+      - name: Setup WPT-diff dependencies
+        run: |
+          cd wpt-diff
+          pnpm install
+          # Install Playwright browsers only if cache miss
+          if [ "${{ steps.playwright-cache.outputs.cache-hit }}" != 'true' ]; then
+            pnpm exec playwright install chromium
+          fi
+          # Generate validators only if cache miss
+          if [ "${{ steps.typia-cache.outputs.cache-hit }}" != 'true' ]; then
+            pnpm generate:validators
+          fi
+
+      - name: Save Playwright browsers cache
+        if: steps.playwright-cache.outputs.cache-hit != 'true'
+        uses: actions/cache/save@v4
+        with:
+          path: |
+            ~/.cache/ms-playwright
+            ~/Library/Caches/ms-playwright
+            C:\\Users\\runneradmin\\AppData\\Local\\ms-playwright
+          key: ${{ runner.os }}-playwright-${{ hashFiles('wpt-diff/pnpm-lock.yaml') }}
+
+      - name: Save Typia validators cache
+        if: steps.typia-cache.outputs.cache-hit != 'true'
+        uses: actions/cache/save@v4
+        with:
+          path: wpt-diff/generatedValidators/
+          key: ${{ runner.os }}-typia-${{ hashFiles('wpt-diff/src/util/validators/**/*.ts', 'wpt-diff/types/**/*.ts', 'wpt-diff/tsconfig.json') }}
+
+      - name: Start ...(proxy name) demo server
+        run: |
+          # You should change this line to whatever starts a proxy site powered by your SW Proxy
+          pnpm start &
+          DEMO_PID="$!"
+          echo "DEMO_PID=$DEMO_PID" >> "$GITHUB_ENV"
+
+      - name: Generate WPT-diff config
+        working-directory: wpt-diff
+        run: |
+          cat > config.toml << EOF
+          [debug]
+          debug = true
+          verbose = true
+
+          [wpt]
+          max_tests = "all"
+          under_proxy = true
+
+          [wpt.urls]
+          # Here you should provide the URL for your proxy site powered by your SW proxy
+          proxy_base_url = ...
+          tests_base_url = "http://web-platform.test:8000"
+          api_base_url = "https://wpt.fyi"
+          EOF
+
+      - name: Start WPT server
+        working-directory: wpt-diff/wpt
+        run: |
+          ./wpt serve --no-h2 &
+          echo "WPT_PID=$!" >> "$GITHUB_ENV"
+
+      - name: Install xvfb
+        run: sudo apt install -y xvfb
+
+      - name: Run WPT tests
+        working-directory: wpt-diff
+        env:
+          CI: true
+          SHARD_COUNT: ${{ github.event.inputs.shard_count || '2' }}
+          MAX_TESTS_ARG: ${{ github.event.inputs.max_tests != '' && format('--max-tests {0}', github.event.inputs.max_tests) || '' }}
+        run: |
+          xvfb-run --auto-servernum pnpm start --report "wpt-report.json" --output-failed "failed-tests.json" --shard "${{ matrix.shard }}" --total-shards "$SHARD_COUNT" "$MAX_TESTS_ARG"
+
+      - name: Stop ...(proxy name) demo server
+        if: always()
+        run: |
+          if [ -n "$DEMO_PID" ]; then
+            kill "$DEMO_PID" || true
+          fi
+
+      - name: Stop WPT server
+        if: always()
+        run: |
+          if [ -n "$WPT_PID" ]; then
+            kill "$WPT_PID" || true
+          fi
+
+      - name: Upload test results
+        uses: actions/upload-artifact@v4
+        with:
+          name: wpt-test-results-shard-${{ matrix.shard }}
+          path: |
+            wpt-diff/wpt-report-diff.json
+            wpt-diff/wpt-report-proxy.json
+            wpt-diff/failed-tests.json
+
+  combine-and-upload-reports:
+    name: Combine and upload reports
+    needs: [build-...(proxy name), generate-matrix, run-wpt-tests]
+    if: ${{ !cancelled() && needs.run-wpt-tests.result != 'failure' && github.event.inputs.skip_combiner != 'true' }}
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout WPT-diff
+        uses: actions/checkout@v4
+        with:
+          repository: MercuryWorkshop/WPT-diff
+          path: wpt-diff
+
+      - name: Combine reports and run regression check
+        uses: ./wpt-diff/
+        with:
+          location: wpt-diff
+          enable_regression_check: false
+          github_repository: MercuryWorkshop/WPT-diff
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          regression_check_workflow_name: "WPT Test Results"
+          artifact_name: wpt-test-reports
+```
+
+
+## Main
+
+Per-commit on your main branch or PR:
+
+1. [Checkout the repo](https://github.com/marketplace/actions/checkout).
+2. Build your SW proxy and [upload an artifact](https://github.com/marketplace/actions/upload-a-build-artifact) of the build for later processing in other steps.
+4. Run your unit tests, including your package structure tests.
+5. Test for site regression with your Playwright Site Integration Tests.
+6. [Upload your artifact as a CI build](https://github.com/marketplace/actions/create-release) if these tests are successful.
+7. Run WPT-Diff Test Map on affected modules to prevent regression for your final NPM package and just for helpful insight when reviewing commits and PRs.
+8. Publish your package to NPM if the version in the package.json is bumped and all tests pass.
+
+:::note
+You should now start commiting PNPM lockfiles, to speed up dependency management.
+:::
