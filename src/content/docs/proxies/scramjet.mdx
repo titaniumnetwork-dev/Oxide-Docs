@@ -90,6 +90,20 @@ Add to your `tsconfig.json`:
 }
 ```
 
+## Installing from the CI builds
+
+The CI builds are published per each successful commit after going through less-extensive testing. You can use these if you want a feature, which isn't currently out in the NPM packages.
+
+Instead you would install with `pnpm install https://github.com/MercuryWorkshop/scramjet/releases/download/latest/mercuryworkshop-scramjet-1.0.2-dev.tgz{:sh}`
+
+:::note
+Fixed types haven't landed in the NPM package yet, so you need to install from the CI builds if you want to take advantage of that.
+:::
+
+### Note about upgrading to a new CI build
+
+If you want to upgrade to a new CI build and you use PNPM, as recommended, you must type `pnpm cache delete @mercuryworkshop/scramjet` and then install it again.
+
 # Upgrading
 
 ## To 1.0.2-dev+
@@ -116,7 +130,7 @@ With:
 
 # Learn from examples
 
-[Here is an example setup of Scramjet as a proxy site](https://github.com/MercuryWorkshop/Scramjet-App). If you get lost and need a reference along the way, you can fork it or take inspiration from it. It's essentially Ultraviolet-App, but with Scramjet as the SW proxy instead.
+[Here is an example setup of Scramjet as a proxy site](https://github.com/MercuryWorkshop/Scramjet-App). If you get lost and need a reference along the way, you can fork it or take inspiration from it. It's essentially Ultraviolet-App, but with Scramjet as the SW proxy instead. It's best used as a reference for migrating from Ultraviolet to Scramjet.
 
 # Official docs
 
