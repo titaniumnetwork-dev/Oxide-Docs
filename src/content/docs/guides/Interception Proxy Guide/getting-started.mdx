@@ -6,6 +6,19 @@ order: 1
 
 This guide is intended for devs interested in making a SW proxy, not all information here is relevant to making a server-only proxy. We will teach you how to do it in a type-safe and effective matter. All historic methods will be documented, and alternatives, but the best will be recommended.
 
+# Why use a SW
+
+As opposed to a server-only proxy:
+
+- It takes the load off the server, so proxy sites that use your proxy can scale well. Remember, rewriters are heavy, and proxies before SW proxies used to handle requests synchronously; even if you handle them asynchronously, it will build up load in terms of memory, since it has to copy the AST trees and nodes in memory.
+- It's a native way to handle Requests and Responses, making it simple to fetch the request under a transport.
+- You can get offline support if your SW proxy supports cache emulation.
+- It's easy to route and switch between other SW proxies.
+
+As opposed to a sandboxed iframe proxy:
+
+TODO: ...
+
 # Glossary
 
 - **Regression-proofing** - This refers to setting up effective tests to ensure that after tweaking modules in your SW proxy it is less likely to break on the next revision. You can do this by following our tips to make your proxy more safe, and implementing integration tests with the help of the [testing doc](./testing.mdx).
