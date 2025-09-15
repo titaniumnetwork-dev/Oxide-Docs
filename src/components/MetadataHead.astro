@@ -48,6 +48,7 @@ const { title, description } = frontmatter || {};
 
 /** Default metadata values used as fallbacks. */
 const DEFAULT_METADATA = {
+  title: "Titanium Network SDK Documentation",
   siteName: "Titanium Network Docs",
   twitterHandle: "@TitaniumNetDev",
   defaultImage:
@@ -92,7 +93,10 @@ const THEME_COLOR =
 /** The final title to display in metadata tags. */
 const finalTitle = isScramjetTypedoc
   ? scramjetMetadata.title
-  : title || "Untitled Page";
+  : title || "Titanium Network SDK Documentation";
+/** TODO: Bandaid fix for the page title on index. 
+Figure out a better way to do this later. */
+
 /** The final description to display in metadata tags. */
 const finalDescription = isScramjetTypedoc
   ? scramjetMetadata.description
@@ -103,21 +107,50 @@ const finalDescription = isScramjetTypedoc
 <meta charset="utf-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <title>{finalTitle}</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no" />
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1.0, shrink-to-fit=no"
+/>
 <link rel="manifest" href="https://titaniumnetwork.org/manifest.json" />
 <link rel="icon" type="image/png" href="https://titaniumnetwork.org/logo.png" />
-<link rel="apple-touch-icon" sizes="180x180" href="https://titaniumnetwork.org/logo.png" />
-<link rel="icon" type="image/png" sizes="32x32" href="https://titaniumnetwork.org/logo.png" />
-<link rel="icon" type="image/png" sizes="16x16" href="https://titaniumnetwork.org/logo.png" />
-<link rel="mask-icon" href="https://titaniumnetwork.org/logo.png" color="#b4213b" />
+<link
+  rel="apple-touch-icon"
+  sizes="180x180"
+  href="https://titaniumnetwork.org/logo.png"
+/>
+<link
+  rel="icon"
+  type="image/png"
+  sizes="32x32"
+  href="https://titaniumnetwork.org/logo.png"
+/>
+<link
+  rel="icon"
+  type="image/png"
+  sizes="16x16"
+  href="https://titaniumnetwork.org/logo.png"
+/>
+<link
+  rel="mask-icon"
+  href="https://titaniumnetwork.org/logo.png"
+  color="#b4213b"
+/>
 <meta name="msapplication-TileColor" content="#b4213b" />
-<meta name="theme-color" media="(prefers-color-scheme: dark)" content={THEME_COLOR} />
+<meta
+  name="theme-color"
+  media="(prefers-color-scheme: dark)"
+  content={THEME_COLOR}
+/>
 {finalDescription && <meta name="description" content={finalDescription} />}
 {KEYWORDS.length > 0 && <meta name="keywords" content={KEYWORDS.join(", ")} />}
 
 <!-- OpenGraph metadata -->
 <meta property="og:title" content={finalTitle} />
-{finalDescription && <meta property="og:description" content={finalDescription} />}
+{
+  finalDescription && (
+    <meta property="og:description" content={finalDescription} />
+  )
+}
 <meta property="og:image" content={IMAGE} />
 <meta property="og:site_name" content={DEFAULT_METADATA.siteName} />
 <meta property="og:type" content="website" />
@@ -128,5 +161,8 @@ const finalDescription = isScramjetTypedoc
 <meta name="twitter:site" content={DEFAULT_METADATA.twitterHandle} />
 <meta name="twitter:creator" content={DEFAULT_METADATA.twitterHandle} />
 <meta name="twitter:title" content={finalTitle || DEFAULT_METADATA.siteName} />
-<meta name="twitter:description" content={finalDescription || DEFAULT_METADATA.defaultDescription} />
+<meta
+  name="twitter:description"
+  content={finalDescription || DEFAULT_METADATA.defaultDescription}
+/>
 <meta name="twitter:image" content={IMAGE} />

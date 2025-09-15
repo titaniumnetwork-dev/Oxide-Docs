@@ -22,4 +22,4 @@ npm run build # build static files
 ## Contributing
 
 If you wish to contribute please check out the Contributions section or commit to the GitHub!
-Please run `pnpm fmt` and `pnpm lint` before finishing your comits.
+Please run `pnpm fmt` and `pnpm lint` before finishing your commits.

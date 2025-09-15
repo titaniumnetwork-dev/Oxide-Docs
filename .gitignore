@@ -27,3 +27,4 @@ src/content/docs/api
 # Git
 package-lock.json
 pnpm-lock.yaml
+typedoc-repos/scramjet
