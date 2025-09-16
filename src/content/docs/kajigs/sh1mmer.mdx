@@ -1,0 +1,61 @@
+---
+title: Sh1mmer
+description: Sh1mmer is an exploit capable of completely unenrolling enterprise-managed Chromebooks.
+author: MercuryWorkshop
+keywords: ["tool", "any kernver", "sh1mmer"]
+link: https://github.com/MercuryWorkshop/Sh1mmer
+sidebar:
+    order: 2
+kernver: 0
+---
+
+{frontmatter.link && (<><a href={frontmatter.link}>{frontmatter.link}</a><br/></>)}
+{frontmatter.description}<br/>
+{frontmatter.author && <small><i>By {frontmatter.author}</i><br/></small>}
+
+#### What are the features?
+- [Unenrollment for Kernvers 1 through 5](/kajigs/unenrollment)
+- Re-Enrollment
+- A modified version of MrChromebox's firmware utility script
+- Set Kernver to 1
+- Write Protection disable
+
+## Prebuilts
+Prebuilts are located at https://dl.mrwork.shop/sh1mmer
+## Building
+```
+git clone https://github.com/MercuryWorkshop/sh1mmer.git
+cd sh1mmer/wax
+```
+Run the next command with a raw shim or nanoshim
+```
+sudo bash wax.sh -i /path/to/shim.bin
+```
+
+<div id="update-payload">
+:::note
+To build Sh1mmer with the update payload for br0ker, replace the second command with
+```
+sudo bash update_downloader.sh <board>
+sudo bash wax.sh -i /path/to/shim.bin -s 2.5G
+```
+* Replace the 2.5G with 3.0G for Nissa boards
+:::
+</div>
+## Flashing
+Linux: (Replace /dev/sdX with your flash drive/sd card)
+```
+sudo dd if=/path/to/sh1mmer_shim.bin of=/dev/sdX bs=1M status=progress
+```
+Windows: Download Rufus, select your USB, select your sh1mmer image
+
+macOS: Download BalenaEtcher, select your USB, select your sh1mmer image
+
+ChromeOS: Download [Chromebook Recovery Utility](https://chromewebstore.google.com/detail/chromebook-recovery-utili/pocpnlppkickgojjlmhdmidojbmbodfm), select "Use local image" in the settings menu of it, select your USB, select your sh1mmer image
+
+<div id="booting">
+## Booting
+1. Press [Esc+Ref+Pwr], then [Ctrl+D] to enter developer mode.
+2. Plug in your flash drive that you flashed {frontmatter.title} to.
+3. Press [Esc+Ref+Pwr] again and allow the shim to boot up.
+</div>

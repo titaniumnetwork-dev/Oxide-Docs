@@ -1,0 +1,36 @@
+---
+title: Unenrollment
+description: List of Unenrollment exploits sorted by Kernver
+sidebar:
+  order: 1
+---
+
+{frontmatter.link && (<><a href={frontmatter.link}>{frontmatter.link}</a><br/></>)}
+{frontmatter.description}<br/>
+{frontmatter.author && <small><i>By {frontmatter.author}</i><br/></small>}
+
+All Unenrollment exploits can be used on previous kernvers.
+
+For example, Br0ker can be used on any Kernver that can be used below 137, which would be Kernvers 1, 2, 3, 4, and 5.
+
+import { getkajigs, kernvers } from '../../config.ts';
+export const kernver = await getkajigs(true)
+
+<table>
+    <thead>
+    <tr>
+      <th>Kernver</th>
+      <th>ChromeOS Versions</th>
+      <th>Kajigs</th>
+    </tr>
+  </thead>
+    <tbody>
+      {Object.entries(kernvers).map(([kv, ver]) => (
+        <tr key={kv}>
+          <td>{Array.isArray(ver) ? ver[0] : kv}</td>
+          <td>{Array.isArray(ver) ? ver[1] : ver}</td>
+          <td>{kernver[kv]?.map((k) => <a href={k.slug}>{k.title}</a>).reduce((a, b) => [a, ", ", b])}</td>
+        </tr>
+      ))}
+    </tbody>
+</table>

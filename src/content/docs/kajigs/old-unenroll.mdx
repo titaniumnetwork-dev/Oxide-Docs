@@ -1,0 +1,50 @@
+---
+title: Unenrollment for old versions
+description: Stub page for Sh1mmer's base unenrollment and rootless unenrollment (≤v101).
+keywords: ["unenrollment", "kernver 1", "sh1mmer", "rootless"]
+kernver: 1
+unenrollment: true
+---
+
+{frontmatter.link && (<><a href={frontmatter.link}>{frontmatter.link}</a><br/></>)}
+{frontmatter.description}<br/>
+{frontmatter.author && <small><i>By {frontmatter.author}</i><br/></small>}
+
+## Sh1mmer
+
+Documentation for Sh1mmer's Unenrollment.<br/>
+<small><i>By Mercury Workshop</i><br/></small>
+
+1. Boot [Sh1mmer](/kajigs/sh1mmer#booting)
+2. Select `Un-Enroll Device`/`Deprovision device`
+3. Exit and Reboot. You're done.
+
+## Rootless Unenrollment (≤v101)
+
+Documentation for Rootless Unenrollment.<br/>
+<small><i>By OlyB</i><br/></small>
+
+:::note
+This relies on you being at or below version 101. See [ChromeOS Versions](/kajigs/crosver).
+:::
+
+#### Requirements
+
+- Crosh access
+- Version 101 or lower
+
+#### Guide
+
+Run this as `chronos{:sh}`:
+
+```
+dbus-send --system --print-reply --dest=org.chromium.SessionManager /org/chromium/SessionManager org.chromium.SessionManagerInterface.ClearForcedReEnrollmentVpd
+```
+
+Or a funny one-liner for Crosh:
+
+```
+set_cellular_ppp \';dbus-send${IFS}--system${IFS}--print-reply${IFS}--dest=org.chromium.SessionManager${IFS}/org/chromium/SessionManager${IFS}org.chromium.SessionManagerInterface.ClearForcedReEnrollmentVpd;exit;\'
+```
+
+If successful, the command will return `method return` and some other data after that. Powerwash your Chromebook and log in with a personal email. On devices without FWMP, you will also have the option to enter developer mode immediately.
