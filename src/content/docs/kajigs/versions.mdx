@@ -1,48 +1,81 @@
 ---
-title: Downgrading
-description: Documentation for downgrading on ChromeOS.
-keywords: ["chromeos exploits"]
+title: Versions
+description: Documentation for ChromeOS and Kernel Versions, as well as recovering.
+sidebar:
+  order: 1
 ---
 
+{frontmatter.link && (<><a href={frontmatter.link}>{frontmatter.link}</a><br/></>)}
+{frontmatter.description}<br/>
+{frontmatter.author && <small><i>By {frontmatter.author}</i><br/></small>}
+## Determine your ChromeOS version
+
+1. Open Settings in ChromeOS
+2. Go to `About ChromeOS`
+3. Note the characters before the first `.` as your version. (Ex: v132)
+
+## Recovering
+
+### What versions can I Recover to?
+On an unmodified device, you can recover to any version within the range your version is currently in.
+
+import { kernvers } from '../../config.ts';
+
+<table>
+    <thead>
+    <tr>
+      <th>Kernver</th>
+      <th>ChromeOS Versions</th>
+    </tr>
+  </thead>
+    <tbody>
+      {Object.entries(kernvers).map(([kv, ver]) => (
+        <tr key={kv}>
+          <td>{Array.isArray(ver) ? ver[0] : kv}</td>
+          <td>{Array.isArray(ver) ? ver[2] : ver}</td>
+        </tr>
+      ))}
+    </tbody>
+</table>
+
 :::note
-Please refer to [Kernel Version Info](/kajigs/kernverinfo) to see what versions you can downgrade to.
+If you are looking for what kajigs you can use on your kernver/version, look at [Kajigs](/kajigs/#kajigs)
 :::
 
-# How can I downgrade my Chromebook?
-
-## What do I need?
+### Requirements
 
 - USB drive (8 GB+)
 - One of the following: [Chromebook Recovery Utility](https://chrome.google.com/webstore/detail/chromebook-recovery-utili/pocpnlppkickgojjlmhdmidojbmbodfm) (ChromeOS, Windows, MacOS), `dd{:sh}` (Linux/macOS/POSIX-compliant), or balenaEtcher (Linux, MacOS, Windows)
 
-## Step 1: Find your board name
+#### Find your board name
 
 1. Open `chrome://version` on your Chromebook
-2. Find **Platform:** row — the word after `stable-channel` is your board name (e.g., **reks**)
+2. Find **Platform:** row — the word after `stable-channel` is your board name (e.g., **reven**)
    ![Higlighted word reven after stable-channel](/assets/downgrading/chrome_version_platform.png)
 
-### `chrome://version` blocked?
+:::note
+`chrome://version` blocked?
 
-Go to "Settings" (the app) → "About Chrome OS" and you should see a button called "additional details". Click it and then you should be able to copy build details - this is a copy of what is on `chrome://version`. You should be able to paste it and find it. Below is a demo where the board is `reven`.
+Go to "Settings" (the app) → "About Chrome OS" and you should see a button called "additional details". Click it and then you should be able to copy build details - this is a copy of what is on `chrome://version`. You should be able to paste it and find it.
+:::
 
-<video controls>
-  <source src="/assets/downgrading/version_chrome_settings.mp4" />
-</video>
+:::note
+Still can't get your board name?
 
-### If both fail...
+Enter Recovery mode [Esc+Ref+Pwr], and see the codename at the bottom of the screen. Then, go to [cros.tech](https://cros.tech) and type in the codename. It will show the board.
+(If Recovery mode shows `VORTICON`, you are on the `octopus` board.)
+:::
 
-Then proceed to the next step but instead of board name assume device name (i.e. Dell Chromebook 3100 (if you have this, it is octopus), but this will be less accurate for some of them.)
+### Downloading a recovery image
 
-## Download recovery image
-
-1. Visit the [cros.download](https://cros.download/) website and click "Recovery Images".
+1. Visit [cros.download](https://cros.download/) and click "Recovery Images".
 2. Search for your board name and click the board name in the table.
 3. Download the `.zip` file.
 4. Find the version you want and click the link in the download column.
 
-## Step 2: Write image to USB
+### Flash image to USB
 
-### Using Chromebook Recovery Utility (Windows/macOS/Chrome OS):
+#### Using Chromebook Recovery Utility (Windows/macOS/Chrome OS):
 
 1. Install [Chromebook Recovery Utility](https://chrome.google.com/webstore/detail/chromebook-recovery-utili/pocpnlppkickgojjlmhdmidojbmbodfm)
 2. Open it (click on the extension icon from the puzzle piece)
@@ -50,14 +83,14 @@ Then proceed to the next step but instead of board name assume device name (i.e.
 4. Select the `.zip` file
 5. Choose your USB drive and create the recovery USB
 
-### Option 2: balenaEtcher
+#### Option 2: balenaEtcher
 
 1. Go to [https://etcher.balena.io/](https://etcher.balena.io/) and download and install balenaEtcher if needed.
 2. Click "flash from file" and select the ZIP file (if it fails, unzip it and then try again).
 3. Select your USB after clicking "select target".
 4. Click "flash".
 
-### Option 3: Using dd (Linux/macOS/POSIX-compliant):
+#### Option 3: Using dd (Linux/macOS/POSIX-compliant):
 
 1. Unzip the `.zip` file either through GUI, or through a command like `unzip{:sh}`
 2. Identify your USB device by running `sudo fdisk -l{:sh}` (Linux) or using macOS Disk Utility. It should say something like `Disk /dev/sd...` (Linux) and in macOS open Disk Utility, select it under "External" and you should see `Device:`. You will want to use `/dev/INSERTTHATNAMEHERE` instead of `/dev/sdX`. Other OSes will have to see relevant documentation for identifying the proper USB device.
@@ -71,7 +104,7 @@ sudo dd bs=4M if=/PATH/TO/IMAGE.bin of=/dev/sdX conv=sync status=progress
 Double-check the device name to avoid data loss!
 :::
 
-## Restore Chrome OS
+### Recover ChromeOS
 
 1. Enter recovery mode: <kbd>Esc</kbd> + <kbd>Refresh</kbd> + <kbd>Power</kbd>
 2. Insert recovery USB

@@ -1,0 +1,97 @@
+---
+title: Extensions
+description: Various exploits to disable managed extensions
+kernver: 0
+---
+
+{frontmatter.link && (<><a href={frontmatter.link}>{frontmatter.link}</a><br/></>)}
+{frontmatter.description}<br/>
+{frontmatter.author && <small><i>By {frontmatter.author}</i><br/></small>}
+
+### DPS
+
+Disable extensions that use Service Workers<br/>
+<small><i>By Shrey719</i><br/></small>
+
+#### Requirements
+Access to `chrome://serviceworker-internals`, and inspect element ***disabled***
+
+#### Steps:
+1. Go to `chrome://serviceworker-internals`.
+2. Click the checkbox that says `Open DevTools and pause JavaScript execution on Service Worker startup for debugging`
+3. Find the extension you want to disabled
+4. Click stop if it appears (otherwise, skip this step)
+5. Click unregister
+
+Works on: Blockfiletypes, LanSchool, GoGuardian, and likely several other untested extensions.
+
+### Insecurely II
+
+Disable extensions that use Service Workers<br/>
+<small><i>By vibingcat</i><br/></small>
+
+#### Requirements
+Access to chrome://indexeddb-internals
+A blocking extension that uses indexeddb (EX: Securly)
+
+1. Go to chrome://indexeddb-internals
+2. Scroll down till you see chrome-extension://(securly extension id)
+    Typically: joflmkccibkooplaeoinecjbmdebglab or iheobagjkfklnlikgihanlhcddjoihkg
+    Also ckecmkbnoanpgplccmnoikfmpcdladkc
+
+3. Click `force stop`
+
+Securly sometimes does kick back in (although it takes awhile) but all you have to do is force stop it again
+
+Works on: Securly
+
+:::note
+Problem: “The securly extension id you gave isn’t there”
+Solution: Go to chrome://extensions, click on securly, check what the id is, and use that for step 2
+:::
+
+### LTVegan
+
+Disable extensions that use Service Workers<br/>
+<small><i>By doxrberg</i><br/></small>
+
+Tested only with lightspeed
+
+#### Steps
+1. for lightspeed filter agent, go to chrome-extension://adkcpkpghahmbopkjchobieckeoaoeem/main.js. for other extensions, find the biggest file for the extension
+2. open chrome://extensions/?id=IDHERE (for lightspeed it's chrome://extensions/?id=adkcpkpghahmbopkjchobieckeoaoeem)
+3. CTRL+A to copy all of the code, then drag the copied text to the tabs bar. this may freeze your chromebook a few times.
+4. start clicking the chrome extension tab (chrome://extensions/?id=IDHERE) a few times, then wait (chromebook is currently frozen).
+5. when your chromebook isn't as frozen, right click the main.js tab and duplicate it.
+6. click the "Allow access to file URLs" (multiple times for good measure) and the first tab should close itself. if BOTH tabs closed themselves, you did something wrong, or just try again.
+7. you should be able to normally use your Chromebook now. afaik you might be able to close the duplicated tab but I didn't close it and it lasted for a long time.
+
+
+### Crimson
+
+Extension Corruption<br/>
+
+#### Steps
+1. Esc+Refresh+Power and re-enroll (Enter recovery page), or you can just powerwash. (alternatively, you can push on the little arrow next to your name, and push "remove user")
+2. Log into your Chromebook and immediately turn off WiFi 
+3. Go to chrome://extensions, turn on WiFi, and wait for your school’s blocking extension to appear.
+4. As soon as it appears, turn off WiFi and restart as fast as possible. (if this does not work for you, try waiting a second or two, I found this to work better)
+5. Log back in, go back to extensions, and wait. If it says your blocking extension could be corrupted, then it worked (wait at least a minute with a close watch in case it comes back)
+6. If it didn’t work, start over. You have to be fast, if it didn't show up as corupted,  it means the extension has not been downloaded yet, repeat steps 3 and 4. 
+
+### LTMeat (\<v114)
+
+1. Find the extension you want to disable.
+2. Visit that `chrome-extension://` page, then type `chrome://hang` in the URL bar of that tab. It should start loading infinitely.
+3. Right-click the tab and duplicate it. Don't close anything.
+4. Go to the `chrome://extensions` page for the extension you want to disable. See the video below:
+
+<video controls width="100%">
+  <source src="https://ltmeat.bypassi.com/img/vid.webm" type="video/webm" />
+
+  Your browser does not support the video tag.
+</video>
+
+5. If that page has any sort of switch, such as "Allow access to file URLs", click that switch. If there are no clickable switches, cry in a corner or something.
+
+The extension should now be broken, assuming you clicked the switch! Only one of the two duplicate tabs should be left standing. You can close your tabs now. Refer to the help section for more help.
