@@ -15,7 +15,6 @@ A somewhat risky CrOS unenrollment method that involves bridging two pins on the
 1. Screwdriver
 2. Conductive bendable object
 3. Sh1mmer USB
-4. However much money it takes to get a replacement Chromebook from your district
 
 ### Steps
 1. Open up your Chromebook using, most likely, a Phillips screwdriver. After that, disconnect the battery on the Chromebook. Methods to disconnect the connector may vary on each model.
@@ -55,6 +54,6 @@ A somewhat risky CrOS unenrollment method that involves bridging two pins on the
 #### Dealing With An Update
 For those on v124 or newer, they changed cryptohome to device_management_client. However, this doesn’t remove FWMP due to “a weird quirk of the refactors” and will simply error upon running the command with —action=remove_firmware_management_parameters.
 
-Instead, you’ll need to downgrade ChromeOS to v123 (or lower) with developer mode on to bypass the “ChromeOS is out-of-date” error. If you don’t know how to downgrade, below are instructions that I’ve made.
+Instead, you’ll need to downgrade ChromeOS to v123 (or lower) with developer mode on to bypass the “ChromeOS is out-of-date” error. If you don’t know how to downgrade, visit the [Downgrading](https://docs.titaniumnetwork.org/kajigs/versions/#downloading-a-recovery-image) section of [Versions](https://docs.titaniumnetwork.org/kajigs/versions/).
 
-If recovery reports “An Unexpected Error Occured”, try a different version.
+If recovery reports “An unexpected error occurred”, try a different version.
