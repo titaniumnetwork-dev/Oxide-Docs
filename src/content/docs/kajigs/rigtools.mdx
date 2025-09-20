@@ -7,9 +7,9 @@ link: https://github.com/FWSmasher/rigtools
 kernver: 4
 ---
 
-{frontmatter.link && (<><a href={frontmatter.link}>{frontmatter.link}</a><br/></>)}
-{frontmatter.description}<br/>
-{frontmatter.author && <small><i>By {frontmatter.author}</i><br/></small>}
+import PageHeader from "/src/components/PageHeader.astro";
+
+<PageHeader title={frontmatter.title} description={frontmatter.description} author={frontmatter.author} link={frontmatter.link} kernver={frontmatter.kernver} nolower={frontmatter.nolower}/>
 
 :::note
 This relies on you being below version 128. See [ChromeOS Versions](/kajigs/crosver).
@@ -17,7 +17,6 @@ This relies on you being below version 128. See [ChromeOS Versions](/kajigs/cros
 
 ### Links
 
-- `devtools://devtools/bundled/devtools_app.html?experiments=true&ws=rigtools.appleflyer.xyz:5506`
 - `devtools://devtools/bundled/devtools_app.html?experiments=true&wss=rig.ccsd.store`
 
 ### Instructions
@@ -27,3 +26,7 @@ This relies on you being below version 128. See [ChromeOS Versions](/kajigs/cros
 3. Double click the gray box (image below)
 4. Click the "extension id" button and paste in your blocking extension's ID (it has to be installed by administrator and it has to have the ability to manage other extensions)
 5. Click the fifth button ("P5") to kill the current extension or click the third button ("P3") and paste in the specific extension's ID you want to kill (image below)
+
+### Images:
+
+<img src="/img/rigtools1.png" />

@@ -1,0 +1,60 @@
+---
+title: Crosh & VMC
+description: Disable managed extensions with Crosh & VMC
+keywords: ["chromeos exploits"]
+kernver: 3
+author: vk6
+---
+
+import PageHeader from "/src/components/PageHeader.astro";
+
+<PageHeader title={frontmatter.title} description={frontmatter.description} author={frontmatter.author} link={frontmatter.link} kernver={frontmatter.kernver} nolower={frontmatter.nolower}/>
+
+:::note
+This relies on you being below version 124. See [ChromeOS Versioning](/kajigs/crosver).
+:::
+
+
+## Prerequisites
+
+- A managed Chromebook with crosh enabled
+- The `VmManagementCliAllowed` policy either unset or set to true
+- Some form of removable media for noting down extension IDs (only useful for the second method and not required, but this prevents you from mistyping an extension ID).
+- A willingness to powerwash
+
+### Pick a variation of this exploit
+
+1. Disabling **all** extensions. This is probably the most reliable, but you'd be left without useful extensions such as any adblockers. You also aren't able to install anything from the Chrome Web Store either.
+2. Disabling **specific** extensions. This is less reliable, since this only becomes possible once Chrome OS has installed at least one extension already, which could be one that you're trying to disable.
+
+### Testing if the exploit is possible
+
+1. Open crosh by hitting <kbd>Ctrl</kbd> + <kbd>Alt</kbd> + <kbd>T</kbd>. If a command line pops up then you have crosh enabled and you can move on to step 2.
+2. Test the `VmManagementCliAllowed` policy by running the `vmc` command. If a list of subcommands is shown, then you're good to go.
+
+## Steps
+
+1. Back up any data you want before the powerwash.
+2. If you're doing the second variation, note down any extension IDs. You may also want to do this if you intend on disabling all extensions, since sometimes that will fail and require you to specify each extension you want to disable.
+3. Powerwash by attempting to enable developer mode. Instructions are available here: [https://chromium.googlesource.com/chromiumos/docs/+/master/developer\_mode.md#dev-mode](https://chromium.googlesource.com/chromiumos/docs/+/master/developer_mode.md#dev-mode)
+4. Log into your Google account as normal, but immediately disable your internet right after you sign in.
+5. You should be logged into your account, but without any extensions installed due to being offline.
+6. Here the instructions are split, so follow the one for the method that you want to do.
+
+### Disable *All* Extensions
+
+1. Open up crosh by hitting <kbd>Ctrl</kbd> + <kbd>Alt</kbd> + <kbd>T</kbd>.
+2. Type in `vmc create-extra-disk --size 1 /home/chronos/user/Extensions`
+3. Run that command.
+4. If it fails with a "file exists" error, then you must individually specify each extension that you want to remove. Move to step 5 of the next section to do that.
+5. Re-enable your internet, and no extensions should be installed.
+
+### Disable *Specific* Extensions
+
+1. Navigate to `chrome://extensions`.
+2. Enable your internet, and immediately disable it when an extension is installed.
+3. Assuming the installed extension was not one that you were trying to enable, move on to step 4. If it was, you'd have to powerwash to try again.
+4. Open up crosh by hitting <kbd>Ctrl</kbd> + <kbd>Alt</kbd> + <kbd>T</kbd>.
+5. For each extension you want to disable, run this command: `vmc create-extra-disk --size 1 /home/chronos/user/Extensions/{extension_id}`
+6. Each command should look something like this: `vmc create-extra-disk --size 1 /home/chronos/user/Extensions/cjpalhdlnbpafiamejdnhcphjbkeiagm`
+7. Re-enable your internet, and if you typed/pasted in the extension IDs correctly, those specific extensions should be blocked from ever being installed.

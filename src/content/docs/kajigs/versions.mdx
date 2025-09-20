@@ -5,16 +5,19 @@ sidebar:
   order: 1
 ---
 
-{frontmatter.link && (<><a href={frontmatter.link}>{frontmatter.link}</a><br/></>)}
-{frontmatter.description}<br/>
-{frontmatter.author && <small><i>By {frontmatter.author}</i><br/></small>}
+import PageHeader from "/src/components/PageHeader.astro";
+
+<PageHeader title={frontmatter.title} description={frontmatter.description} author={frontmatter.author} link={frontmatter.link} kernver={frontmatter.kernver} nolower={frontmatter.nolower}/>
+
+Depending on your ChromeOS version, you may or may not be able to use some kajigs.
+
 ## Determine your ChromeOS version
 
 1. Open Settings in ChromeOS
 2. Go to `About ChromeOS`
 3. Note the characters before the first `.` as your version. (Ex: v132)
 
-## Recovering
+## How can I downgrade/recover my Chromebook?
 
 ### What versions can I Recover to?
 On an unmodified device, you can recover to any version within the range your version is currently in.
@@ -56,7 +59,11 @@ If you are looking for what kajigs you can use on your kernver/version, look at 
 :::note
 `chrome://version` blocked?
 
-Go to "Settings" (the app) → "About Chrome OS" and you should see a button called "additional details". Click it and then you should be able to copy build details - this is a copy of what is on `chrome://version`. You should be able to paste it and find it.
+Go to "Settings" (the app) → "About Chrome OS" and you should see a button called "additional details". Click it and then you should be able to copy build details - this is a copy of what is on `chrome://version`. You should be able to paste it and find it. Below is a demo where the board is `reven`.
+
+<video controls>
+  <source src="/assets/downgrading/version_chrome_settings.mp4" />
+</video>
 :::
 
 :::note

@@ -9,9 +9,9 @@ sidebar:
 kernver: 0
 ---
 
-{frontmatter.link && (<><a href={frontmatter.link}>{frontmatter.link}</a><br/></>)}
-{frontmatter.description}<br/>
-{frontmatter.author && <small><i>By {frontmatter.author}</i><br/></small>}
+import PageHeader from "/src/components/PageHeader.astro";
+
+<PageHeader title={frontmatter.title} description={frontmatter.description} author={frontmatter.author} link={frontmatter.link} kernver={frontmatter.kernver} nolower={frontmatter.nolower}/>
 
 #### What are the features?
 - Recovery
@@ -19,23 +19,25 @@ kernver: 0
 - Booting other shims
 - Wifi connectivity
 
-## Prebuilts
+## Flashing
+
+First, obtain an image of Aurora.
+### Prebuilts
 Prebuilts are located at https://dl.mrwork.shop/aurora
-## Building
+### Building
 ```
 git clone https://github.com/AerialiteLabs/Aurora.git
 cd Aurora
 ```
 Run the next command with a raw shim or nanoshim
 ```
-sudo bash Aurora /path/to/shim.bin
+sudo bash Aurora -i /path/to/shim.bin
 ```
 Alternatively, you can automatically download a shim and build it with the following command:
 ```
 sudo bash Aurora <board> --auto
 ```
 
-## Flashing
 Linux: (Replace /dev/sdX with your flash drive/sd card)
 ```
 sudo dd if=/path/to/board-aurora.bin of=/dev/sdX bs=1M status=progress
