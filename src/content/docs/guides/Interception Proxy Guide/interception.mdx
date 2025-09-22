@@ -1,0 +1,113 @@
+---
+title: Interception
+description: This part of the guide explains what defines an "interception proxy" and what to expect when making one.
+order: 2
+---
+
+You may see the ambiguous term “interception proxy” being thrown around. Interception proxies are web proxies that do the rewriting on the client, rather than on the server, and use interception methods, rather than rewriting whenever feasible. Interception is about taking advantage of browser features in a higher-level way to avoid complexities. Interception proxies can use either a SW or a sandboxed iframe.
+
+This guide teaches you how to make an **SW-based** interception web proxy; however, this may change as other forms of interception proxies may become possible, especially with new web features being constantly added
+
+:::note
+Not enough has been researched about sandboxed iframes for web proxies to make special parts of the guide for it. Feel free to contribute to Oxide Docs if you want to document them. There has yet to be a stable production-ready web proxy made with sandboxed iframes other than a POC (only [sandstone](https://github.com/ading2210/sandstone) at the moment).
+:::
+
+Interception is an essential concept to proxies, because interceptors are used. Sometimes these interceptors need to be be used to power emulators, which you will [learn later](./emulators.mdx).
+
+The job of interceptors are to prevent escapes via Web APIs, which rewriters shouldn't approach on.
+
+# Terms you should know
+
+- **Real Location/Origin** - The origin as it actually is rather than the URL that the proxy is trying to proxy. You would consider this the encoded URL if you are a proxy site developer.
+- **Proxy Location/Origin** - The origin that the proxy is trying to proxy. You would consider this the decoded URL if you are a proxy site developer.
+- **Faking** - Faking the status of an API so that a site doesn't complain.
+- **Revealers** - Anything which may reveal the real origin.
+
+# Types of interceptors
+
+1. Origin Concealers - Origin concealers are when you use proxification to prevent revealers.
+2. Location (Redirects) - This is where a redirect is prevented, usually from normal API use, so that the new navigation occurs under the proxy. This is typically done by proxification, but also rewriting in the case of rewriting operations on locations.
+3. Emulators - These are browser features, which need interception to mimic what is normally handled and controlled by the browser with meta tags and HTTP headers. The most common type of emulator is to emulate restricted behavior due to an emulation system of a security policy needed to make the security policy origin-specific. Emulators can be in contexts more than interceptors in examples such as, injecting client-side code to emulate clearing site data for a specific origin to emulate the `Clear-Site-Data` header.
+4. Origin Isolators - This is more of a broad term, which encompasses anything which is used to fake the origin to the proxified site, so that it doesn't believe it is in a proxy. These require heavy proxification to implement. This can be more than just interceptors. Remember, the whole point of interceptors are for origin isolation.
+
+:::note
+Finding out about what to intercept is all about reading web standards and trial and error. This will consume most of your time as a proxy developer.
+:::
+
+Offending APIs
+
+TODO: Make an MDX table
+
+## Origin Revealers
+
+### Navigation
+
+```js
+const navEntries = performance.getEntriesByType("navigation")
+if (navEntries) alert(nav.name);
+```
+
+### Prototype methods
+
+Methods on native prototypes can be intercepted by malicious pages to attempt to alter a proxy's inner workings' behavior. Interceptors may be able to get by by `Object.freeze`ing native prototypes or leaving them alone, but have to deal with their implications: either that the prototypes are unmodifiable to pages or that any method could be overridden by a page.
+
+We cannot share specific exmaples of this kind of revealer, as they are incredibly hard to patch compared to native APIs, which can simply be intercepted.
+
+# Methods of interception
+
+## Request/Response
+
+### SW
+
+### Sandboxed Iframe
+
+## Request URL
+
+It's not recommended to use interception for Request URLs. The methods are either limited, or they expose the real URLs to the filtering extensions
+
+### Catch-all SW Request Interception
+
+A method, which uses clients to rewrite the source URLs in the SW, requiring less rewrites, favoring interception, but it comes at a *large cost* of making the requests easily blockable by web extensions, since they intercept the requests and responses before being handled by the SW, if they block a URL, then the SW proxy won't be abel to unblock the site's resources with this method.
+
+#### Catch-all SW Request Interception
+
+Catch-all SW Request Interception can be useful because it bypasses the need to rewrite cross-origin request URLs from the source (where the resources are linked or imported from), since `FetchEvent.request.url` only shows the URL past the path, because you can correct this by using either force-referrer or Clients API.
+
+##### [Force-referrer](./emulators.mdx)
+
+##### Clients API
+
+```ts
+const clientUrl: URL;
+// Get the origin from the user's window
+if (event.clientId !== "") {
+  // Get the current window
+  const client = await clients.get(event.clientId);
+
+  if (client)
+    // Get the url after the prefix
+    clientUrl = new URL(afterPrefix(client.url));
+  }
+}
+```
+
+### Base URL
+
+This refers to setting a base URL to be under the route that the SW handles under its prefix. This is only useful for relative URLs. There's no point of doing this, because you also need to handle absolute URLs.
+
+## Proxification
+
+Proxification typically refers to using ES6 proxies or reimplementing objects (typically with `Object.defineProperty`) to intercept use of an API. These are used for writing concealers and origin-isolators.
+
+## API Faking
+
+In rare cases, you should reimplement the API. This is called API Faking. You will likely encounter API Faking for the first time when reimplementing the Location API to conceal it.
+
+## Event-based
+
+This is more rare, and in some cases can replace methods where interception is used. A notable example of this is...
+
+## `DOMParser` + `MutationObserver`
+
+Although this isn't a strictly rewriting method, there is documentation for it in [HTML Rewriting](./rewriting.mdx), since, although it is an interception strategy, there is a rewriting component involved in that you have to rewrite the resource URLs (namely `src` attributes).
+The use of `DOMParser` on the original HTML response body is not interception, but in this method you are rewriting the HTML in an event-based manner when new mutation records occur, when you combine `MutationObserver`.
