@@ -27,6 +27,17 @@ export default defineConfig({
       ],
     ],
   },
+  redirects: {
+    "/kajigs/caubdns-proxy-editor": "/kajigs/caub",
+    "/kajigs/caudns": "/kajigs/caub",
+    "/kajigs/connection-on-whitelisted-wifi": "/kajigs/wifi",
+    "/kajigs/crosver": "/kajigs/versions",
+    "/kajigs/downgrading": "/kajigs/versions",
+    "/kajigs/kernverinfo": "/kajigs/versions",
+    "/kajigs/lockdown-browser": "/kajigs/webviews",
+    "/kajigs/ltmeat": "/kajigs/extensions",
+    "/kajigs/rootless-unenrollment": "/kajigs/old-unenroll",
+  },
   integrations: [
     starlight({
       title: "Titanium Network",
