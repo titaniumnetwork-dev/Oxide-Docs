@@ -1,8 +1,0 @@
----
-title: Sandboxing
-description: This document explains sandboxing and what it entails in interception proxies
-order: 4
----
-
-The job of sandboxers are to trick the proxied site into thinking it is in its proxied origin. It contains the interceptors and emulators for a web proxy. Sandboxers are injected into the client  by the SW handler of the SW proxy.
-Some sandboxers are flexible to be used in other proxies or for other isolation reasions, such as [Wombat](https://github.com/webrecorder/wombat). It's recommended that you at least try to make your own sandboxer for the experience before you use an pre-existing solution, so you can have a fundemental understanding of why sandboxing is needed.
