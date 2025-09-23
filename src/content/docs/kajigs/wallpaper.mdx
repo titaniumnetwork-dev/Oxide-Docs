@@ -1,0 +1,41 @@
+---
+title: Change your Wallpaper
+description: Several methods to force change your wallpaper in ChromeOS
+keywords: ["chromeos exploits"]
+kernver: 0
+---
+
+import PageHeader from "/src/components/PageHeader.astro";
+
+<PageHeader title={frontmatter.title} description={frontmatter.description} author={frontmatter.author} link={frontmatter.link} kernver={frontmatter.kernver} nolower={frontmatter.nolower}/>
+
+## Most versions of ChromeOS
+
+### Steps
+1. Open the `Files` app.
+2. Navigate to your wallpaper image and right click it.
+3. Click 'Set as Wallpaper'
+
+## Really old versions (v99-v104)
+
+### Steps
+:::caution
+The method above is easier and will probably work better.
+
+Requires `chrome://flags` unblocked.
+:::
+
+1. head to `chrome://flags`
+2. search for "personalization"
+3. enable "Personalization Hub UI"
+4. restart
+5. right click desktop, click "Personalize" (or find "Personalize your device" in settings)
+6. go to "Wallpaper" → anything that's not "My Images" (for example: Cityscapes, Heritage, etc)
+7. click "Change Daily"
+8. it'll throw an error but it changes the wallpaper anyway
+9. head back to the main Wallpaper menu again
+10. go to "My Images"
+11. select whatever image you want
+12. you're done! have fun
+
+You have to repeat steps 5-11 every time you restart

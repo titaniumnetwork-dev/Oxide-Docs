@@ -5,9 +5,9 @@ sidebar:
   order: 1
 ---
 
-{frontmatter.link && (<><a href={frontmatter.link}>{frontmatter.link}</a><br/></>)}
-{frontmatter.description}<br/>
-{frontmatter.author && <small><i>By {frontmatter.author}</i><br/></small>}
+import PageHeader from "/src/components/PageHeader.astro";
+
+<PageHeader title={frontmatter.title} description={frontmatter.description} author={frontmatter.author} link={frontmatter.link} kernver={frontmatter.kernver} nolower={frontmatter.nolower}/>
 
 ## What is a kajig?
 Kajigs are exploits/tools, typically made for use on managed devices.
@@ -26,7 +26,28 @@ Kajigs can be posted by anyone with the `Programmer` or `samyk` roles in the Dis
 
 <div id="kajigs">
 ### What kajigs can I use?
-Most kajigs can be used in all previous Kernvers. 
+
+This depends. For extension bypasses, Please see [Non-ChromeOS Exploits](/kajigs/notcros)
+
+For ChromeOS Exploits, Refer to the information below.
+
+#### What is a Kernver?
+
+A Kernver is ChromeOS's ***Kern***el ***Ver***sion. (Hence, Kernver)
+
+Kernvers are used by Google to lock the Chromebook to a range of ChromeOS versions, with the purpose of patching exploits.
+
+While your device is in a Kernver (read which versions those encapsulate below), the lowest recoverable ChromeOS version is the bottom of the Kernver's range.
+
+[Read more about downgrading and how to recover here.](/kajigs/versions)
+
+Now, about the table below. If you are at a ***higher*** Kernver than a listed kajig, you cannot use it. 
+
+If you are at a ***lower*** Kernver, you can do it. If a kajig cannot be used on a lower Kernver, it will be highlighted a vibrant pink and stated in the kajig's page.
+
+:::note
+If you are able and willing to, you can change your Kernver [Unenrolling](/kajigs/unenrollment) and [Changing your Kernver](/kajigs/set-kernver).
+:::
 
 import { getkajigs, kernvers } from '../../config.ts';
 export const kernver = await getkajigs()
@@ -44,7 +65,7 @@ export const kernver = await getkajigs()
         <tr key={kv}>
           <td>{Array.isArray(ver) ? ver[0] : kv}</td>
           <td>{Array.isArray(ver) ? ver[1] : ver}</td>
-          <td>{kernver[kv]?.map((k) => <a href={k.slug}>{k.title}</a>).reduce((a, b) => [a, ", ", b])}</td>
+          <td>{kernver[kv]?.map((k) => <a style={{ textDecoration: "none", color: k.color }} href={k.slug}>{k.title}</a>).reduce((a, b) => [a, ", ", b])}</td>
         </tr>
       ))}
     </tbody>

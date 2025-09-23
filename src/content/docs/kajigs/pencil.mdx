@@ -6,6 +6,10 @@ kernver: 0
 unenrollment: true
 ---
 
+import PageHeader from "/src/components/PageHeader.astro";
+
+<PageHeader title={frontmatter.title} description={frontmatter.description} author={frontmatter.author} link={frontmatter.link} kernver={frontmatter.kernver} nolower={frontmatter.nolower}/>
+
 > "Stop doing pencil"<br/>
 > <small>*-Rafflesia*</small>
 

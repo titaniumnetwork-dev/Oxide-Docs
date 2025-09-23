@@ -6,6 +6,7 @@
       "!dist",
       "!.astro",
       "!.vscode",
+      "!typedoc-repos",
       "!**/*.mdx",
       "!**/*.md",
       "!LICENSE",
