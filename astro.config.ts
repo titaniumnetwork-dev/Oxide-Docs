@@ -78,6 +78,10 @@ export default defineConfig({
           autogenerate: { directory: "guides" },
         },
         {
+          label: "Organizations",
+          autogenerate: { directory: "organizations" },
+        },
+        {
           label: "Services",
           autogenerate: { directory: "services" },
         },
@@ -101,10 +105,6 @@ export default defineConfig({
         {
           label: "Kajigs",
           autogenerate: { directory: "kajigs" },
-        },
-        {
-          label: "Organizations",
-          autogenerate: { directory: "organizations" },
         }
       ],
       customCss: [
