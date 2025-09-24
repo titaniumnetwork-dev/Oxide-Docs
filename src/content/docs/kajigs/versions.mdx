@@ -35,11 +35,11 @@ import { kernvers } from '../../config.ts';
 
   <tbody>
     {Object.entries(kernvers).map(([kv, ver]) => (
-                            <tr key={kv}>
-                              <td>{Array.isArray(ver) ? ver[0] : kv}</td>
-                              <td>{Array.isArray(ver) ? ver[2] : ver}</td>
-                            </tr>
-                          ))}
+      <tr key={kv}>
+        <td>{Array.isArray(ver) ? ver[0] : kv}</td>
+        <td>{Array.isArray(ver) ? ver[2] : ver}</td>
+      </tr>
+    ))}
   </tbody>
 </table>
 

@@ -26,10 +26,10 @@ The job of interceptors are to prevent escapes via Web APIs, which rewriters sho
 
 # Types of interceptors
 
-1. Origin Concealers - Origin concealers are when you use proxification to prevent revealers.
-2. Location (Redirects) - This is where a redirect is prevented, usually from normal API use, so that the new navigation occurs under the proxy. This is typically done by proxification, but also rewriting in the case of rewriting operations on locations.
-3. Emulators - These are browser features, which need interception to mimic what is normally handled and controlled by the browser with meta tags and HTTP headers. The most common type of emulator is to emulate restricted behavior due to an emulation system of a security policy needed to make the security policy origin-specific. Emulators can be in contexts more than interceptors in examples such as, injecting client-side code to emulate clearing site data for a specific origin to emulate the `Clear-Site-Data` header.
-4. Origin Isolators - This is more of a broad term, which encompasses anything which is used to fake the origin to the proxified site, so that it doesn't believe it is in a proxy. These require heavy proxification to implement. This can be more than just interceptors. Remember, the whole point of interceptors are for origin isolation.
+1. **Origin Concealers** - Origin concealers are when you use proxification to prevent revealers.
+2. **Location (Redirects)** - This is where a redirect is prevented, usually from normal API use, so that the new navigation occurs under the proxy. This is typically done by proxification, but also rewriting in the case of rewriting operations on locations.
+3. **Emulators** - These are browser features, which need interception to mimic what is normally handled and controlled by the browser with meta tags and HTTP headers. The most common type of emulator is to emulate restricted behavior due to an emulation system of a security policy needed to make the security policy origin-specific. Emulators can be in contexts more than interceptors in examples such as, injecting client-side code to emulate clearing site data for a specific origin to emulate the `Clear-Site-Data` header.
+4. **Origin Isolators** - This is more of a broad term, which encompasses anything which is used to fake the origin to the proxified site, so that it doesn't believe it is in a proxy. These require heavy proxification to implement. This can be more than just interceptors. Remember, the whole point of interceptors are for origin isolation.
 
 :::note
 Finding out about what to intercept is all about reading web standards and trial and error. This will consume most of your time as a proxy developer.
@@ -39,8 +39,8 @@ Offending APIs
 
 {/* TODO: Create an MDX Table here*/}
 
-:::caution
-This part is unfinished
+:::note
+This part is unfinished.
 :::
 
 ## Origin Revealers
@@ -64,7 +64,19 @@ We cannot share specific exmaples of this kind of revealer, as they are incredib
 
 ### SW
 
+:::note
+This part is unfinished.
+:::
+
+{/* TODO: ... */}
+
 ### Sandboxed Iframe
+
+:::note
+This part is unfinished.
+:::
+
+{/* TODO: ... */}
 
 ## Request URL
 
