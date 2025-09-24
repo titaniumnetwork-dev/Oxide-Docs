@@ -67,12 +67,12 @@ Kajigs can be posted by anyone with the `Programmer` or `samyk` roles in the Dis
 
     <tbody>
       {Object.entries(kernvers).map(([kv, ver]) => (
-                                <tr key={kv}>
-                                  <td>{Array.isArray(ver) ? ver[0] : kv}</td>
-                                  <td>{Array.isArray(ver) ? ver[1] : ver}</td>
-                                  <td>{kernver[kv]?.map((k) => <a style={{ textDecoration: "none", color: k.color }} href={k.slug}>{k.title}</a>).reduce((a, b) => [a, ", ", b])}</td>
-                                </tr>
-                              ))}
+                                      <tr key={kv}>
+                                        <td>{Array.isArray(ver) ? ver[0] : kv}</td>
+                                        <td>{Array.isArray(ver) ? ver[1] : ver}</td>
+                                        <td>{kernver[kv]?.map((k) => <a style={{ textDecoration: "none", color: k.color }} href={k.slug}>{k.title}</a>).reduce((a, b) => [a, ", ", b])}</td>
+                                      </tr>
+                                    ))}
     </tbody>
   </table>
 

@@ -25,8 +25,9 @@ The [DOMUtils libraries](https://domutils.js.org/index.html) will take you a lon
 
 ### The `MutationObserver` approach and why it is not recommended
 
-It's slow\...
-TODO: ...
+It's slow
+
+{/* TODO: ... */}
 
 #### A short overview on DOM painting
 
@@ -34,7 +35,9 @@ TODO: ...
 
 Don't even bother, RegExp is good enough. You only need to rewrite [`import(){:css}` at-rule statements](https://developer.mozilla.org/en-US/docs/Web/CSS/@import).
 
-> PLEASE **do not use RegExp for rewriting anything, except for CSS**
+:::caution
+**Do not use RegExp for rewriting anything, except for CSS**
+:::
 
 ## JS Rewriting
 
