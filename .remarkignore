@@ -3,3 +3,4 @@ node_modules/
 dist/
 .astro/
 .vscode/
+src/content/docs/guides/Interception Proxy Guide/server-side.mdx

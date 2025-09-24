@@ -1,7 +1,8 @@
 ---
 title: Getting Started
 description: This part of the guide lays out the foundation of what you need to know to build a SW proxy.
-order: 1
+sidebar:
+  order: 1
 ---
 
 This guide is intended for devs interested in making a SW proxy, not all information here is relevant to making a server-only proxy. We will teach you how to do it in a type-safe and effective matter. All historic methods will be documented, and alternatives, but the best will be recommended.
@@ -17,14 +18,19 @@ As opposed to a server-only proxy:
 
 As opposed to a sandboxed iframe proxy:
 
-TODO: ...
+:::note
+This part is unfinished.
+:::
+
+{/* TODO: ... */}
 
 # Glossary
 
 - **Regression-proofing** - This refers to setting up effective tests to ensure that after tweaking modules in your SW proxy it is less likely to break on the next revision. You can do this by following our tips to make your proxy more safe, and implementing integration tests with the help of the [testing doc](./testing.mdx).
 
 :::note
-More terms in another glossary can be found in the [interception doc](./interception.mdx).
+More terms in another glossary can be found in the [interception document](./interception.mdx).
+:::
 
 # Recommendations
 
@@ -38,7 +44,7 @@ It's recommended that you annotate your public-facing APIs, typically for initia
 
 ## Types
 
-[Typescript](https://www.typescriptlang.org) is recommended, but provide your config example with JSDoc [importing](https://jsdoc.app/tags-type) and [typing](https://jsdoc.app/tags-type) your exposed config types in your package. 
+[Typescript](https://www.typescriptlang.org) is recommended, but provide your config example with JSDoc [importing](https://jsdoc.app/tags-type) and [typing](https://jsdoc.app/tags-type) your exposed config types in your package.
 
 ### Type Building
 
@@ -57,7 +63,7 @@ It's recommended that you annotate your public-facing APIs, typically for initia
 ## Browser Features
 
 - [**Service Workers**](https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API) - You should also know that Service Workers are commonly referred to as "SWs".
-  - [**client \<-\> SW communication**](https://web.dev/articles/two-way-communication-guide)
+  - [**client \<-> SW communication**](https://web.dev/articles/two-way-communication-guide)
   - [**Clients API**](https://developer.mozilla.org/en-US/docs/Web/API/Clients)
 - [**Object data type**](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)
 - [**ES6 Proxies**](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy)
@@ -70,7 +76,7 @@ It's recommended that you annotate your public-facing APIs, typically for initia
 
 ## Optional
 
-- [**Valibot**](https://valibot.dev) - This is recommended for type-validating the message RPC of Client \<-\> SW.
+- [**Valibot**](https://valibot.dev) - This is recommended for type-validating the message RPC of Client \<-> SW.
 - [**Workbox**](https://developer.chrome.com/docs/workbox) - Workbox will likely have no use in your SW proxy, but you should still learn it since proxy site devs, mostly webOS and PWA-powered offline proxy sites, will likely route your SW proxy with it.
 
 ## Extras
@@ -81,10 +87,10 @@ It's best that you learn of APIs through explainers, and then delve deeper in we
 
 ### Common explainer sources
 
-- [MDN](https://developer.mozilla.org/en-US/docs/Web/API) - This will be your primary source. These will contain guides, descriptions (guides, interfaces, properties), and browser compatibilty tables.
-- [web.dev](https://web.dev/articles) - These articles, written by Google Devs, explain APIs in terms that make sense for the average web developer.
-- [Chrome Web Platform](https://developer.chrome.com/docs/web-platform) - These documents explain APIs, which only ship in Chromium at a time. These usually aren't explained in the other sources. You should focus on APIs shipped on all majors browsers, before you delve into most of these, since they tend to be niche.
-- [Can I use](https://caniuse.com) - This site provides the most in depth compatibility. It shows table columns for more browsers, and shows when an API was adopted and removed after being deprecated. This may also be useful if there is not an MDN article written for it yet, but that is a rare occurance.
+- [**MDN**](https://developer.mozilla.org/en-US/docs/Web/API) - This will be your primary source. These will contain guides, descriptions (guides, interfaces, properties), and browser compatibilty tables.
+- [**web.dev**](https://web.dev/articles) - These articles, written by Google Devs, explain APIs in terms that make sense for the average web developer.
+- [**Chrome Web Platform**](https://developer.chrome.com/docs/web-platform) - These documents explain APIs, which only ship in Chromium at a time. These usually aren't explained in the other sources. You should focus on APIs shipped on all majors browsers, before you delve into most of these, since they tend to be niche.
+- [**Can I use**](https://caniuse.com) - This site provides the most in depth compatibility. It shows table columns for more browsers, and shows when an API was adopted and removed after being deprecated. This may also be useful if there is not an MDN article written for it yet, but that is a rare occurance.
 
 # Building Controller APIs
 

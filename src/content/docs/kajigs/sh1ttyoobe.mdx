@@ -9,13 +9,14 @@ unenrollment: true
 
 import PageHeader from "/src/components/PageHeader.astro";
 
-<PageHeader title={frontmatter.title} description={frontmatter.description} author={frontmatter.author} link={frontmatter.link} kernver={frontmatter.kernver} nolower={frontmatter.nolower}/>
+<PageHeader title={frontmatter.title} description={frontmatter.description} author={frontmatter.author} link={frontmatter.link} kernver={frontmatter.kernver} nolower={frontmatter.nolower} />
 
 #### Steps
-1.  Powerwash your Chromebook
-2.  On the "welcome to your Chromebook" screen, click the android button
-3.  Hit CTRL+ALT+SHIFT+R and click "cancel"
-4.  Click "Enter your google account email and password" it should say to connect to a network
-5.  Open quick settings from the bottom right and connect to a network
+
+1. Powerwash your Chromebook
+2. On the "welcome to your Chromebook" screen, click the android button
+3. Hit CTRL+ALT+SHIFT+R and click "cancel"
+4. Click "Enter your google account email and password" it should say to connect to a network
+5. Open quick settings from the bottom right and connect to a network
 
 After signing in you can sign out and you will be back on the welcome screen, progress through oobe as normal by clicking get started and next, you will be greeted with three options to sign in. Sign in with the same email and when you sign in it will hang on the please wait screen, simply restart or alt+volup+x and you will be placed on the lockscreen. After that you are done and can sign out/reboot and it will be persistent until next powerwash.

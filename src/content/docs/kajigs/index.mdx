@@ -7,59 +7,64 @@ sidebar:
 
 import PageHeader from "/src/components/PageHeader.astro";
 
-<PageHeader title={frontmatter.title} description={frontmatter.description} author={frontmatter.author} link={frontmatter.link} kernver={frontmatter.kernver} nolower={frontmatter.nolower}/>
+<PageHeader title={frontmatter.title} description={frontmatter.description} author={frontmatter.author} link={frontmatter.link} kernver={frontmatter.kernver} nolower={frontmatter.nolower} />
 
 ## What is a kajig?
+
 Kajigs are exploits/tools, typically made for use on managed devices.
 
 #### Where can I find them?
+
 Kajigs can be found in [Titanium Network's Discord server](https://discord.gg/unblock) after verifying. Kajigs are located in the `kajig-the-things` category. This category has several kajig-related channels listed below.
-  1. `#kajigs-info`: Has information about the various tags/categories that kajigs have
-  2. `#kajigs-helpdesk`: A threads channel for recieving help from TN's Librarians.
-  3. `#kajigs`: The main kajigs threads channel, for things such as Chromebooks, iOS devices, and Windows devices.
-  4. `#webview-kajigs`: Threads channel exclusively for exploits allowing limited, but unblocked browsers
-  5. `#read-only-kajigs`: Threads channel containing exploits that are locked. Not much in here, aside from [Galapagos](/kajigs/galapagos)
-  4. `#kajigs-discussion`: Talk about kajigs in general, if you use it for help you probably won't get an answer. (See: `#kajigs-helpdesk`)
+
+1. `#kajigs-info`: Has information about the various tags/categories that kajigs have
+2. `#kajigs-helpdesk`: A threads channel for recieving help from TN's Librarians.
+3. `#kajigs`: The main kajigs threads channel, for things such as Chromebooks, iOS devices, and Windows devices.
+4. `#webview-kajigs`: Threads channel exclusively for exploits allowing limited, but unblocked browsers
+5. `#read-only-kajigs`: Threads channel containing exploits that are locked. Not much in here, aside from [Galapagos](/kajigs/galapagos)
+6. `#kajigs-discussion`: Talk about kajigs in general, if you use it for help you probably won't get an answer. (See: `#kajigs-helpdesk`)
 
 #### Who makes kajigs?
+
 Kajigs can be posted by anyone with the `Programmer` or `samyk` roles in the Discord server. Webview Kajigs can be posted by anyone.
 
 <div id="kajigs">
-### What kajigs can I use?
+  ### What kajigs can I use?
 
-This depends. For extension bypasses, Please see [Non-ChromeOS Exploits](/kajigs/notcros)
+  This depends. For extension bypasses, Please see [Non-ChromeOS Exploits](/kajigs/notcros)
 
-For ChromeOS Exploits, Refer to the information below.
+  For ChromeOS Exploits, Refer to the information below.
 
-#### What is a Kernver?
+  #### What is a Kernver?
 
-A Kernver is ChromeOS's ***Kern***el ***Ver***sion. (Hence, Kernver)
+  A Kernver is ChromeOS's ***Kern***&#x65;l ***Ver***&#x73;ion. (Hence, Kernver)
 
-Kernvers are used by Google to lock the Chromebook to a range of ChromeOS versions, with the purpose of patching exploits.
+  Kernvers are used by Google to lock the Chromebook to a range of ChromeOS versions, with the purpose of patching exploits.
 
-While your device is in a Kernver (read which versions those encapsulate below), the lowest recoverable ChromeOS version is the bottom of the Kernver's range.
+  While your device is in a Kernver (read which versions those encapsulate below), the lowest recoverable ChromeOS version is the bottom of the Kernver's range.
 
-[Read more about downgrading and how to recover here.](/kajigs/versions)
+  [Read more about downgrading and how to recover here.](/kajigs/versions)
 
-Now, about the table below. If you are at a ***higher*** Kernver than a listed kajig, you cannot use it. 
+  Now, about the table below. If you are at a ***higher*** Kernver than a listed kajig, you cannot use it.
 
-If you are at a ***lower*** Kernver, you can do it. If a kajig cannot be used on a lower Kernver, it will be highlighted a vibrant pink and stated in the kajig's page.
+  If you are at a ***lower*** Kernver, you can do it. If a kajig cannot be used on a lower Kernver, it will be highlighted a vibrant pink and stated in the kajig's page.
 
-:::note
-If you are able and willing to, you can change your Kernver [Unenrolling](/kajigs/unenrollment) and [Changing your Kernver](/kajigs/set-kernver).
-:::
+  :::note
+  If you are able and willing to, you can change your Kernver [Unenrolling](/kajigs/unenrollment) and [Changing your Kernver](/kajigs/set-kernver).
+  :::
 
-import { getkajigs, kernvers } from '../../config.ts';
-export const kernver = await getkajigs()
+  import { getkajigs, kernvers } from '../../config.ts';
+  export const kernver = await getkajigs()
 
-<table>
+  <table>
     <thead>
-    <tr>
-      <th>Kernver</th>
-      <th>ChromeOS Versions</th>
-      <th>Kajigs</th>
-    </tr>
-  </thead>
+      <tr>
+        <th>Kernver</th>
+        <th>ChromeOS Versions</th>
+        <th>Kajigs</th>
+      </tr>
+    </thead>
+
     <tbody>
       {Object.entries(kernvers).map(([kv, ver]) => (
         <tr key={kv}>
@@ -69,9 +74,9 @@ export const kernver = await getkajigs()
         </tr>
       ))}
     </tbody>
-</table>
+  </table>
 
-:::note
-    If you are on Kernver 1, you can recover to any version. However, if a kajig is listed as Kernver 1, it can only be done below v112.
-:::
+  :::note
+  If you are on Kernver 1, you can recover to any version. However, if a kajig is listed as Kernver 1, it can only be done below v112.
+  :::
 </div>

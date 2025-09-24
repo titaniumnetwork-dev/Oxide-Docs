@@ -7,7 +7,7 @@ sidebar:
 
 import PageHeader from "/src/components/PageHeader.astro";
 
-<PageHeader title={frontmatter.title} description={frontmatter.description} author={frontmatter.author} link={frontmatter.link} kernver={frontmatter.kernver} nolower={frontmatter.nolower}/>
+<PageHeader title={frontmatter.title} description={frontmatter.description} author={frontmatter.author} link={frontmatter.link} kernver={frontmatter.kernver} nolower={frontmatter.nolower} />
 
 Depending on your ChromeOS version, you may or may not be able to use some kajigs.
 
@@ -20,25 +20,27 @@ Depending on your ChromeOS version, you may or may not be able to use some kajig
 ## How can I downgrade/recover my Chromebook?
 
 ### What versions can I Recover to?
+
 On an unmodified device, you can recover to any version within the range your version is currently in.
 
 import { kernvers } from '../../config.ts';
 
 <table>
-    <thead>
+  <thead>
     <tr>
       <th>Kernver</th>
       <th>ChromeOS Versions</th>
     </tr>
   </thead>
-    <tbody>
-      {Object.entries(kernvers).map(([kv, ver]) => (
-        <tr key={kv}>
-          <td>{Array.isArray(ver) ? ver[0] : kv}</td>
-          <td>{Array.isArray(ver) ? ver[2] : ver}</td>
-        </tr>
-      ))}
-    </tbody>
+
+  <tbody>
+    {Object.entries(kernvers).map(([kv, ver]) => (
+      <tr key={kv}>
+        <td>{Array.isArray(ver) ? ver[0] : kv}</td>
+        <td>{Array.isArray(ver) ? ver[2] : ver}</td>
+      </tr>
+    ))}
+  </tbody>
 </table>
 
 :::note
@@ -64,12 +66,13 @@ Go to "Settings" (the app) → "About Chrome OS" and you should see a button cal
 <video controls>
   <source src="/assets/downgrading/version_chrome_settings.mp4" />
 </video>
+
 :::
 
 :::note
 Still can't get your board name?
 
-Enter Recovery mode [Esc+Ref+Pwr], and see the codename at the bottom of the screen. Then, go to [cros.tech](https://cros.tech) and type in the codename. It will show the board.
+Enter Recovery mode \[Esc+Ref+Pwr], and see the codename at the bottom of the screen. Then, go to [cros.tech](https://cros.tech) and type in the codename. It will show the board.
 (If Recovery mode shows `VORTICON`, you are on the `octopus` board.)
 :::
 

@@ -7,7 +7,7 @@ sidebar:
 
 import PageHeader from "/src/components/PageHeader.astro";
 
-<PageHeader title={frontmatter.title} description={frontmatter.description} author={frontmatter.author} link={frontmatter.link} kernver={frontmatter.kernver} nolower={frontmatter.nolower}/>
+<PageHeader title={frontmatter.title} description={frontmatter.description} author={frontmatter.author} link={frontmatter.link} kernver={frontmatter.kernver} nolower={frontmatter.nolower} />
 
 All Unenrollment exploits can be used on previous kernvers.
 
@@ -17,20 +17,21 @@ import { getkajigs, kernvers } from '../../config.ts';
 export const kernver = await getkajigs(true)
 
 <table>
-    <thead>
+  <thead>
     <tr>
       <th>Kernver</th>
       <th>ChromeOS Versions</th>
       <th>Kajigs</th>
     </tr>
   </thead>
-    <tbody>
-      {Object.entries(kernvers).map(([kv, ver]) => (
-        <tr key={kv}>
-          <td>{Array.isArray(ver) ? ver[0] : kv}</td>
-          <td>{Array.isArray(ver) ? ver[1] : ver}</td>
-          <td>{kernver[kv]?.map((k) => <a href={k.slug}>{k.title}</a>).reduce((a, b) => [a, ", ", b])}</td>
-        </tr>
-      ))}
-    </tbody>
+
+  <tbody>
+    {Object.entries(kernvers).map(([kv, ver]) => (
+      <tr key={kv}>
+        <td>{Array.isArray(ver) ? ver[0] : kv}</td>
+        <td>{Array.isArray(ver) ? ver[1] : ver}</td>
+        <td>{kernver[kv]?.map((k) => <a href={k.slug}>{k.title}</a>).reduce((a, b) => [a, ", ", b])}</td>
+      </tr>
+    ))}
+  </tbody>
 </table>

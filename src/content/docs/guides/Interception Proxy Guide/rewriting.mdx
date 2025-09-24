@@ -1,7 +1,8 @@
 ---
 title: Rewriting
 description: This document explains how and what to rewrite in an interception proxy
-order: 3
+sidebar:
+  order: 3
 ---
 
 # What needs to be rewritten
@@ -24,8 +25,9 @@ The [DOMUtils libraries](https://domutils.js.org/index.html) will take you a lon
 
 ### The `MutationObserver` approach and why it is not recommended
 
-It's slow...
-TODO: ...
+It's slow
+
+{/* TODO: ... */}
 
 #### A short overview on DOM painting
 
@@ -33,7 +35,9 @@ TODO: ...
 
 Don't even bother, RegExp is good enough. You only need to rewrite [`import(){:css}` at-rule statements](https://developer.mozilla.org/en-US/docs/Web/CSS/@import).
 
-> PLEASE **do not use RegExp for rewriting anything, except for CSS**
+:::caution
+**Do not use RegExp for rewriting anything, except for CSS**
+:::
 
 ## JS Rewriting
 
@@ -41,8 +45,8 @@ JS Rewriting is requried because you can't monkeypatch location objects, since t
 
 ### Recommended Libraries
 
-- [Oxc Parser](https://www.npmjs.com/package/oxc-parser)
-- [Oxc Walker](https://www.npmjs.com/package/oxc-walker)
+- [**Oxc Parser**](https://www.npmjs.com/package/oxc-parser)
+- [**Oxc Walker**](https://www.npmjs.com/package/oxc-walker)
 
 > Watch out and don't use unmaintained libraries like esprima, where you will be stuck with ES5-only
 

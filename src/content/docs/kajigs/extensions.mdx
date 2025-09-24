@@ -6,17 +6,19 @@ kernver: 0
 
 import PageHeader from "/src/components/PageHeader.astro";
 
-<PageHeader title={frontmatter.title} description={frontmatter.description} author={frontmatter.author} link={frontmatter.link} kernver={frontmatter.kernver} nolower={frontmatter.nolower}/>
+<PageHeader title={frontmatter.title} description={frontmatter.description} author={frontmatter.author} link={frontmatter.link} kernver={frontmatter.kernver} nolower={frontmatter.nolower} />
 
 ### DPS
 
-Disable extensions that use Service Workers<br/>
-<small><i>By Shrey719</i><br/></small>
+Disable extensions that use Service Workers<br />
+<small><i>By Shrey719</i><br /></small>
 
 #### Requirements
+
 Access to `chrome://serviceworker-internals`, and inspect element ***disabled***
 
 #### Steps:
+
 1. Go to `chrome://serviceworker-internals`.
 2. Click the checkbox that says `Open DevTools and pause JavaScript execution on Service Worker startup for debugging`
 3. Find the extension you want to disabled
@@ -27,17 +29,19 @@ Works on: Blockfiletypes, LanSchool, GoGuardian, and likely several other untest
 
 ### Insecurely II
 
-Disable extensions that use Service Workers<br/>
-<small><i>By vibingcat</i><br/></small>
+Disable extensions that use Service Workers<br />
+<small><i>By vibingcat</i><br /></small>
 
 #### Requirements
+
 Access to chrome://indexeddb-internals
 A blocking extension that uses indexeddb (EX: Securly)
 
 1. Go to chrome://indexeddb-internals
+
 2. Scroll down till you see chrome-extension://(securly extension id)
-    Typically: joflmkccibkooplaeoinecjbmdebglab or iheobagjkfklnlikgihanlhcddjoihkg
-    Also ckecmkbnoanpgplccmnoikfmpcdladkc
+   Typically: joflmkccibkooplaeoinecjbmdebglab or iheobagjkfklnlikgihanlhcddjoihkg
+   Also ckecmkbnoanpgplccmnoikfmpcdladkc
 
 3. Click `force stop`
 
@@ -52,12 +56,13 @@ Solution: Go to chrome://extensions, click on securly, check what the id is, and
 
 ### LTVegan
 
-Disable extensions that use Service Workers<br/>
-<small><i>By doxrberg</i><br/></small>
+Disable extensions that use Service Workers<br />
+<small><i>By doxrberg</i><br /></small>
 
 Tested only with lightspeed
 
 #### Steps
+
 1. for lightspeed filter agent, go to chrome-extension://adkcpkpghahmbopkjchobieckeoaoeem/main.js. for other extensions, find the biggest file for the extension
 2. open chrome://extensions/?id=IDHERE (for lightspeed it's chrome://extensions/?id=adkcpkpghahmbopkjchobieckeoaoeem)
 3. CTRL+A to copy all of the code, then drag the copied text to the tabs bar. this may freeze your chromebook a few times.
@@ -66,18 +71,18 @@ Tested only with lightspeed
 6. click the "Allow access to file URLs" (multiple times for good measure) and the first tab should close itself. if BOTH tabs closed themselves, you did something wrong, or just try again.
 7. you should be able to normally use your Chromebook now. afaik you might be able to close the duplicated tab but I didn't close it and it lasted for a long time.
 
-
 ### Crimson
 
-Extension Corruption<br/>
+Extension Corruption<br />
 
 #### Steps
+
 1. Esc+Refresh+Power and re-enroll (Enter recovery page), or you can just powerwash. (alternatively, you can push on the little arrow next to your name, and push "remove user")
-2. Log into your Chromebook and immediately turn off WiFi 
+2. Log into your Chromebook and immediately turn off WiFi
 3. Go to chrome://extensions, turn on WiFi, and wait for your school’s blocking extension to appear.
 4. As soon as it appears, turn off WiFi and restart as fast as possible. (if this does not work for you, try waiting a second or two, I found this to work better)
 5. Log back in, go back to extensions, and wait. If it says your blocking extension could be corrupted, then it worked (wait at least a minute with a close watch in case it comes back)
-6. If it didn’t work, start over. You have to be fast, if it didn't show up as corupted,  it means the extension has not been downloaded yet, repeat steps 3 and 4. 
+6. If it didn’t work, start over. You have to be fast, if it didn't show up as corupted,  it means the extension has not been downloaded yet, repeat steps 3 and 4.
 
 ### LTMeat (\<v114)
 
@@ -100,7 +105,7 @@ The extension should now be broken, assuming you clicked the switch! Only one of
 
 1. Esc+Refresh+Power and re-enroll (Enter recovery page), or you can just powerwash. (alternatively, you can push on the little arrow next to your name, and push "remove user")
 
-2. Log into your Chromebook and immediately turn off WiFi 
+2. Log into your Chromebook and immediately turn off WiFi
 
 3. Go to chrome://extensions, turn on WiFi, and wait for your school’s blocking extension to appear.
 
@@ -108,7 +113,7 @@ The extension should now be broken, assuming you clicked the switch! Only one of
 
 5. Log back in, go back to extensions, and wait. If it says your blocking extension could be corrupted, then it worked (wait at least a minute with a close watch in case it comes back)
 
-6. If it didn’t work, start over. You have to be fast, if it didn't show up as corupted,  it means the extension has not been downloaded yet, repeat steps 3 and 4. 
+6. If it didn’t work, start over. You have to be fast, if it didn't show up as corupted,  it means the extension has not been downloaded yet, repeat steps 3 and 4.
 
 ### Cormada
 
@@ -116,15 +121,18 @@ The extension should now be broken, assuming you clicked the switch! Only one of
 <small><i>By Cuhassle and thefakesydney, [Omada DNS](/kajigs/omada-dns) devs, Corkey devs</i></small>
 
 #### Requirements
+
 1. Unblocked Internet with permission to change nameservers (Home or School Guest Network)
 2. A brain
 
 #### Features
+
 No tracking or blocking extensions
 The ability to change and/or customize your wallpaper settings
 more we haven't discovered..
 
 #### Steps
+
 1. Powerwash (CTRL+ALT+SHIFT+R) or Go to dev mode and back
 2. Connect To internet (DO NOT PRESS GET STARTED)
 3. Set DNS servers to 66.23.198.252 and 66.94.105.229 (Do this on all networks)
@@ -132,8 +140,9 @@ more we haven't discovered..
 5. profit
 
 #### Tested on
+
 1. Chromebooks with "Securly for chromebooks" and "securly classroom" (blockers)
 2. The history logger/tracker "learnplatform"
-:::caution
-Haven't tested with other extensions yet. Feel free to try it out!
-:::
+   :::caution
+   Haven't tested with other extensions yet. Feel free to try it out!
+   :::

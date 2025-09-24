@@ -1,7 +1,8 @@
 ---
 title: Testing and CI (Advanced)
 description: In this part of the guide, we explain how to write playwright integration tests to prevent regressions on support of specific sites, and how to integrate WPT-diff, which has become standard for regression-proofing SW proxies.
-order: 7
+sidebar:
+  order: 7
 ---
 
 :::note
@@ -65,8 +66,8 @@ This section assumes you are using [GitHub Workflows](https://docs.github.com/en
 
 ## Setting up WPT-diff Test Map
 
-:::note
-TODO: Right now, WPT-diff does not support Test Maps, but it will in the near future. This is a planned feature, so this section will remain as a placeholder for now to remind me to finish it.
+:::caution
+At the moment WPT-diff does not support Test Maps, but it will in the near future. This is a planned feature, so this section will remain as a placeholder for now to remind me to finish it.
 :::
 
 ## Workflows
@@ -364,18 +365,17 @@ jobs:
           artifact_name: wpt-test-reports
 ```
 
-
 ## Main
 
 Per-commit on your main branch or PR:
 
 1. [Checkout the repo](https://github.com/marketplace/actions/checkout).
 2. Build your SW proxy and [upload an artifact](https://github.com/marketplace/actions/upload-a-build-artifact) of the build for later processing in other steps.
-4. Run your unit tests, including your package structure tests.
-5. Test for site regression with your Playwright Site Integration Tests.
-6. [Upload your artifact as a CI build](https://github.com/marketplace/actions/create-release) if these tests are successful.
-7. Run WPT-Diff Test Map on affected modules to prevent regression for your final NPM package and just for helpful insight when reviewing commits and PRs.
-8. Publish your package to NPM if the version in the package.json is bumped and all tests pass.
+3. Run your unit tests, including your package structure tests.
+4. Test for site regression with your Playwright Site Integration Tests.
+5. [Upload your artifact as a CI build](https://github.com/marketplace/actions/create-release) if these tests are successful.
+6. Run WPT-Diff Test Map on affected modules to prevent regression for your final NPM package and just for helpful insight when reviewing commits and PRs.
+7. Publish your package to NPM if the version in the package.json is bumped and all tests pass.
 
 :::note
 You should now start commiting PNPM lockfiles, to speed up dependency management.
