@@ -1,0 +1,7 @@
+{
+  "label": "Interception Proxy Guide",
+  "link": {
+    "type": "generated-index",
+    "description": "A complete guide for building an interception proxy. It relies less on source examples and following along, and more on intuition from the reader. It's best suited to help you get started."
+  }
+}

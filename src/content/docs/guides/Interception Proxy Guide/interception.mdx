@@ -47,11 +47,27 @@ const navEntries = performance.getEntriesByType("navigation")
 if (navEntries) alert(nav.name);
 ```
 
+### Prototype methods
+
+Methods on native prototypes can be intercepted by malicious pages to attempt to alter a proxy's inner workings' behavior. Interceptors may be able to get by by `Object.freeze`ing native prototypes or leaving them alone, but have to deal with their implications: either that the prototypes are unmodifiable to pages or that any method could be overridden by a page.
+
+We cannot share specific exmaples of this kind of revealer, as they are incredibly hard to patch compared to native APIs, which can simply be intercepted.
+
 # Methods of interception
 
 ## Request/Response
 
 ### SW
+
+### Sandboxed Iframe
+
+## Request URL
+
+It's not recommended to use interception for Request URLs. The methods are either limited, or they expose the real URLs to the filtering extensions
+
+### Catch-all SW Request Interception
+
+A method, which uses clients to rewrite the source URLs in the SW, requiring less rewrites, favoring interception, but it comes at a *large cost* of making the requests easily blockable by web extensions, since they intercept the requests and responses before being handled by the SW, if they block a URL, then the SW proxy won't be abel to unblock the site's resources with this method.
 
 #### Catch-all SW Request Interception
 
@@ -75,17 +91,9 @@ if (event.clientId !== "") {
 }
 ```
 
-### Sandboxed Iframe
-
-## Request URL
-
-### Catch-all SW Request Interception
-
-a method, which uses clients to rewrite the source URLs in the SW, requiring less rewrites, favoring interception, but it comes at a *large cost* of making the requests easily blockable by web extensions, since they intercept the requests and responses before being handled by the SW, if they block a URL, then the SW proxy won't be abel to unblock the site's resources with this method.
-
 ### Base URL
 
-This is only useful for relative URLs...
+This refers to setting a base URL to be under the route that the SW handles under its prefix. This is only useful for relative URLs. There's no point of doing this, because you also need to handle absolute URLs.
 
 ## Proxification
 
