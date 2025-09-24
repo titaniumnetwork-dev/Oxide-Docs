@@ -1,7 +1,8 @@
 ---
 title: Encoding (Advanced)
 description: In this part of the guide, we explain the types of encoding that are recommended for web proxies, and how you should implement encoding.
-order: 6
+sidebar:
+  order: 6
 ---
 
 Encoding is useful to prevent extension blockers from blocking your requests. It's useless for network filters when making an interception proxy, since you intercept the requests and responses on the client and not the server, however extension filters can block your requests before they reach the SW.

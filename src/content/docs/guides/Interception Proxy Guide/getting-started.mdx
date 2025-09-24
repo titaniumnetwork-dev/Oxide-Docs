@@ -1,7 +1,8 @@
 ---
 title: Getting Started
 description: This part of the guide lays out the foundation of what you need to know to build a SW proxy.
-order: 1
+sidebar:
+  order: 1
 ---
 
 This guide is intended for devs interested in making a SW proxy, not all information here is relevant to making a server-only proxy. We will teach you how to do it in a type-safe and effective matter. All historic methods will be documented, and alternatives, but the best will be recommended.
@@ -17,7 +18,9 @@ As opposed to a server-only proxy:
 
 As opposed to a sandboxed iframe proxy:
 
-TODO: ...
+:::caution
+This part is unfinished
+:::
 
 # Glossary
 
@@ -38,7 +41,7 @@ It's recommended that you annotate your public-facing APIs, typically for initia
 
 ## Types
 
-[Typescript](https://www.typescriptlang.org) is recommended, but provide your config example with JSDoc [importing](https://jsdoc.app/tags-type) and [typing](https://jsdoc.app/tags-type) your exposed config types in your package. 
+[Typescript](https://www.typescriptlang.org) is recommended, but provide your config example with JSDoc [importing](https://jsdoc.app/tags-type) and [typing](https://jsdoc.app/tags-type) your exposed config types in your package.
 
 ### Type Building
 
@@ -57,7 +60,7 @@ It's recommended that you annotate your public-facing APIs, typically for initia
 ## Browser Features
 
 - [**Service Workers**](https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API) - You should also know that Service Workers are commonly referred to as "SWs".
-  - [**client \<-\> SW communication**](https://web.dev/articles/two-way-communication-guide)
+  - [**client \<-> SW communication**](https://web.dev/articles/two-way-communication-guide)
   - [**Clients API**](https://developer.mozilla.org/en-US/docs/Web/API/Clients)
 - [**Object data type**](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)
 - [**ES6 Proxies**](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy)
@@ -70,7 +73,7 @@ It's recommended that you annotate your public-facing APIs, typically for initia
 
 ## Optional
 
-- [**Valibot**](https://valibot.dev) - This is recommended for type-validating the message RPC of Client \<-\> SW.
+- [**Valibot**](https://valibot.dev) - This is recommended for type-validating the message RPC of Client \<-> SW.
 - [**Workbox**](https://developer.chrome.com/docs/workbox) - Workbox will likely have no use in your SW proxy, but you should still learn it since proxy site devs, mostly webOS and PWA-powered offline proxy sites, will likely route your SW proxy with it.
 
 ## Extras
