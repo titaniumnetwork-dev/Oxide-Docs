@@ -84,9 +84,9 @@ export default defineConfig({
         {
           label: "Proxies",
           items: [
+            "proxies/scramjet",
             "proxies/rammerhead",
             "proxies/ultraviolet",
-            "proxies/scramjet",
             typeDocSidebarGroup,
           ],
         },
@@ -102,6 +102,10 @@ export default defineConfig({
           label: "Kajigs",
           autogenerate: { directory: "kajigs" },
         },
+        {
+          label: "Organizations",
+          autogenerate: { directory: "organizations" },
+        }
       ],
       customCss: [
         "./src/styles/custom.css",

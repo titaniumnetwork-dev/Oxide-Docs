@@ -6,6 +6,7 @@ export const collections = {
     schema: docsSchema({
       extend: z.object({
         github: z.string().optional(),
+        gitlab: z.string().optional(),
         discord: z.string().optional(),
         "official-link": z.string().optional(),
         kernver: z.number().optional(),
