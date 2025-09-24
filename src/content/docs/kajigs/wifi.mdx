@@ -6,16 +6,18 @@ kernver: 0
 
 import PageHeader from "/src/components/PageHeader.astro";
 
-<PageHeader title={frontmatter.title} description={frontmatter.description} author={frontmatter.author} link={frontmatter.link} kernver={frontmatter.kernver} nolower={frontmatter.nolower}/>
+<PageHeader title={frontmatter.title} description={frontmatter.description} author={frontmatter.author} link={frontmatter.link} kernver={frontmatter.kernver} nolower={frontmatter.nolower} />
 
 ### Get your Wifi Password
 
-<small><i>By Luphoria</i><br/></small>
+<small><i>By Luphoria</i><br /></small>
 
 #### Requirements
+
 chrome://net-export and chrome://policy unblocked
 
 #### Steps
+
 1. Visit chrome://net-export
 2. In "OPTIONS" set "Include raw bytes"
 3. Click "Start Logging to Disk"

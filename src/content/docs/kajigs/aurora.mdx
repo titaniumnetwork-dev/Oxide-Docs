@@ -11,9 +11,10 @@ kernver: 0
 
 import PageHeader from "/src/components/PageHeader.astro";
 
-<PageHeader title={frontmatter.title} description={frontmatter.description} author={frontmatter.author} link={frontmatter.link} kernver={frontmatter.kernver} nolower={frontmatter.nolower}/>
+<PageHeader title={frontmatter.title} description={frontmatter.description} author={frontmatter.author} link={frontmatter.link} kernver={frontmatter.kernver} nolower={frontmatter.nolower} />
 
 #### What are the features?
+
 - Recovery
 - Payloads
 - Booting other shims
@@ -22,26 +23,36 @@ import PageHeader from "/src/components/PageHeader.astro";
 ## Flashing
 
 First, obtain an image of Aurora.
+
 ### Prebuilts
-Prebuilts are located at https://dl.mrwork.shop/aurora
+
+Prebuilts are located at [https://dl.mrwork.shop/aurora](https://dl.mrwork.shop/aurora)
+
 ### Building
+
 ```
 git clone https://github.com/AerialiteLabs/Aurora.git
 cd Aurora
 ```
+
 Run the next command with a raw shim or nanoshim
+
 ```
 sudo bash Aurora -i /path/to/shim.bin
 ```
+
 Alternatively, you can automatically download a shim and build it with the following command:
+
 ```
 sudo bash Aurora <board> --auto
 ```
 
 Linux: (Replace /dev/sdX with your flash drive/sd card)
+
 ```
 sudo dd if=/path/to/board-aurora.bin of=/dev/sdX bs=1M status=progress
 ```
+
 Windows: Download Rufus, select your USB, select board-aurora.bin
 
 macOS: Download BalenaEtcher, select your USB, select board-aurora.bin
@@ -49,21 +60,24 @@ macOS: Download BalenaEtcher, select your USB, select board-aurora.bin
 ChromeOS: Download [Chromebook Recovery Utility](https://chromewebstore.google.com/detail/chromebook-recovery-utili/pocpnlppkickgojjlmhdmidojbmbodfm), select "Use local image" in the settings menu of it, select your USB, select board-aurora.bin
 
 ## Booting
-1. Press [Esc+Ref+Pwr], then [Ctrl+D] to enter developer mode.
+
+1. Press \[Esc+Ref+Pwr], then \[Ctrl+D] to enter developer mode.
 2. Plug in your flash drive that you flashed {frontmatter.title} to.
-3. Press [Esc+Ref+Pwr] again and allow the shim to boot up.
+3. Press \[Esc+Ref+Pwr] again and allow the shim to boot up.
 
 #### Upload files via another device
+
 1. Use AFT on page 2 of Aurora (requires wifi connectivity)
 2. Use a Linux computer with **ROOT ACCESS**
-    - Mount your flash drive
-        ```
-        sudo mount /dev/sdX4 /mnt
-        ```
-    - Copy your files
-        ```
-        sudo cp /path/to/[recoveryimage|shim].bin /mnt/usr/share/aurora/images/[recovery|shims]/
-        ```
+   - Mount your flash drive
+     ```
+     sudo mount /dev/sdX4 /mnt
+     ```
+   - Copy your files
+     ```
+     sudo cp /path/to/[recoveryimage|shim].bin /mnt/usr/share/aurora/images/[recovery|shims]/
+     ```
+
 :::caution
 ChromeOS' Files app will NOT WORK! Use VT2 or Crostini USB passthrough if you must.
 :::

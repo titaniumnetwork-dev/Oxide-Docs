@@ -9,57 +9,62 @@ unenrollment: true
 
 import PageHeader from "/src/components/PageHeader.astro";
 
-<PageHeader title={frontmatter.title} description={frontmatter.description} author={frontmatter.author} link={frontmatter.link} kernver={frontmatter.kernver} nolower={frontmatter.nolower}/>
+<PageHeader title={frontmatter.title} description={frontmatter.description} author={frontmatter.author} link={frontmatter.link} kernver={frontmatter.kernver} nolower={frontmatter.nolower} />
 
 It requires you to be on v132 or lower, which can be achieved by downgrading to v132 LTS. You can also get the bundled update with Sh1mmer, by building with it's [update payload](/kajigs/sh1mmer#update-payload)
 
 ### How do I use Br0ker?
+
 Sh1mmer only:
-    1. Boot [Sh1mmer](/kajigs/sh1mmer#booting)
-    2. Select `Payloads`
-    3. Select `Br0ker (unenrollment up to kernver 5)`
+
+1. Boot [Sh1mmer](/kajigs/sh1mmer#booting)
+2. Select `Payloads`
+3. Select `Br0ker (unenrollment up to kernver 5)`
 
 BadApple + Sh1mmer:
-    1. Enter [BadApple](/kajigs/badapple)
-    2. Plug in your Sh1mmer USB drive
-    3. Find your USB device by running
-        ```
-        ls /dev/sd*
-        ```
-        and noting what shows up. (We'll be using /dev/sdX as an example, but you must replace "X" with the correct letter.)
-    4. Run these commands:
-        ```
-        mkdir -p /mnt/sh1mmer
-        mount -o ro /dev/sdX /mnt/sh1mmer
-        sh /mnt/sh1mmer/root/noarch/payloads/br0ker.sh
-        ```
+
+1. Enter [BadApple](/kajigs/badapple)
+2. Plug in your Sh1mmer USB drive
+3. Find your USB device by running
+   ```
+   ls /dev/sd*
+   ```
+   and noting what shows up. (We'll be using /dev/sdX as an example, but you must replace "X" with the correct letter.)
+4. Run these commands:
+   ```
+   mkdir -p /mnt/sh1mmer
+   mount -o ro /dev/sdX /mnt/sh1mmer
+   sh /mnt/sh1mmer/root/noarch/payloads/br0ker.sh
+   ```
 
 Sh1ttyOOBE + BadRecovery + Sh1mmer (v135-137)
-    1. Perform [Sh1ttyOOBE](/kajigs/sh1ttyoobe), press [Esc+Ref+Pwr], and enter developer mode
-    2. Enter unverified [BadRecovery](/kajigs/badrecovery), ignore errors, and wait for the shell.
-    3. Once it fully loads, unplug the USB drive used for BadRecovery
-    4. Plug in your Sh1mmer USB drive
-    5. Find your USB device by running
-        ```
-        ls /dev/sd*
-        ```
-        and noting what shows up. (We'll be using /dev/sdX as an example, but you must replace "X" with the correct letter.)
-    6. Run these commands:
-        ```
-        mkdir -p /mnt/sh1mmer
-        mount -o ro /dev/sdX /mnt/sh1mmer
-        sh /mnt/sh1mmer/root/noarch/payloads/br0ker.sh
-        ```
+
+1. Perform [Sh1ttyOOBE](/kajigs/sh1ttyoobe), press \[Esc+Ref+Pwr], and enter developer mode
+2. Enter unverified [BadRecovery](/kajigs/badrecovery), ignore errors, and wait for the shell.
+3. Once it fully loads, unplug the USB drive used for BadRecovery
+4. Plug in your Sh1mmer USB drive
+5. Find your USB device by running
+   ```
+   ls /dev/sd*
+   ```
+   and noting what shows up. (We'll be using /dev/sdX as an example, but you must replace "X" with the correct letter.)
+6. Run these commands:
+   ```
+   mkdir -p /mnt/sh1mmer
+   mount -o ro /dev/sdX /mnt/sh1mmer
+   sh /mnt/sh1mmer/root/noarch/payloads/br0ker.sh
+   ```
 
 Sh1ttyOOBE + BadBr0ker (v135-137)
-    1. Perform [Sh1ttyOOBE](/kajigs/sh1ttyoobe), press [Esc+Ref+Pwr], and enter developer mode.
-    2. Enter [BadBr0ker](https://github.com/crosbreaker/badbr0ker?tab=readme-ov-file#i-have-a-usb-what-now).
-    3. While __still__ in developer mode, press [Ctrl+Alt+Ref], login as "root" run the following commands.
-        ```
-        echo --enterprise-enable-unified-state-determination=never >/tmp/chrome_dev.conf
-        echo --enterprise-enable-forced-re-enrollment=never >>/tmp/chrome_dev.conf
-        echo --enterprise-enable-initial-enrollment=never >>/tmp/chrome_dev.conf
-        mount --bind /tmp/chrome_dev.conf /etc/chrome_dev.conf
-        initctl restart ui
-        ```
-    4. Press [Ctrl+Alt+GoBack] and set up the device fully through the setup process. DO NOT POWER OFF THE DEVICE UNTIL FULLY SETUP, OR UNENROLLMENT WILL FAIL.
+
+1. Perform [Sh1ttyOOBE](/kajigs/sh1ttyoobe), press \[Esc+Ref+Pwr], and enter developer mode.
+2. Enter [BadBr0ker](https://github.com/crosbreaker/badbr0ker?tab=readme-ov-file#i-have-a-usb-what-now).
+3. While **still** in developer mode, press \[Ctrl+Alt+Ref], login as "root" run the following commands.
+   ```
+   echo --enterprise-enable-unified-state-determination=never >/tmp/chrome_dev.conf
+   echo --enterprise-enable-forced-re-enrollment=never >>/tmp/chrome_dev.conf
+   echo --enterprise-enable-initial-enrollment=never >>/tmp/chrome_dev.conf
+   mount --bind /tmp/chrome_dev.conf /etc/chrome_dev.conf
+   initctl restart ui
+   ```
+4. Press \[Ctrl+Alt+GoBack] and set up the device fully through the setup process. DO NOT POWER OFF THE DEVICE UNTIL FULLY SETUP, OR UNENROLLMENT WILL FAIL.

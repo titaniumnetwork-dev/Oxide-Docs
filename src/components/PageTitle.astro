@@ -9,7 +9,7 @@ const SLUG = Astro.url.pathname.replace(/^\/+|\/+$/g, "");
 const DOCS = await getCollection("docs");
 /** Document matching the current slug if found. */
 const MATCHING_DOC: CollectionEntry<"docs"> | undefined = DOCS.find(
-  (doc: CollectionEntry<"docs">) => doc.slug === SLUG,
+  (doc: CollectionEntry<"docs">) => doc.slug === SLUG
 );
 /** Frontmatter data from the matching document, or empty object as fallback. */
 const FRONTMATTER_DATA = MATCHING_DOC?.data ?? {
