@@ -3,4 +3,9 @@ node_modules/
 dist/
 .astro/
 .vscode/
+
+# Broken under Remark
 src/content/docs/guides/Interception Proxy Guide/server-side.mdx
+src/content/docs/kajigs/index.mdx
+src/content/docs/kajigs/unenrollment.mdx
+src/content/docs/kajigs/versions.mdx
