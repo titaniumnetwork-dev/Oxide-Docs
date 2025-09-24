@@ -31,16 +31,13 @@ export default defineConfig({
   redirects: {
     "/kajigs/caubdns-proxy-editor": "/kajigs/caub#caubdns-proxy-editor",
     "/kajigs/caudns": "/kajigs/caub#caudns",
-    "/kajigs/connection-on-whitelisted-wifi":
-      "/kajigs/wifi#connect-to-non-whitelisted-networks",
+    "/kajigs/connection-on-whitelisted-wifi": "/kajigs/wifi#connect-to-non-whitelisted-networks",
     "/kajigs/crosver": "/kajigs/versions#what-versions-can-i-recover-to",
     "/kajigs/downgrading": "/kajigs/versions",
     "/kajigs/kernverinfo": "/kajigs/versions#what-versions-can-i-recover-to",
-    "/kajigs/lockdown-browser":
-      "/kajigs/webviews#eduphoria-lockdown-browser-webview",
+    "/kajigs/lockdown-browser": "/kajigs/webviews#eduphoria-lockdown-browser-webview",
     "/kajigs/ltmeat": "/kajigs/extensions#ltmeat-v114",
-    "/kajigs/rootless-unenrollment":
-      "/kajigs/old-unenroll#rootless-unenrollment-v101",
+    "/kajigs/rootless-unenrollment": "/kajigs/old-unenroll#rootless-unenrollment-v101",
   },
   integrations: [
     starlight({
