@@ -5,9 +5,19 @@ sidebar:
   order: 5
 ---
 
+# Glossary
+
+- **Captured Headers** - Headers that are captured in the Header rewriter, before they are rewritten. These headers are then sent to the client, so that they can be used for emulation, since you can't rewrite the origin to a proxified origin. Not all forms of emulation require this, sometimes you need to emulate in the SW as is the case with policies, such as cache and referrer. In rare cases, you can use client APIs in the sandboxer to emulate this behavior without needing knowledge of the existing policies set by the headers.
+
 # Types of Emulation
 
 Everything, which needs to be emulated includes: errors for all major browsers, Nested SWs, caching, and every security policy.
+
+## Referrer Policy Chain Tracking
+
+:::note
+This part is unfinished.
+:::
 
 ## History State Emulation
 
