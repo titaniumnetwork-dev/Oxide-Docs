@@ -1,6 +1,6 @@
 ---
 const frontmatter = Astro.props.frontmatter || Astro.props;
-const { github, discord, "official-link": officialLink } = frontmatter;
+const { github, gitlab, discord, "official-link": officialLink } = frontmatter;
 
 import SocialIconsClone from "./SocialIconsClone.astro";
 
@@ -11,6 +11,14 @@ if (github) {
     href: github,
     label: "View on GitHub",
     icon: "github" as const,
+  });
+}
+
+if (gitlab) {
+  links.push({
+    href: gitlab,
+    label: "View on GitLab",
+    icon: "gitlab" as const,
   });
 }
 
