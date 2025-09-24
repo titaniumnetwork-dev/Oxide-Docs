@@ -11,7 +11,8 @@ import PageHeader from "/src/components/PageHeader.astro";
 
 If a blocking system requires both an extension and a Chrome App to function, the extension may communicate with the Chrome App over HTTP on the `lo` (local) network interface. If that's the case, HSTS can most likely be used to bypass it.
 
-:::noteRequirements
+:::note
+Requirements
 
 - `chrome://net-internals` unblocked
 - A Chrome Extension that comes with a helper Chrome App
@@ -38,7 +39,8 @@ If a blocking system requires both an extension and a Chrome App to function, th
 - GoGuardian
 - Anything that doesn't have both a Chrome App and Extension
 
-:::noteIssues
+:::caution
+Issues
 
 - If you have a force-installed extension and have a Chrome App from the same developer force-installed, it's worth giving this a try.
 - If you discover another filter this works with, reply with the name.

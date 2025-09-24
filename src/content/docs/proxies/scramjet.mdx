@@ -1,10 +1,11 @@
 ---
 title: Scramjet
 description: An interception-based web proxy designed to evade internet censorship, bypass arbitrary web browser restrictions and innovate web proxy technologies.
-keywords: ["web proxy", "sw proxy", "interception proxy"]
+keywords: ["web proxy", "interception proxy", "sw proxy"]
 themeColor: "#ffa660"
 github: "https://github.com/MercuryWorkshop/scramjet"
 official-link: "https://scramjet.mercurywork.shop"
+order: 1
 ---
 
 <img width="200px" align="right" src="https://raw.githubusercontent.com/MercuryWorkshop/scramjet/refs/heads/main/assets/scramjet.png" alt="Official Scramjet Logo" height="250" />
@@ -21,7 +22,7 @@ In the proxy community, you may see it abbreviated as "SJ".
 
 1. Install the package: `pnpm i @mercuryworkshop/scramjet@2.0.0-alpha{:sh}`
 
-2. [Setup a transport on your site](../transports/using.mdx)
+2. [Setup a transport on your site](../transports/using-transports.mdx)
 
 3. Serve the Scramjet build under your specified route using the path `import { scramjetPath } from "@mercuryworkshop/scramjet/path"{:js}`. We will use `/scram/` as a route for these examples.
 
@@ -96,7 +97,7 @@ The CI builds are published per each successful commit after going through less-
 
 Instead you would install with `pnpm install https://github.com/MercuryWorkshop/scramjet/releases/download/latest/mercuryworkshop-scramjet-1.0.2-dev.tgz{:sh}`
 
-:::note
+:::caution
 Fixed types haven't landed in the NPM package yet, so you need to install from the CI builds if you want to take advantage of that.
 :::
 
