@@ -1,0 +1,7 @@
+{
+  "label": "Proxies",
+  "link": {
+    "type": "generated-index",
+    "description": "This collection documents web proxies that are relevant in the unblocking community. Some proxies are deprecated, but kept for legacy purposes."
+  }
+}
