@@ -1,0 +1,20 @@
+---
+title: Using Transports
+order: 1
+---
+
+This is a *new guide* on how to use transports without Bare-Mux, since use of it is **discouraged** now.
+
+This guide teaches using transports without Bare-Mux. As great as Bare-Mux was for proxy sites, it was also a curse, since due to browser bugs, it was determined to be too buggy to use in production.
+
+# What's wrong with Bare-Mux?
+
+Shared Workers can be suicidal. Bare-Mux relies on Shared Workers to switch transports, but there are issues, such as the message port getting lost when the worker is terminated after a set amount of time (which is different for all stable major browsers). This is only fixed on Chromium Canary.
+
+# Using Transports individually
+
+You're recommended to pick one transport (see the other docs in this category), while we wait for BCC-v2.
+
+# Synoposis
+
+AKA: A brief history lesson of transports.
