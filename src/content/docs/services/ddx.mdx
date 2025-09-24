@@ -1,0 +1,47 @@
+---
+title: DayDream X
+description: Explore the Web with DayDream X.
+gitlab: https://gitlab.com/nightnetwork/daydreamx
+discord: https://discord.night-x.com
+---
+
+# Features
+
+- Cloaking
+- Tabs
+- History
+- Theming
+- Bookmarks
+- Proxies
+- Games
+
+# Deployment
+
+<br/>
+
+<a target="_blank" href="https://app.koyeb.com/deploy?type=git&repository=gitlab.com/NightProxy/DayDreamX"><img alt="Deploy to Koyeb" src="https://binbashbanana.github.io/deploy-buttons/buttons/remade/koyeb.svg"></img></a>
+
+<br/>
+
+:::tip
+You **can not** host DDX locally via a static web hosting site such as Netlify, Github Pages, and Cloudflare Pages.
+:::
+
+We recommend using the Bun package manager to install DayDreamX's dependencies. However, DayDreamX contains lock files for three major package managers: npm, pnpm, and bun.
+
+Please run the following commands to host a server:
+
+```sh
+git clone https://gitlab.com/NightProxy/DayDreamX.git
+cd DayDreamX
+npm i
+npm start
+```
+
+In the above example, replace `npm` with `bun` or `pnpm` for whichever package manager you wish to use.
+
+# Updating
+
+```sh
+git pull --force --allow-unrelated-histories
+```
