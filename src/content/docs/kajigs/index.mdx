@@ -6,6 +6,8 @@ sidebar:
 ---
 
 import PageHeader from "/src/components/PageHeader.astro";
+import { getkajigs, kernvers } from '../../config.ts';
+export const kernver = await getkajigs()
 
 <PageHeader title={frontmatter.title} description={frontmatter.description} author={frontmatter.author} link={frontmatter.link} kernver={frontmatter.kernver} nolower={frontmatter.nolower} />
 
@@ -52,9 +54,6 @@ Kajigs can be posted by anyone with the `Programmer` or `samyk` roles in the Dis
   :::note
   If you are able and willing to, you can change your Kernver [Unenrolling](/kajigs/unenrollment) and [Changing your Kernver](/kajigs/set-kernver).
   :::
-
-  import { getkajigs, kernvers } from '../../config.ts';
-  export const kernver = await getkajigs()
 
   <table>
     <thead>
