@@ -46,8 +46,6 @@ Holy Unblocker LTS is optimized for self-hosting to provide you with maximum pri
 [![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/QuiteAFancyEmerald/Holy-Unblocker)
 [![Deploy to Fly.io](https://img.shields.io/badge/Deploy%20to-Fly.io-blue?logo=fly.io)](https://fly.io/launch?repo=https://github.com/QuiteAFancyEmerald/Holy-Unblocker)
 
-
-
 ## Production Paid/Free Options (Requires Payment Info)
 
 [![Deploy to Azure](https://raw.githubusercontent.com/BinBashBanana/deploy-buttons/master/buttons/remade/azure.svg)](https://deploy.azure.com/?repository=https://github.com/QuiteAFancyEmerald/Holy-Unblocker)
@@ -65,7 +63,7 @@ Replit is no longer free and Heroku has a set policy against web proxies. Try Gi
 
 - Fork (and star!) this repository to your GitHub account
 - Head to the official [Codespaces](https://github.com/codespaces) website (ensure you have a GitHub account already made)
-- Select **New Codespaces** and look for _[USERNAME]/Holy-Unblocker_ on your account
+- Select **New Codespaces** and look for *\[USERNAME]/Holy-Unblocker* on your account
 - Ensure the branch is set to `master` and the dev container configuration is set to **Holy Unblocker LTS**
 - Select **Create Codespace** and allow the container to setup
 - Type `npm run fresh-install` and `npm start` in the terminal
@@ -98,7 +96,7 @@ Replit is no longer free and Heroku has a set policy against web proxies. Try Gi
 
 ### It is highly recommended you switch branches via your IDE to a production released branch. Often the master branch contains unstable or WIP changes.
 
-### Example: v6.x_production instead of master
+### Example: v6.x\_production instead of master
 
 ## Terminal
 
@@ -166,20 +164,21 @@ sudo systemctl restart nginx
 
 Resources for self-hosting:
 
-- https://github.com/nvm-sh/nvm
-- https://docs.titaniumnetwork.org/guides/nginx/
-- https://docs.titaniumnetwork.org/guides/vps-hosting/
-- https://docs.titaniumnetwork.org/guides/dns-setup/
+- [https://github.com/nvm-sh/nvm](https://github.com/nvm-sh/nvm)
+- [https://docs.titaniumnetwork.org/guides/nginx/](https://docs.titaniumnetwork.org/guides/nginx/)
+- [https://docs.titaniumnetwork.org/guides/vps-hosting/](https://docs.titaniumnetwork.org/guides/vps-hosting/)
+- [https://docs.titaniumnetwork.org/guides/dns-setup/](https://docs.titaniumnetwork.org/guides/dns-setup/)
 
 ## Configuration
 
 ### Server Configuration Setup
 
-The default PORT for the proxy when started is `http://localhost:8080`. You can change the PORT and other production metrics if needed in `./ecosystem.config.js`. 
+The default PORT for the proxy when started is `http://localhost:8080`. You can change the PORT and other production metrics if needed in `./ecosystem.config.js`.
 
 Every other localized changes for source randomization, auto-minify, etc. are located in `./config.json`.
 
 **config.json**
+
 - `minifyScripts`: Automatically minify respective static assets upon starting the server.
 - `randomizeIdentifiers`: Enable experimental proxy global randomization for Ultraviolet. This reduces the chances of UV being detected by any extension based filters.
 - `production`: Utilize a pre-configured production setup for server hosting. Automatically has cache control, session jobs for Rammerhead and source rewrites setup.
@@ -268,7 +267,7 @@ prSet('pr-example', 'example');
 
 ### Games Management
 
-As stated above all game links that need to be appended to a page (including images and descriptions) are managed via the nav files in`./views/assets/json`. 
+As stated above all game links that need to be appended to a page (including images and descriptions) are managed via the nav files in`./views/assets/json`.
 
 Download the latest release [here](https://github.com/QuiteAFancyEmerald/Holy-Unblocker/releases/latest/download/GAMES.md) and extract it within a folder called `/views/archive`.
 
@@ -321,7 +320,8 @@ Out of the list of hosting providers Dedipath and Azure rank first as a preferen
 After you have selected a decent VPS, use Cloudflare for the DNS records for both the site and the subdomains for the proxies.
 
 This is an example of DNS records. Self-hosting will require `A records` preferably.
-<img src="https://raw.githubusercontent.com/titaniumnetwork-dev/Holy-Unblocker/master/views/assets/img/dnssetup.png" width="500"></img>
+
+<img src="https://raw.githubusercontent.com/titaniumnetwork-dev/Holy-Unblocker/master/views/assets/img/dnssetup.png" width="500" />
 
 - `@` and `www.example.com` are being used for Holy Unblocker LTS.
 - `a.example.com` is being used for other instances like Libreddit, Invidious or web ported games depending on what the site maintainer needs.
@@ -340,8 +340,8 @@ Make sure they are CNAME although A records also work and try to follow this str
 
 **Type | Name | Target**
 
-`A | @ | VPS IP GOES HERE`  
-`A | www | VPS IP GOES HERE`  
+`A | @ | VPS IP GOES HERE`\
+`A | www | VPS IP GOES HERE`\
 `A | a | VPS IP GOES HERE`
 
 Make sure HTTPS is forced and have SSL set to Flexible (if you don't use LetsEncrypt). Otherwise you can have SSL set to Full.

@@ -4,6 +4,7 @@ description: A stunning and sleek web proxy with support for hundreds of popular
 keywords: ["proxy sites"]
 github: "https://github.com/NebulaServices/Nebula"
 official-link: "https://nebulaproxy.io"
+discord: "https://discord.gg/unblocker"
 ---
 
 [![repo](https://socialify.git.ci/nebulaservices/nebula/image?description=1\&font=Inter\&forks=1\&issues=1\&language=1\&name=1\&owner=1\&pattern=Circuit%20Board\&pulls=1\&stargazers=1\&theme=Dark)](https://github.com/nebulaservices/nebula)
@@ -12,7 +13,7 @@ official-link: "https://nebulaproxy.io"
 [![website status](https://img.shields.io/website?url=https%3A%2F%2Fnebulaproxy.io\&style=for-the-badge)](https://nebulaproxy.io)
 [![commit a week](https://img.shields.io/github/commit-activity/w/nebulaservices/nebula?style=for-the-badge)](https://github.com/NebulaServices/Nebula/commits/main/)
 
-## Get started
+# Get started
 
 To get started, press one of the buttons below to deploy Nebula
 
@@ -25,73 +26,72 @@ This will **NOT** deploy on GitHub Pages, Netlify, Vercel, GitLab Pages, or any 
 This will **NOT** work on Render
 :::
 
-## How to get links
-
-[![Nebula Services Discord](https://invidget.switchblade.xyz/unblocker?theme=dark)](https://discord.gg/unblocker)
-[![Titanium Network Discord](https://invidget.switchblade.xyz/unblock?theme=dark)](https://discord.gg/unblock)
-
 ---
 
-## Features
+# Features
 
 - Multiple Proxy "Backends":
+  - [Scramjet](/proxies/scramjet)
   - [Ultraviolet](/proxies/ultraviolet)
-  - [Rammerhead](/proxies/rammerhead)
 
 ---
 
-## Contributors
+# Contributors
 
 - [Rifting](https://github.com/rifting) - Owner & Maintainer
 - [MotorTruck1221](https://motortruck1221.com) - Maintainer
+- [Scaratek](https://github.com/scaratech) - Maintainer
+- [Skylink](https://skylinkhosting.com) - Providing hosting
 
 ---
 
-## Tech Stack
+# Tech Stack
 
 - [Astro](https://astro.build)
+- [Tailwind](https://tailwindcss.com/)
+- [Svelte](https://svelte.dev/)
 - [Fastify](https://fastify.dev)
 - [Ultraviolet](/proxies/ultraviolet)
-- [Rammerhead](/proxies/rammerhead)
+- [Scramjet](/proxies/scramjet)
 - [Epoxy](/technologies/epoxy-server)
-- [Libcurl.js](https://github.com/ading2210/libcurl.js)
-- HTML, CSS, and JavaScript (DUH)
+- [libcurl.js](/transports/curl-transport)
 
 ---
 
-## Catalog/Marketplace
+# Catalog/Marketplace
 
 - By default, the marketplace is enabled and uses SQLite
+  - If you encounter any issues with SQLite3, please run the `fix_sqlite3.sh{:sh}` script
 - If you would like to disable the catalog, see [#config](#config)
 - For big production instances, I recommend using PostgreSQL rather than SQLite. To do this see [#config](#config)
 - To use PostgreSQL via the provided docker-compose files, see [#docker](#docker)
 
-### How to make a theme
+## How to make a theme
 
 - Themes allow you to customize Nebula's *look*.
 
-#### Prerequisites:
+### Prerequisites:
 
-- Make sure you have our [Discord server](https://discord.gg/unblocker) so you can submit your theme
+- Make sure you have our Discord server so you can submit your theme
 
-##### Making the themes:
+#### Making the themes:
 
 1. Firstly, copy the CSS vars:
 
 ```css
 :root {
-    --background-primary: /*Your stuff here */;
-    --background-lighter: ;
-    --navbar-color: ;
-    --navbar-text-color: ;
-    --navbar-link-color: ; 
-    --navbar-link-hover-color: ; 
-    --input-text-color: ;
-    --input-placeholder-color: ; 
-    --input-background-color: ;
-    --input-border-color: ;
-    --tab-color: ;
-    --border-color: ; 
+  --background-primary: /*Your stuff here */;
+  --background-lighter: ;
+  --navbar-color: ;
+  --navbar-text-color: ;
+  --navbar-link-color: ; 
+  --navbar-link-hover-color: ; 
+  --input-text-color: ;
+  --input-placeholder-color: ; 
+  --input-background-color: ;
+  --input-border-color: ;
+  --tab-color: ;
+  --border-color: ; 
 }
 ```
 
@@ -111,32 +111,32 @@ And this to the bottom of your CSS file/submission:
    }
 ```
 
-A good example of using a custom font is the built-in `retro` theme [here](./database_assets/com.nebula.retro)
+A good example of using a custom font is the built-in `retro` theme [here](https://github.com/NebulaServices/Nebula/tree/main/database_assets/com.nebula.retro)
 :::
 
 2. Add your colors and test! (Either with a self-hosted version of Nebula OR via a live preview (no clue when this will happen)
 
-3. Once you're satisfied with the colors, submit your theme to the [Discord Server](https://discord.gg/unblocker)!
+3. Once you're satisfied with the colors, submit your theme to the Discord Server!
 
 ---
 
-### How to make a plugin
+## How to make a plugin
 
 - Plugins extend the functionality of either the proxied page(s) or the service worker.
 - This guide provides an incredibly basic example of how to make either.
 
-#### Prerequisites:
+### Prerequisites:
 
-- Make sure you have joined our [Discord server](https://discord.gg/unblocker) so you can submit your plugin.
+- Make sure you have joined our Discord server so you can submit your plugin.
 - Some knowledge of JS/TS
 
-##### Serviceworker plugin:
+#### Serviceworker plugin:
 
 - These plugins are handled by Workerware see [here](/technologies/workerware) for docs.
 
 1. Create an index.js (or other file name) file:
 
-```bash
+```sh
 touch index.js
 ```
 
@@ -182,15 +182,15 @@ Example of a named function: `function example() {/* Some form of code */}{:js}`
 If a named function is used where it shouldn't be, your plugin will not be approved, nor will it work properly.
 :::
 
-3. Submit your plugin in the [Discord](https://discord.gg/unblocker)!
+3. Submit your plugin in the Discord!
 
-##### Proxied page plugins
+#### Proxied page plugins
 
 - They allow modification of websites that UV proxies, (EX: you could add Vencord to Discord with this)
 
 1. Create an index.js file (or another file name)
 
-```bash
+```sh
 touch index.js
 ```
 
@@ -211,60 +211,70 @@ function example() {
 self.entryFunc = example; //DO NOT run the function here. That will cause errors. Only assign the reference to the function here.
 ```
 
-3. Submit it in our [Discord](https://discord.gg/unblocker)!
+3. Submit it in our Discord!
 
 ---
 
-## Deployment
+# Deployment
 
-### Terminal
+## Terminal
 
 Prerequisites:
 
-- Node & npm
+- Node & npm (pnpm recommended!)
 - Git
+
+0. Install pnpm
+
+```sh
+npm i -g pnpm
+```
 
 1. Clone the repo:
 
-```bash
+```sh
 git clone https://github.com/nebulaservices/nebula --recursive && cd nebula
 ```
 
 2. Install all of the dependencies:
 
-```bash
-npm i
+```sh
+pnpm i
 ```
 
 3. Create a `config.toml` file
 
-```bash
+```sh
 cp config.example.toml config.toml
 ```
 
 4. Modify the `config.toml` file to your liking (docs [here](#environment))
 
-```
+```sh
 nano config.toml
 ```
 
 5. Build the front end & server:
 
 ```bash
-npm run build
+pnpm build
 ```
 
 6. Start the server
 
-```bash
-npm start
+```sh
+pnpm start
 ```
 
 :::note
-You can run `npm run bstart{:sh}` to build and start together
+You can run `pnpm bstart{:sh}` to build and start together
 :::
 
-### Docker
+## Docker
+
+:::caution
+**CURRENTLY DOCKER DOES NOT WORK!! For some reason the docker image doesn't exist in Dockhub**
+:::
 
 - There are two ways to deploy with docker:
   - [Normal docker](#normal-docker)
@@ -279,25 +289,25 @@ Prerequisites:
 
 1. Clone the repo (skip if using a prebuilt image):
 
-```bash
+```sh
 git clone https://github.com/nebulaservices/nebula --recursive && cd nebula
 ```
 
 2. Create an `config.toml` file (if using prebuilt image, copy the example from the repo):
 
-```bash
+```sh
 cp config.example.toml config.toml
 ```
 
 3. Modify the `config.toml` file to your liking (docs [here](#environment))
 
-```bash
+```sh
 nano config.toml
 ```
 
 4. Build the docker image (skip if using prebuilt):
 
-```bash
+```sh
 docker build nebula:latest
 ```
 
@@ -305,13 +315,13 @@ docker build nebula:latest
 
    - Prebuilt:
 
-   ```bash
+   ```sh
    docker run -v ./config.toml:/app/config.toml ghcr.io/nebulaservices/nebula:latest
    ```
 
    - Image you built yourself:
 
-   ```bash
+   ```sh
    docker run -v ./config.toml:/app/config.toml nebula:latest
    ```
 
@@ -324,25 +334,25 @@ Prerequisites:
 
 1. Clone the repo (skip if using a prebuilt image):
 
-```bash
+```sh
 git clone https://github.com/nebulaservices/nebula --recursive
 ```
 
 2. Create an `config.toml` file (if using prebuilt image, copy the example from the repo):
 
-```bash
+```sh
 cp config.example.toml config.toml
 ```
 
 3. Modify the `config.toml` file to your liking (docs on that [here](#environment)]
 
-```bash
+```sh
 nano config.toml
 ```
 
-4. Build the docker image (skip if using prebuilt):
+4. Build the Docker image (skip if using prebuilt):
 
-```bash
+```sh
 docker compose -f ./docker-compose.build.yml build
 ```
 
@@ -350,28 +360,27 @@ docker compose -f ./docker-compose.build.yml build
 
    - Prebuilt:
 
-   ```bash
+   ```sh
    docker compose up
    ```
 
    - Image you built yourself:
 
-   ```bash
+   ```sh
    docker compose -f ./docker-compose.build.yml up
    ```
 
-#### Extra (Postgres)
+### Extra (Postgres)
 
 - To use Postgres over SQLite, uncomment the DB section in the `docker-compose` file (or use your own Postgres DB!). Then, modify the `config.toml` (See: [#config](#config) for knowledge on how to do this)
 - To use Postgres over SQLite in a normal docker environment (no compose), you'll have to set one up and then modify the `config.toml` to use it. (See: [#config](#config) for knowledge on how to do this)
 
 ---
 
-## Config
+# Config
 
 There are a couple of configuration options for Nebula. The defaults are fine most of the time, but there are instances where you may not want certain options enabled or certain things running.
 
-- An example config file is located [here](./config.example.toml).
 - Config format is in TOML
 
 |           Variable           |                                                     Description                                                    |     Type     |     Default    |
@@ -396,11 +405,12 @@ There are a couple of configuration options for Nebula. The defaults are fine mo
 |           `logging`          |                             Whether or not to enable logging. *Note: Logs are massive*                             |   `boolean`  |     `true`     |
 | ---------------------------- |                    ----------------------------------------------------------------------------                    | ------------ | -------------- |
 
-## Deploying
+# Deploying
 
-### Koyeb
+## Koyeb
 
-- Fork this repo
-- Create new koyeb service, and select webservice
-- Select import from github and import your forked repo
-- Change package to dockerfile and press deploy!
+- First setup the `config.toml` file with the docker-compose instructions!
+- Fork the repo
+- Create new Koyeb service, and select webservice
+- Select import from GitHub and import your forked repo
+- Change package to Dockerfile and press deploy!
