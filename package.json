@@ -6,6 +6,9 @@
   "repository": "https://github.com/titaniumnetwork-dev/Oxide-Docs",
   "type": "module",
   "version": "3.0.0",
+  "engines": {
+    "node": "22.x"
+  },
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
