@@ -67,7 +67,7 @@ You will have to install the required Rust toolchains by running `rustup target 
 
 ### Building
 
-```bash
+```sh
 git clone --recursive https://github.com/MercuryWorkshop/anuraOS
 make all
 ```
@@ -80,7 +80,7 @@ You can use `make all -B{:sh}` instead if you want to force a full build.
 
 - Make sure you have `Docker` installed and running.
 
-```bash
+```sh
 make rootfs
 usermod -a -G docker $USER
 ```
@@ -89,7 +89,7 @@ usermod -a -G docker $USER
 
 You can run Anura with the command
 
-```bash
+```sh
 make server
 ```
 

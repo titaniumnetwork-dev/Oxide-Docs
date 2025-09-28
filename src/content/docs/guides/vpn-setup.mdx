@@ -78,7 +78,7 @@ Backup `/etc/ipsec.secrets` and replace its contents with:
 
 Run these four commands:
 
-```bash
+```sh
 sudo ufw allow OpenSSH
 sudo ufw allow 500,4500/udp
 sudo ufw allow 5
@@ -120,14 +120,14 @@ net/ipv4/ip_no_pmtu_disc=1
 
 Restart ufw with:
 
-```bash
+```sh
 sudo ufw disable
 sudo ufw enable
 ```
 
 Finally, start the VPN server
 
-```bash
+```sh
 sudo systemctl enable strongswan-starter
 sudo systemctl start strongswan-starter
 ```
@@ -136,7 +136,7 @@ sudo systemctl start strongswan-starter
 
 First, Install Pi-Hole:
 
-```bash
+```sh
 curl -sSL https://install.pi-hole.net | bash
 ```
 

@@ -34,37 +34,37 @@ Prerequisites:
 
 1. Clone the repo:
 
-```bash
+```sh
 git clone https://github.com/titaniumnetwork-dev/incognito && cd incognito
 ```
 
 2. Install all of the dependencies:
 
-```bash
+```sh
 deno install --allow-scripts
 ```
 
 3. Create a .env file
 
-```bash
+```sh
 cp config.example.toml config.toml
 ```
 
 4. Modify the `config.toml` file to your liking (docs [here](#config))
 
-```bash
+```sh
 nano config.toml
 ```
 
 5. Build the frontend:
 
-```bash
+```sh
 deno task build
 ```
 
 6. Start the server
 
-```bash
+```sh
 deno task start
 ```
 
@@ -94,25 +94,25 @@ Prerequisites:
 
 1. Clone the repo (skip if using prebuilt image):
 
-```bash
+```sh
 git clone https://github.com/titaniumnetwork/incognito && cd incognito
 ```
 
 2. Create an config.toml file (if using prebuilt image, copy the example from the repo):
 
-```bash
+```sh
 cp config.example.toml config.toml
 ```
 
 3. Modify the config.toml file to your liking (docs [here](#config))
 
-```bash
+```sh
 nano config.toml
 ```
 
 4. Build the docker image (skip if using prebuilt):
 
-```bash
+```sh
 docker build -t incog:latest
 ```
 
@@ -122,13 +122,13 @@ For info on the build arg check [here](#config)
 
    - Prebuilt:
 
-   ```bash
+   ```sh
    docker run --volume ./config.toml:/app/config.toml motortruck1221/incognito:latest
    ```
 
    - Image you built yourself:
 
-   ```bash
+   ```sh
    docker run --volume ./config.toml:/app/config.toml incog:latest
    ```
 
@@ -141,25 +141,25 @@ Prerequisites:
 
 1. Clone the repo (skip if using prebuilt image):
 
-```bash
+```sh
 git clone https://github.com/titaniumnetwork-dev/incognito
 ```
 
 2. Create an config.toml file (if using prebuilt image, copy the example from the repo):
 
-```bash
+```sh
 cp config.example.toml config.toml
 ```
 
 3. Modify the config.toml file to your liking (docs on that [here](#config))
 
-```bash
+```sh
 nano config.toml
 ```
 
 4. Build the docker image (skip if using prebuilt):
 
-```bash
+```sh
 docker compose -f ./docker-compose.build.yml build
 ```
 
@@ -167,13 +167,13 @@ docker compose -f ./docker-compose.build.yml build
 
    - Prebuilt:
 
-   ```bash
+   ```sh
    docker compose up
    ```
 
    - Image you built yourself:
 
-   ```bash
+   ```sh
    docker compose -f ./docker-compose.build.yml up
    ```
 

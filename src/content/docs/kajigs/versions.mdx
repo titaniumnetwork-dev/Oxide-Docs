@@ -106,7 +106,7 @@ Enter Recovery mode \[Esc+Ref+Pwr], and see the codename at the bottom of the sc
 2. Identify your USB device by running `sudo fdisk -l{:sh}` (Linux) or using macOS Disk Utility. It should say something like `Disk /dev/sd...` (Linux) and in macOS open Disk Utility, select it under "External" and you should see `Device:`. You will want to use `/dev/INSERTTHATNAMEHERE` instead of `/dev/sdX`. Other OSes will have to see relevant documentation for identifying the proper USB device.
 3. Write the image (replace `/dev/sdX` and file path. Remember to use the unzipped file):
 
-```bash
+```sh
 sudo dd bs=4M if=/PATH/TO/IMAGE.bin of=/dev/sdX conv=sync status=progress
 ```
 
