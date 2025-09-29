@@ -71,6 +71,8 @@ Feel free to experiment with your own stack along the way. [SWC](https://swc.rs)
 
 Parse the script into AST, and then walk through it with a compatible AST walker. Try to find any possible object property access (through `MemberExpression` traversal in the AST) and check if it is to `window.location`. You can do this by wrapping the access in a function and checking if it is `window.location`. Remember, bracket access is a thing, too. You don't want to overwhelm the call stack, so don't blindly try to wrap every possible object property access. What I mean by this is check for any global object references such as `window`, `self`, `globalthis`, `parent`, `top`, and start looking for possible accesses only if it starts with the base object identifier being these. There you go, full DPSC (oversimplified).
 
+This is commonly accoplished by wrapping all member expressions' properties in a wrapper function, which is fine initially. To allow more features (and potentially improve Google Botguard score), Precise DPSC passes the object being accessed into the property rewriter as well, allowing more targeted propty rewriting.
+
 :::note
 You should also proxify `document.URL` and `document.baseURI`, but it is configurable with `Object.defineProperty`, but that is interception-focused, so it won't be mentioned here.
 :::
