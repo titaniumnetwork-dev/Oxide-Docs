@@ -1,0 +1,691 @@
+---
+title: Transport Development Standards
+description: Guidelines and best practices for developing BareMux-compatible transports based on established implementations.
+keywords: ["transport", "bare mux", "development", "standards"]
+---
+
+This document outlines the standards and best practices for developing BareMux-compatible transports, based on analysis of established implementations like [Reflux](../transports/reflux.mdx), [CurlTransport](../transports/curl-transport.mdx), and [EpoxyTransport](../transports/epoxy-transport.mdx).
+
+# What is a Transport?
+
+A transport is a module that implements the `BareTransport` interface from [bare-mux](../transports/bare-mux.mdx), providing HTTP(S) request handling and WebSocket connectivity through various protocols (Wisp, Bare, etc.).
+
+## Transport Types
+
+### Traditional Transports
+Directly handle network requests using specific protocols (e.g., Wisp, Bare):
+- **EpoxyTransport**: Uses epoxy-tls for encrypted communication
+- **CurlTransport**: Uses libcurl.js for TLS-encrypted requests
+- **Bare-Client**: Implements the Bare protocol
+
+### Middleware Transports
+Wrap other transports to add functionality:
+- **Reflux**: Adds middleware and plugin capabilities to any base transport
+
+# Core Interface Requirements
+
+All transports must implement the `BareTransport` interface:
+
+```typescript
+interface BareTransport {
+  // Initialization
+  init: () => Promise<void>;
+  ready: boolean;
+  
+  // HTTP Requests
+  request: (
+    remote: URL,
+    method: string,
+    body: BodyInit | null,
+    headers: BareHeaders,
+    signal?: AbortSignal
+  ) => Promise<TransferrableResponse>;
+  
+  // WebSocket Connections
+  connect: (
+    url: URL,
+    protocols: string[],
+    requestHeaders: BareHeaders,
+    onopen: (protocol: string) => void,
+    onmessage: (data: Blob | ArrayBuffer | string) => void,
+    onclose: (code: number, reason: string) => void,
+    onerror: (error: string) => void,
+  ) => [(data: Blob | ArrayBuffer | string) => void, (code: number, reason: string) => void];
+  
+  // Metadata
+  meta: () => BareMeta;
+}
+```
+
+# Implementation Standards
+
+## 1. Constructor Pattern
+
+Transports should accept options through their constructor:
+
+```typescript
+export default class MyTransport implements BareTransport {
+  ready = false;
+  
+  constructor(private opts: MyTransportOptions) {}
+}
+```
+
+### Example: EpoxyTransport
+```typescript
+export default class EpoxyTransport implements BareTransport {
+  ready = false;
+  client: EpoxyClient = null!;
+  wisp: string;
+  opts: EpoxyOptions;
+
+  constructor(opts: EpoxyOptions & { wisp: string }) {
+    this.wisp = opts.wisp;
+    this.opts = opts;
+    this.client_version = epoxyInfo;
+  }
+}
+```
+
+### Example: CurlTransport
+```typescript
+export default class LibcurlClient implements BareTransport {
+  wisp: string;
+  proxy: string;
+  transport: string;
+  
+  constructor(options) {
+    this.wisp = options.wisp ?? options.websocket;
+    this.transport = options.transport;
+    this.proxy = options.proxy;
+    
+    // Validation
+    if (!this.wisp.endsWith("/")) {
+      throw new TypeError("The Websocket URL must end with a trailing forward slash.");
+    }
+  }
+}
+```
+
+## 2. Initialization Pattern
+
+The `init()` method should:
+- Load any required libraries/WebAssembly modules
+- Set up connections or sessions
+- Set `ready` to `true` when complete
+- Handle errors gracefully with logging
+
+### Example: CurlTransport
+```typescript
+async init() {
+  if (this.transport)
+    libcurl.transport = this.transport;
+  
+  libcurl.set_websocket(this.wisp);
+  this.session = new libcurl.HTTPSession({
+    proxy: this.proxy
+  });
+  
+  this.ready = libcurl.ready;
+  if (this.ready) {
+    console.log("running libcurl.js v" + libcurl.version.lib);
+    return;
+  }
+
+  await new Promise((resolve, reject) => {
+    libcurl.onload = () => {
+      console.log("loaded libcurl.js v" + libcurl.version.lib);
+      this.ready = true;
+      resolve(null);
+    }
+  });
+}
+```
+
+### Example: EpoxyTransport
+```typescript
+async init() {
+  await initEpoxy();  // Load WASM module
+
+  let options = new EpoxyClientOptions();
+  options.user_agent = navigator.userAgent;
+  opts.forEach(x => this.setopt(options, x))
+  this.client = new EpoxyClient(this.wisp, options);
+
+  this.ready = true;
+}
+```
+
+### Example: Reflux (Middleware Transport)
+```typescript
+async init() {
+  const {
+    base: transportPath,
+    middleware = [],
+    ...innerOptions
+  } = this.opts;
+
+  console.debug('%cRF%c Initializing transport wrapper', 'background: #0066cc; color: white; padding: 2px 4px; border-radius: 2px; font-weight: bold', '');
+
+  try {
+    const mod = await import(transportPath);
+    const TransportClass = mod.default;
+
+    this.inner = new TransportClass(innerOptions);
+
+    if (typeof this.inner.init === 'function') {
+      await this.inner.init();
+    }
+
+    this.wrapped = new MiddlewareTransport(this.inner);
+    await this.wrapped.init();
+
+    this.ready = true;
+    console.debug('%cRF%c Transport ready', 'background: #0066cc; color: white; padding: 2px 4px; border-radius: 2px; font-weight: bold', '');
+  } catch (err) {
+    console.error('%cRF%c Failed to initialize transport:', 'background: #0066cc; color: white; padding: 2px 4px; border-radius: 2px; font-weight: bold', '', err);
+    throw err;
+  }
+}
+```
+
+## 3. Request Handling
+
+The `request()` method should:
+- Handle all HTTP methods (GET, POST, PUT, DELETE, etc.)
+- Support request bodies of various types
+- Respect abort signals
+- Return properly formatted `TransferrableResponse`
+- Handle redirects appropriately (typically `redirect: "manual"`)
+
+### Example: EpoxyTransport
+```typescript
+async request(
+  remote: URL,
+  method: string,
+  body: BodyInit | null,
+  headers: BareHeaders,
+  signal: AbortSignal | undefined
+): Promise<TransferrableResponse> {
+  if (body instanceof Blob)
+    body = await body.arrayBuffer();
+
+  try {
+    let res = await this.client.fetch(remote.href, { 
+      method, 
+      body, 
+      headers, 
+      redirect: "manual" 
+    });
+    
+    return {
+      body: res.body!,
+      headers: (res as any).rawHeaders,
+      status: res.status,
+      statusText: res.statusText,
+    };
+  } catch (err) {
+    console.error(err);
+    throw err;
+  }
+}
+```
+
+### Example: CurlTransport
+```typescript
+async request(
+  remote: URL,
+  method: string,
+  body: BodyInit | null,
+  headers: BareHeaders,
+  signal: AbortSignal | undefined
+): Promise<TransferrableResponse> {
+  let payload = await this.session.fetch(remote.href, {
+    method,
+    headers: headers,
+    body,
+    redirect: "manual",
+    signal: signal
+  });
+
+  // Convert headers array to object
+  let respheaders = {};
+  for (let [key, value] of payload.raw_headers) {
+    if (!respheaders[key]) {
+      respheaders[key] = [value];
+    } else {
+      respheaders[key].push(value);
+    }
+  }
+
+  return {
+    body: payload.body!,
+    headers: respheaders,
+    status: payload.status,
+    statusText: payload.statusText,
+  }
+}
+```
+
+## 4. WebSocket Handling
+
+The `connect()` method should:
+- Establish WebSocket connections
+- Support protocol negotiation
+- Handle binary and text messages
+- Return send and close functions as a tuple
+- Set appropriate `binaryType` (typically "arraybuffer")
+
+### Example: EpoxyTransport
+```typescript
+connect(
+  url: URL,
+  protocols: string[],
+  requestHeaders: BareHeaders,
+  onopen: (protocol: string) => void,
+  onmessage: (data: Blob | ArrayBuffer | string) => void,
+  onclose: (code: number, reason: string) => void,
+  onerror: (error: string) => void,
+): [(data: Blob | ArrayBuffer | string) => void, (code: number, reason: string) => void] {
+  let handlers = new EpoxyHandlers(
+    onopen,
+    onclose,
+    onerror,
+    (data: Uint8Array | string) => 
+      data instanceof Uint8Array ? onmessage(data.buffer) : onmessage(data)
+  );
+
+  let ws = this.client.connect_websocket(
+    handlers,
+    url.href,
+    protocols,
+    Object.assign(requestHeaders)
+  );
+
+  return [
+    async (data) => {
+      if (data instanceof Blob) data = await data.arrayBuffer();
+      (await ws).send(data);
+    },
+    async (code, reason) => {
+      (await ws).close(code, reason || "")
+    }
+  ]
+}
+```
+
+### Example: CurlTransport
+```typescript
+connect(
+  url: URL,
+  protocols: string[],
+  requestHeaders: BareHeaders,
+  onopen: (protocol: string) => void,
+  onmessage: (data: Blob | ArrayBuffer | string) => void,
+  onclose: (code: number, reason: string) => void,
+  onerror: (error: string) => void,
+): [(data: Blob | ArrayBuffer | string) => void, (code: number, reason: string) => void] {
+  let socket = new libcurl.WebSocket(url.toString(), protocols, {
+    headers: requestHeaders
+  });
+  
+  // Bare client always expects an arraybuffer
+  socket.binaryType = "arraybuffer";
+
+  socket.onopen = (event: Event) => { onopen("") };
+  socket.onclose = (event: CloseEvent) => { onclose(event.code, event.reason) };
+  socket.onerror = (event: Event) => { onerror("") };
+  socket.onmessage = (event: MessageEvent) => {
+    onmessage(event.data);
+  };
+
+  return [ 
+    (data) => {
+      socket.send(data);
+    },
+    (code, reason) => {
+      socket.close(code, reason)
+    }
+  ]
+}
+```
+
+## 5. Metadata Method
+
+The `meta()` method should return transport metadata (often empty or minimal):
+
+```typescript
+async meta() { 
+  // Return metadata about the transport
+  // Can be empty or return version info, capabilities, etc.
+}
+```
+
+# Best Practices
+
+## Error Handling
+
+**Do:**
+- ✅ Validate options in constructor
+- ✅ Throw descriptive errors for invalid configurations
+- ✅ Log errors with context
+- ✅ Handle async errors properly
+- ✅ Respect abort signals
+
+**Example:**
+```typescript
+constructor(options) {
+  if (!options.wisp.endsWith("/")) {
+    throw new TypeError("The Websocket URL must end with a trailing forward slash.");
+  }
+  if (!options.wisp.startsWith("ws://") && !options.wisp.startsWith("wss://")) {
+    throw new TypeError("The Websocket URL must use the ws:// or wss:// protocols.");
+  }
+}
+```
+
+## Logging
+
+Use consistent, branded logging:
+
+```typescript
+// EpoxyTransport style
+console.log("loaded epoxy-tls v" + version);
+
+// CurlTransport style
+console.log("running libcurl.js v" + libcurl.version.lib);
+
+// Reflux style (with styling)
+console.debug('%cRF%c Initializing transport wrapper', 
+  'background: #0066cc; color: white; padding: 2px 4px; border-radius: 2px; font-weight: bold', 
+  ''
+);
+```
+
+## Type Safety
+
+**Do:**
+- ✅ Use TypeScript for type safety
+- ✅ Define clear option interfaces
+- ✅ Import types from bare-mux
+- ✅ Export relevant types for consumers
+
+```typescript
+import type {
+  BareHeaders,
+  TransferrableResponse,
+  BareTransport
+} from "@mercuryworkshop/bare-mux";
+
+export type MyTransportOptions = {
+  wisp: string;
+  option1?: boolean;
+  option2?: string;
+};
+```
+
+## Options Handling
+
+**Do:**
+- ✅ Accept flexible option names (e.g., `wisp` or `websocket`)
+- ✅ Provide sensible defaults
+- ✅ Document all options clearly
+- ✅ Support option validation
+
+```typescript
+constructor(options) {
+  // Support multiple names for same option
+  this.wisp = options.wisp ?? options.websocket;
+  
+  // Provide defaults
+  this.connections = options.connections ?? [60, 50, 6];
+  
+  // Validate
+  if (!this.wisp) {
+    throw new Error("Wisp server URL is required");
+  }
+}
+```
+
+## Async/Await Pattern
+
+**Do:**
+- ✅ Use async/await for asynchronous operations
+- ✅ Handle promises properly
+- ✅ Await initialization before marking ready
+
+```typescript
+async init() {
+  await loadLibrary();
+  await setupConnection();
+  this.ready = true;
+}
+```
+
+# Middleware Transport Pattern
+
+For transports that wrap other transports (like Reflux), follow these patterns:
+
+## Composition Over Inheritance
+
+```typescript
+export default class WrapperTransport implements BareTransport {
+  private inner!: BareTransport;
+  
+  async init() {
+    // Import and instantiate base transport
+    const mod = await import(this.opts.base);
+    const TransportClass = mod.default;
+    this.inner = new TransportClass(this.opts);
+    
+    // Initialize base transport
+    if (typeof this.inner.init === 'function') {
+      await this.inner.init();
+    }
+    
+    // Add wrapper functionality
+    this.setupMiddleware();
+  }
+}
+```
+
+## Delegation Pattern
+
+```typescript
+async request(...args) {
+  // Pre-processing
+  await this.middleware.onRequest(...);
+  
+  // Delegate to inner transport
+  const response = await this.inner.request(...args);
+  
+  // Post-processing
+  return await this.middleware.onResponse(response);
+}
+```
+
+## Exposing Middleware
+
+```typescript
+export default class WrapperTransport implements BareTransport {
+  private wrapped!: MiddlewareLayer;
+  
+  get middleware(): MiddlewareLayer {
+    return this.wrapped;
+  }
+}
+```
+
+# Build Configuration
+
+## TypeScript Configuration
+
+Standard `tsconfig.json`:
+
+```json
+{
+  "compilerOptions": {
+    "target": "ES2020",
+    "module": "ESNext",
+    "lib": ["ES2020", "DOM"],
+    "outDir": "./lib",
+    "declaration": true,
+    "declarationMap": true,
+    "sourceMap": true,
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "moduleResolution": "node"
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "lib"]
+}
+```
+
+## Package Structure
+
+Standard directory layout:
+
+```
+my-transport/
+├── src/
+│   └── main.ts          # Main transport implementation
+├── lib/                 # Build output
+│   ├── index.cjs        # CommonJS build
+│   └── index.d.ts       # Type definitions
+├── package.json
+├── tsconfig.json
+├── README.md
+└── LICENSE
+```
+
+## Package.json
+
+Essential fields:
+
+```json
+{
+  "name": "@org/my-transport",
+  "version": "1.0.0",
+  "type": "module",
+  "main": "./lib/index.cjs",
+  "types": "./lib/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./lib/index.mjs",
+      "require": "./lib/index.cjs",
+      "types": "./lib/index.d.ts"
+    }
+  },
+  "peerDependencies": {
+    "@mercuryworkshop/bare-mux": "^2.0.0"
+  }
+}
+```
+
+# Testing Considerations
+
+**Test:**
+- ✅ HTTP requests (GET, POST, etc.)
+- ✅ WebSocket connections
+- ✅ Error handling
+- ✅ Abort signal support
+- ✅ Various content types
+- ✅ Large payloads
+- ✅ Concurrent requests
+- ✅ Edge cases (empty bodies, no headers, etc.)
+
+# Documentation Standards
+
+**Include:**
+- ✅ Clear usage examples
+- ✅ All configuration options documented
+- ✅ Installation instructions
+- ✅ Troubleshooting section
+- ✅ Links to related projects
+- ✅ License information
+- ✅ API reference
+
+**Format:**
+- Use Markdown
+- Include code examples
+- Provide both basic and advanced usage
+- Link to bare-mux documentation
+- Explain when to use your transport
+
+# Security Considerations
+
+**Remember:**
+- Transports handle sensitive network traffic
+- Validate all input options
+- Handle credentials securely
+- Don't log sensitive data
+- Consider CSP implications
+- Document security features
+
+# Performance Best Practices
+
+**Do:**
+- ✅ Minimize initialization overhead
+- ✅ Reuse connections when possible
+- ✅ Handle concurrent requests efficiently
+- ✅ Clean up resources properly
+- ✅ Avoid memory leaks
+- ✅ Profile performance bottlenecks
+
+**Don't:**
+- ❌ Block the main thread
+- ❌ Create excessive connections
+- ❌ Buffer entire response bodies unnecessarily
+- ❌ Perform synchronous operations in hot paths
+
+# Examples from the Wild
+
+## Traditional Transport (EpoxyTransport)
+- ✅ Clean constructor with validation
+- ✅ Async initialization with WASM loading
+- ✅ Proper type handling (Blob → ArrayBuffer)
+- ✅ Error handling with try-catch
+- ✅ Version information exposed
+
+## Traditional Transport (CurlTransport)
+- ✅ Flexible option naming (`wisp` or `websocket`)
+- ✅ Extensive validation with descriptive errors
+- ✅ Session-based connection management
+- ✅ Header normalization
+- ✅ Version logging
+
+## Middleware Transport (Reflux)
+- ✅ Dynamic import of base transport
+- ✅ Composition over inheritance
+- ✅ Middleware exposure via getter
+- ✅ Consistent branded logging
+- ✅ Graceful error handling with context
+
+# Related Documentation
+
+- [**bare-mux**](../transports/bare-mux.mdx) - Transport multiplexer specification
+- [**EpoxyTransport**](../transports/epoxy-transport.mdx) - Reference implementation
+- [**CurlTransport**](../transports/curl-transport.mdx) - Reference implementation
+- [**Reflux**](../transports/reflux.mdx) - Middleware transport reference
+
+# Summary Checklist
+
+When developing a transport, ensure you:
+
+- [ ] Implement all `BareTransport` interface methods
+- [ ] Handle initialization asynchronously
+- [ ] Support HTTP requests with all methods
+- [ ] Implement WebSocket connectivity
+- [ ] Validate constructor options
+- [ ] Use TypeScript for type safety
+- [ ] Provide clear error messages
+- [ ] Include comprehensive documentation
+- [ ] Test thoroughly
+- [ ] Follow naming conventions
+- [ ] Export relevant types
+- [ ] Handle edge cases gracefully
+- [ ] Log important events
+- [ ] Respect abort signals
+- [ ] Clean up resources
