@@ -1,23 +1,66 @@
 ---
 title: EpoxyTransport
-description: A bare transport that implements end-to-end encryption with epoxy-tls and wisp.
-keywords: ["sw proxy", "transport"]
+description: A bare transport that implements end-to-end encryption with epoxy-tls and Wisp.
+keywords: ["sw proxy", "transport", "bare mux", "epoxy", "wisp"]
 github: "https://github.com/MercuryWorkshop/EpoxyTransport"
 ---
 
-EpoxyTransport is a transport for bare-mux which allows you to use [epoxy-tls](/technologies/epoxy-server) in your bare client.
+EpoxyTransport is a transport for [bare-mux](./bare-mux.mdx) which allows you to use [epoxy-tls](../technologies/epoxy-server.mdx) in your bare client, providing end-to-end encryption for your web proxy traffic.
 
-Usage of this transport is as simple as setting the transport and providing a wisp server. An example is shown below where you get connected to the public testing wisp server.
+# Installation
+
+```bash
+npm install @mercuryworkshop/epoxy-transport
+```
+
+# Basic Usage
 
 ```js
-import { SetTransport } from '@mercuryworkshop/bare-mux';
+import { BareMuxConnection } from "@mercuryworkshop/bare-mux";
 
-SetTransport("EpxMod.EpoxyClient", { wisp: "wss://wisp.mercurywork.shop/" });
+const connection = new BareMuxConnection("/baremux/worker.js");
+
+// Set EpoxyTransport with Wisp server
+await connection.setTransport("/path/to/epoxy/index.mjs", [{
+  wisp: "wss://wisp.mercurywork.shop/"
+}]);
 ```
 
-## Building
+## Alternative Usage
 
-```sh
-npm i
+You can also use the `SetTransport` function for simpler setups:
+
+```js
+import { SetTransport } from "@mercuryworkshop/bare-mux";
+
+SetTransport("EpxMod.EpoxyClient", { 
+  wisp: "wss://wisp.mercurywork.shop/" 
+});
+```
+
+:::note
+Use `BareMuxConnection` when you need more control over the transport lifecycle, or `SetTransport` for quick setup.
+:::
+
+# Features
+
+- **End-to-End Encryption**: Full encryption using epoxy-tls
+- **Wisp Protocol**: Efficient WebSocket multiplexing
+- **Lightweight**: Minimal overhead compared to other transports
+- **Fast**: Optimized for performance
+
+# Building from Source
+
+```bash
+npm install
 npm run build
 ```
+
+# Related Projects
+
+- [**bare-mux**](./bare-mux.mdx) - Transport multiplexer that EpoxyTransport integrates with
+- [**CurlTransport**](./curl-transport.mdx) - Alternative transport with proxy support
+- [**epoxy-tls**](../technologies/epoxy-server.mdx) - The encryption library powering EpoxyTransport
+- [**Wisp Protocol**](https://github.com/MercuryWorkshop/wisp-protocol) - WebSocket multiplexing protocol
+
+Created and maintained by [Mercury Workshop](../organizations/mercury-workshop.mdx).

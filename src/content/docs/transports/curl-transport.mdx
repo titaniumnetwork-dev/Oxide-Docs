@@ -1,35 +1,274 @@
 ---
 title: CurlTransport
-description: A bare transport that implements end-to-end encryption with libcurl.js and wisp.
-keywords: ["sw proxy", "transport", "bare mux"]
+description: A bare transport that implements end-to-end encryption with libcurl.js and Wisp, with support for SOCKS5, SOCKS4, and HTTP proxy routing.
+keywords: ["sw proxy", "transport", "bare mux", "libcurl", "wisp"]
 github: "https://github.com/MercuryWorkshop/CurlTransport"
 ---
 
-A bare-module for implementing end-to-end encryption with libcurl.js
+CurlTransport is a transport for [bare-mux](./bare-mux.mdx) that implements end-to-end encryption using libcurl.js and Wisp. It allows developers to route traffic through SOCKS5, SOCKS4, and HTTP proxies, providing powerful proxy chaining capabilities.
 
-# How to use
+# Features
 
-In an Ultraviolet app with bare-mux installed, you'll see a line like
+- **End-to-End Encryption**: Full TLS encryption using libcurl.js
+- **Wisp Protocol**: Efficient WebSocket multiplexing
+- **Proxy Support**: Route through SOCKS5, SOCKS4a, and HTTP proxies
+- **Wsproxy Alternative**: Optional wsproxy transport mode
+- **Connection Management**: Configurable connection pooling and limits
 
-```js
-BareMux.SetTransport("EpxMod.EpoxyClient", { wisp: "ws://localhost:8080/wisp" });
+# Installation
+
+```bash
+npm install @mercuryworkshop/libcurl-transport
 ```
 
-Simply replace it with
+# Basic Usage
 
 ```js
-BareMux.SetTransport("CurlMod.LibcurlClient", { wisp: "ws://localhost:8080/wisp" });
+import { BareMuxConnection } from "@mercuryworkshop/bare-mux";
+
+const connection = new BareMuxConnection("/baremux/worker.js");
+
+// Set CurlTransport with Wisp server
+await connection.setTransport("/path/to/libcurl/index.mjs", [{
+  websocket: "wss://example.com/wisp/"
+}]);
 ```
 
-to use the libcurl.js backend instead
+:::note
+The `websocket` parameter can also be specified as `wisp`. Both parameters are supported for compatibility.
+:::
 
-You must import `dist/index.js` in your service worker, before Ultraviolet is initialized.
+# Proxy Routing
 
-## Building
+CurlTransport allows you to route your traffic through intermediate proxies, enabling proxy chaining and advanced network configurations. This is powered by libcurl.js's native proxy support.
 
-```sh
-npm i
+## Supported Proxy Types
+
+CurlTransport supports three major proxy protocols:
+
+### SOCKS5 (`socks5h://`)
+- **Full Name**: Socket Secure version 5 with remote DNS
+- **Protocol**: Established connection-based proxy protocol
+- **DNS Resolution**: Remote (DNS queries are resolved by the proxy server)
+- **Use Cases**: Tor integration, anonymity networks, bypassing DNS-based restrictions
+- **Port**: Typically 1080 or 9050 (Tor)
+
+### SOCKS4A (`socks4a://`)
+- **Full Name**: Socket Secure version 4A with remote DNS
+- **Protocol**: Earlier version with remote DNS support
+- **DNS Resolution**: Remote (DNS queries are resolved by the proxy server)
+- **Use Cases**: Legacy proxy systems, older SOCKS implementations
+- **Port**: Typically 1080
+- **Note**: Less feature-rich than SOCKS5 but widely supported
+
+### HTTP (`http://`)
+- **Full Name**: HTTP/HTTPS Proxy
+- **Protocol**: HTTP CONNECT method for tunneling
+- **DNS Resolution**: Can be local or remote depending on proxy configuration
+- **Use Cases**: Corporate proxies, web filtering systems, CDN routing
+- **Port**: Typically 8080, 3128, or 8888
+- **Note**: Works with both HTTP and HTTPS traffic
+
+## Using a Proxy
+
+Add the `proxy` parameter with the proxy URL in the format `protocol://host:port`:
+
+```js
+await connection.setTransport("/path/to/libcurl/index.mjs", [{
+  websocket: "wss://example.com/wisp/",
+  proxy: "socks5h://proxy.example.com:1080"
+}]);
+```
+
+### Examples
+
+**SOCKS5 Proxy (Recommended for most use cases):**
+```js
+await connection.setTransport("/path/to/libcurl/index.mjs", [{
+  websocket: "wss://example.com/wisp/",
+  proxy: "socks5h://127.0.0.1:9050"  // Tor example
+}]);
+```
+
+**HTTP Proxy (Common in corporate environments):**
+```js
+await connection.setTransport("/path/to/libcurl/index.mjs", [{
+  websocket: "wss://example.com/wisp/",
+  proxy: "http://proxy.example.com:8080"
+}]);
+```
+
+**SOCKS4A Proxy (Legacy systems):**
+```js
+await connection.setTransport("/path/to/libcurl/index.mjs", [{
+  websocket: "wss://example.com/wisp/",
+  proxy: "socks4a://proxy.example.com:1080"
+}]);
+```
+
+## Proxy Authentication
+
+If your proxy requires authentication, include credentials in the URL:
+
+**HTTP Proxy with Authentication:**
+```js
+await connection.setTransport("/path/to/libcurl/index.mjs", [{
+  websocket: "wss://example.com/wisp/",
+  proxy: "http://username:password@proxy.example.com:8080"
+}]);
+```
+
+**SOCKS5 Proxy with Authentication:**
+```js
+await connection.setTransport("/path/to/libcurl/index.mjs", [{
+  websocket: "wss://example.com/wisp/",
+  proxy: "socks5h://username:password@proxy.example.com:1080"
+}]);
+```
+
+:::caution
+Be careful when hardcoding credentials in your code. Consider using environment variables or secure configuration methods.
+:::
+
+# Advanced Configuration
+
+## Using Wsproxy
+
+If you prefer to use wsproxy instead of Wisp, set `transport: "wsproxy"`. Wsproxy is similar to Wisp, but each TCP connection exists as a separate WebSocket instead of being multiplexed.
+
+```js
+await connection.setTransport("/path/to/libcurl/index.mjs", [{
+  websocket: "wss://example.com/wsproxy/",
+  transport: "wsproxy"
+}]);
+```
+
+**With Proxy:**
+```js
+await connection.setTransport("/path/to/libcurl/index.mjs", [{
+  websocket: "wss://example.com/wsproxy/",
+  transport: "wsproxy",
+  proxy: "socks5h://127.0.0.1:9050"
+}]);
+```
+
+## Connection Pooling
+
+Configure the maximum number of open connections for libcurl.js. The `connections` option is passed through to `HTTPSession.set_connections` in libcurl.js.
+
+**Format:** `[hard_limit, cache_limit, max_per_host]`
+
+- `hard_limit` (default 60): Maximum active connections
+- `cache_limit` (default 50): Connection cache size
+- `max_per_host` (default 6): Max connections per host
+
+```js
+await connection.setTransport("/path/to/libcurl/index.mjs", [{
+  websocket: "wss://example.com/wisp/",
+  connections: [30, 20, 1]  // Conservative settings
+}]);
+```
+
+### Example Configurations
+
+**High Performance:**
+```js
+connections: [100, 80, 10]
+```
+
+**Conservative (Good for Tor/SOCKS):**
+```js
+connections: [30, 20, 1]
+```
+
+**Default:**
+```js
+connections: [60, 50, 6]
+```
+
+# Use Cases
+
+## Tor Integration
+Route traffic through Tor for anonymity:
+```js
+await connection.setTransport("/path/to/libcurl/index.mjs", [{
+  websocket: "wss://example.com/wisp/",
+  proxy: "socks5h://127.0.0.1:9050",  // Tor SOCKS proxy
+  connections: [30, 20, 1]  // Tor-friendly settings
+}]);
+```
+
+**Why SOCKS5 with Tor?**
+- Remote DNS resolution prevents DNS leaks
+- Full protocol support for all connection types
+- Better performance than HTTP proxies
+- Native Tor compatibility
+
+## Corporate Proxy
+Route through a corporate HTTP proxy:
+```js
+await connection.setTransport("/path/to/libcurl/index.mjs", [{
+  websocket: "wss://example.com/wisp/",
+  proxy: "http://corporate-proxy.company.com:8080"
+}]);
+```
+
+**Common Corporate Scenarios:**
+- Authenticated proxies with credentials
+- Multiple proxy servers for load balancing
+- Proxy auto-configuration (PAC) support via manual URL
+
+## Proxy Chaining
+Combine CurlTransport's proxy support with your Wisp server's routing capabilities for multi-hop proxy chains.
+
+**Example Multi-Hop Setup:**
+1. Browser → CurlTransport
+2. CurlTransport → SOCKS5 Proxy
+3. SOCKS5 Proxy → Wisp Server
+4. Wisp Server → Destination
+
+```js
+await connection.setTransport("/path/to/libcurl/index.mjs", [{
+  websocket: "wss://wisp-server.com/wisp/",  // Wisp server as second hop
+  proxy: "socks5h://first-proxy.com:1080"    // SOCKS5 as first hop
+}]);
+```
+
+## VPN Exit Nodes
+Route traffic through VPN endpoints that expose SOCKS proxies:
+```js
+await connection.setTransport("/path/to/libcurl/index.mjs", [{
+  websocket: "wss://example.com/wisp/",
+  proxy: "socks5h://vpn-exit-node.com:1080"
+}]);
+```
+
+## Geographic Routing
+Use region-specific proxies for geo-restricted content:
+```js
+// Route through EU proxy
+await connection.setTransport("/path/to/libcurl/index.mjs", [{
+  websocket: "wss://example.com/wisp/",
+  proxy: "socks5h://eu-proxy.example.com:1080"
+}]);
+```
+
+# Building from Source
+
+```bash
+npm install
 npm run build
 ```
 
+:::caution
 Building on Windows is not supported at this time.
+:::
+
+# Related Projects
+
+- [**bare-mux**](./bare-mux.mdx) - Transport multiplexer that CurlTransport integrates with
+- [**EpoxyTransport**](./epoxy-transport.mdx) - Alternative encrypted transport
+- [**libcurl.js**](https://github.com/ading2210/libcurl.js) - WebAssembly port of libcurl
+- [**Wisp Protocol**](https://github.com/MercuryWorkshop/wisp-protocol) - WebSocket multiplexing protocol
+
+Created and maintained by [Mercury Workshop](../organizations/mercury-workshop.mdx).

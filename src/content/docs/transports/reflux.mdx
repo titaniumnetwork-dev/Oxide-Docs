@@ -1,0 +1,390 @@
+---
+title: Reflux
+description: A powerful, universal request/response middleware engine for BareMux-compatible web proxies with a dynamic plugin system.
+keywords: ["transport", "middleware", "plugins", "bare mux"]
+github: "https://github.com/Obsidian-Dev-Labs/Reflux"
+---
+
+Reflux is a powerful, universal request/response middleware engine designed for any BareMux compatible web proxy. It features a dynamic plugin system that allows you to load and execute custom JavaScript code on specific websites, making it a transport **wrapper** rather than a traditional transport.
+
+:::note
+Reflux wraps around other transports like [EpoxyTransport](./epoxy-transport.mdx) or [CurlTransport](./curl-transport.mdx), adding middleware capabilities on top of their functionality.
+:::
+
+# Features
+
+- **Dynamic Plugin System**: Load and execute custom plugins on specific sites or globally
+- **Request/Response Middleware**: Intercept and modify HTTP requests and responses
+- **WebSocket Support**: Middleware support for WebSocket connections
+- **Site-Specific Targeting**: Run plugins only on specified domains with pattern matching
+- **Real-time Control**: Add, remove, and manage plugins dynamically without reloading
+- **HTML Modification**: Inject scripts, modify DOM, add custom functionality
+- **Browser & Server-Side Code**: Execute code both in the middleware and browser context
+
+# Architecture
+
+Reflux sits between BareMux and your base transport, providing a middleware layer:
+
+```
+┌─────────────────┐
+│   Application   │
+└────────┬────────┘
+         │
+         ▼
+┌─────────────────┐
+│    BareMux      │
+└────────┬────────┘
+         │
+         ▼
+┌─────────────────┐
+│     Reflux      │ ◄── Plugin System
+│   Middleware    │
+└────────┬────────┘
+         │
+         ▼
+┌─────────────────┐
+│ Base Transport  │
+│ (Epoxy/Libcurl) │
+└─────────────────┘
+```
+
+# Installation
+
+```bash
+npm install @nightnetwork/reflux
+```
+
+## Dependencies
+
+Reflux requires the following peer dependencies:
+
+- `@mercuryworkshop/bare-mux` - BareMux transport multiplexer
+- A base transport (e.g., `@mercuryworkshop/epoxy-transport` or `@mercuryworkshop/libcurl-transport`)
+
+```bash
+npm install @mercuryworkshop/bare-mux @mercuryworkshop/epoxy-transport
+```
+
+# Basic Usage
+
+## Setting Up Reflux Transport
+
+```javascript
+import { BareMuxConnection } from "@mercuryworkshop/bare-mux";
+
+// Initialize BareMux with Reflux wrapping EpoxyTransport
+const connection = new BareMuxConnection("/baremux/worker.js");
+await connection.setTransport("/reflux/index.mjs", [{
+  base: "/epoxy/index.mjs",  // Base transport to wrap
+  wisp: "wss://example.com/wisp/"
+}]);
+```
+
+## Creating and Managing Plugins
+
+```javascript
+import { RefluxAPI } from "@nightnetwork/reflux";
+
+// Create Reflux API instance
+const api = new RefluxAPI();
+
+// Add a plugin
+await api.addPlugin({
+  name: "com.example.logger",
+  sites: ["example.com"],  // Run only on example.com
+  function: `
+    /* @browser */
+    console.log('Plugin running on:', url);
+    console.log('Page title:', document.title);
+    /* @/browser */
+  `
+});
+
+// Enable the plugin
+await api.enablePlugin("com.example.logger");
+
+// List all plugins
+const plugins = await api.listPlugins();
+console.log("Installed plugins:", plugins);
+
+// Disable a plugin
+await api.disablePlugin("com.example.logger");
+
+// Remove a plugin
+await api.removePlugin("com.example.logger");
+```
+
+# Plugin System
+
+## Plugin Structure
+
+Plugins consist of JavaScript code with special markers for browser-side and server-side execution:
+
+```javascript
+{
+  name: "com.example.my-plugin",  // Unique identifier (use reverse domain notation)
+  sites: ["example.com", "*.example.com"],  // Site patterns
+  function: `
+    // Server-side code (runs in middleware)
+    // Modify response before it reaches browser
+    if (body.includes('</head>')) {
+      body = body.replace('</head>', '<style>...</style></head>');
+    }
+    
+    /* @browser */
+    // Browser-side code (injected into page)
+    console.log('Running on:', url);
+    document.body.style.backgroundColor = 'lightblue';
+    /* @/browser */
+    
+    return body;  // Must return body from server-side code
+  `
+}
+```
+
+## Site Pattern Matching
+
+- `"*"` - Match all sites
+- `"example.com"` - Exact domain match
+- `"*.example.com"` - Wildcard subdomain match
+- `"example.*"` - Wildcard TLD match
+
+## Available Variables
+
+### Browser-Side Code
+- `url` (string): Current page URL
+- `pluginName` (string): Name of the plugin
+- All standard browser APIs (document, window, etc.)
+
+### Server-Side Code
+- `body` (string): HTML content
+- `url` (string): Target URL
+- `headers` (Record\<string, string\>): Response headers
+
+# Use Cases
+
+## Ad Blocking
+```javascript
+await api.addPlugin({
+  name: "com.example.adblocker",
+  sites: ["*"],
+  function: `
+    /* @browser */
+    document.querySelectorAll('.ad, [class*="advertisement"]').forEach(el => {
+      el.remove();
+    });
+    /* @/browser */
+  `
+});
+```
+
+## Custom UI Injection
+```javascript
+await api.addPlugin({
+  name: "com.example.dark-mode",
+  sites: ["example.com"],
+  function: `
+    // Server-side: Inject CSS
+    if (body.includes('</head>')) {
+      const css = '<style>body { background: #1a1a1a; color: #fff; }</style>';
+      body = body.replace('</head>', css + '</head>');
+    }
+    
+    /* @browser */
+    // Browser-side: Toggle button
+    const btn = document.createElement('button');
+    btn.textContent = '🌙 Dark Mode';
+    btn.style.cssText = 'position: fixed; top: 10px; right: 10px; z-index: 9999;';
+    document.body.appendChild(btn);
+    /* @/browser */
+    
+    return body;
+  `
+});
+```
+
+## Request/Response Interception
+```javascript
+await api.addPlugin({
+  name: "com.example.analytics",
+  sites: ["*"],
+  function: `
+    // Log all requests
+    console.log('[Reflux] Request to:', url);
+    
+    /* @browser */
+    console.log('[Page] Loaded:', url);
+    console.log('[Page] Performance:', performance.timing);
+    /* @/browser */
+    
+    return body;
+  `
+});
+```
+
+# API Reference
+
+## RefluxAPI Methods
+
+### addPlugin(plugin)
+Adds a new plugin to the system.
+
+```typescript
+await api.addPlugin({
+  name: string,
+  sites: string[],
+  function: string
+});
+```
+
+### removePlugin(name)
+Removes a plugin from the system.
+
+```typescript
+await api.removePlugin("com.example.plugin");
+```
+
+### enablePlugin(name)
+Enables a disabled plugin.
+
+```typescript
+await api.enablePlugin("com.example.plugin");
+```
+
+### disablePlugin(name)
+Disables an enabled plugin.
+
+```typescript
+await api.disablePlugin("com.example.plugin");
+```
+
+### listPlugins()
+Returns a list of all installed plugins.
+
+```typescript
+const plugins = await api.listPlugins();
+// Returns: Array<{ name, sites, enabled, function }>
+```
+
+### getEnabledPlugins()
+Returns an array of enabled plugin names.
+
+```typescript
+const enabled = await api.getEnabledPlugins();
+// Returns: string[]
+```
+
+### updatePluginSites(name, sites)
+Updates the site patterns for a plugin.
+
+```typescript
+await api.updatePluginSites("com.example.plugin", ["example.com", "*.test.com"]);
+```
+
+# Advanced Features
+
+## WebSocket Middleware
+
+Reflux supports intercepting and modifying WebSocket messages:
+
+```javascript
+// This is typically handled at a lower level
+// Plugins can access WebSocket data through the middleware system
+```
+
+## Request Middleware
+
+Modify requests before they're sent:
+
+```javascript
+const middleware = {
+  id: "custom-headers",
+  onRequest: async (ctx, next) => {
+    ctx.headers["X-Custom"] = "value";
+    return await next(ctx);
+  }
+};
+```
+
+## Response Middleware
+
+Transform responses before they reach the browser:
+
+```javascript
+const middleware = {
+  id: "response-modifier",
+  onResponse: async (ctx, next) => {
+    const response = await next();
+    response.headers["X-Modified"] = "true";
+    return response;
+  }
+};
+```
+
+# Performance Considerations
+
+- Use specific site patterns instead of `["*"]` when possible
+- Keep plugin code minimal and efficient
+- Avoid heavy synchronous operations
+- Test plugins individually to identify issues
+- Clean up resources in browser-side code
+
+# Browser Compatibility
+
+**Required:**
+- ES6+ JavaScript support
+- IndexedDB/LocalForage
+- Service Worker support (for BareMux)
+
+**Tested:**
+- Chrome/Edge 90+
+- Firefox 88+
+- Safari 14+
+
+# Security Considerations
+
+- Plugins execute with full permissions
+- Be careful with untrusted plugin code
+- Server-side code runs in middleware context
+- Browser-side code runs in page context
+- Plugins can modify CSP headers
+
+# Troubleshooting
+
+## Plugin Not Running
+
+1. **Check if plugin is enabled:**
+   ```javascript
+   const enabled = await api.getEnabledPlugins();
+   console.log("Enabled plugins:", enabled);
+   ```
+
+2. **Verify plugin was added:**
+   ```javascript
+   const plugins = await api.listPlugins();
+   console.log("All plugins:", plugins);
+   ```
+
+3. **Check site matching:**
+   ```javascript
+   await api.updatePluginSites("plugin-name", ["example.com", "*.example.com"]);
+   ```
+
+## Console Errors
+
+- **"RefluxAPIModule not found"**: Make sure `/reflux/api.js` is loaded before your script
+- **"Plugin has no code"**: Ensure the `function` property is not empty
+- **Storage errors**: Check browser console for IndexedDB/LocalForage errors
+
+# Related Projects
+
+- [**bare-mux**](./bare-mux.mdx) - Transport multiplexer that Reflux builds on
+- [**EpoxyTransport**](./epoxy-transport.mdx) - Common base transport for Reflux
+- [**CurlTransport**](./curl-transport.mdx) - Alternative base transport using libcurl.js
+
+# Links
+
+- [GitHub Repository](https://github.com/Obsidian-Dev-Labs/Reflux)
+- [NPM Package](https://www.npmjs.com/package/@nightnetwork/reflux)
+
+Created and maintained by [Night Network](../organizations/night-network.mdx).
