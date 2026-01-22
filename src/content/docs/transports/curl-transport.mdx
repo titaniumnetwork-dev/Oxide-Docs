@@ -47,6 +47,7 @@ CurlTransport allows you to route your traffic through intermediate proxies, ena
 CurlTransport supports three major proxy protocols:
 
 ### SOCKS5 (`socks5h://`)
+
 - **Full Name**: Socket Secure version 5 with remote DNS
 - **Protocol**: Established connection-based proxy protocol
 - **DNS Resolution**: Remote (DNS queries are resolved by the proxy server)
@@ -54,6 +55,7 @@ CurlTransport supports three major proxy protocols:
 - **Port**: Typically 1080 or 9050 (Tor)
 
 ### SOCKS4A (`socks4a://`)
+
 - **Full Name**: Socket Secure version 4A with remote DNS
 - **Protocol**: Earlier version with remote DNS support
 - **DNS Resolution**: Remote (DNS queries are resolved by the proxy server)
@@ -62,6 +64,7 @@ CurlTransport supports three major proxy protocols:
 - **Note**: Less feature-rich than SOCKS5 but widely supported
 
 ### HTTP (`http://`)
+
 - **Full Name**: HTTP/HTTPS Proxy
 - **Protocol**: HTTP CONNECT method for tunneling
 - **DNS Resolution**: Can be local or remote depending on proxy configuration
@@ -83,6 +86,7 @@ await connection.setTransport("/path/to/libcurl/index.mjs", [{
 ### Examples
 
 **SOCKS5 Proxy (Recommended for most use cases):**
+
 ```js
 await connection.setTransport("/path/to/libcurl/index.mjs", [{
   websocket: "wss://example.com/wisp/",
@@ -91,6 +95,7 @@ await connection.setTransport("/path/to/libcurl/index.mjs", [{
 ```
 
 **HTTP Proxy (Common in corporate environments):**
+
 ```js
 await connection.setTransport("/path/to/libcurl/index.mjs", [{
   websocket: "wss://example.com/wisp/",
@@ -99,6 +104,7 @@ await connection.setTransport("/path/to/libcurl/index.mjs", [{
 ```
 
 **SOCKS4A Proxy (Legacy systems):**
+
 ```js
 await connection.setTransport("/path/to/libcurl/index.mjs", [{
   websocket: "wss://example.com/wisp/",
@@ -111,6 +117,7 @@ await connection.setTransport("/path/to/libcurl/index.mjs", [{
 If your proxy requires authentication, include credentials in the URL:
 
 **HTTP Proxy with Authentication:**
+
 ```js
 await connection.setTransport("/path/to/libcurl/index.mjs", [{
   websocket: "wss://example.com/wisp/",
@@ -119,6 +126,7 @@ await connection.setTransport("/path/to/libcurl/index.mjs", [{
 ```
 
 **SOCKS5 Proxy with Authentication:**
+
 ```js
 await connection.setTransport("/path/to/libcurl/index.mjs", [{
   websocket: "wss://example.com/wisp/",
@@ -144,6 +152,7 @@ await connection.setTransport("/path/to/libcurl/index.mjs", [{
 ```
 
 **With Proxy:**
+
 ```js
 await connection.setTransport("/path/to/libcurl/index.mjs", [{
   websocket: "wss://example.com/wsproxy/",
@@ -172,16 +181,19 @@ await connection.setTransport("/path/to/libcurl/index.mjs", [{
 ### Example Configurations
 
 **High Performance:**
+
 ```js
 connections: [100, 80, 10]
 ```
 
 **Conservative (Good for Tor/SOCKS):**
+
 ```js
 connections: [30, 20, 1]
 ```
 
 **Default:**
+
 ```js
 connections: [60, 50, 6]
 ```
@@ -189,7 +201,9 @@ connections: [60, 50, 6]
 # Use Cases
 
 ## Tor Integration
+
 Route traffic through Tor for anonymity:
+
 ```js
 await connection.setTransport("/path/to/libcurl/index.mjs", [{
   websocket: "wss://example.com/wisp/",
@@ -199,13 +213,16 @@ await connection.setTransport("/path/to/libcurl/index.mjs", [{
 ```
 
 **Why SOCKS5 with Tor?**
+
 - Remote DNS resolution prevents DNS leaks
 - Full protocol support for all connection types
 - Better performance than HTTP proxies
 - Native Tor compatibility
 
 ## Corporate Proxy
+
 Route through a corporate HTTP proxy:
+
 ```js
 await connection.setTransport("/path/to/libcurl/index.mjs", [{
   websocket: "wss://example.com/wisp/",
@@ -214,14 +231,17 @@ await connection.setTransport("/path/to/libcurl/index.mjs", [{
 ```
 
 **Common Corporate Scenarios:**
+
 - Authenticated proxies with credentials
 - Multiple proxy servers for load balancing
 - Proxy auto-configuration (PAC) support via manual URL
 
 ## Proxy Chaining
+
 Combine CurlTransport's proxy support with your Wisp server's routing capabilities for multi-hop proxy chains.
 
 **Example Multi-Hop Setup:**
+
 1. Browser → CurlTransport
 2. CurlTransport → SOCKS5 Proxy
 3. SOCKS5 Proxy → Wisp Server
@@ -235,7 +255,9 @@ await connection.setTransport("/path/to/libcurl/index.mjs", [{
 ```
 
 ## VPN Exit Nodes
+
 Route traffic through VPN endpoints that expose SOCKS proxies:
+
 ```js
 await connection.setTransport("/path/to/libcurl/index.mjs", [{
   websocket: "wss://example.com/wisp/",
@@ -244,7 +266,9 @@ await connection.setTransport("/path/to/libcurl/index.mjs", [{
 ```
 
 ## Geographic Routing
+
 Use region-specific proxies for geo-restricted content:
+
 ```js
 // Route through EU proxy
 await connection.setTransport("/path/to/libcurl/index.mjs", [{

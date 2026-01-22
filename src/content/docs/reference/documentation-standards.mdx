@@ -11,6 +11,7 @@ This document outlines the writing standards and formatting conventions used thr
 All MDX files use YAML frontmatter for metadata:
 
 ## Basic Page Frontmatter
+
 ```yaml
 ---
 title: Page Title
@@ -20,6 +21,7 @@ keywords: ["keyword1", "keyword2", "keyword3"]
 ```
 
 ## Proxy/Technology/Transport Pages
+
 ```yaml
 ---
 title: Project Name
@@ -33,6 +35,7 @@ order: 1  # Optional: sidebar ordering
 ```
 
 ## Organization Pages
+
 ```yaml
 ---
 title: Organization Name
@@ -47,23 +50,27 @@ official-link: "https://example.com"
 # Writing Style
 
 ## Tone
+
 - **Professional but approachable**
 - **Clear and concise**
 - **Technically accurate**
 - **Community-focused**
 
 ## Voice
+
 - Use active voice: "Scramjet provides" not "is provided by"
 - Direct address: "You can install" not "One can install"
 - Present tense for current features
 - Be specific, not vague
 
 ## Technical Terms
+
 - **First mention**: Full name with abbreviation in parentheses
 - **Subsequent mentions**: Use abbreviation or short form
 - **Example**: "Service Worker (SW)" → later use "SW"
 
 ### Example from Scramjet docs:
+
 > "In the proxy community, you may see it abbreviated as 'SJ'."
 
 # Structure Patterns
@@ -71,29 +78,34 @@ official-link: "https://example.com"
 ## Page Organization
 
 ### 1. Opening Section
+
 - Brief description (1-2 sentences)
 - Key features or value proposition
 - Context about the project's role
 
 ### 2. Feature List
+
 Use bullet points with **bold headings**:
+
 ```markdown
 - **Feature Name**: Brief description
 - **Another Feature**: Brief description
 ```
 
 ### 3. Installation/Setup
-```markdown
+
+````markdown
 # Installation
 
 ```bash
 npm install package-name
-```
+````
 
 ## Dependencies
 
 List required packages...
-```
+
+````
 
 ### 4. Usage Examples
 - Start simple, progress to complex
@@ -118,9 +130,10 @@ End with links to:
 ## H2: Major Sections
 ### H3: Subsections
 #### H4: Detailed Breakdowns
-```
+````
 
 **Rules:**
+
 - Only one H1 per page (the title)
 - Don't skip heading levels
 - Keep headings concise (3-7 words)
@@ -129,18 +142,22 @@ End with links to:
 # Code Examples
 
 ## Inline Code
+
 Use backticks for:
+
 - File names: `package.json`
 - Function names: `setTransport()`
 - Variable names: `connection`
 - Short code snippets: `const api = new API()`
 
 ### Example:
+
 > The class `Person` is in `src/models/person.ts`.
 
 ## Code Blocks
 
 ### With Language Identifier
+
 ````markdown
 ```javascript
 const example = "code";
@@ -148,6 +165,7 @@ const example = "code";
 ````
 
 ### With Highlighting
+
 ````markdown
 ```js
 import { scramjetPath } from "@mercuryworkshop/scramjet/path"{:js}
@@ -155,6 +173,7 @@ import { scramjetPath } from "@mercuryworkshop/scramjet/path"{:js}
 ````
 
 ### Shell Commands
+
 ````markdown
 ```bash
 npm install package-name
@@ -181,7 +200,9 @@ importScripts("/scram/scramjet.all.js");
 # Admonitions (Callout Boxes)
 
 ## Note
+
 For general information or tips:
+
 ```markdown
 :::note
 In the proxy community, you may see it abbreviated as "SJ".
@@ -189,7 +210,9 @@ In the proxy community, you may see it abbreviated as "SJ".
 ```
 
 ## Caution/Warning
+
 For important warnings:
+
 ```markdown
 :::caution
 Fixed types haven't landed in the NPM package yet.
@@ -197,6 +220,7 @@ Fixed types haven't landed in the NPM package yet.
 ```
 
 ## Note with Title
+
 ```markdown
 :::note[Custom Title]
 Content goes here.
@@ -204,6 +228,7 @@ Content goes here.
 ```
 
 ## When to Use
+
 - **Note**: Non-critical information, helpful tips
 - **Caution**: Important limitations or gotchas
 - **Warning**: Critical issues that could cause problems
@@ -212,24 +237,28 @@ Content goes here.
 # Links
 
 ## Internal Links (Same Site)
+
 ```markdown
 [**Scramjet**](../proxies/scramjet.mdx)
 [transport guide](../transports/using-transports.mdx)
 ```
 
 **Pattern:**
+
 - Use relative paths
 - Include `.mdx` extension
 - Use `../` to go up directories
 - Bold important project names
 
 ## External Links
+
 ```markdown
 [GitHub Repository](https://github.com/org/repo)
 [Official Documentation](https://example.com/docs)
 ```
 
 ## Link in Lists
+
 ```markdown
 - [**Project Name**](../category/project.mdx) - Brief description
 ```
@@ -237,6 +266,7 @@ Content goes here.
 # Lists
 
 ## Unordered Lists
+
 ```markdown
 - Item one
 - Item two
@@ -246,6 +276,7 @@ Content goes here.
 ```
 
 ## Ordered Lists
+
 ```markdown
 1. First step
 2. Second step
@@ -253,6 +284,7 @@ Content goes here.
 ```
 
 ## Definition Lists
+
 ```markdown
 - **Term**: Definition or explanation
 - **Another Term**: Another definition
@@ -261,16 +293,19 @@ Content goes here.
 # Images
 
 ## With Alt Text
+
 ```markdown
 ![Official Logo](https://example.com/logo.png)
 ```
 
 ## With Sizing
+
 ```markdown
 <img width="200px" align="right" src="..." alt="..." height="250" />
 ```
 
 ## Placeholder Images
+
 ```markdown
 ![Placeholder](https://via.placeholder.com/800x200/1a1a2e/eee?text=Text)
 ```
@@ -291,26 +326,31 @@ Use Markdown tables for structured data:
 ## API Methods
 
 ### Method Signature
-```markdown
+
+````markdown
 ### methodName()
 
 ```typescript
 async methodName(param: Type): Promise<ReturnType>
-```
+````
 
 Brief description.
 
 **Parameters:**
+
 - `param` (Type): Description
 
 **Returns:**
+
 - `Promise<ReturnType>` - Description
 
 **Example:**
+
 ```javascript
 const result = await api.methodName(value);
 ```
-```
+
+````
 
 ## Interface Documentation
 ```markdown
@@ -320,40 +360,48 @@ interface InterfaceName {
   property: string;
   optional?: number;
 }
-```
-```
+````
+
+````
 
 ## Configuration Options
 ```markdown
 **Options:**
 - `option1` (type): Description (default: value)
 - `option2` (type): Description
-```
+````
 
 # Formatting Best Practices
 
 ## Emphasis
 
 ### Bold
+
 Use for:
+
 - **Feature names**
 - **Important terms** on first use
 - **Key concepts**
 - **Section emphasis**
 
 ### Italic
+
 Use sparingly for:
+
 - *Emphasis within a sentence*
 - *Book/document titles*
 
 ### Bold + Italic
-Use very rarely for **_critical warnings_**
+
+Use very rarely for ***critical warnings***
 
 ## Lists vs. Paragraphs
+
 - Use lists for: Multiple related items, steps, options
 - Use paragraphs for: Explanations, descriptions, narrative
 
 ## Code vs. Text
+
 - Use code formatting for anything a user would type or see in code
 - Use regular text for concepts and explanations
 
@@ -392,7 +440,7 @@ History and relationship to TitaniumNetwork...
 
 ## Transport Page Pattern
 
-```markdown
+````markdown
 ---
 title: Transport Name
 description: Brief description
@@ -411,20 +459,23 @@ Introduction paragraph.
 
 ```bash
 npm install ...
-```
+````
 
 # Usage
 
 ## Basic Usage
+
 Code example...
 
 ## Advanced Usage
+
 Code example...
 
 # Related Projects
 
 Links...
-```
+
+````
 
 ## Reference Page Pattern
 
@@ -446,22 +497,24 @@ Content...
 
 ## Subtopic
 Content...
-```
+````
 
 # Common Phrases and Patterns
 
 ## Installation
-```markdown
+
+````markdown
 # Installation
 
 ```bash
 npm install package-name
-```
+````
 
 ## Dependencies
 
 Requires the following peer dependencies:
-```
+
+````
 
 ## Usage Introduction
 ```markdown
@@ -469,8 +522,9 @@ Here is a basic example of using [Project]:
 
 ```javascript
 // code
-```
-```
+````
+
+````
 
 ## Method Documentation
 ```markdown
@@ -484,8 +538,9 @@ Description.
 **Example:**
 ```javascript
 code example
-```
-```
+````
+
+````
 
 ## Troubleshooting
 ```markdown
@@ -499,7 +554,7 @@ code example
 
 1. Step one
 2. Step two
-```
+````
 
 # Consistency Checklist
 
@@ -533,6 +588,7 @@ Refer to these pages as examples:
 # Quick Reference
 
 ## File Structure
+
 ```
 ---
 title: ...
@@ -555,6 +611,7 @@ Content
 ```
 
 ## Common Admonitions
+
 ```markdown
 :::note
 Informational content
@@ -566,6 +623,7 @@ Warning content
 ```
 
 ## Code Block
+
 ````markdown
 ```language
 code here
@@ -573,6 +631,7 @@ code here
 ````
 
 ## Internal Link
+
 ```markdown
 [**Project Name**](../category/file.mdx)
 ```
