@@ -1,0 +1,29 @@
+---
+title: Quicksilver
+description: Quicksilver is an unenrollment exploit for Kernver 6.
+author: emerwyi, soap phia
+keywords: ["unenrollment", "chromeos exploits", "kernver 6"]
+link: https://github.com/AerialiteLabs/GoodSilver
+kernver: 6
+unenrollment: true
+---
+
+import PageHeader from "/src/components/PageHeader.astro";
+
+<PageHeader title={frontmatter.title} description={frontmatter.description} author={frontmatter.author} link={frontmatter.link} kernver={frontmatter.kernver} nolower={frontmatter.nolower} />
+
+# Quicksilver - unenrollment from v125 - v142 (kv4 - kv6)
+Quicksilver is an exploit for ChromeOS devices allowing for unenrollment on devices v125 or above (kv4) and v142 or below (kv6)
+Don't know what your ChromeOS version or kernver is? [Check here](/kajigs/versions)
+## How to use
+### If your device can boot SH1MMER (unkeyrolled):
+1. Boot SH1MMER (make sure the version is from at least December 15th 2025)
+2. Open the payloads menu and run the quicksilver payload
+3. Go through setup, you should be unenrolled!! 
+-# if your version is from before December 15th 2025, run this command in the bash shell: `vpd -i RW_VPD -s re_enrollment_key="$(openssl rand -hex 32)"`. it will say `unable to write 'random state'`, ignore this
+### If your device cannot boot SH1MMER (keyrolled):
+1. Do [Sh1ttyExec](/kajigs/sh1ttyexec)
+2. Enable developer mode & then enter recovery mode again
+3. Boot a [GoodSilver](https://unenrollment.com/GoodSilver/) image and choose "Deprosivion"
+4. After it reboots, go through setup, you will be unenrolled!!
+## This is persistent if you're on an unpatched version (<=v142)! If you're not updated & want to re-enroll run `vpd -i RW_VPD -d "re_enrollment_key"` in any shell
