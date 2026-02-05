@@ -57,18 +57,18 @@ export default defineConfig({
       ],
       plugins: [
         starlightAutoSidebar(),
-        starlightTypeDoc({
-          entryPoints: ["./typedoc-repos/scramjet/src/entry.ts"],
-          tsconfig: "./tsconfig-scramjet.json",
-          sidebar: {
-            label: "Scramjet API",
-          },
-          typeDoc: {
-            skipErrorChecking: true,
-            excludeNotDocumented: false,
-            treatWarningsAsErrors: false,
-          },
-        }),
+        // starlightTypeDoc({
+        //   entryPoints: ["./typedoc-repos/scramjet/src/entry.ts"],
+        //   tsconfig: "./tsconfig-scramjet.json",
+        //   sidebar: {
+        //     label: "Scramjet API",
+        //   },
+        //   typeDoc: {
+        //     skipErrorChecking: true,
+        //     excludeNotDocumented: false,
+        //     treatWarningsAsErrors: false,
+        //   },
+        // }),
       ],
       components: {
         Head: "./src/components/MetadataHead.astro",
@@ -93,7 +93,6 @@ export default defineConfig({
             "proxies/scramjet",
             "proxies/rammerhead",
             "proxies/ultraviolet",
-            typeDocSidebarGroup,
           ],
         },
         {
