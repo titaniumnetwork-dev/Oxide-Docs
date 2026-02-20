@@ -13,13 +13,17 @@ A transport is a module that implements the `BareTransport` interface from [bare
 ## Transport Types
 
 ### Traditional Transports
+
 Directly handle network requests using specific protocols (e.g., Wisp, Bare):
+
 - **EpoxyTransport**: Uses epoxy-tls for encrypted communication
 - **CurlTransport**: Uses libcurl.js for TLS-encrypted requests
 - **Bare-Client**: Implements the Bare protocol
 
 ### Middleware Transports
+
 Wrap other transports to add functionality:
+
 - **Reflux**: Adds middleware and plugin capabilities to any base transport
 
 # Core Interface Requirements
@@ -72,6 +76,7 @@ export default class MyTransport implements BareTransport {
 ```
 
 ### Example: EpoxyTransport
+
 ```typescript
 export default class EpoxyTransport implements BareTransport {
   ready = false;
@@ -88,6 +93,7 @@ export default class EpoxyTransport implements BareTransport {
 ```
 
 ### Example: CurlTransport
+
 ```typescript
 export default class LibcurlClient implements BareTransport {
   wisp: string;
@@ -110,12 +116,14 @@ export default class LibcurlClient implements BareTransport {
 ## 2. Initialization Pattern
 
 The `init()` method should:
+
 - Load any required libraries/WebAssembly modules
 - Set up connections or sessions
 - Set `ready` to `true` when complete
 - Handle errors gracefully with logging
 
 ### Example: CurlTransport
+
 ```typescript
 async init() {
   if (this.transport)
@@ -143,6 +151,7 @@ async init() {
 ```
 
 ### Example: EpoxyTransport
+
 ```typescript
 async init() {
   await initEpoxy();  // Load WASM module
@@ -157,6 +166,7 @@ async init() {
 ```
 
 ### Example: Reflux (Middleware Transport)
+
 ```typescript
 async init() {
   const {
@@ -192,6 +202,7 @@ async init() {
 ## 3. Request Handling
 
 The `request()` method should:
+
 - Handle all HTTP methods (GET, POST, PUT, DELETE, etc.)
 - Support request bodies of various types
 - Respect abort signals
@@ -199,6 +210,7 @@ The `request()` method should:
 - Handle redirects appropriately (typically `redirect: "manual"`)
 
 ### Example: EpoxyTransport
+
 ```typescript
 async request(
   remote: URL,
@@ -232,6 +244,7 @@ async request(
 ```
 
 ### Example: CurlTransport
+
 ```typescript
 async request(
   remote: URL,
@@ -270,6 +283,7 @@ async request(
 ## 4. WebSocket Handling
 
 The `connect()` method should:
+
 - Establish WebSocket connections
 - Support protocol negotiation
 - Handle binary and text messages
@@ -277,6 +291,7 @@ The `connect()` method should:
 - Set appropriate `binaryType` (typically "arraybuffer")
 
 ### Example: EpoxyTransport
+
 ```typescript
 connect(
   url: URL,
@@ -315,6 +330,7 @@ connect(
 ```
 
 ### Example: CurlTransport
+
 ```typescript
 connect(
   url: URL,
@@ -366,6 +382,7 @@ async meta() {
 ## Error Handling
 
 **Do:**
+
 - ✅ Validate options in constructor
 - ✅ Throw descriptive errors for invalid configurations
 - ✅ Log errors with context
@@ -373,6 +390,7 @@ async meta() {
 - ✅ Respect abort signals
 
 **Example:**
+
 ```typescript
 constructor(options) {
   if (!options.wisp.endsWith("/")) {
@@ -405,6 +423,7 @@ console.debug('%cRF%c Initializing transport wrapper',
 ## Type Safety
 
 **Do:**
+
 - ✅ Use TypeScript for type safety
 - ✅ Define clear option interfaces
 - ✅ Import types from bare-mux
@@ -427,6 +446,7 @@ export type MyTransportOptions = {
 ## Options Handling
 
 **Do:**
+
 - ✅ Accept flexible option names (e.g., `wisp` or `websocket`)
 - ✅ Provide sensible defaults
 - ✅ Document all options clearly
@@ -450,6 +470,7 @@ constructor(options) {
 ## Async/Await Pattern
 
 **Do:**
+
 - ✅ Use async/await for asynchronous operations
 - ✅ Handle promises properly
 - ✅ Await initialization before marking ready
@@ -587,6 +608,7 @@ Essential fields:
 # Testing Considerations
 
 **Test:**
+
 - ✅ HTTP requests (GET, POST, etc.)
 - ✅ WebSocket connections
 - ✅ Error handling
@@ -599,6 +621,7 @@ Essential fields:
 # Documentation Standards
 
 **Include:**
+
 - ✅ Clear usage examples
 - ✅ All configuration options documented
 - ✅ Installation instructions
@@ -608,6 +631,7 @@ Essential fields:
 - ✅ API reference
 
 **Format:**
+
 - Use Markdown
 - Include code examples
 - Provide both basic and advanced usage
@@ -617,6 +641,7 @@ Essential fields:
 # Security Considerations
 
 **Remember:**
+
 - Transports handle sensitive network traffic
 - Validate all input options
 - Handle credentials securely
@@ -627,6 +652,7 @@ Essential fields:
 # Performance Best Practices
 
 **Do:**
+
 - ✅ Minimize initialization overhead
 - ✅ Reuse connections when possible
 - ✅ Handle concurrent requests efficiently
@@ -635,6 +661,7 @@ Essential fields:
 - ✅ Profile performance bottlenecks
 
 **Don't:**
+
 - ❌ Block the main thread
 - ❌ Create excessive connections
 - ❌ Buffer entire response bodies unnecessarily
@@ -643,6 +670,7 @@ Essential fields:
 # Examples from the Wild
 
 ## Traditional Transport (EpoxyTransport)
+
 - ✅ Clean constructor with validation
 - ✅ Async initialization with WASM loading
 - ✅ Proper type handling (Blob → ArrayBuffer)
@@ -650,6 +678,7 @@ Essential fields:
 - ✅ Version information exposed
 
 ## Traditional Transport (CurlTransport)
+
 - ✅ Flexible option naming (`wisp` or `websocket`)
 - ✅ Extensive validation with descriptive errors
 - ✅ Session-based connection management
@@ -657,6 +686,7 @@ Essential fields:
 - ✅ Version logging
 
 ## Middleware Transport (Reflux)
+
 - ✅ Dynamic import of base transport
 - ✅ Composition over inheritance
 - ✅ Middleware exposure via getter
