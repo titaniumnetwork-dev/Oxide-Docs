@@ -25,12 +25,12 @@
     "check-ci": "remark \"src/content/docs/**/*.{md,mdx}\" && biome check ."
   },
   "dependencies": {
-    "@astrojs/check": "^0.9.4",
-    "@astrojs/starlight": "^0.36.0",
+    "@astrojs/check": "^0.9.6",
+    "@astrojs/starlight": "^0.37.6",
     "@fontsource/raleway": "^5.2.8",
     "@shikijs/rehype": "^3.13.0",
     "@shikijs/themes": "^3.13.0",
-    "astro": "^5.14.1",
+    "astro": "^5.17.3",
     "astro-rehype-relative-markdown-links": "^0.18.1",
     "gray-matter": "^4.0.3",
     "sharp": "^0.34.4",
