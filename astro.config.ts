@@ -56,19 +56,7 @@ export default defineConfig({
         },
       ],
       plugins: [
-        starlightAutoSidebar(),
-        starlightTypeDoc({
-          entryPoints: ["./typedoc-repos/scramjet/src/entry.ts"],
-          tsconfig: "./tsconfig-scramjet.json",
-          sidebar: {
-            label: "Scramjet API",
-          },
-          typeDoc: {
-            skipErrorChecking: true,
-            excludeNotDocumented: false,
-            treatWarningsAsErrors: false,
-          },
-        }),
+        starlightAutoSidebar()
       ],
       components: {
         Head: "./src/components/MetadataHead.astro",
@@ -92,8 +80,7 @@ export default defineConfig({
           items: [
             "proxies/scramjet",
             "proxies/rammerhead",
-            "proxies/ultraviolet",
-            typeDocSidebarGroup,
+            "proxies/ultraviolet"
           ],
         },
         {
