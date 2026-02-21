@@ -1,9 +1,7 @@
-import { defineConfig } from "astro/config";
 import starlight from "@astrojs/starlight";
-import starlightAutoSidebar from "starlight-auto-sidebar";
-import starlightTypeDoc, { typeDocSidebarGroup } from "starlight-typedoc";
-import rehypeAstroRelativeMarkdownLinks from "astro-rehype-relative-markdown-links";
 import rehypeShiki from "@shikijs/rehype";
+import { defineConfig } from "astro/config";
+import rehypeAstroRelativeMarkdownLinks from "astro-rehype-relative-markdown-links";
 
 // https://astro.build/config
 export default defineConfig({
@@ -31,13 +29,16 @@ export default defineConfig({
   redirects: {
     "/kajigs/caubdns-proxy-editor": "/kajigs/caub#caubdns-proxy-editor",
     "/kajigs/caudns": "/kajigs/caub#caudns",
-    "/kajigs/connection-on-whitelisted-wifi": "/kajigs/wifi#connect-to-non-whitelisted-networks",
+    "/kajigs/connection-on-whitelisted-wifi":
+      "/kajigs/wifi#connect-to-non-whitelisted-networks",
     "/kajigs/crosver": "/kajigs/versions#what-versions-can-i-recover-to",
     "/kajigs/downgrading": "/kajigs/versions",
     "/kajigs/kernverinfo": "/kajigs/versions#what-versions-can-i-recover-to",
-    "/kajigs/lockdown-browser": "/kajigs/webviews#eduphoria-lockdown-browser-webview",
+    "/kajigs/lockdown-browser":
+      "/kajigs/webviews#eduphoria-lockdown-browser-webview",
     "/kajigs/ltmeat": "/kajigs/extensions#ltmeat-v114",
-    "/kajigs/rootless-unenrollment": "/kajigs/old-unenroll#rootless-unenrollment-v101",
+    "/kajigs/rootless-unenrollment":
+      "/kajigs/old-unenroll#rootless-unenrollment-v101",
   },
   integrations: [
     starlight({
@@ -55,9 +56,7 @@ export default defineConfig({
           href: "https://discord.gg/unblock",
         },
       ],
-      plugins: [
-        starlightAutoSidebar()
-      ],
+      plugins: [],
       components: {
         Head: "./src/components/MetadataHead.astro",
         PageTitle: "./src/components/PageTitle.astro",
@@ -73,15 +72,24 @@ export default defineConfig({
         },
         {
           label: "Services",
-          autogenerate: { directory: "services" },
+          items: [
+            {
+              label: "Browsing",
+              autogenerate: { directory: "services/browsing" },
+            },
+            {
+              label: "WebOS",
+              autogenerate: { directory: "services/webos" },
+            },
+            {
+              label: "Unblocked Games",
+              autogenerate: { directory: "services/unblocked-games" },
+            },
+          ],
         },
         {
           label: "Proxies",
-          items: [
-            "proxies/scramjet",
-            "proxies/rammerhead",
-            "proxies/ultraviolet"
-          ],
+          autogenerate: { directory: "proxies" },
         },
         {
           label: "Technologies",
@@ -94,7 +102,7 @@ export default defineConfig({
         {
           label: "Kajigs",
           autogenerate: { directory: "kajigs" },
-        }
+        },
       ],
       customCss: [
         "./src/styles/custom.css",
