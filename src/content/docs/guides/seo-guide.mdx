@@ -6,7 +6,7 @@ keywords: ["seo guide", "guidebook", "search engine optimization"]
 
 ## Competitive Search Engine Optimization is a powerful skill set.
 
-> **Created By Quite A Fancy Emerald, creator of Holy Unblocker, a past popular web service with over 15M+ users monthly and zero sponsors**
+> **Created By Quite A Fancy Emerald, creator of InvisiProxy, a past popular web service with over 15M+ users monthly and zero sponsors**
 
 This doc goes through core concepts discovered by hosting various open-source web proxy projects.
 
@@ -21,14 +21,14 @@ The idea is this:
 - First, create a way to serve an SEO source to your official domain that ENDS in `.net`/`.dev`/`.com`/`.org`/`.co` (if your domain does not use these TLDs forget about getting good SEO. .app is possible but harder unless you host a popular site)
 - This serving can be done either through server-side functions by well checking if the domain is the official site and serving up the exclusive SEO source, considering fancy str.replace methods (cough cough source randomization) or well straight up have two sources that you host separately
 
-**[Source Randomization](https://github.com/QuiteAFancyEmerald/Holy-Unblocker/blob/master/src/randomization.mjs):**
+**[Source Randomization](https://github.com/QuiteAFancyEmerald/InvisiProxy/blob/master/src/randomization.mjs):**
 
 You might ask, is this worth it? Wouldn't this be harder to maintain or set up? Well sadly if you wish to utilize competitive Search Engine Optimization you need to apply one of the serving methods in order to have a perfect source where you don't need to worry about keywords. Your official domain is going to get blocked almost instantly BUT it still serves as a gateway to your backlinks such as documentation, discord, social media and GitHub. It creates massive popularity. You might even ask yourself who is going to search this up? PEOPLE will search and SEO influences so much more than your classic distribution.
 
 ## Starting Steps
 
 1. Create a search console account for Google: [here](https://search.google.com/search-console/about)
-   Google should be your priority. You first need to actually get your site indexed and understand what Google is looking for. This tool will TELL you everything you need to know. Sure you will need to nerd about a bit but the steps below will make more sense once you see this console. On the actual console page ENSURE to type out the absolute path to index; example is "[https://holyunblocker.org//](https://holyunblocker.org//)" with your fancy /. Do this for every single page with the URL Inspection tool. Remember your paths need to be server side not straight up markdown files. Check the performance tab once your site gains users to see if your keywords and well below you will see if your descriptors are leaving good impressions on Google. With good SEO you should hold a spot from either 1-6.
+   Google should be your priority. You first need to actually get your site indexed and understand what Google is looking for. This tool will TELL you everything you need to know. Sure you will need to nerd about a bit but the steps below will make more sense once you see this console. On the actual console page ENSURE to type out the absolute path to index; example is "[https://invisiproxy.com//](https://invisiproxy.com//)" with your fancy /. Do this for every single page with the URL Inspection tool. Remember your paths need to be server side not straight up markdown files. Check the performance tab once your site gains users to see if your keywords and well below you will see if your descriptors are leaving good impressions on Google. With good SEO you should hold a spot from either 1-6.
 
 ---
 
@@ -79,43 +79,43 @@ You might ask, is this worth it? Wouldn't this be harder to maintain or set up? 
 
 
 <url>
-  <loc>https://holyunblocker.org//</loc>
+  <loc>https://invisiproxy.com/</loc>
   <lastmod>2021-03-14T17:04:57+00:00</lastmod>
   <priority>1.00</priority>
   <changefreq>weekly</changefreq>
 </url>
 <url>
-  <loc>https://holyunblocker.org//proxies</loc>
+  <loc>https://invisiproxy.com/browsing</loc>
   <lastmod>2021-03-14T17:04:57+00:00</lastmod>
   <priority>0.90</priority>
   <changefreq>weekly</changefreq>
 </url>
 <url>
-  <loc>https://holyunblocker.org//faq</loc>
+  <loc>https://invisiproxy.com/questions</loc>
   <lastmod>2021-03-14T17:04:57+00:00</lastmod>
   <priority>0.90</priority>
   <changefreq>weekly</changefreq>
 </url>
 <url>
-  <loc>https://holyunblocker.org//documentation</loc>
+  <loc>https://invisiproxy.com/documentation</loc>
   <lastmod>2021-03-14T17:04:57+00:00</lastmod>
   <priority>0.90</priority>
   <changefreq>weekly</changefreq>
 </url>
 <url>
-  <loc>https://holyunblocker.org//games</loc>
+  <loc>https://invisiproxy.com/games</loc>
   <lastmod>2021-03-14T17:04:57+00:00</lastmod>
   <priority>0.80</priority>
   <changefreq>weekly</changefreq>
 </url>
 <url>
-  <loc>https://holyunblocker.org//youtube</loc>
+  <loc>https://invisiproxy.com/youtube</loc>
   <lastmod>2021-03-14T17:04:57+00:00</lastmod>
   <priority>0.80</priority>
   <changefreq>weekly</changefreq>
 </url>
 <url>
-  <loc>https://holyunblocker.org//example</loc>
+  <loc>https://invisiproxy.com/example</loc>
   <lastmod>2021-03-14T17:04:57+00:00</lastmod>
   <priority>0.80</priority>
   <changefreq>weekly</changefreq>
@@ -158,7 +158,7 @@ For my example, I forced all my caching to Cloudflare, which acted as my CDN by 
 
 THIS IS SUPER IMPORTANT. I'm talking **HTTP2, TLS, SSL, SECURITY HEADERS, ADDED HTTP HEADERS**
 
-First off, use NGINX, and if you wish, you can use CF for caching or whatever CDN you need. Maintain NGINX as your initial reverse proxy setup. Many people don't understand the importance of modern web security and how Google or Bing actually account for this. They check for specific security headers, proper TLS/SSL settings, and fingerprinting. Above and below, I am providing various examples of what you should consider adding, as well as my own server example from when I was hosting Holy Unblocker
+First off, use NGINX, and if you wish, you can use CF for caching or whatever CDN you need. Maintain NGINX as your initial reverse proxy setup. Many people don't understand the importance of modern web security and how Google or Bing actually account for this. They check for specific security headers, proper TLS/SSL settings, and fingerprinting. Above and below, I am providing various examples of what you should consider adding, as well as my own server example from when I was hosting InvisiProxy
 
 **8a:** [https://medium.com/@oryaacov/how-to-setup-a-secured-http-server-using-nginx-c7d8e85815a](https://medium.com/@oryaacov/how-to-setup-a-secured-http-server-using-nginx-c7d8e85815a)
 
@@ -441,28 +441,28 @@ Notice the optimization throughout the source. Leave animations to frameworks or
     
     <!-- Consider Google Focus; Don't neglect Bing however source wise Bing will leech off Google -->
     <meta name="googlebot" content="index, follow, snippet" />
-    <link rel="canonical" href="https://holyunblocker.org//" />
+    <link rel="canonical" href="https://invisiproxy.com/" />
     
     <!-- Modern search engines don't care; Note modern ;D  -->
-    <meta name="keywords" content="proxy, web proxy, unblock websites, unblock chromebook, free web proxy, proxy list, proxy sites, un block chromebook, online proxy, proxy server, proxysite, proxy youtube, bypass securly, bypass iboss, bypass lightspeed filter, holy unblocker, chromebooks, titanium network, unblock youtube, youtube proxy, unblocked youtube, youtube unblocked">
-    <title>Holy Unblocker</title>
-    <meta name="description" content="Holy Unblocker is a secure web proxy service with support for many sites. Bypass filters and freely enjoy a safer private browsing experience or unblock websites on devices such as Chromebooks and at places like school or work without downloading anything."
+    <meta name="keywords" content="proxy, web proxy, unblock websites, unblock chromebook, free web proxy, proxy list, proxy sites, un block chromebook, online proxy, proxy server, proxysite, proxy youtube, bypass securly, bypass iboss, bypass lightspeed filter, InvisiProxy, chromebooks, titanium network, unblock youtube, youtube proxy, unblocked youtube, youtube unblocked">
+    <title>InvisiProxy</title>
+    <meta name="description" content="InvisiProxy is a secure web proxy service with support for many sites. Bypass filters and freely enjoy a safer private browsing experience or unblock websites on devices such as Chromebooks and at places like school or work without downloading anything."
     />
 
 	<!-- Embed Properties; readable rich structure. Notice my descriptor switches -->
-	<meta property="og:site_name" content="Holy Unblocker">
-	<meta property="og:url" content="https://holyunblocker.org//">
-	<meta property="og:title" content="Holy Unblocker">
+	<meta property="og:site_name" content="InvisiProxy">
+	<meta property="og:url" content="https://invisiproxy.com/">
+	<meta property="og:title" content="InvisiProxy">
 	<meta property="og:type" content="website">
-	<meta property="og:description" content="Holy Unblocker is a web proxy service that helps you access websites that may be blocked by your network or browser. It does this securely and with additional features.">
+	<meta property="og:description" content="InvisiProxy is a web proxy service that helps you access websites that may be blocked by your network or browser. It does this securely and with additional features.">
 	<meta property="og:image" content="/img/embedthingy.png">
 	<meta property="og:image:secure_url" content="/img/embedthingy.png">
 	<meta property="twitter:image" content="/img/embedthingy_alt.jpg">
 	<meta name="twitter:site" content="@HU">
 	<meta name="twitter:creator" content="@HU">
 	<meta name="twitter:card" content="summary_large_image">
-	<meta name="twitter:title" content="Holy Unblocker">
-	<meta name="twitter:description" content="Holy Unblocker, an official flagship Titanium Network site, can bypass web filters regardless of whether it is an extension or network-based. Being a secure web proxy service, it supports numerous sites while being updated frequently and concentrating on detail with design, mechanics, and features.">
+	<meta name="twitter:title" content="InvisiProxy">
+	<meta name="twitter:description" content="InvisiProxy, an official flagship Titanium Network site, can bypass web filters regardless of whether it is an extension or network-based. Being a secure web proxy service, it supports numerous sites while being updated frequently and concentrating on detail with design, mechanics, and features.">
 	
 	<!-- Assets; readable rich structure -->
 	<link rel="icon" type="image/png" href="[favicon.png](view-source:https://hutao.dev/favicon.png)">
@@ -486,15 +486,15 @@ Notice the optimization throughout the source. Leave animations to frameworks or
         {
             "@context": "https://schema.org",
             "@type": "Organization",
-            "name": "Holy Unblocker",
+            "name": "InvisiProxy",
             "alternateName": "Titanium Network (HU)",
-            "url": "https://holyunblocker.org/",
-            "logo": "https://holyunblocker.org//assets/img/icon.png",
+            "url": "https://invisiproxy.com/",
+            "logo": "https://invisiproxy.com/assets/img/icon.png",
             "sameAs": [
                 "https://github.com/titaniumnetwork-dev",
                 "https://twitter.com/titaniumnetdev",
                 "https://www.youtube.com/channel/UC6LaREFvs9L72SK1s2PcxNg",
-                "https://holyunblocker.org/"
+                "https://invisiproxy.com/"
             ]
         }
     </script>
@@ -504,52 +504,52 @@ Notice the optimization throughout the source. Leave animations to frameworks or
             "@type": "FAQPage",
             "mainEntity": [{
                 "@type": "Question",
-                "name": "What is Holy Unblocker?",
+                "name": "What is InvisiProxy?",
                 "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "Holy Unblocker is a secure web proxy service supporting numerous sites while concentrating on detail with design, mechanics, and features. Bypass web filters regardless of whether it is an extension or network-based."
+                    "text": "InvisiProxy is a secure web proxy service supporting numerous sites while concentrating on detail with design, mechanics, and features. Bypass web filters regardless of whether it is an extension or network-based."
                 }
             }, {
                 "@type": "Question",
                 "name": "How do I unblock websites at school?",
                 "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "Using Holy Unblocker, a free web proxy service with frequent updates and domain restocks, you can unblock sites at school! If a Holy Unblocker site gets blocked simply join the TN Discord to request for a newer site. Restocks occur monthly to prevent mass blocking."
+                    "text": "Using InvisiProxy, a free web proxy service with frequent updates and domain restocks, you can unblock sites at school! If a InvisiProxy site gets blocked simply join the TN Discord to request for a newer site. Restocks occur monthly to prevent mass blocking."
                 }
             }, {
                 "@type": "Question",
-                "name": "What sites can I unblock with Holy Unblocker?",
+                "name": "What sites can I unblock with InvisiProxy?",
                 "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "With Holy Unblocker you can access sites such as Discord, Spotify, YouTube and other game sites!"
+                    "text": "With InvisiProxy you can access sites such as Discord, Spotify, YouTube and other game sites!"
                 }
             }, {
                 "@type": "Question",
-                "name": "Is Holy Unblocker safe?",
+                "name": "Is InvisiProxy safe?",
                 "acceptedAnswer": {
                     "@type": "Answer",
                     "text": "Yep! Check out our Privacy Policy for more information. We don't collect or log any information as it defeats our main moral with ending internet censorship and providing a more private experience without downloading anything. We are also open-source."
                 }
             }, {
                 "@type": "Question",
-                "name": "Does Holy Unblocker hide my search history?",
+                "name": "Does InvisiProxy hide my search history?",
                 "acceptedAnswer": {
                     "@type": "Answer",
                     "text": "Yes! Change your Tab appearance via Settings > Tab Cloak and use Stealth mode when browsing."
                 }
             }, {
                 "@type": "Question",
-                "name": "Where can I obtain more Holy Unblocker sites?",
+                "name": "Where can I obtain more InvisiProxy sites?",
                 "acceptedAnswer": {
                     "@type": "Answer",
                     "text": "Be sure to join the Titanium Network discord at discord.gg/unblock! Then simply type \"/proxy\" in our bots channel for a site to be sent to you via DMs using our bot."
                 }
             }, {
                 "@type": "Question",
-                "name": "Is Holy Unblocker open-source?",
+                "name": "Is InvisiProxy open-source?",
                 "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "Yes! Check out our GitHub where you can deploy or host your own instance of Holy Unblocker."
+                    "text": "Yes! Check out our GitHub where you can deploy or host your own instance of InvisiProxy."
                 }
             }]
         }
@@ -563,7 +563,7 @@ It is essential that your `sitemap.xml` file and navbar match accordingly with p
 
 ```html
 <div id="header" class="fullwidth">
-        <a href="/" class="brand">Holy Unblocker</a>
+        <a href="/" class="brand">InvisiProxy</a>
         <input id="mnavecb" type="checkbox">
         <label for="mnavecb" class="mnave"><span class="mnavebutton"></span></label>
         <ul class="navbar">
@@ -604,18 +604,18 @@ The main takeaway here is my use of the (be sure not the abuse keywords):
 <div id="mainbody" class="fullwidth">
         <div class="box-home text-center">
         <span id="overview"></span>
-            <h1 title="Unblock websites at school or work and bypass filters with Holy Unblocker!">End Internet Censorship.</h1>
-            <h1 title="Hide your search history via the Settings menu while using Stealth mode. Enjoy a private experience with Holy Unblocker.">Privacy right at your fingertips.</h1>
+            <h1 title="Unblock websites at school or work and bypass filters with InvisiProxy!">End Internet Censorship.</h1>
+            <h1 title="Hide your search history via the Settings menu while using Stealth mode. Enjoy a private experience with InvisiProxy.">Privacy right at your fingertips.</h1>
             <a title="Learn more?" class="hovermessage buttonlink startbutton" data-hover-text="Epic!" href="#scrollfix">Bypass now?</a>
         </div>
-        <img id="logo" width="40px;" height="40px;" src="example" alt="Holy Unblocker's logo; an official flagship Titanium Network site, can bypass web filters."></img>
+        <img id="logo" width="40px;" height="40px;" src="example" alt="InvisiProxy's logo; an official flagship Titanium Network site, can bypass web filters."></img>
         <div id="scrollfix"><br></div>
         <div id="desc">
             <div id="info" class="box-info box-large text-center textm">
-                <h2>What is Holy Unblocker?</h2>
-                <p>Holy Unblocker, an official flagship Titanium Network site, can bypass web filters or "blockers" regardless of whether it is an extension or network-based.</p>
+                <h2>What is InvisiProxy?</h2>
+                <p>InvisiProxy, an official flagship Titanium Network site, can bypass web filters or "blockers" regardless of whether it is an extension or network-based.</p>
                 <p>Being a secure web proxy service, it supports numerous sites while being updated frequently and concentrating on detail with design, mechanics, and features.</p>
-                <h2>How do I unblock websites using Holy Unblocker?</h2>
+                <h2>How do I unblock websites using InvisiProxy?</h2>
                 <p>Head to the <a href="/web-proxies">Web Proxies</a> page and select one of the proxies featured! Afterwards, type out the site you wish to access in the search box ("example.com").</p>
                 <p>If you wish to explore the games featured on HU, check out the <a href="/games">game</a> pages.</p>
                 <h2>Don't know the difference between each web proxy?</h2>
@@ -647,7 +647,7 @@ The main takeaways here are to remember the use:
 <div id="footer" class="fullwidth">
         <div class="footerflex">
             <div class="footerbrand">
-                <h3><a href="/">Holy Unblocker</a></h3>
+                <h3><a href="/">InvisiProxy</a></h3>
                 <p>Made by Students, For Students.</p>
             </div>
             <div class="footerlist">
@@ -661,17 +661,17 @@ The main takeaways here are to remember the use:
             <div class="footerlist">
                 <h3>About</h3>
                 <ul>
-                    <li><a target="_blank" href="/services/holy-unblocker">GitHub</a></li>
+                    <li><a target="_blank" href="/services/InvisiProxy">GitHub</a></li>
                     <li><a href="/?t">Privacy and Terms of Service</a></li>
                     <li><a href="/?c">Credits</a></li>
                 </ul>
             </div>
         </div>
         <div class="footersocials">
-            <a target="_blank" class="soc-github" href="https://github.com/QuiteAFancyEmerald/Holy-Unblocker"><i class="fab fa-github"></i></a>
-            <a target="_blank" class="soc-patreon" href="https://www.patreon.com/holyunblocker"><i class="fab fa-patreon"></i></a>
+            <a target="_blank" class="soc-github" href="https://github.com/QuiteAFancyEmerald/InvisiProxy"><i class="fab fa-github"></i></a>
+            <a target="_blank" class="soc-patreon" href="https://www.patreon.com/invisiproxy"><i class="fab fa-patreon"></i></a>
         </div>
-        <p class="copyright">Holy Unblocker &copy; 2024</p>
+        <p class="copyright">InvisiProxy &copy; 2024</p>
     </div>
 
 <!-- Scripts required within the body tag here; remember structure -->
@@ -683,8 +683,8 @@ The main takeaways here are to remember the use:
 ## External Links
 
 - [Emerald's website](https://hutao.dev/)
-- [Holy Unblocker Official Link](https://holyunblocker.org//)
-- [Holy Unblocker GitHub Repository](/services/holy-unblocker)
+- [InvisiProxy Official Link](https://invisiproxy.com//)
+- [InvisiProxy GitHub Repository](/services/InvisiProxy)
 - [TN GitHub Organization](https://github.com/titaniumnetwork-dev/)
 - [TN official website](https://titaniumnetwork.org/)
 
