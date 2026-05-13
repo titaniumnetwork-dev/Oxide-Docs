@@ -1,6 +1,6 @@
 # Oxide-Docs
 
-The official SDK documentation site for Titanium Network. Here we provide
+The official documentation site for TitaniumNetwork. Here we provide
 advanced web proxy services through the progression of web proxy technologies.
 This composes from advanced URL rewriting proxies, webOS projects, web-based
 emulation built from libretro, kajigs (a repository of device/OS exploits) and

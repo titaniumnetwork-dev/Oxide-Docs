@@ -42,7 +42,7 @@ export default defineConfig({
   },
   integrations: [
     starlight({
-      title: "Titanium Network",
+      title: "TitaniumNetwork",
       favicon: "/favicon.png",
       social: [
         {

@@ -11,7 +11,7 @@ import PageHeader from "/src/components/PageHeader.astro";
 
 All Unenrollment exploits can be used on previous kernvers.
 
-For example, Quicksilver can be used on any Kernver that can be used below 143, which would be Kernvers 1, 2, 3, 4, 5, and 6.
+For example, Quicksilver can be used on any kernver that can be used on or below r142, which would be kernvers 1, 2, 3, 4, 5, and 6.
 
 import { getkajigs, kernvers } from '../../config.ts';
 export const kernver = await getkajigs(true)
@@ -26,6 +26,11 @@ export const kernver = await getkajigs(true)
   </thead>
 
   <tbody>
+      <tr key="0">
+        <td>Any</td>
+        <td>All versions</td>
+        <td>{kernver["0"]?.map((k) => <a href={k.slug}>{k.title}</a>).reduce((a, b) => [a, ", ", b])}</td>
+      </tr>
     {Object.entries(kernvers).map(([kv, ver]) => (
       <tr key={kv}>
         <td>{Array.isArray(ver) ? ver[0] : kv}</td>
@@ -36,5 +41,5 @@ export const kernver = await getkajigs(true)
   </tbody>
 </table>
 :::note
-You cannot downgrade to v132 in Kernver 5. However, Br0ker downgrades in a specific way, while in Kernver 5.
+In order to downgrade to a kernver 5 version of r132 for br0ker, you must use a r132-LTS recovery image, or use the built-in downgrading functionality of br0ker.
 :::
