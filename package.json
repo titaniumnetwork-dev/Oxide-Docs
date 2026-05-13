@@ -1,6 +1,6 @@
 {
   "name": "docs",
-  "description": "The official SDK documentation site for TitaniumNetwork.",
+  "description": "The official documentation site for TitaniumNetwork.",
   "homepage": "https://docs.titaniumnetwork.org/",
   "license": "AGPLv3",
   "repository": "https://github.com/titaniumnetwork-dev/Oxide-Docs",

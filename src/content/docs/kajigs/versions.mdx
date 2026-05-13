@@ -21,7 +21,7 @@ Depending on your ChromeOS version, you may or may not be able to use some kajig
 
 ### What versions can I Recover to?
 
-On an unmodified device, you can recover to any version within the range your version is currently in.
+On an unmodified device, you can recover to any version within the range or newer than your current version.
 
 import { kernvers } from '../../config.ts';
 
@@ -34,14 +34,22 @@ import { kernvers } from '../../config.ts';
   </thead>
 
   <tbody>
+    <tr key="0">
+      <td>0</td>
+      <td>Bugged (any version)</td>
+    </tr>
     {Object.entries(kernvers).map(([kv, ver]) => (
       <tr key={kv}>
         <td>{Array.isArray(ver) ? ver[0] : kv}</td>
-        <td>{Array.isArray(ver) ? ver[2] : ver}</td>
+        <td>{Array.isArray(ver) ? ver[1] : ver}</td>
       </tr>
     ))}
   </tbody>
 </table>
+
+:::note
+On boards that were released after mid-2023, the kernel versions may be lower than what is shown in the list above.
+:::
 
 ### How do I check what Kernver I have?
 1. Press [Esc+Ref+Pwr] to enter recovery mode
@@ -87,27 +95,11 @@ Enter Recovery mode \[Esc+Ref+Pwr], and see the codename at the bottom of the sc
 
 1. Visit [cros.download](https://cros.download/) and click "Recovery Images".
 2. Search for your board name and click the board name in the table.
-3. Download the `.zip` file.
-4. Find the version you want and click the link in the download column.
+3. Find the version you want and click the link in the download column.
 
 ### Flash image to USB
 
-#### Using Chromebook Recovery Utility (Windows/macOS/Chrome OS):
-
-1. Install [Chromebook Recovery Utility](https://chrome.google.com/webstore/detail/chromebook-recovery-utili/pocpnlppkickgojjlmhdmidojbmbodfm)
-2. Open it (click on the extension icon from the puzzle piece)
-3. Click the gear icon → "Use local image"
-4. Select the `.zip` file
-5. Choose your USB drive and create the recovery USB
-
-#### Option 2: balenaEtcher
-
-1. Go to [https://etcher.balena.io/](https://etcher.balena.io/) and download and install balenaEtcher if needed.
-2. Click "flash from file" and select the ZIP file (if it fails, unzip it and then try again).
-3. Select your USB after clicking "select target".
-4. Click "flash".
-
-#### Option 3: Using dd (Linux/macOS/POSIX-compliant):
+#### Option 1: Using dd (Linux/macOS/POSIX-compliant):
 
 1. Unzip the `.zip` file either through GUI, or through a command like `unzip{:sh}`
 2. Identify your USB device by running `sudo fdisk -l{:sh}` (Linux) or using macOS Disk Utility. It should say something like `Disk /dev/sd...` (Linux) and in macOS open Disk Utility, select it under "External" and you should see `Device:`. You will want to use `/dev/INSERTTHATNAMEHERE` instead of `/dev/sdX`. Other OSes will have to see relevant documentation for identifying the proper USB device.
@@ -120,6 +112,20 @@ sudo dd bs=4M if=/PATH/TO/IMAGE.bin of=/dev/sdX conv=sync status=progress
 :::caution
 Double-check the device name to avoid data loss!
 :::
+
+#### Option 2: Using Rufus (Windows only)
+
+1. Download Rufus from [GitHub](https://github.com/pbatard/rufus/releases) and open it.
+2. Select your USB drive and file that you want to flash (zip files are automatically unzipped).
+3. Click "START" and continue through any warnings.
+
+#### Option 3: Using Chromebook Recovery Utility (Windows/macOS/Chrome OS) (unreliable):
+
+1. Install [Chromebook Recovery Utility](https://chrome.google.com/webstore/detail/chromebook-recovery-utili/pocpnlppkickgojjlmhdmidojbmbodfm)
+2. Open it (click on the extension icon from the puzzle piece)
+3. Click the gear icon → "Use local image"
+4. Select the `.zip` file
+5. Choose your USB drive and create the recovery USB
 
 ### Recover ChromeOS
 

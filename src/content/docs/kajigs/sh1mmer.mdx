@@ -15,27 +15,35 @@ import PageHeader from "/src/components/PageHeader.astro";
 
 #### What are the features?
 
-- [Unenrollment for Kernvers 1 through 5](/kajigs/unenrollment)
+- [Unenrollment for Kernvers 1 through 6](/kajigs/unenrollment)
 - Re-Enrollment
 - A modified version of MrChromebox's firmware utility script
-- Set Kernver to 1
-- Write Protection disable
+- Set kernver to 1 (if already unenrolled)
 
 ## Prebuilts
 
-Prebuilts are located at [https://dl.mrwork.shop/sh1mmer](https://dl.mrwork.shop/sh1mmer)
+Currently unavailable.
 
 ## Building
+
+You must first obtain an unmodified ("raw") RMA shim. You can find these at [cros.download](https://cros.download/shims).
+You must unzip the file if it's in a zip file.
+
+### Option 1: Use the web builder
+
+Simply go to https://sh1mmer.me/builder, click Start, and select your raw shim `.bin` file.
+Wait a minute or two, and your Sh1mmer shim will automatically download.
+
+### Option 2: Build locally (requires Linux or WSL2)
 
 ```
 git clone https://github.com/MercuryWorkshop/sh1mmer.git
 cd sh1mmer/wax
 ```
 
-Run the next command with a raw shim or nanoshim
-
+Run this command with a raw or stripped shim:
 ```
-sudo bash wax.sh -i /path/to/shim.bin
+sudo bash wax.sh -i path/to/shim.bin
 ```
 
 <div id="update-payload">
@@ -56,7 +64,7 @@ sudo bash wax.sh -i /path/to/shim.bin
 Linux: (Replace /dev/sdX with your flash drive/sd card)
 
 ```
-sudo dd if=/path/to/sh1mmer_shim.bin of=/dev/sdX bs=1M status=progress
+sudo dd if=/path/to/sh1mmer_shim.bin of=/dev/sdX bs=4M status=progress
 ```
 
 Windows: Download Rufus, select your USB, select your sh1mmer image
