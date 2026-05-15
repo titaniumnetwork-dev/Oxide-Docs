@@ -63,14 +63,6 @@ export default defineConfig({
       },
       sidebar: [
         {
-          label: "Guides",
-          autogenerate: { directory: "guides" },
-        },
-        {
-          label: "Organizations",
-          autogenerate: { directory: "organizations" },
-        },
-        {
           label: "Services",
           items: [
             {
@@ -88,20 +80,28 @@ export default defineConfig({
           ],
         },
         {
-          label: "Proxies",
-          autogenerate: { directory: "proxies" },
+          label: "Kajigs",
+          autogenerate: { directory: "kajigs" },
         },
         {
-          label: "Technologies",
-          autogenerate: { directory: "technologies" },
+          label: "Organizations",
+          autogenerate: { directory: "organizations" },
+        },
+        {
+          label: "Guides",
+          autogenerate: { directory: "guides" },
+        },
+        {
+          label: "Proxies",
+          autogenerate: { directory: "proxies" },
         },
         {
           label: "Transports",
           autogenerate: { directory: "transports" },
         },
         {
-          label: "Kajigs",
-          autogenerate: { directory: "kajigs" },
+          label: "Technologies",
+          autogenerate: { directory: "technologies" },
         },
       ],
       customCss: [
