@@ -25,22 +25,22 @@
     "check-ci": "remark \"src/content/docs/**/*.{md,mdx}\" && biome check ."
   },
   "dependencies": {
-    "@astrojs/check": "^0.9.6",
-    "@astrojs/starlight": "^0.37.6",
+    "@astrojs/check": "^0.9.9",
+    "@astrojs/starlight": "^0.37.7",
     "@fontsource/raleway": "^5.2.8",
-    "@shikijs/rehype": "^3.13.0",
-    "@shikijs/themes": "^3.13.0",
-    "astro": "^5.17.3",
+    "@shikijs/rehype": "^3.23.0",
+    "@shikijs/themes": "^3.23.0",
+    "astro": "^5.18.1",
     "astro-rehype-relative-markdown-links": "^0.18.1",
     "gray-matter": "^4.0.3",
-    "sharp": "^0.34.4",
-    "starlight-auto-sidebar": "^0.1.2",
-    "starlight-typedoc": "^0.21.3",
-    "typedoc": "^0.28.13",
-    "typescript": "^5.9.2"
+    "sharp": "^0.34.5",
+    "starlight-auto-sidebar": "^0.1.4",
+    "starlight-typedoc": "^0.21.5",
+    "typedoc": "^0.28.19",
+    "typescript": "^5.9.3"
   },
   "devDependencies": {
-    "@biomejs/biome": "^2.2.4",
+    "@biomejs/biome": "^2.4.15",
     "@mdx-js/mdx": "^3.1.1",
     "remark": "^15.0.1",
     "remark-cli": "^12.0.1",
