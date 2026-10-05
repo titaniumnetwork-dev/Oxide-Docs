@@ -1,0 +1,129 @@
+---
+title: ⭐ Obsidian
+description: Play instantly. No downloads.
+keywords: ["proxy sites"]
+github: "https://github.com/titaniumnetwork-dev/Obsidian"
+official-link: "https://playobsidian.com/"
+sidebar:
+  order: 1
+---
+
+<p align="center">
+  <kbd>
+    <img width="100px" src="https://raw.githubusercontent.com/titaniumnetwork-dev/Obsidian/refs/heads/main/static/assets/logo-180.png" />
+  </kbd>
+</p>
+
+<h1 align="center">
+  Obsidian
+</h1>
+
+<p align="center">
+  Play instantly. No downloads.
+</p>
+
+Obsidian is your ultimate web-based game library. Dive into a massive collection of classic and modern online games, preserved Flash masterpieces, and emulated retro classics directly in your browser.
+
+![Obsidian Screenshot](https://raw.githubusercontent.com/titaniumnetwork-dev/Obsidian/refs/heads/main/static/assets/screenshot_home.png)
+
+## Features
+
+- A large collection of popular games
+- Browse the store and install games to your personal library
+- Sort by tags and view games in the same collection
+- Save your favorite games
+- Run multiple games at once in a "Steam like" interface
+- Keep track of your playtime
+- Record gameplay and change keybinds to your liking
+- Large collection of emulators
+- Download and upload local backups
+- Tab cloaking
+- Additional advanced settings (and lots of fun secrets!)
+
+## Community
+
+Request new games, report bugs, participate in events, and hang out with other players in the [TitaniumNetwork Discord](https://discord.gg/unblock).
+
+## Setup
+
+### Running locally
+
+> Tip:
+> Run `pnpm install` to install the required dependencies.
+
+Run `pnpm dev` to run Obsidian in development mode
+
+### Setup Cloudflare R2 Bucket
+
+- Create Bucket
+- Bucket name "files"
+- Back to R2 overview
+- Click Manage API Tokens
+- Copy "S3 API" URL
+- Create Account API Token
+- Name: File uploader (or whatever)
+- Permissions: "Object Read & Write"
+- Apply to specific buckets only: "files"
+- Save "Access Key ID" and "Secret Access Key"
+- Download Rclone
+
+Windows
+
+```bash
+sudo -v ; curl https://rclone.org/install.sh | sudo bash
+```
+
+MacOS
+
+```bash
+brew install rclone
+```
+
+### Setup Rclone Conenction to Cloudflare R2
+
+- Run `rclone config`
+- New remote (n)
+- Name: files
+- Type of storage: S3 (Option 4)
+- Provider: Cloudfare R2 (Option 7)
+- env_auth: Type false
+- access_key_id: Paste your Access Key ID.
+- secret_access_key: Paste your Secret Access Key.
+- Region: Auto (1)
+- Endpoint: Paste your S3 API URL (keep the https://).
+- Edit advance config: No (n)
+- Keep this "files" remote: Yes this is OK (y)
+- Quit (q)
+
+### Upload Games
+
+Run `rclone sync ./ files:files --progress --transfers 10 --exclude-from .rclone-ignore` in the games folder directory
+
+.rclone-ignore
+
+```
+.DS_Store
+**/.DS_Store
+README.md
+.rclone-ignore
+.gitignore
+```
+
+### Deploy with Wrangler
+
+- Make sure your logged in with `wranger login`
+- Run `pnpm run deploy` to deploy with Cloudflare Pages
+- "Create a new project" if needed and enter the production branch name `main`
+
+## Google AdSense
+
+- Place ads.txt inside the `/static/` folder
+- Use PUBLIC_ADSENSE_PUB_ID inside `.env`
+
+## Developers
+
+[Nebelung](https://github.com/Nebelung-Dev) - Creator and developer
+
+## License
+
+Obsidian uses the AGPL-3.0 license.
